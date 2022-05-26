@@ -1,5 +1,4 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import dominio.ValidadorContrasenias;
+import dominio.validorDeContrasenias.ValidadorContrasenias;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ public class TestValidadorContrasenias {
 
         String contrasenia =  "holaiasd0";
 
-        Boolean validada = new ValidadorContrasenias().verificarContrasenia(contrasenia);
+        Boolean validada = new ValidadorContrasenias().validar(contrasenia);
 
         Assert.assertFalse(validada);
     }
@@ -20,7 +19,7 @@ public class TestValidadorContrasenias {
 
         String contrasenia =  "HOLASDASD0";
 
-        Boolean validada = new ValidadorContrasenias().verificarContrasenia(contrasenia);
+        Boolean validada = new ValidadorContrasenias().validar(contrasenia);
 
         Assert.assertFalse(validada);
     }
@@ -30,7 +29,7 @@ public class TestValidadorContrasenias {
 
         String contrasenia =  "HOLASDASD";
 
-        Boolean validada = new ValidadorContrasenias().verificarContrasenia(contrasenia);
+        Boolean validada = new ValidadorContrasenias().validar(contrasenia);
 
         Assert.assertFalse(validada);
     }
@@ -40,7 +39,7 @@ public class TestValidadorContrasenias {
 
         String contrasenia =  "HOLAS";
 
-        Boolean validada = new ValidadorContrasenias().verificarContrasenia(contrasenia);
+        Boolean validada = new ValidadorContrasenias().validar(contrasenia);
 
         Assert.assertFalse(validada);
     }
@@ -50,7 +49,7 @@ public class TestValidadorContrasenias {
 
         String contrasenia =  "12345qwerT";
 
-        Boolean validada = new ValidadorContrasenias().verificarContrasenia(contrasenia);
+        Boolean validada = new ValidadorContrasenias().validar(contrasenia);
 
         Assert.assertFalse(validada);
     }
@@ -60,7 +59,7 @@ public class TestValidadorContrasenias {
 
         String contrasenia =  "Hoalsdfgasd0";
 
-        Boolean validada = new ValidadorContrasenias().verificarContrasenia(contrasenia);
+        Boolean validada = new ValidadorContrasenias().validar(contrasenia);
 
         Assert.assertTrue(validada);
     }
