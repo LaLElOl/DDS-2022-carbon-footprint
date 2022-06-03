@@ -9,7 +9,7 @@ public class LectorExcelTest {
 
     private final String pathArchivo = "src/main/resources/files/tablaTest.xlsx";
 
-    /*@Test
+    @Test
     public void excelTest() throws IOException {
         LectorExcel lector = new LectorExcel();
         Map<Integer, List<String>> datos = lector.readExcel(pathArchivo);
@@ -21,5 +21,5 @@ public class LectorExcelTest {
             }
             System.out.println();
         }
-    }*/
+    }
 }

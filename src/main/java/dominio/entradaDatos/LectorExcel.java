@@ -6,7 +6,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import javax.persistence.Column;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class LectorExcel {
                         data.get(i).add(celda.getRichStringCellValue().getString() + "");
                         break;
                     case NUMERIC:
-                        if(celda.getColumnIndex() == 5){
+                        if(celda.getColumnIndex() != 4){
                             //Esta en la columna 5 que es la de fechas (ULTRA HARDCODED)
                             data.get(i).add(celda.getNumericCellValue() + "");
                         }else{
