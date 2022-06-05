@@ -1,6 +1,12 @@
 package dominio.transporte;
 
+import dominio.Ubicacion;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import java.io.IOException;
+
 public interface Transporte {
-    public Integer calcularConsumo();
+    Integer calcularConsumo();
+    Integer calcularDistancia(Ubicacion ubicacionInicial, Ubicacion ubicacionFinal) throws IOException;
 }
 
