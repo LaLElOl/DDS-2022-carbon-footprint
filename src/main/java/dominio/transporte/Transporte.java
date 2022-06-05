@@ -1,8 +1,6 @@
 package dominio.transporte;
 
 import dominio.Ubicacion;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 
 public interface Transporte {
