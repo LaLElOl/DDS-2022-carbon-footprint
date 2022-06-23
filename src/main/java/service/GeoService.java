@@ -14,5 +14,11 @@ public interface GeoService {
     Call<List<Provincia>> provincias(@Query("offset")Integer numero, @Header("Authorization")String token);
 
     @GET("distancia")
-    Call<Distancia> distancia(@Query("localidadOrigenId")Integer localidadOrigenId,@Query("calleOrigen")String calleOrigen,@Query("alturaOrigen")String alturaOrigen,@Query("localidadDestinoId")Integer localidadDestinoId,@Query("calleDestino")String calleDestino,@Query("alturaDestino")Integer alturaDestino, @Header("Authorization")String token);
+    Call<Distancia> distancia(@Query("localidadOrigenId")Integer localidadOrigenId,
+                              @Query("calleOrigen")String calleOrigen,
+                              @Query("alturaOrigen")String alturaOrigen,
+                              @Query("localidadDestinoId")Integer localidadDestinoId,
+                              @Query("calleDestino")String calleDestino,
+                              @Query("alturaDestino")Integer alturaDestino,
+                              @Header("Authorization")String token);
 }

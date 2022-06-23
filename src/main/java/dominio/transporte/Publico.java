@@ -18,6 +18,7 @@ public class Publico implements Transporte {
         int indiceParadaInicial = obtenerIndiceParada(ubicacionInicial);
         int indiceParadaFinal = obtenerIndiceParada(ubicacionInicial);
         int aux = indiceParadaInicial;
+        //TODO: Probar usando Iterator
         while(aux < indiceParadaFinal){
             distanciaRecorrida += this.paradas.get(aux).getDistanciaAlaSiguiente();
             aux++;
