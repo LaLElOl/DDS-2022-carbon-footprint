@@ -1,4 +1,4 @@
-import dominio.entradaDatos.ApachePOIExcelAdapter;
+import dominio.entradaDatos.ApachePOIExcel;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ public class ApachePOIExcelTest {
 
     @Test
     public void excelTest() throws IOException {
-        ApachePOIExcelAdapter lector = new ApachePOIExcelAdapter();
+        ApachePOIExcel lector = new ApachePOIExcel();
         Map<Integer, List<String>> datos = lector.leerExcel(pathArchivo);
 
 

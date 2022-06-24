@@ -4,6 +4,7 @@ import dominio.persona.Miembro;
 import dominio.persona.Tramo;
 import lombok.Getter;
 import lombok.Setter;
+import service.GeoService;
 import service.RetrofitServicioGeo;
 import service.entities.Distancia;
 
@@ -22,6 +23,7 @@ public class Particular implements Transporte {
     public Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
         //Aca tengo el checkeo para los tramos compartidos
         //TODO: ver como resolver el acoplamiento del tramo
+        //TODO: bajar acoplamiento de la api, usar adapter para llamarla
         if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0;
         Distancia distancia = RetrofitServicioGeo.getInstancia().distancia(
                 tramo.getInicioTramo().getLocalidad(),

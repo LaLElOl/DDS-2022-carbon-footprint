@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ApachePOIExcelAdapter implements AdapterLectorExcel {
+public class ApachePOIExcel implements AdapterLectorExcel {
 
     public Map<Integer, List<String>> leerExcel(String pathArchivo) throws IOException {
         FileInputStream file = new FileInputStream(pathArchivo);
