@@ -10,22 +10,22 @@ import service.entities.Provincia;
 import java.io.IOException;
 import java.util.List;
 
-public class ServicioGeo {
-    private static ServicioGeo instancia = null;
+public class RetrofitServicioGeo {
+    private static RetrofitServicioGeo instancia = null;
     private static final String urlAPI = "https://ddstpa.com.ar/api/";
-    private Retrofit retrofit;
+    private final Retrofit retrofit;
 
 
-    private ServicioGeo() {
+    private RetrofitServicioGeo() {
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(urlAPI)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
-    public static ServicioGeo getInstancia() {
+    public static RetrofitServicioGeo getInstancia() {
         if(instancia == null) {
-            instancia = new ServicioGeo();
+            instancia = new RetrofitServicioGeo();
         }
         return instancia;
     }

@@ -1,9 +1,16 @@
 package dominio.transporte;
 
 import dominio.Ubicacion;
+import dominio.persona.Miembro;
+import dominio.persona.Tramo;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Collections;
 import java.util.List;
 
+@Getter
+@Setter
 public class Publico implements Transporte {
     private String nombre;
     private List<ParadasTransporte> paradas;
@@ -12,11 +19,11 @@ public class Publico implements Transporte {
         return 0;
     }
 
-    public Integer calcularDistancia(Ubicacion ubicacionInicial, Ubicacion ubicacionFinal){
+    public Integer calcularDistancia(Tramo tramo, Miembro miembro){
 
         int distanciaRecorrida = 0;
-        int indiceParadaInicial = obtenerIndiceParada(ubicacionInicial);
-        int indiceParadaFinal = obtenerIndiceParada(ubicacionInicial);
+        int indiceParadaInicial = obtenerIndiceParada(tramo.getInicioTramo());
+        int indiceParadaFinal = obtenerIndiceParada(tramo.getFinTramo());
         int aux = indiceParadaInicial;
         //TODO: Probar usando Iterator
         while(aux < indiceParadaFinal){
@@ -35,19 +42,10 @@ public class Publico implements Transporte {
         return -1;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void agregarParadas(ParadasTransporte...paradas){
+        Collections.addAll(this.paradas,paradas);
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public List<ParadasTransporte> getParadas() {
-        return paradas;
-    }
-
-    public void setParadas(List<ParadasTransporte> paradas) {
-        this.paradas = paradas;
+    public void quitarParada(ParadasTransporte parada){
+        this.paradas.remove(parada);
     }
 }

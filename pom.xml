@@ -98,6 +98,13 @@
             <version>8.13.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Se añaden las dependencias de org.slf4j para que no rompa al contactar mediante Twilio. Info: https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder-->
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <!--        <dependency>-->

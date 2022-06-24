@@ -1,6 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import service.ServicioGeo;
+import service.RetrofitServicioGeo;
 import service.entities.Distancia;
 import service.entities.Provincia;
 
@@ -12,7 +12,7 @@ public class API {
     @Test
     public void chequearConexionAApi() throws IOException {
 
-        ServicioGeo servicioGeo = ServicioGeo.getInstancia();
+        RetrofitServicioGeo servicioGeo = RetrofitServicioGeo.getInstancia();
         List<Provincia> provincias =servicioGeo.provincias();
         Distancia distancia =servicioGeo.distancia(1,"maipu","100",457,"O'Higgins",200);
 

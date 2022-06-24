@@ -1,12 +1,17 @@
 package dominio.persona;
 
 import dominio.Ubicacion;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 public class Trayecto {
     private Ubicacion fin;
     private Ubicacion inicio;
@@ -31,23 +36,11 @@ public class Trayecto {
         }).collect(Collectors.toList());
     }
 
-    public Ubicacion getFin() {
-        return fin;
+    public void agregarTramos(Tramo...tramos){
+        Collections.addAll(this.tramos,tramos);
     }
 
-    public void setFin(Ubicacion fin) {
-        this.fin = fin;
-    }
-
-    public Ubicacion getInicio() {
-        return inicio;
-    }
-
-    public void setInicio(Ubicacion inicio) {
-        this.inicio = inicio;
-    }
-
-    public List<Tramo> getTramos() {
-        return tramos;
+    public void quitarTramo(Tramo tramo){
+        this.tramos.remove(tramo);
     }
 }

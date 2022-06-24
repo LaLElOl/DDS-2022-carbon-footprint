@@ -1,7 +1,8 @@
 package dominio.transporte;
 
-import dominio.Ubicacion;
-import service.ServicioGeo;
+import dominio.persona.Miembro;
+import dominio.persona.Tramo;
+import service.RetrofitServicioGeo;
 import service.entities.Distancia;
 
 import java.io.IOException;
@@ -10,11 +11,11 @@ public class Ecologico implements Transporte {
     public Integer calcularConsumo() {
         return 0;
     }
-
-    public Integer calcularDistancia(Ubicacion ubicacionInicial, Ubicacion ubicacionFinal) throws IOException {
-        Distancia distancia = ServicioGeo.getInstancia().distancia(ubicacionInicial.getLocalidad(), ubicacionInicial.getCalle(),
-                String.valueOf(ubicacionInicial.getAltura()),ubicacionFinal.getLocalidad(),
-                ubicacionFinal.getCalle(),ubicacionFinal.getAltura());
+    //No uso miembro
+    public Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
+        Distancia distancia = RetrofitServicioGeo.getInstancia().distancia(tramo.getInicioTramo().getLocalidad(), tramo.getInicioTramo().getCalle(),
+                String.valueOf(tramo.getInicioTramo().getAltura()),tramo.getFinTramo().getLocalidad(),
+                tramo.getFinTramo().getCalle(),tramo.getFinTramo().getAltura());
         return new Integer(distancia.valor);
     }
 }

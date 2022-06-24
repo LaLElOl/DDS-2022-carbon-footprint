@@ -1,11 +1,15 @@
 package dominio.organizacion;
 
 import dominio.persona.Miembro;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
 public class Sector {
     private final HashSet<Miembro> miembros;
     private final HashSet<Miembro> miembrosSolicitantes;
@@ -31,21 +35,5 @@ public class Sector {
 
     public HashSet<Miembro> getMiembrosSolicitantes() {
         return miembrosSolicitantes;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Organizacion getOrganizacion() {
-        return organizacion;
-    }
-
-    public void setOrganizacion(Organizacion organizacion) {
-        this.organizacion = organizacion;
     }
 }

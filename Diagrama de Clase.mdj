@@ -13994,7 +13994,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -224,
+											"left": -432,
+											"top": -80,
 											"height": 13
 										},
 										{
@@ -14004,8 +14005,8 @@
 												"$ref": "AAAAAAGBkrWUDOChGcc="
 											},
 											"font": "Arial;13;1",
-											"left": 997,
-											"top": 199,
+											"left": 893,
+											"top": 159,
 											"width": 112.7216796875,
 											"height": 13,
 											"text": "Adminstrador"
@@ -14018,7 +14019,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -224,
+											"left": -432,
+											"top": -80,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -14031,14 +14033,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -224,
+											"left": -432,
+											"top": -80,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 992,
-									"top": 192,
+									"left": 888,
+									"top": 152,
 									"width": 122.7216796875,
 									"height": 25,
 									"stereotypeLabel": {
@@ -14074,8 +14077,8 @@
 												"$ref": "AAAAAAGBkrW4m+4xTio="
 											},
 											"font": "Arial;13;0",
-											"left": 997,
-											"top": 222,
+											"left": 893,
+											"top": 182,
 											"width": 112.7216796875,
 											"height": 13,
 											"text": "-usuario: String",
@@ -14091,8 +14094,8 @@
 												"$ref": "AAAAAAGBkrXbAPLdKno="
 											},
 											"font": "Arial;13;0",
-											"left": 997,
-											"top": 237,
+											"left": 893,
+											"top": 197,
 											"width": 112.7216796875,
 											"height": 13,
 											"text": "-contrasenia: String",
@@ -14100,8 +14103,8 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 992,
-									"top": 217,
+									"left": 888,
+									"top": 177,
 									"width": 122.7216796875,
 									"height": 38
 								},
@@ -14115,8 +14118,8 @@
 										"$ref": "AAAAAAGBkrWUDOCe22w="
 									},
 									"font": "Arial;13;0",
-									"left": 992,
-									"top": 255,
+									"left": 888,
+									"top": 215,
 									"width": 122.7216796875,
 									"height": 10
 								},
@@ -14131,7 +14134,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -112,
+									"left": -216,
+									"top": -40,
 									"width": 10,
 									"height": 10
 								},
@@ -14146,15 +14150,16 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -112,
+									"left": -216,
+									"top": -40,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 992,
-							"top": 192,
+							"left": 888,
+							"top": 152,
 							"width": 122.7216796875,
 							"height": 73,
 							"nameCompartment": {
@@ -14180,8 +14185,8 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 1144,
-							"top": 200,
+							"left": 1040,
+							"top": 160,
 							"width": 137,
 							"height": 133,
 							"text": "Saber si tenemos que agregar o no el administrador en la pantalla.\nSaber como hacer el chequeo para que solo el admin pueda usar las funciones privilegiadas\n"

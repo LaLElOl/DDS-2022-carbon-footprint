@@ -1,10 +1,12 @@
 package dominio.transporte;
 
-import dominio.Ubicacion;
+import dominio.persona.Miembro;
+import dominio.persona.Tramo;
+
 import java.io.IOException;
 
 public interface Transporte {
     Integer calcularConsumo();
-    Integer calcularDistancia(Ubicacion ubicacionInicial, Ubicacion ubicacionFinal) throws IOException;
+    Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException;
 }
 

@@ -1,7 +1,9 @@
 package dominio.transporte;
 
 import dominio.Ubicacion;
-import service.ServicioGeo;
+import dominio.persona.Miembro;
+import dominio.persona.Tramo;
+import service.RetrofitServicioGeo;
 import service.entities.Distancia;
 
 import java.io.IOException;
@@ -11,10 +13,17 @@ public class ServicioContratado implements Transporte {
         return null;
     }
 
-    public Integer calcularDistancia(Ubicacion ubicacionInicial, Ubicacion ubicacionFinal) throws IOException {
-        Distancia distancia = ServicioGeo.getInstancia().distancia(ubicacionInicial.getLocalidad(), ubicacionInicial.getCalle(),
-                String.valueOf(ubicacionInicial.getAltura()),ubicacionFinal.getLocalidad(),
-                ubicacionFinal.getCalle(),ubicacionFinal.getAltura());
+    public Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
+        //Aca tengo el checkeo para los tramos compartidos
+        //TODO: ver como resolver el acoplamiento del tramo
+        if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0;
+        Distancia distancia = RetrofitServicioGeo.getInstancia().distancia(
+                tramo.getInicioTramo().getLocalidad(),
+                tramo.getInicioTramo().getCalle(),
+                String.valueOf(tramo.getInicioTramo().getAltura()),
+                tramo.getFinTramo().getLocalidad(),
+                tramo.getFinTramo().getCalle(),
+                tramo.getFinTramo().getAltura());
         return new Integer(distancia.valor);
     }
 }

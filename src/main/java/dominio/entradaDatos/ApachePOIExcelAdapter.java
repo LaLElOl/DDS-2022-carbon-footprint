@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LectorExcel {
+public class ApachePOIExcelAdapter implements AdapterLectorExcel {
 
-    public Map<Integer, List<String>> readExcel(String pathArchivo) throws IOException {
+    public Map<Integer, List<String>> leerExcel(String pathArchivo) throws IOException {
         FileInputStream file = new FileInputStream(pathArchivo);
         Workbook workbook = new XSSFWorkbook(file);
 
