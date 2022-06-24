@@ -1,4 +1,4 @@
-package dominio.transporte;
+package dominio.transporte.medios;
 
 import lombok.Getter;
 import lombok.Setter;

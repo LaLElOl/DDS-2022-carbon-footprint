@@ -1,4 +1,4 @@
-package dominio.entradaDatos;
+package services.lectorExcel;
 
 public enum Periodicidad {
     MENSUAL,

@@ -1,5 +1,6 @@
-import dominio.entradaDatos.ApachePOIExcel;
+import services.lectorExcel.ApachePOIExcel;
 import org.junit.Test;
+import services.lectorExcel.DatoConsumo;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,14 +13,10 @@ public class ApachePOIExcelTest {
     @Test
     public void excelTest() throws IOException {
         ApachePOIExcel lector = new ApachePOIExcel();
-        Map<Integer, List<String>> datos = lector.leerExcel(pathArchivo);
+        List<DatoConsumo> datos = lector.leerExcel(pathArchivo);
 
 
-        for(int i = 0;i < 5;i++){
-            for(String dato : datos.get(i)){
-                System.out.print(dato + "\t");
-            }
-            System.out.println();
-        }
+        DatoConsumo dato = datos.get(0);
+        System.out.println(dato.getActividad() + dato.getTipoConsumo().getClass().toString() + dato.getValor() );
     }
 }

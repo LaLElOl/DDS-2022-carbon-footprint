@@ -1,7 +1,8 @@
 package dominio.transporte.combustibles;
 
-public class Nafta implements Combustible {
+public class FuelOil implements Combustible{
+    @Override
     public Integer consumoCombustible() {
-        return 0;
+        return null;
     }
 }

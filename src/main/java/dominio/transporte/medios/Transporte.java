@@ -1,4 +1,4 @@
-package dominio.transporte;
+package dominio.transporte.medios;
 
 import dominio.persona.Miembro;
 import dominio.persona.Tramo;

@@ -1,7 +1,9 @@
-package dominio.transporte;
+package dominio.transporte.medios;
 
 import dominio.persona.Miembro;
 import dominio.persona.Tramo;
+import dominio.transporte.vehiculos.TipoVehiculo;
+import dominio.transporte.combustibles.Combustible;
 import lombok.Getter;
 import lombok.Setter;
 import services.distancias.AdapterGeoService;

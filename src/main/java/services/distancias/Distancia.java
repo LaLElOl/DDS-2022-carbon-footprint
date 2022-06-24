@@ -1,4 +1,4 @@
-package service.entities;
+package services.distancias;
 
 import lombok.Getter;
 import lombok.Setter;

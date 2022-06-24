@@ -1,9 +1,10 @@
 package dominio.persona;
 
-import dominio.Ubicacion;
+import dominio.transporte.Ubicacion;
 import dominio.organizacion.Sector;
 import lombok.Getter;
 import lombok.Setter;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class Miembro {
     private Integer numDoc;
     private final List<Sector> sectores;
     private TipoDoc tipoDoc;
-    private List<Trayecto> trayectos;
+    private final List<Trayecto> trayectos;
     private String usuario;
 
     public Miembro(){

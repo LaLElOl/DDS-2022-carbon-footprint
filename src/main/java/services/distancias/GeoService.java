@@ -1,11 +1,9 @@
-package service;
+package services.distancias;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Query;
-import service.entities.Distancia;
-import service.entities.Provincia;
 
 import java.util.List;
 

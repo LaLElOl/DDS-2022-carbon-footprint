@@ -1,7 +1,5 @@
-package service.entities;
+package services.distancias;
 
-
-import java.util.List;
 
 public class Provincia {
     public String id;

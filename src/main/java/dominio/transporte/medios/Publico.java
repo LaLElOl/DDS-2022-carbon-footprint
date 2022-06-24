@@ -1,6 +1,6 @@
-package dominio.transporte;
+package dominio.transporte.medios;
 
-import dominio.Ubicacion;
+import dominio.transporte.Ubicacion;
 import dominio.persona.Miembro;
 import dominio.persona.Tramo;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
-import service.RetrofitServicioGeo;
-import service.entities.Distancia;
-import service.entities.Provincia;
+import services.distancias.RetrofitServicioGeo;
+import services.distancias.Distancia;
+import services.distancias.Provincia;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package dominio.transporte;
+package dominio.transporte.combustibles;
 
 public class GNC implements Combustible {
     public Integer consumoCombustible() {

@@ -1,7 +1,7 @@
 package dominio.persona;
 
-import dominio.Ubicacion;
-import dominio.transporte.Transporte;
+import dominio.transporte.Ubicacion;
+import dominio.transporte.medios.Transporte;
 import lombok.Getter;
 import lombok.Setter;
 

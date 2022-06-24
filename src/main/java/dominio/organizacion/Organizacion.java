@@ -1,15 +1,15 @@
 package dominio.organizacion;
 
-import dominio.Ubicacion;
-import dominio.entradaDatos.AdapterLectorExcel;
+import dominio.transporte.Ubicacion;
+import services.lectorExcel.AdapterLectorExcel;
 import lombok.Getter;
 import lombok.Setter;
+import services.lectorExcel.DatoConsumo;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -35,7 +35,7 @@ public class Organizacion {
         this.sectores.remove(sector);
     }
 
-    public Map<Integer, List<String>> leerExcel(String pathArchivo) throws IOException {
+    public List<DatoConsumo> leerExcel(String pathArchivo) throws IOException {
         return lectorExcel.leerExcel(pathArchivo);
     }
 }

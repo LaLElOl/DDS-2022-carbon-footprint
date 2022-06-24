@@ -1,51 +1,80 @@
-package dominio.entradaDatos;
+package services.lectorExcel;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import dominio.transporte.combustibles.Combustible;
+import dominio.transporte.combustibles.Kerosene;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 
 public class ApachePOIExcel implements AdapterLectorExcel {
 
-    public Map<Integer, List<String>> leerExcel(String pathArchivo) throws IOException {
+    public List<DatoConsumo> leerExcel(String pathArchivo) throws IOException {
         FileInputStream file = new FileInputStream(pathArchivo);
         Workbook workbook = new XSSFWorkbook(file);
+        List<DatoConsumo> data = new ArrayList<>();
 
         Sheet hoja = workbook.getSheetAt(0);
 
-        Map<Integer, List<String>> data = new HashMap<>();
-        int i = 0;
-        for (Row columna : hoja) {
-            data.put(i, new ArrayList<String>());
-            for (Cell celda : columna) {
-                switch (celda.getCellType()) {
-                    case STRING:
-                        data.get(i).add(celda.getRichStringCellValue().getString() + "");
+        //Empezamos por la fila nro 3 porque las primeras dos son titulos nomas
+        for(int j=2 ; j < hoja.getLastRowNum() ; j++){
+            DatoConsumo datoConsumo = new DatoConsumo();
+            Row fila = hoja.getRow(j);
+            for (int i = 0 ; i < 5; i++){
+                switch (i){
+                    case 0:
+                        datoConsumo.setActividad(this.obtenerActividad(fila.getCell(i)));
                         break;
-                    case NUMERIC:
-                        if(celda.getColumnIndex() != 4){
-                            //Esta en la columna 5 que es la de fechas (ULTRA HARDCODED)
-                            data.get(i).add(celda.getNumericCellValue() + "");
-                        }else{
-                            data.get(i).add(celda.getDateCellValue() + "");
-                        }
+                    case 1:
+                        datoConsumo.setTipoConsumo(this.obtenerCombustible(fila.getCell(i)));
+                        break;
+                    case 2:
+                        datoConsumo.setValor(this.obtenerValor(fila.getCell(i)));
+                        break;
+                    case 3:
+                        datoConsumo.setPeriodicidad(this.obtenerPeriodicidad(fila.getCell(i)));
+                        break;
+                    case 4:
+                        datoConsumo.setPeriodo(this.obtenerPeriodo(fila.getCell(i)));
                         break;
                     default:
-                        data.get(i).add("null"); //Asi se puede ver algo en el print del test
                         break;
                 }
             }
-            i++;
+            data.add(datoConsumo);
         }
         file.close();
         return data;
+    }
+
+    private Date obtenerPeriodo(Cell cell) {
+        return cell.getDateCellValue();
+    }
+
+    private Periodicidad obtenerPeriodicidad(Cell cell) {
+        switch (cell.getRichStringCellValue().getString().toLowerCase(Locale.ROOT)){
+            case "mensual":
+                return Periodicidad.MENSUAL;
+            default:
+                return Periodicidad.ANUAL;
+        }
+    }
+
+    private Double obtenerValor(Cell cell) {
+        return cell.getNumericCellValue();
+    }
+
+    private Combustible obtenerCombustible(Cell cell) {
+        //TODO: Necesitamos alternativa a un switch para hacer esto
+        return new Kerosene();
+    }
+
+    private String obtenerActividad(Cell cell) {
+        return cell.getRichStringCellValue().getString();
     }
 }

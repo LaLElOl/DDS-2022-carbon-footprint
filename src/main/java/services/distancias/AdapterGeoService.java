@@ -1,12 +1,10 @@
-package service;
-
-import service.entities.Distancia;
+package services.distancias;
 
 import java.io.IOException;
 
 public interface AdapterGeoService {
 
-    public Distancia distancia(Integer localidadOrigenId,
+    Distancia distancia(Integer localidadOrigenId,
                                String calleOrigen,
                                String alturaOrigen,
                                Integer localidadDestinoId,

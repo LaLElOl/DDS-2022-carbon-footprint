@@ -1,11 +1,9 @@
-package service;
+package services.distancias;
 
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import service.entities.Distancia;
-import service.entities.Provincia;
 
 import java.io.IOException;
 import java.util.List;
