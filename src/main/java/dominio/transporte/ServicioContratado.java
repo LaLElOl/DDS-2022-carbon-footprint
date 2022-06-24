@@ -1,14 +1,16 @@
 package dominio.transporte;
 
-import dominio.Ubicacion;
 import dominio.persona.Miembro;
 import dominio.persona.Tramo;
+import service.AdapterGeoService;
 import service.RetrofitServicioGeo;
 import service.entities.Distancia;
 
 import java.io.IOException;
 
 public class ServicioContratado implements Transporte {
+    private AdapterGeoService servicioDistancia;
+
     public Integer calcularConsumo() {
         return null;
     }
@@ -18,7 +20,7 @@ public class ServicioContratado implements Transporte {
         //TODO: ver como resolver el acoplamiento del tramo
         //TODO: bajar acoplamiento de la api, usar adapter para llamarla
         if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0;
-        Distancia distancia = RetrofitServicioGeo.getInstancia().distancia(
+        Distancia distancia = this.servicioDistancia.distancia(
                 tramo.getInicioTramo().getLocalidad(),
                 tramo.getInicioTramo().getCalle(),
                 String.valueOf(tramo.getInicioTramo().getAltura()),

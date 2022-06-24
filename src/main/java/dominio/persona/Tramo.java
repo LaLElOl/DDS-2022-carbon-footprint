@@ -21,7 +21,7 @@ public class Tramo {
     }
 
     public Integer calcularConsumo() {
-        return 0;
+        return this.transporte.calcularConsumo();
     }
 
     public Integer calcularDistancia(Miembro miembro) throws IOException {

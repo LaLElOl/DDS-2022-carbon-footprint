@@ -37,9 +37,18 @@ public class RetrofitServicioGeo {
         return responseProvinciasArg.body();
     }
 
-    public Distancia distancia(Integer localidadOrigenId,String calleOrigen, String alturaOrigen, Integer localidadDestinoId, String calleDestino, Integer alturaDestino) throws IOException {
+    public Distancia distancia(Integer localidadOrigenId,String calleOrigen,
+                               String alturaOrigen, Integer localidadDestinoId,
+                               String calleDestino, Integer alturaDestino) throws IOException {
         GeoService geoService = this.retrofit.create(GeoService.class);
-        Call<Distancia> requestDistancia = geoService.distancia(localidadOrigenId,calleOrigen,alturaOrigen,localidadDestinoId,calleDestino,alturaDestino,"Bearer Yi/6XlA+LZc7PKtkXwWFa8dSWE9zT7dEEj3aHrmztYw=");
+        Call<Distancia> requestDistancia = geoService.distancia(
+                localidadOrigenId,
+                calleOrigen,
+                alturaOrigen,
+                localidadDestinoId,
+                calleDestino,
+                alturaDestino,
+                "Bearer Yi/6XlA+LZc7PKtkXwWFa8dSWE9zT7dEEj3aHrmztYw=");
         Response<Distancia> responseDistancia = requestDistancia.execute();
         return responseDistancia.body();
     }
