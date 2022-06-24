@@ -2,23 +2,27 @@ package dominio.transporte;
 
 import dominio.persona.Miembro;
 import dominio.persona.Tramo;
-import service.AdapterGeoService;
-import service.RetrofitServicioGeo;
-import service.entities.Distancia;
+import lombok.Getter;
+import lombok.Setter;
+import services.distancias.AdapterGeoService;
+import services.distancias.Distancia;
 
 import java.io.IOException;
 
-public class ServicioContratado implements Transporte {
+@Getter
+@Setter
+public class Particular implements Transporte {
+    private Combustible combustible;
+    private TipoVehiculo vehiculo;
     private AdapterGeoService servicioDistancia;
 
     public Integer calcularConsumo() {
-        return null;
+        return 0;
     }
 
     public Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
         //Aca tengo el checkeo para los tramos compartidos
         //TODO: ver como resolver el acoplamiento del tramo
-        //TODO: bajar acoplamiento de la api, usar adapter para llamarla
         if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0;
         Distancia distancia = this.servicioDistancia.distancia(
                 tramo.getInicioTramo().getLocalidad(),
