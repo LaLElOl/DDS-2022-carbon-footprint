@@ -8,7 +8,8 @@ import services.distancias.Distancia;
 import java.io.IOException;
 
 public class ServicioContratado implements Transporte {
-    private AdapterGeoService servicioDistancia;
+    //private AdapterGeoService servicioDistancia;
+    private CalculadorDistanciaAPI calculador = new CalculadorDistanciaAPI();
 
     public Integer calcularConsumo() {
         return null;
@@ -19,13 +20,7 @@ public class ServicioContratado implements Transporte {
         //TODO: ver como resolver el acoplamiento del tramo
         //TODO: bajar acoplamiento de la api, usar adapter para llamarla
         if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0;
-        Distancia distancia = this.servicioDistancia.distancia(
-                tramo.getInicioTramo().getLocalidad(),
-                tramo.getInicioTramo().getCalle(),
-                String.valueOf(tramo.getInicioTramo().getAltura()),
-                tramo.getFinTramo().getLocalidad(),
-                tramo.getFinTramo().getCalle(),
-                tramo.getFinTramo().getAltura());
-        return new Integer(distancia.valor);
+        return calculador.calcularDistancia(tramo,miembro);
+
     }
 }

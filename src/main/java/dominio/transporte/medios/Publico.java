@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 @Getter
@@ -41,7 +42,30 @@ public class Publico implements Transporte {
         }
         return -1;
     }
+///Alternativa
+    public Integer calcularDistancia2(Tramo tramo, Miembro miembro){
 
+        int distanciaRecorrida = 0;
+        ParadasTransporte paradaPosicion = obtenerParada(tramo.getInicioTramo());
+        ParadasTransporte paradaFinal = obtenerParada(tramo.getFinTramo());
+
+        while(paradaPosicion != paradaFinal){
+            distanciaRecorrida += paradaPosicion.getDistanciaAlaSiguiente();
+            paradaPosicion = paradaPosicion.getParadaTransporteSiguiente();
+        }
+        return distanciaRecorrida;
+    }
+
+    private ParadasTransporte obtenerParada(Ubicacion ubicacion){
+
+        Iterator<ParadasTransporte> iterador = this.paradas.iterator();
+
+        while(iterador.hasNext()) {
+            if(iterador.next().getParadaActual().getUbicacion() == ubicacion) return iterador.next();
+        }
+        return null;
+    }
+/////
     public void agregarParadas(ParadasTransporte...paradas){
         Collections.addAll(this.paradas,paradas);
     }

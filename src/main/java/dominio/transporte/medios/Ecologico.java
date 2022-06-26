@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class Ecologico implements Transporte {
 
-    private AdapterGeoService servicioDistancia;
+    //private AdapterGeoService servicioDistancia;
+    private CalculadorDistanciaAPI calculador = new CalculadorDistanciaAPI();
 
     public Integer calcularConsumo() {
         return 0;
@@ -17,13 +18,8 @@ public class Ecologico implements Transporte {
     //No uso miembro
     //TODO: bajar acoplamiento de la api, usar adapter para llamarla
     public Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
-        Distancia d = servicioDistancia.distancia(
-                tramo.getInicioTramo().getLocalidad(),
-                tramo.getInicioTramo().getCalle(),
-                String.valueOf(tramo.getInicioTramo().getAltura()),
-                tramo.getFinTramo().getLocalidad(),
-                tramo.getFinTramo().getCalle(),
-                tramo.getFinTramo().getAltura());
-        return new Integer(d.getValor());
+
+        return calculador.calcularDistancia(tramo,miembro);
+
     }
 }

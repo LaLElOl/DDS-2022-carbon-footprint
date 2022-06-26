@@ -16,7 +16,8 @@ import java.io.IOException;
 public class Particular implements Transporte {
     private Combustible combustible;
     private TipoVehiculo vehiculo;
-    private AdapterGeoService servicioDistancia;
+    //private AdapterGeoService servicioDistancia;
+    private CalculadorDistanciaAPI calculador = new CalculadorDistanciaAPI();
 
     public Integer calcularConsumo() {
         return 0;
@@ -26,13 +27,7 @@ public class Particular implements Transporte {
         //Aca tengo el checkeo para los tramos compartidos
         //TODO: ver como resolver el acoplamiento del tramo
         if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0;
-        Distancia distancia = this.servicioDistancia.distancia(
-                tramo.getInicioTramo().getLocalidad(),
-                tramo.getInicioTramo().getCalle(),
-                String.valueOf(tramo.getInicioTramo().getAltura()),
-                tramo.getFinTramo().getLocalidad(),
-                tramo.getFinTramo().getCalle(),
-                tramo.getFinTramo().getAltura());
-        return new Integer(distancia.valor);
+
+        return calculador.calcularDistancia(tramo,miembro);
     }
 }
