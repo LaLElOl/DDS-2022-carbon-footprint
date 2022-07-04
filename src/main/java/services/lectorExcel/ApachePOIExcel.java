@@ -1,7 +1,6 @@
 package services.lectorExcel;
 
-import dominio.transporte.combustibles.Combustible;
-import dominio.transporte.combustibles.Kerosene;
+import dominio.transporte.combustibles.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -66,12 +65,38 @@ public class ApachePOIExcel implements AdapterLectorExcel {
     }
 
     private Double obtenerValor(Cell cell) {
-        return cell.getNumericCellValue();
+        //TODO: para el 3er tipo de emisiones controlar si recibe o no un valor numerico
+        if(cell.getCellType() == CellType.NUMERIC)
+            return cell.getNumericCellValue();
+        return null;
     }
 
     private Combustible obtenerCombustible(Cell cell) {
         //TODO: Necesitamos alternativa a un switch para hacer esto
-        return new Kerosene();
+        switch(cell.getRichStringCellValue().toString().toLowerCase(Locale.ROOT)){
+            case "gas natural":
+                return new GasNatural();
+            case "fuel oil":
+                return new FuelOil();
+            case "carbon":
+                return new Carbon();
+            case "leña":
+                return new Lenia();
+            case "kerosene":
+                return new Kerosene();
+            case "carbon de leña":
+                return new CarbonLenia();
+            case "gnc":
+                return new GNC();
+            case "nafta":
+                return new Nafta();
+            case "electricidad":
+                return new Electrico();
+            case "gasoil":
+                return new Gasoil();
+            default:
+                return null;
+        }
     }
 
     private String obtenerActividad(Cell cell) {

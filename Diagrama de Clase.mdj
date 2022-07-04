@@ -13953,19 +13953,6 @@
 							"text": "Saber si tenemos que agregar o no el administrador en la pantalla.\nSaber como hacer el chequeo para que solo el admin pueda usar las funciones privilegiadas\n"
 						},
 						{
-							"_type": "UMLTextView",
-							"_id": "AAAAAAGBkrbV2iUy10Q=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"left": 744,
-							"top": 1312,
-							"width": 201,
-							"height": 53,
-							"text": "agregar atributo para poder switchear entre apis si tenemos /*********\n"
-						},
-						{
 							"_type": "UMLClassView",
 							"_id": "AAAAAAGBk1T2Db4JckI=",
 							"_parent": {
