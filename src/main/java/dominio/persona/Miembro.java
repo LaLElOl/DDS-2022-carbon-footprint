@@ -22,6 +22,7 @@ public class Miembro {
     private TipoDoc tipoDoc;
     private final List<Trayecto> trayectos;
     private String usuario;
+    private Contacto contacto;
 
     public Miembro(){
         this.sectores = new ArrayList<>();
