@@ -53,4 +53,9 @@ public class Organizacion {
                     contacto.getMediosNotificacion().forEach(medio -> medio.notificar(contacto,link));
                 });
     }
+
+    public Integer calcularHC(){
+        //TODO
+        return 0;
+    }
 }
