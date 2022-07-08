@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Publico implements Transporte {
+public abstract class Publico implements Transporte {
     private String nombre;
     private List<ParadasTransporte> paradas;
 
