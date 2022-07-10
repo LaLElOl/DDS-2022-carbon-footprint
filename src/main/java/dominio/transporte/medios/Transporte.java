@@ -6,7 +6,7 @@ import dominio.persona.Tramo;
 import java.io.IOException;
 
 public interface Transporte {
-    Integer calcularConsumo();
-    Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException;
+    Double calcularConsumo();
+    Double calcularDistancia(Tramo tramo, Miembro miembro) throws IOException;
 }
 

@@ -38,4 +38,8 @@ public class Sector {
     public List<Solicitud> getMiembrosSolicitantes() {
         return solicitudes;
     }
+
+    public Double calcularHuella() {
+        return this.getMiembros().stream().mapToDouble(Miembro::calcularHuella).sum();
+    }
 }

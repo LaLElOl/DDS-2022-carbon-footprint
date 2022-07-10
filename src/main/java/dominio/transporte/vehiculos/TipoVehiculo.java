@@ -1,8 +1,18 @@
 package dominio.transporte.vehiculos;
 
-import dominio.transporte.medios.Particular;
+import dominio.transporte.combustibles.Combustible;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface TipoVehiculo {
-    public Integer calcularConsumoParticular(Particular particular);
+@Getter
+@Setter
+public abstract class TipoVehiculo {
+
+    protected Double factorVehiculo;
+    private Combustible combustible;
+
+    public Double calcularConsumoParticular() {
+
+        return this.factorVehiculo * this.combustible.consumoCombustible();
+    }
 }
-

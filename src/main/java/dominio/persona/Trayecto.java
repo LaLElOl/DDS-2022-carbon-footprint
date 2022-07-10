@@ -21,11 +21,11 @@ public class Trayecto {
         this.tramos = new ArrayList<>();
     }
 
-    public int distanciaTotal(Miembro miembro){
-        return this.distanciaDeTramos(miembro).stream().mapToInt(d -> d).sum();
+    public Double distanciaTotal(Miembro miembro){
+        return this.distanciaDeTramos(miembro).stream().mapToDouble(d -> d).sum();
     }
 
-    public List<Integer> distanciaDeTramos(Miembro miembro){
+    public List<Double> distanciaDeTramos(Miembro miembro){
         return this.tramos.stream().map(t -> {
             try {
                 return t.calcularDistancia(miembro);
@@ -42,5 +42,17 @@ public class Trayecto {
 
     public void quitarTramo(Tramo tramo){
         this.tramos.remove(tramo);
+    }
+
+    public Double calcularHuella(Miembro miembro){
+        //TODO: REVISAR ESTE TRY CATCH
+        return this.tramos.stream().mapToDouble(t -> {
+            try {
+                return t.calcularHuella(miembro);
+            } catch (IOException e) {
+                e.printStackTrace();
+            };
+            return 0;
+        }).sum();
     }
 }

@@ -1,7 +1,4 @@
 package dominio.transporte.combustibles;
 
-public class Electrico implements Combustible {
-    public Integer consumoCombustible() {
-        return 0;
-    }
+public class Electrico extends Combustible {
 }

@@ -14,7 +14,7 @@ public class CalculadorDistanciaAPI {
     private AdapterGeoService servicioDistancia;
 
 
-    public Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
+    public Double calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
         Distancia d = servicioDistancia.distancia(
                 tramo.getInicioTramo().getLocalidad(),
                 tramo.getInicioTramo().getCalle(),
@@ -22,6 +22,6 @@ public class CalculadorDistanciaAPI {
                 tramo.getFinTramo().getLocalidad(),
                 tramo.getFinTramo().getCalle(),
                 tramo.getFinTramo().getAltura());
-        return new Integer(d.getValor());
+        return new Double(d.getValor());
     }
 }

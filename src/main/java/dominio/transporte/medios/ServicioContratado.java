@@ -8,18 +8,18 @@ import services.distancias.Distancia;
 import java.io.IOException;
 
 public class ServicioContratado implements Transporte {
-    //private AdapterGeoService servicioDistancia;
-    private CalculadorDistanciaAPI calculador = new CalculadorDistanciaAPI();
 
-    public Integer calcularConsumo() {
-        return null;
+    private CalculadorDistanciaAPI calculador = new CalculadorDistanciaAPI();
+    private Double factorEmision = 3.0;
+
+    public Double calcularConsumo() {
+        return this.factorEmision;
     }
 
-    public Integer calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
+    public Double calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
         //Aca tengo el checkeo para los tramos compartidos
         //TODO: ver como resolver el acoplamiento del tramo
-        //TODO: bajar acoplamiento de la api, usar adapter para llamarla
-        if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0;
+        if(tramo.getCompartido() && tramo.getDuenioTramo() != miembro) return 0.0;
         return calculador.calcularDistancia(tramo,miembro);
 
     }

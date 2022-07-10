@@ -1,9 +1,8 @@
 package dominio.transporte.vehiculos;
 
-import dominio.transporte.medios.Particular;
+public class Camioneta extends TipoVehiculo {
 
-public class Camioneta implements TipoVehiculo {
-    public Integer calcularConsumoParticular(Particular particular) {
-        return 0;
+    public Camioneta(){
+        this.factorVehiculo = 4.0;
     }
 }

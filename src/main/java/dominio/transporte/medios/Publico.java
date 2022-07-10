@@ -15,14 +15,15 @@ import java.util.List;
 public abstract class Publico implements Transporte {
     private String nombre;
     private List<ParadasTransporte> paradas;
+    protected Double factorEmision;
 
-    public Integer calcularConsumo() {
-        return 0;
+    public Double calcularConsumo() {
+        return this.factorEmision;
     }
 
-    public Integer calcularDistancia(Tramo tramo, Miembro miembro){
+    public Double calcularDistancia(Tramo tramo, Miembro miembro){
 
-        int distanciaRecorrida = 0;
+        Double distanciaRecorrida = 0.0;
         int indiceParadaInicial = obtenerIndiceParada(tramo.getInicioTramo());
         int indiceParadaFinal = obtenerIndiceParada(tramo.getFinTramo());
         int aux = indiceParadaInicial;

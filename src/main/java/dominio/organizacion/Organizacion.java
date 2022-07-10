@@ -54,8 +54,10 @@ public class Organizacion {
                 });
     }
 
-    public Integer calcularHC(){
-        //TODO
-        return 0;
+    public Double calcularHC(){
+        //TODO: falta calcular la parte del excel y sumarla a "huella"
+        double huella = 0.0;
+        huella += this.sectores.stream().mapToDouble(Sector::calcularHuella).sum();
+        return huella;
     }
 }

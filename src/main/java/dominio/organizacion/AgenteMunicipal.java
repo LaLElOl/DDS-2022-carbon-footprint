@@ -1,14 +1,24 @@
 package dominio.organizacion;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class AgenteMunicipal {
     private String municipio;
     private String nombre;
     private List<Organizacion> organizaciones;
 
+    public AgenteMunicipal(){
+        this.organizaciones = new ArrayList<>();
+    }
 
-    public Integer calcularHCMunicipal(){
-        return this.organizaciones.stream().mapToInt(org->org.calcularHC()).sum();
+
+    public Double calcularHCMunicipal(){
+        return this.organizaciones.stream().mapToDouble(Organizacion::calcularHC).sum();
     }
 }

@@ -44,4 +44,10 @@ public class Miembro {
     public void quitarTrayecto(Trayecto trayecto){
         this.trayectos.remove(trayecto);
     }
+
+    public Double calcularHuella() {
+        Double huella = 0.0;
+        huella = this.trayectos.stream().mapToDouble(trayecto -> trayecto.calcularHuella(this)).sum();
+        return huella;
+    }
 }

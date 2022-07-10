@@ -1,6 +1,10 @@
 package dominio.transporte.combustibles;
 
-public interface Combustible {
-    public Integer consumoCombustible();
-}
+public abstract class Combustible {
 
+    Double factorEmision;
+
+    public Double consumoCombustible(){
+        return factorEmision;
+    };
+}

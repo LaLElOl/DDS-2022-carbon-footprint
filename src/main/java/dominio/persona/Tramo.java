@@ -20,11 +20,15 @@ public class Tramo {
         this.duenioTramo = m;
     }
 
-    public Integer calcularConsumo() {
+    public Double calcularConsumo() {
         return this.transporte.calcularConsumo();
     }
 
-    public Integer calcularDistancia(Miembro miembro) throws IOException {
+    public Double calcularDistancia(Miembro miembro) throws IOException {
         return this.transporte.calcularDistancia(this, miembro);
+    }
+
+    public Double calcularHuella(Miembro miembro) throws IOException {
+        return this.calcularConsumo() * this.calcularDistancia(miembro);
     }
 }
