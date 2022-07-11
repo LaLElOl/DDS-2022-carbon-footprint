@@ -75,25 +75,25 @@ public class ApachePOIExcel implements AdapterLectorExcel {
         //TODO: Necesitamos alternativa a un switch para hacer esto
         switch(cell.getRichStringCellValue().toString().toLowerCase(Locale.ROOT)){
             case "gas natural":
-                return new GasNatural();
+                return GasNatural.getInstancia();
             case "fuel oil":
-                return new FuelOil();
+                return FuelOil.getInstancia();
             case "carbon":
-                return new Carbon();
+                return Carbon.getInstancia();
             case "leña":
-                return new Lenia();
+                return Lenia.getInstancia();
             case "kerosene":
-                return new Kerosene();
+                return Kerosene.getInstancia();
             case "carbon de leña":
-                return new CarbonLenia();
+                return CarbonLenia.getInstancia();
             case "gnc":
-                return new GNC();
+                return GNC.getInstancia();
             case "nafta":
-                return new Nafta();
+                return Nafta.getInstancia();
             case "electricidad":
-                return new Electrico();
+                return Electrico.getInstancia();
             case "gasoil":
-                return new Gasoil();
+                return Gasoil.getInstancia();
             default:
                 return null;
         }
