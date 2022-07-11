@@ -8,5 +8,5 @@ public abstract class Combustible {
 
     public Double consumoCombustible(){
         return factorEmision;
-    };
+    }
 }

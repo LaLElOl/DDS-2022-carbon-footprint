@@ -2,6 +2,7 @@ package dominio.organizacion;
 
 import lombok.Getter;
 import lombok.Setter;
+import services.lectorExcel.Periodicidad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,6 @@ public class AgenteMunicipal {
     public AgenteMunicipal(){
         this.organizaciones = new ArrayList<>();
     }
-
 
     public Double calcularHCMunicipal(){
         return this.organizaciones.stream().mapToDouble(Organizacion::calcularHC).sum();

@@ -21,7 +21,7 @@ public class ApachePOIExcel implements AdapterLectorExcel {
         Sheet hoja = workbook.getSheetAt(0);
 
         //Empezamos por la fila nro 3 porque las primeras dos son titulos nomas
-        for(int j=2 ; j < hoja.getLastRowNum() ; j++){
+        for(int j=2 ; j < hoja.getLastRowNum() + 1; j++){
             DatoConsumo datoConsumo = new DatoConsumo();
             Row fila = hoja.getRow(j);
             for (int i = 0 ; i < 5; i++){
