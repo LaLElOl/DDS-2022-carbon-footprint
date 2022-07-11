@@ -5,6 +5,7 @@ import lombok.Setter;
 import services.lectorExcel.Periodicidad;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -18,7 +19,15 @@ public class AgenteMunicipal {
         this.organizaciones = new ArrayList<>();
     }
 
-    public Double calcularHCMunicipal(){
-        return this.organizaciones.stream().mapToDouble(Organizacion::calcularHC).sum();
+    public void agregarOrganizaciones(Organizacion...organizaciones){
+        Collections.addAll(this.organizaciones,organizaciones);
+    }
+
+    public Double calcularHuellaMensual(int mes, int anio){
+        return this.organizaciones.stream().mapToDouble(o -> o.calcularHuella(mes,anio)).sum();
+    }
+
+    public Double calcularHuellaAnual(int anio){
+        return this.organizaciones.stream().mapToDouble(o -> o.calcularHuella(0,anio)).sum();
     }
 }

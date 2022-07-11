@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Getter
@@ -18,7 +19,11 @@ public class AgenteProvincial {
     }
 
 
-    public Double calcularHCMunicipal(){
-        return this.agentesMunicipales.stream().mapToDouble(AgenteMunicipal::calcularHCMunicipal).sum();
+    public Double calcularHuellaMensual(int mes, int anio){
+        return this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuellaMensual(mes,anio)).sum();
+    }
+
+    public Double calcularHuellaAnual(int anio){
+        return this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuellaAnual(anio)).sum();
     }
 }

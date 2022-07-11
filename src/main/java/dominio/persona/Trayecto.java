@@ -45,7 +45,6 @@ public class Trayecto {
     }
 
     public Double calcularHuella(Miembro miembro){
-        //TODO: REVISAR ESTE TRY CATCH
         return this.tramos.stream().mapToDouble(t -> {
             try {
                 return t.calcularHuella(miembro);

@@ -6,9 +6,11 @@ import dominio.transporte.Ubicacion;
 import services.lectorExcel.AdapterLectorExcel;
 import lombok.Getter;
 import lombok.Setter;
-import services.lectorExcel.DatoConsumo;
+import services.lectorExcel.Periodicidad;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter
@@ -54,10 +56,31 @@ public class Organizacion {
                 });
     }
 
-    public Double calcularHC(){
+    public Double calcularHuella(int mes, int anio){
         //TODO: falta calcular la parte del excel y sumarla a "huella"
         double huella = 0.0;
-        huella += this.sectores.stream().mapToDouble(Sector::calcularHuella).sum();
+        if(mes > 0 && mes <= 12){
+            huella += obtenerHuellaMiembros();
+            huella += obtenerHuellaOrganizacion(Periodicidad.MENSUAL, LocalDate.of(anio,mes,1));
+        }else{
+            huella += obtenerHuellaMiembros() * 12;
+            huella += obtenerHuellaOrganizacion(Periodicidad.ANUAL,LocalDate.of(anio,mes,1));
+        }
         return huella;
+    }
+
+    public double obtenerHuellaMiembros() {
+        return this.sectores.stream().mapToDouble(Sector::calcularHuella).sum();
+    }
+
+    public List<DatoConsumo> obtenerConsumos(Periodicidad periodicidad, LocalDate fecha){
+        List<DatoConsumo> datos = new ArrayList<>();
+        //TODO: Obtener datos de la base de datos, filtrando por periodicidad y fecha
+        return datos;
+    }
+
+    public double obtenerHuellaOrganizacion(Periodicidad periodicidad, LocalDate fecha) {
+        List<DatoConsumo> datos = obtenerConsumos(periodicidad,fecha);
+        return datos.stream().mapToDouble(DatoConsumo::calcularHuella).sum();
     }
 }

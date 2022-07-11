@@ -1,11 +1,14 @@
 package services.lectorExcel;
 
+import dominio.organizacion.DatoConsumo;
 import dominio.transporte.combustibles.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,8 +54,10 @@ public class ApachePOIExcel implements AdapterLectorExcel {
         return data;
     }
 
-    private Date obtenerPeriodo(Cell cell) {
-        return cell.getDateCellValue();
+    private LocalDate obtenerPeriodo(Cell cell) {
+        LocalDateTime valor = cell.getLocalDateTimeCellValue();
+
+        return LocalDate.of(valor.getYear(),valor.getMonth(),valor.getDayOfMonth());
     }
 
     private Periodicidad obtenerPeriodicidad(Cell cell) {
