@@ -50,4 +50,14 @@ public class Miembro {
         huella = this.trayectos.stream().mapToDouble(trayecto -> trayecto.calcularHuella(this)).sum();
         return huella;
     }
+
+    public double calcularImpactoEnOrganizacion(Sector sector,int mes, int anio){
+        double porcentajeImpacto = 0.0;
+        boolean trabajoAca = this.sectores.contains(sector);
+        if(trabajoAca){
+            double huellaOrganizacion = sector.getOrganizacion().calcularHuella(mes,anio);
+            porcentajeImpacto = (this.calcularHuella() / huellaOrganizacion)*100;
+        }
+        return porcentajeImpacto;
+    }
 }

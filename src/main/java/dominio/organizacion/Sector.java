@@ -16,6 +16,7 @@ public class Sector {
     private final HashSet<Miembro> miembros;
     private String nombre;
     private Organizacion organizacion;
+    private Double promedioHCMiembro;
 
     public Sector(){
         this.miembros = new HashSet<Miembro>();
@@ -40,6 +41,8 @@ public class Sector {
     }
 
     public Double calcularHuella() {
-        return this.getMiembros().stream().mapToDouble(Miembro::calcularHuella).sum();
+        double huella =  this.getMiembros().stream().mapToDouble(Miembro::calcularHuella).sum();
+        this.promedioHCMiembro = huella / getMiembros().size();
+        return huella;
     }
 }

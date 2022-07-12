@@ -73,7 +73,7 @@ public class Organizacion {
         return this.sectores.stream().mapToDouble(Sector::calcularHuella).sum();
     }
 
-    public List<DatoConsumo> obtenerConsumos(Periodicidad periodicidad, LocalDate fecha){
+    private List<DatoConsumo> obtenerConsumos(Periodicidad periodicidad, LocalDate fecha){
         List<DatoConsumo> datos = new ArrayList<>();
         //TODO: Obtener datos de la base de datos, filtrando por periodicidad y fecha
         return datos;

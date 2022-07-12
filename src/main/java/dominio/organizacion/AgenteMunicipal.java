@@ -2,8 +2,6 @@ package dominio.organizacion;
 
 import lombok.Getter;
 import lombok.Setter;
-import services.lectorExcel.Periodicidad;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
