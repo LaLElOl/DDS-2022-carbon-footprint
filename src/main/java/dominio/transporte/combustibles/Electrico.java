@@ -11,4 +11,9 @@ public class Electrico extends Combustible {
         }
         return instancia;
     }
+
+    static public Double obtenerGramos(Double kwh){
+        return kwh*122;
+    }
+
 }

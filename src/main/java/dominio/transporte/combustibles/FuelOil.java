@@ -11,4 +11,8 @@ public class FuelOil extends Combustible{
         }
         return instancia;
     }
+
+    static public Double obtenerGramos(Double litros){
+        return litros*850;
+    }
 }

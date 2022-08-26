@@ -12,4 +12,8 @@ public class GasNatural extends Combustible{
         }
         return instancia;
     }
+
+    static public Double obtenerGramos(Double m3){
+        return m3*7;
+    }
 }

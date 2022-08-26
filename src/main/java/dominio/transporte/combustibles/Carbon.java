@@ -11,4 +11,8 @@ public class Carbon extends Combustible{
         }
         return instancia;
     }
+
+    static public Double obtenerGramos(Double kilos){
+        return kilos/1000;
+    }
 }
