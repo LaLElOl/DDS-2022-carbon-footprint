@@ -1,17 +1,11 @@
 import dominio.organizacion.*;
+import dominio.organizacion.datos.DatoConsumo;
 import dominio.persona.Miembro;
 import dominio.persona.Tramo;
 import dominio.persona.Trayecto;
 import org.junit.*;
-import org.mockito.internal.matchers.Or;
-import services.lectorExcel.Periodicidad;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

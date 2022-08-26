@@ -1,5 +1,6 @@
 package dominio.organizacion;
 
+import dominio.organizacion.datos.Periodicidad;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
@@ -21,11 +22,7 @@ public class AgenteMunicipal {
         Collections.addAll(this.organizaciones,organizaciones);
     }
 
-    public Double calcularHuellaMensual(int mes, int anio){
-        return this.organizaciones.stream().mapToDouble(o -> o.calcularHuella(mes,anio)).sum();
-    }
-
-    public Double calcularHuellaAnual(int anio){
-        return this.organizaciones.stream().mapToDouble(o -> o.calcularHuella(0,anio)).sum();
+    public Double calcularHuella(int mes, int anio) {
+        return this.organizaciones.stream().mapToDouble(o -> o.calcularHuella(mes, anio)).sum();
     }
 }

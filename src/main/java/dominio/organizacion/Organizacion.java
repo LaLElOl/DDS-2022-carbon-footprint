@@ -1,16 +1,17 @@
 package dominio.organizacion;
 
+import dominio.organizacion.datos.Anual;
+import dominio.organizacion.datos.DatoConsumo;
+import dominio.organizacion.datos.Mensual;
+import dominio.organizacion.datos.Periodicidad;
 import dominio.persona.Contacto;
-import dominio.persona.Miembro;
 import dominio.transporte.Ubicacion;
 import services.lectorExcel.AdapterLectorExcel;
 import lombok.Getter;
 import lombok.Setter;
-import services.lectorExcel.Periodicidad;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter
@@ -24,11 +25,11 @@ public class Organizacion {
     private String usuario;
     private String contrasenia;
     private AdapterLectorExcel lectorExcel;
-    private Set<Miembro> miembrosANotificar;
+    private Set<Contacto> contactosANotificar;
 
     public Organizacion(){
         this.sectores = new ArrayList<>();
-        this.miembrosANotificar = new HashSet<>();
+        this.contactosANotificar = new HashSet<>();
     }
 
     public void agregarSectores(Sector ... sectoresAAgregar){
@@ -43,17 +44,14 @@ public class Organizacion {
         return lectorExcel.leerExcel(pathArchivo);
     }
 
-    public void suscribirARecomendacion(Miembro miembro){
+    public void suscribirARecomendacion(Contacto contacto){
         //TODO: Ver si agregamos los chequeos de que el miembro es de la organizacion
-        this.miembrosANotificar.add(miembro);
+        this.contactosANotificar.add(contacto);
     }
 
     public void notificarRecomendacion(String link){
-        this.miembrosANotificar.forEach(
-                miembro -> {
-                    Contacto contacto = miembro.getContacto();
-                    contacto.getMediosNotificacion().forEach(medio -> medio.notificar(contacto,link));
-                });
+        this.contactosANotificar.forEach(
+                contacto -> contacto.getMediosNotificacion().forEach(medio -> medio.notificar(contacto,link)));
     }
 
     public Double calcularHuella(int mes, int anio){
@@ -61,10 +59,10 @@ public class Organizacion {
         double huella = 0.0;
         if(mes > 0 && mes <= 12){
             huella += obtenerHuellaMiembros();
-            huella += obtenerHuellaOrganizacion(Periodicidad.MENSUAL, LocalDate.of(anio,mes,1));
+            huella += obtenerHuellaOrganizacion(new Mensual(), LocalDate.of(anio,mes,1));
         }else{
             huella += obtenerHuellaMiembros() * 12;
-            huella += obtenerHuellaOrganizacion(Periodicidad.ANUAL,LocalDate.of(anio,mes,1));
+            huella += obtenerHuellaOrganizacion(new Anual(),LocalDate.of(anio,mes,1));
         }
         return huella;
     }

@@ -19,11 +19,7 @@ public class AgenteProvincial {
     }
 
 
-    public Double calcularHuellaMensual(int mes, int anio){
-        return this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuellaMensual(mes,anio)).sum();
-    }
-
-    public Double calcularHuellaAnual(int anio){
-        return this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuellaAnual(anio)).sum();
+    public Double calcularHuella(int mes, int anio){
+        return this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuella(mes,anio)).sum();
     }
 }

@@ -1,9 +1,8 @@
-package dominio.organizacion;
+package dominio.organizacion.datos;
 
 import dominio.transporte.combustibles.Combustible;
 import lombok.Getter;
 import lombok.Setter;
-import services.lectorExcel.Periodicidad;
 import java.time.LocalDate;
 
 @Getter

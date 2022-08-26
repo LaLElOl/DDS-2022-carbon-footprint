@@ -1,6 +1,6 @@
 package services.lectorExcel;
 
-import dominio.organizacion.DatoConsumo;
+import dominio.organizacion.datos.DatoConsumo;
 
 import java.io.IOException;
 import java.util.List;
