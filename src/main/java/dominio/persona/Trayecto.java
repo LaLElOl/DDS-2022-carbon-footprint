@@ -44,14 +44,7 @@ public class Trayecto {
         this.tramos.remove(tramo);
     }
 
-    public Double calcularHuella(Miembro miembro){
-        return this.tramos.stream().mapToDouble(t -> {
-            try {
-                return t.calcularHuella(miembro);
-            } catch (IOException e) {
-                e.printStackTrace();
-            };
-            return 0;
-        }).sum();
+    public Double calcularHuella(Miembro miembro) {
+        return this.tramos.stream().mapToDouble(t -> t.calcularHuella(miembro)).sum();
     }
 }

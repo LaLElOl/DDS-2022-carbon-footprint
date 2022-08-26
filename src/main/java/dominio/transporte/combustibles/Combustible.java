@@ -1,12 +1,13 @@
 package dominio.transporte.combustibles;
 
+import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class Combustible {
-    @Setter
+
     private Double factorEmision;
 
-    public Double consumoCombustible(){
-        return factorEmision;
-    }
+    abstract public Double obtenerGramos(Double kilos);
 }

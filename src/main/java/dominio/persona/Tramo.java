@@ -28,7 +28,13 @@ public class Tramo {
         return this.transporte.calcularDistancia(this, miembro);
     }
 
-    public Double calcularHuella(Miembro miembro) throws IOException {
-        return this.calcularConsumo() * this.calcularDistancia(miembro);
+    public Double calcularHuella(Miembro miembro){
+        double huella = 0.0;
+        try{
+            huella = this.calcularConsumo() * this.calcularDistancia(miembro);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return huella;
     }
 }

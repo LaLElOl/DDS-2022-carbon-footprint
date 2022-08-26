@@ -78,27 +78,28 @@ public class ApachePOIExcel implements AdapterLectorExcel {
 
     private Combustible obtenerCombustible(Cell cell) {
         //TODO: Necesitamos alternativa a un switch para hacer esto
+        //TODO: Tiene que recuperar la instancia unica de cada combustible desde la DB
         switch(cell.getRichStringCellValue().toString().toLowerCase(Locale.ROOT)){
             case "gas natural":
-                return GasNatural.getInstancia();
+                return new GasNatural();
             case "fuel oil":
-                return FuelOil.getInstancia();
+                return new FuelOil();
             case "carbon":
-                return Carbon.getInstancia();
+                return new Carbon();
             case "leña":
-                return Lenia.getInstancia();
+                return new Lenia();
             case "kerosene":
-                return Kerosene.getInstancia();
+                return new Kerosene();
             case "carbon de leña":
-                return CarbonLenia.getInstancia();
+                return new CarbonLenia();
             case "gnc":
-                return GNC.getInstancia();
+                return new GNC();
             case "nafta":
-                return Nafta.getInstancia();
+                return new Nafta();
             case "electricidad":
-                return Electrico.getInstancia();
+                return new Electrico();
             case "gasoil":
-                return Gasoil.getInstancia();
+                return new Gasoil();
             default:
                 return null;
         }

@@ -13,6 +13,6 @@ public abstract class TipoVehiculo {
 
     public Double calcularConsumoParticular() {
 
-        return this.factorVehiculo * this.combustible.consumoCombustible();
+        return this.factorVehiculo * this.combustible.getFactorEmision();
     }
 }

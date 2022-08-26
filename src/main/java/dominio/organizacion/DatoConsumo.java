@@ -16,6 +16,6 @@ public class DatoConsumo {
     private LocalDate periodo;
 
     public double calcularHuella(){
-        return this.valor * this.tipoConsumo.consumoCombustible();
+        return this.valor * this.tipoConsumo.getFactorEmision();
     }
 }
