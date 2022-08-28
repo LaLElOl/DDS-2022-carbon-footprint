@@ -1,5 +1,6 @@
 package services.lectorExcel;
 
+import dominio.organizacion.Organizacion;
 import dominio.organizacion.datos.Anual;
 import dominio.organizacion.datos.DatoConsumo;
 import dominio.organizacion.datos.Mensual;
@@ -18,7 +19,7 @@ import java.util.Locale;
 
 public class ApachePOIExcel implements AdapterLectorExcel {
 
-    public List<DatoConsumo> leerExcel(String pathArchivo) throws IOException {
+    public List<DatoConsumo> leerExcel(String pathArchivo, Organizacion organizacion) throws IOException {
         FileInputStream file = new FileInputStream(pathArchivo);
         Workbook workbook = new XSSFWorkbook(file);
         List<DatoConsumo> data = new ArrayList<>();
@@ -28,6 +29,7 @@ public class ApachePOIExcel implements AdapterLectorExcel {
         //Empezamos por la fila nro 3 porque las primeras dos son titulos nomas
         for(int j=2 ; j < hoja.getLastRowNum() + 1; j++){
             DatoConsumo datoConsumo = new DatoConsumo();
+            datoConsumo.setOrganizacion(organizacion);
             Row fila = hoja.getRow(j);
             for (int i = 0 ; i < 5; i++){
                 switch (i){

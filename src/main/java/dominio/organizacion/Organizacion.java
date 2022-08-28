@@ -41,7 +41,7 @@ public class Organizacion {
     }
 
     public List<DatoConsumo> leerExcel(String pathArchivo) throws IOException {
-        return lectorExcel.leerExcel(pathArchivo);
+        return lectorExcel.leerExcel(pathArchivo,this);
     }
 
     public void suscribirARecomendacion(Contacto contacto){

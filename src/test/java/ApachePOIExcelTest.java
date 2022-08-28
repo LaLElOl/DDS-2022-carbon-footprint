@@ -1,3 +1,5 @@
+import dominio.organizacion.Organizacion;
+import org.mockito.internal.matchers.Or;
 import services.lectorExcel.ApachePOIExcel;
 import org.junit.Test;
 import dominio.organizacion.datos.DatoConsumo;
@@ -12,7 +14,7 @@ public class ApachePOIExcelTest {
 
     @Test
     public void excelTest() throws IOException {
-        List<DatoConsumo> datos = lector.leerExcel(pathArchivo);
+        List<DatoConsumo> datos = lector.leerExcel(pathArchivo,new Organizacion());
 
         datos.forEach( dato ->
                 System.out.println(dato.getActividad() + " "
