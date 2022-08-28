@@ -13,6 +13,7 @@ import lombok.Setter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -62,7 +63,7 @@ public class Organizacion {
             huella += obtenerHuellaOrganizacion(new Mensual(), LocalDate.of(anio,mes,1));
         }else{
             huella += obtenerHuellaMiembros() * 12;
-            huella += obtenerHuellaOrganizacion(new Anual(),LocalDate.of(anio,mes,1));
+            huella += obtenerHuellaOrganizacion(new Anual(),LocalDate.of(anio,1,1));
         }
         return huella;
     }
@@ -71,14 +72,18 @@ public class Organizacion {
         return this.sectores.stream().mapToDouble(Sector::calcularHuella).sum();
     }
 
-    private List<DatoConsumo> obtenerConsumos(Periodicidad periodicidad, LocalDate fecha){
+    private List<DatoConsumo> obtenerConsumos(LocalDate fecha){
         List<DatoConsumo> datos = new ArrayList<>();
-        //TODO: Obtener datos de la base de datos, filtrando por periodicidad y fecha
+        //TODO: Obtener datos de la base de datos, filtrando por periodo (año) y organizacion
         return datos;
     }
 
     public double obtenerHuellaOrganizacion(Periodicidad periodicidad, LocalDate fecha) {
-        List<DatoConsumo> datos = obtenerConsumos(periodicidad,fecha);
-        return datos.stream().mapToDouble(DatoConsumo::calcularHuella).sum();
+        List<DatoConsumo> datos = obtenerConsumos(fecha);
+
+        return periodicidad.filtrarDatos(datos,fecha)
+                .stream()
+                .mapToDouble(DatoConsumo::calcularHuella)
+                .sum();
     }
 }
