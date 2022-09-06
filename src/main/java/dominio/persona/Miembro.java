@@ -1,27 +1,55 @@
 package dominio.persona;
 
+import dominio.EntidadPersistente;
 import dominio.transporte.Ubicacion;
 import dominio.organizacion.Sector;
 import lombok.Getter;
 import lombok.Setter;
 
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Getter
 @Setter
-public class Miembro {
+
+@Entity
+@Table(name = "miembro")
+public class Miembro extends EntidadPersistente {
+
+    @Column(name = "apellido")
     private String apellido;
+
+    @Column(name = "contrasenia")
     private String contrasenia;
+
+    @ManyToOne
+    @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Ubicacion domicilio;
+
+    @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "nro_doc")
     private Integer numDoc;
-    private final List<Sector> sectores;
+
+    //TODO: Resolver el many to many contra los sectores
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Sector> sectores;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "apellido")
     private TipoDoc tipoDoc;
-    private final List<Trayecto> trayectos;
+
+    @OneToMany(mappedBy = "miembro", fetch = FetchType.LAZY)
+    private List<Trayecto> trayectos;
+
+    @Column(name = "usuario")
     private String usuario;
+
+    @OneToOne
     private Contacto contacto;
 
     public Miembro(){

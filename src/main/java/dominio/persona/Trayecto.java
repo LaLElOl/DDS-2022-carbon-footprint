@@ -1,9 +1,11 @@
 package dominio.persona;
 
+import dominio.EntidadPersistente;
 import dominio.transporte.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,9 +14,18 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class Trayecto {
+
+@Entity
+@Table(name = "trayecto")
+public class Trayecto extends EntidadPersistente {
+    @ManyToOne
+    @JoinColumn(name = "ubicacion_fin_id", referencedColumnName = "id")
     private Ubicacion fin;
+    @ManyToOne
+    @JoinColumn(name = "ubicacion_inicio_id", referencedColumnName = "id")
     private Ubicacion inicio;
+
+    @OneToMany(mappedBy = "trayecto")
     private final List<Tramo> tramos;
 
     public Trayecto(){

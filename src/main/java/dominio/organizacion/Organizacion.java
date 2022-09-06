@@ -1,15 +1,16 @@
 package dominio.organizacion;
 
-import dominio.organizacion.datos.Anual;
-import dominio.organizacion.datos.DatoConsumo;
-import dominio.organizacion.datos.Mensual;
-import dominio.organizacion.datos.Periodicidad;
+import dominio.EntidadPersistente;
+import dominio.organizacion.datos.*;
 import dominio.persona.Contacto;
 import dominio.transporte.Ubicacion;
 import services.lectorExcel.AdapterLectorExcel;
 import lombok.Getter;
 import lombok.Setter;
+import services.lectorExcel.ApachePOIExcel;
+import services.mediosNotiicacion.FactoryMedioNotificacion;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -17,20 +18,49 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class Organizacion {
+
+@Entity
+@Table(name = "organizacion")
+
+public class Organizacion extends EntidadPersistente {
+
+    @Transient
     private Clasificable clasificacion;
+
+    @Column(name = "razon_social")
     private String razonSocial;
+
+    @OneToMany(mappedBy = "organizacion", fetch = FetchType.LAZY)
     private List<Sector> sectores;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_organizacion")
     private TipoOrganizacion tipo;
+
+    @OneToOne
     private Ubicacion ubicacion;
+
+    @Column(name = "usuario")
     private String usuario;
+
+    @Column(name = "contrasenia")
     private String contrasenia;
+
+    @Transient
     private AdapterLectorExcel lectorExcel;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contactos_a_notificar", referencedColumnName = "id")
     private Set<Contacto> contactosANotificar;
+
+    @ManyToOne
+    @JoinColumn(name = "agente_municipal_id", referencedColumnName = "id")
+    private AgenteMunicipal agenteMunicipal;
 
     public Organizacion(){
         this.sectores = new ArrayList<>();
         this.contactosANotificar = new HashSet<>();
+        this.lectorExcel = new ApachePOIExcel();
     }
 
     public void agregarSectores(Sector ... sectoresAAgregar){
@@ -52,7 +82,9 @@ public class Organizacion {
 
     public void notificarRecomendacion(String link){
         this.contactosANotificar.forEach(
-                contacto -> contacto.getMediosNotificacion().forEach(medio -> medio.notificar(contacto,link)));
+                contacto -> contacto.getMediosNotificacion().forEach(medio ->
+                        FactoryMedioNotificacion.obtenerMedioNotificacion(medio)
+                                .notificar(contacto,link)));
     }
 
     public Double calcularHuella(int mes, int anio){
@@ -60,10 +92,10 @@ public class Organizacion {
         double huella = 0.0;
         if(mes > 0 && mes <= 12){
             huella += obtenerHuellaMiembros();
-            huella += obtenerHuellaOrganizacion(new Mensual(), LocalDate.of(anio,mes,1));
+            huella += obtenerHuellaOrganizacion(EPeriodicidad.MENSUAL, LocalDate.of(anio,mes,1));
         }else{
             huella += obtenerHuellaMiembros() * 12;
-            huella += obtenerHuellaOrganizacion(new Anual(),LocalDate.of(anio,1,1));
+            huella += obtenerHuellaOrganizacion(EPeriodicidad.ANUAL,LocalDate.of(anio,1,1));
         }
         return huella;
     }
@@ -78,10 +110,10 @@ public class Organizacion {
         return datos;
     }
 
-    public double obtenerHuellaOrganizacion(Periodicidad periodicidad, LocalDate fecha) {
+    public double obtenerHuellaOrganizacion(EPeriodicidad periodicidad, LocalDate fecha) {
         List<DatoConsumo> datos = obtenerConsumos(fecha);
 
-        return periodicidad.filtrarDatos(datos,fecha)
+        return FactoryPeriodicidad.obtenerPeriodicidad(periodicidad).filtrarDatos(datos,fecha)
                 .stream()
                 .mapToDouble(DatoConsumo::calcularHuella)
                 .sum();

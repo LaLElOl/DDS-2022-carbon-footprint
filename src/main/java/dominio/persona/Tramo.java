@@ -1,20 +1,44 @@
 package dominio.persona;
 
+import dominio.EntidadPersistente;
 import dominio.transporte.Ubicacion;
 import dominio.transporte.medios.Transporte;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.IOException;
 
 @Getter
 @Setter
-public class Tramo {
+
+@Entity
+@Table(name = "tramo")
+public class Tramo extends EntidadPersistente {
+
+    @ManyToOne
+    @JoinColumn(name = "duenio_tramo_id", referencedColumnName = "id")
     private Miembro duenioTramo;
+
+    @ManyToOne
+    @JoinColumn(name = "ubicacion_fin_id", referencedColumnName = "id")
     private Ubicacion finTramo;
+
+    @ManyToOne
+    @JoinColumn(name = "ubicacion_inicio_id", referencedColumnName = "id")
     private Ubicacion inicioTramo;
+
+//    @ManyToOne
+//    @JoinColumn(name = "transporte_id", referencedColumnName = "id")
+    @Transient
     private Transporte transporte;
+
+    @Column(name = "es_compartido")
     private Boolean compartido;
+
+    @ManyToOne
+    @JoinColumn(name = "trayecto_id", referencedColumnName = "id")
+    private Trayecto trayecto;
 
     public Tramo(Miembro m){
         this.duenioTramo = m;

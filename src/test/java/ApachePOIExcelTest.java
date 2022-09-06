@@ -20,7 +20,7 @@ public class ApachePOIExcelTest {
                 System.out.println(dato.getActividad() + " "
                 + dato.getTipoConsumo() + " "
                 + dato.getValor() + " "
-                + dato.getPeriodicidad() + " "
+                + dato.getEPeriodicidad() + " "
                 + dato.getPeriodo())
         );
     }

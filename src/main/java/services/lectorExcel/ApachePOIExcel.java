@@ -1,10 +1,7 @@
 package services.lectorExcel;
 
 import dominio.organizacion.Organizacion;
-import dominio.organizacion.datos.Anual;
-import dominio.organizacion.datos.DatoConsumo;
-import dominio.organizacion.datos.Mensual;
-import dominio.organizacion.datos.Periodicidad;
+import dominio.organizacion.datos.*;
 import dominio.transporte.combustibles.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -43,7 +40,7 @@ public class ApachePOIExcel implements AdapterLectorExcel {
                         datoConsumo.setValor(this.obtenerValor(fila.getCell(i)));
                         break;
                     case 3:
-                        datoConsumo.setPeriodicidad(this.obtenerPeriodicidad(fila.getCell(i)));
+                        datoConsumo.setEPeriodicidad(this.obtenerPeriodicidad(fila.getCell(i)));
                         break;
                     case 4:
                         datoConsumo.setPeriodo(this.obtenerPeriodo(fila.getCell(i)));
@@ -64,12 +61,13 @@ public class ApachePOIExcel implements AdapterLectorExcel {
         return LocalDate.of(valor.getYear(),valor.getMonth(),valor.getDayOfMonth());
     }
 
-    private Periodicidad obtenerPeriodicidad(Cell cell) {
+
+    private EPeriodicidad obtenerPeriodicidad(Cell cell) {
         switch (cell.getRichStringCellValue().getString().toLowerCase(Locale.ROOT)){
             case "mensual":
-                return new Mensual();
+                return EPeriodicidad.MENSUAL;
             case "anual":
-                return new Anual();
+                return EPeriodicidad.ANUAL;
             default:
                 return null;
         }
