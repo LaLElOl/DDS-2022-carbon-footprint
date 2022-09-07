@@ -24,6 +24,7 @@ public class Contacto extends EntidadPersistente {
     private String email;
 
     //TODO: ver como mapear la lista de enums
+    @Transient
     private List<EMedioNotificacion> mediosNotificacion;
 
     public Contacto(){

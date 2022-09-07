@@ -18,6 +18,11 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "trayecto")
 public class Trayecto extends EntidadPersistente {
+
+    @ManyToOne
+    @JoinColumn(name = "miembro_id", referencedColumnName = "id")
+    private Miembro miembro;
+
     @ManyToOne
     @JoinColumn(name = "ubicacion_fin_id", referencedColumnName = "id")
     private Ubicacion fin;

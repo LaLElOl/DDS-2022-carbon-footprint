@@ -19,11 +19,15 @@ import java.util.Set;
 
 public class Sector extends EntidadPersistente {
 
-    @OneToMany(mappedBy = "sector", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sector_id",referencedColumnName = "id")
     private List<Solicitud> solicitudes;
 
-    //TODO: resolver many to many contra miembros
-    @OneToMany(mappedBy = "sector", fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(name = "empleados_sector",
+            joinColumns = @JoinColumn(name = "sector_id"),
+            inverseJoinColumns = @JoinColumn(name = "miembro_id")
+            )
     private final Set<Miembro> miembros;
 
     @Column(name = "nombre")

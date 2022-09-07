@@ -35,12 +35,11 @@ public class Miembro extends EntidadPersistente {
     @Column(name = "nro_doc")
     private Integer numDoc;
 
-    //TODO: Resolver el many to many contra los sectores
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "miembros",fetch = FetchType.LAZY)
     private List<Sector> sectores;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "apellido")
+    @Column(name = "tipo_doc")
     private TipoDoc tipoDoc;
 
     @OneToMany(mappedBy = "miembro", fetch = FetchType.LAZY)
