@@ -6,15 +6,28 @@ import dominio.persona.Tramo;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 @Getter
 @Setter
-public abstract class Publico implements Transporte {
+
+@Entity
+//@Table(name = "transporte_publico")
+public abstract class Publico extends Transporte {
+
+    @Column(name = "nombre")
     private String nombre;
+
+    @OneToMany(mappedBy = "transportePublico")
     private List<ParadasTransporte> paradas;
+
+    @Column(name = "factor_emision")
     protected Double factorEmision;
 
     public Double calcularConsumo() {
@@ -52,7 +65,7 @@ public abstract class Publico implements Transporte {
 
         while(paradaPosicion != paradaFinal){
             distanciaRecorrida += paradaPosicion.getDistanciaAlaSiguiente();
-            paradaPosicion = paradaPosicion.getParadaTransporteSiguiente();
+            paradaPosicion = paradaPosicion.getParadaSiguiente();
         }
         return distanciaRecorrida;
     }
