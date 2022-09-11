@@ -49,6 +49,7 @@ public class Miembro extends EntidadPersistente {
     private String usuario;
 
     @OneToOne
+    @JoinColumn(name = "contacto_id", referencedColumnName = "id")
     private Contacto contacto;
 
     public Miembro(){
@@ -73,7 +74,7 @@ public class Miembro extends EntidadPersistente {
     }
 
     public Double calcularHuella() {
-        Double huella = 0.0;
+        double huella = 0.0;
         huella = this.trayectos.stream().mapToDouble(trayecto -> trayecto.calcularHuella(this)).sum();
         return huella;
     }

@@ -21,7 +21,8 @@ public class Vehiculo extends EntidadPersistente {
     @Column (name = "tipo_vehiculo")
     protected TipoVehiculo tipoVehiculo;
 
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "combustible_id", referencedColumnName = "id")
     private Combustible combustible;
 
     public Double calcularConsumoParticular() {
