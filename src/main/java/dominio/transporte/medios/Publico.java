@@ -6,10 +6,7 @@ import dominio.persona.Tramo;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -18,11 +15,15 @@ import java.util.List;
 @Setter
 
 @Entity
-//@Table(name = "transporte_publico")
+@DiscriminatorValue("publico")
 public abstract class Publico extends Transporte {
 
     @Column(name = "nombre")
     private String nombre;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "medio_transporte")
+    protected TipoTransporte tipoTransporte;
 
     @OneToMany(mappedBy = "transportePublico")
     private List<ParadasTransporte> paradas;

@@ -2,23 +2,25 @@ package dominio.transporte.medios;
 
 import dominio.persona.Miembro;
 import dominio.persona.Tramo;
-import dominio.transporte.vehiculos.TipoVehiculo;
+import dominio.transporte.vehiculos.Vehiculo;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.IOException;
 
 @Getter
 @Setter
 
 @Entity
-@Table(name = "transporte_particular")
+@DiscriminatorValue("particular")
 public class Particular extends Transporte {
 
+    @ManyToOne
+    @JoinColumn(name = "vehiculo_id", referencedColumnName = "id")
+    private Vehiculo vehiculo;
 
-    private TipoVehiculo vehiculo;
+    @Transient
     private CalculadorDistanciaAPI calculador = new CalculadorDistanciaAPI();
 
     public Double calcularConsumo() {

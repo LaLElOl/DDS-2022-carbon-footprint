@@ -7,18 +7,15 @@ import lombok.Setter;
 import services.distancias.AdapterGeoService;
 import services.distancias.Distancia;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.IOException;
 @Setter
 @Getter
 
 @Entity
-@Table(name = "transporte_ecologico")
+@DiscriminatorValue("ecologico")
 public class Ecologico extends Transporte {
 
-    //TODO: Ver como corregir la persistencia de Ecologico, que no tiene atributos persistentes
     @Transient
     private final CalculadorDistanciaAPI calculador = new CalculadorDistanciaAPI();
 

@@ -7,16 +7,13 @@ import lombok.Setter;
 import services.distancias.AdapterGeoService;
 import services.distancias.Distancia;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.IOException;
 @Setter
 @Getter
 
 @Entity
-@Table(name = "transporte_contratado")
+@DiscriminatorValue("servicio_contratado")
 public class ServicioContratado extends Transporte {
 
     @Transient
