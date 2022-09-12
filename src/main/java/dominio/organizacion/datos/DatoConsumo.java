@@ -20,9 +20,8 @@ public class DatoConsumo extends EntidadPersistente {
     @Column(name = "actividad")
     private String actividad;
 
-//    @ManyToOne
-//    @JoinColumn(name = "tipo_consumo_id", referencedColumnName = "id")
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "tipo_consumo_id", referencedColumnName = "id")
     private Combustible tipoConsumo;
 
     @Column(name = "valor")
