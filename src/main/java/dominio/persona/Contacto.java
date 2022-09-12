@@ -23,8 +23,10 @@ public class Contacto extends EntidadPersistente {
     @Column(name = "email")
     private String email;
 
-    //TODO: ver como mapear la lista de enums
-    @Transient
+    @ElementCollection(targetClass = EMedioNotificacion.class)
+    @JoinTable(name = "medio_notificacion", joinColumns = @JoinColumn(name = "contacto_id"))
+    @Column(name = "medio_notificacion")
+    @Enumerated(EnumType.STRING)
     private List<EMedioNotificacion> mediosNotificacion;
 
     public Contacto(){
