@@ -28,9 +28,8 @@ public class Tramo extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_inicio_id", referencedColumnName = "id")
     private Ubicacion inicioTramo;
 
-//    @ManyToOne
-//    @JoinColumn(name = "transporte_id", referencedColumnName = "id")
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "transporte_id", referencedColumnName = "id")
     private Transporte transporte;
 
     @Column(name = "es_compartido")

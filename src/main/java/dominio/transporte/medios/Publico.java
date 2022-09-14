@@ -16,7 +16,7 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("publico")
-public abstract class Publico extends Transporte {
+public class Publico extends Transporte {
 
     @Column(name = "nombre")
     private String nombre;
