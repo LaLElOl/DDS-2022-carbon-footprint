@@ -16,6 +16,7 @@ import java.io.IOException;
 @DiscriminatorValue("particular")
 public class Particular extends Transporte {
 
+    //TODO: controlar si uso one to one
     @ManyToOne
     @JoinColumn(name = "vehiculo_id", referencedColumnName = "id")
     private Vehiculo vehiculo;

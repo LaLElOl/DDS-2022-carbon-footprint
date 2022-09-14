@@ -20,6 +20,7 @@ public class ParadasTransporte extends EntidadPersistente {
     @JoinColumn(name = "parada_actual_id",referencedColumnName = "id")
     private Parada paradaActual;
 
+    //TODO: one to one
     @ManyToOne
     @JoinColumn(name = "parada_siguiente_id",referencedColumnName = "id")
     private ParadasTransporte paradaSiguiente;

@@ -11,5 +11,4 @@ public class Electrico extends Combustible {
         //TODO: INCHEQUEABLE
         return kwh*122;
     }
-
 }

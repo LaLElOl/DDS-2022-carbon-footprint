@@ -28,7 +28,7 @@ public class Sector extends EntidadPersistente {
             joinColumns = @JoinColumn(name = "sector_id"),
             inverseJoinColumns = @JoinColumn(name = "miembro_id")
             )
-    private final Set<Miembro> miembros;
+    private Set<Miembro> miembros;
 
     @Column(name = "nombre")
     private String nombre;

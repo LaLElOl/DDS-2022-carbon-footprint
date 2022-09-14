@@ -20,6 +20,7 @@ public class Tramo extends EntidadPersistente {
     @JoinColumn(name = "duenio_tramo_id", referencedColumnName = "id")
     private Miembro duenioTramo;
 
+    //TODO: one to one
     @ManyToOne
     @JoinColumn(name = "ubicacion_fin_id", referencedColumnName = "id")
     private Ubicacion finTramo;
@@ -28,6 +29,7 @@ public class Tramo extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_inicio_id", referencedColumnName = "id")
     private Ubicacion inicioTramo;
 
+    //TODO: controlar manytoone
     @ManyToOne
     @JoinColumn(name = "transporte_id", referencedColumnName = "id")
     private Transporte transporte;

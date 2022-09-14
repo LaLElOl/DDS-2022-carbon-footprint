@@ -25,7 +25,7 @@ public class Miembro extends EntidadPersistente {
     @Column(name = "contrasenia")
     private String contrasenia;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Ubicacion domicilio;
 
