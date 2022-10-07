@@ -33,4 +33,7 @@ public class Ubicacion extends EntidadPersistente {
 
     @Column(name = "provincia")
     private String provincia;
+
+    @Column(name = "municipio")
+    private String municipio;
 }

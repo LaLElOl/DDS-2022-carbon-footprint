@@ -14,6 +14,7 @@ import services.mediosNotiicacion.FactoryMedioNotificacion;
 import javax.persistence.*;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,12 @@ public class Organizacion extends EntidadPersistente {
     @OneToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
+
+    @Column(name = "huellaCarbonoActual")
+    private Double huellaCarbonoActual;
+
+    @Column(name = "fechaUltimoCalculoHuella", columnDefinition = "DATE")
+    private LocalDate fechaUltimoCalculoHuella;
 
     @Transient
     private AdapterLectorExcel lectorExcel;
@@ -87,6 +94,11 @@ public class Organizacion extends EntidadPersistente {
     }
 
     public Double calcularHuella(int mes, int anio){
+
+        if((LocalDate.now().minus(2,ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuella))){
+            return this.huellaCarbonoActual;
+        }
+
         //TODO: falta calcular la parte del excel y sumarla a "huella"
         double huella = 0.0;
         if(mes > 0 && mes <= 12){
@@ -96,6 +108,8 @@ public class Organizacion extends EntidadPersistente {
             huella += obtenerHuellaMiembros() * 12;
             huella += obtenerHuellaOrganizacion(EPeriodicidad.ANUAL,LocalDate.of(anio,1,1));
         }
+        this.fechaUltimoCalculoHuella = LocalDate.now();
+        this.huellaCarbonoActual = huella;
         return huella;
     }
 

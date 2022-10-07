@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +42,12 @@ public class Sector extends EntidadPersistente {
     @Column(name = "promedio_huella_miembro")
     private Double promedioHCMiembro;
 
+    @Column(name = "huellaCarbonoActual")
+    private Double huellaCarbonoActual;
+
+    @Column(name = "periodo", columnDefinition = "DATE")
+    private LocalDate fechaUltimoCalculoHuella;
+
     public Sector(){
         this.miembros = new HashSet<Miembro>();
         this.solicitudes = new ArrayList<Solicitud>() {
@@ -63,8 +71,15 @@ public class Sector extends EntidadPersistente {
     }
 
     public Double calcularHuella() {
+
+        if((LocalDate.now().minus(2, ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuella))){
+            return this.huellaCarbonoActual;
+        }
+
         double huella =  this.getMiembros().stream().mapToDouble(Miembro::calcularHuella).sum();
         this.promedioHCMiembro = huella / getMiembros().size();
+        this.fechaUltimoCalculoHuella = LocalDate.now();
+        this.huellaCarbonoActual = huella;
         return huella;
     }
 }
