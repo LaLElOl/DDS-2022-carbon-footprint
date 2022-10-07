@@ -1,6 +1,7 @@
 package dominio.organizacion;
 
 import dominio.EntidadPersistente;
+import dominio.Usuario;
 import dominio.organizacion.datos.*;
 import dominio.persona.Contacto;
 import dominio.transporte.Ubicacion;
@@ -40,11 +41,9 @@ public class Organizacion extends EntidadPersistente {
     @OneToOne
     private Ubicacion ubicacion;
 
-    @Column(name = "usuario")
-    private String usuario;
-
-    @Column(name = "contrasenia")
-    private String contrasenia;
+    @OneToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
     @Transient
     private AdapterLectorExcel lectorExcel;

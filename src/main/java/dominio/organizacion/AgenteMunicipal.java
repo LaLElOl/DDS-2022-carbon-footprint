@@ -1,6 +1,7 @@
 package dominio.organizacion;
 
 import dominio.EntidadPersistente;
+import dominio.Usuario;
 import dominio.organizacion.datos.Periodicidad;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,10 @@ public class AgenteMunicipal extends EntidadPersistente {
 
     @Column(name = "nombre_agente")
     private String nombre;
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "agenteMunicipal", fetch = FetchType.LAZY)
     private List<Organizacion> organizaciones;

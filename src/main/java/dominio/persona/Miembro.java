@@ -1,6 +1,7 @@
 package dominio.persona;
 
 import dominio.EntidadPersistente;
+import dominio.Usuario;
 import dominio.transporte.Ubicacion;
 import dominio.organizacion.Sector;
 import lombok.Getter;
@@ -22,9 +23,6 @@ public class Miembro extends EntidadPersistente {
     @Column(name = "apellido")
     private String apellido;
 
-    @Column(name = "contrasenia")
-    private String contrasenia;
-
     @OneToOne
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Ubicacion domicilio;
@@ -45,8 +43,9 @@ public class Miembro extends EntidadPersistente {
     @OneToMany(mappedBy = "miembro", fetch = FetchType.LAZY)
     private List<Trayecto> trayectos;
 
-    @Column(name = "usuario")
-    private String usuario;
+    @OneToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
     @OneToOne
     @JoinColumn(name = "contacto_id", referencedColumnName = "id")
