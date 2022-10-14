@@ -26,8 +26,9 @@ import java.util.stream.Collectors;
 
 public class Organizacion extends EntidadPersistente {
 
-    @Transient
-    private Clasificable clasificacion;
+    @ManyToOne
+    @JoinColumn(name = "clasificacion_id", referencedColumnName = "id")
+    private Clasificacion clasificacion;
 
     @Column(name = "razon_social")
     private String razonSocial;
