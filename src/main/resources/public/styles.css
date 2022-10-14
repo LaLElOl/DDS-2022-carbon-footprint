@@ -1,0 +1,177 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #4cb8b3;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.header h1 {
+    color: #ffffff;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.contenedor {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.contenido-header {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navegacion-principal {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.navegacion-principal a {
+    color: #ffffff;
+    font-size: 2.4rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.navegacion-principal a:hover {
+    color: #fef46d;
+    font-size: 2.4rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*Formulario*/
+.formulario {
+    background-color: #4cb8b3;
+    width: 60rem;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+
+.campo {
+    margin-bottom: 1rem;
+}
+
+.campo label {
+    color: #000000;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.formulario fieldset {
+    border: none;
+}
+
+input {
+    width: 97%;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 8px;
+    margin-right: 3px;
+}
+
+select {
+    width: 100%;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 8px;
+    margin-right: 3px;
+}
+
+.enviar .boton {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.enviar {
+    width: 28%;
+    margin-left: 20.4rem;
+}
+
+.boton {
+    background-color: #506463;
+    color: #ffffff;
+    padding: 1rem 3rem; /*ENGORDA EL ELEMENTO */
+    margin-top: 0.5rem; /* PARA QUE SE SEPARE DE LO QUE ESTA ARRIBA*/
+    font-size: 2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 0.5rem; /* ESQUINAS REDONDEADAS */
+    width: 90%;
+    text-align: center;
+    border: none;
+}
+
+.boton-sector {
+    background-color: #0d2335;
+    color: #ffffff;
+    padding: 0.5rem 1.5rem; /*ENGORDA EL ELEMENTO */
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 0.5rem; /* ESQUINAS REDONDEADAS */
+    width: 40%;
+    text-align: center;
+    border: none;
+}
+
+.visualizar {
+    margin-left: 10.9rem;
+}
+
+
+button:hover{
+    cursor: pointer;
+}
+
+footer{
+    background-color: #4cb8b3;
+    padding: 1rem;
+}
+
+footer p {
+    color: #ffffff;
+    margin: 0;
+    text-align: center;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+main {
+    max-width: 120rem;
+    margin: 2rem auto 2rem auto;
+    -webkit-box-shadow: 0px 6px 5px 0px rgba(102,102,102,0.61);
+    -moz-box-shadow: 0px 6px 5px 0px rgba(102,102,102,0.61);
+    box-shadow: 0px 6px 5px 0px rgba(102,102,102,0.61);
+    background-color: var(--blanco);
+    padding: 2rem;
+    border-radius: 1rem; /* ESQUINAS REDONDEADAS */
+}
