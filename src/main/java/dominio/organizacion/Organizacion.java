@@ -36,10 +36,6 @@ public class Organizacion extends EntidadPersistente {
     @OneToMany(mappedBy = "organizacion", fetch = FetchType.LAZY)
     private List<Sector> sectores;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_organizacion")
-    private TipoOrganizacion tipo;
-
     @OneToOne
     private Ubicacion ubicacion;
 

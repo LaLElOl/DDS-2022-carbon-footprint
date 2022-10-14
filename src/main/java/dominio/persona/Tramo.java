@@ -20,12 +20,11 @@ public class Tramo extends EntidadPersistente {
     @JoinColumn(name = "duenio_tramo_id", referencedColumnName = "id")
     private Miembro duenioTramo;
 
-    //TODO: one to one
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "ubicacion_fin_id", referencedColumnName = "id")
     private Ubicacion finTramo;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "ubicacion_inicio_id", referencedColumnName = "id")
     private Ubicacion inicioTramo;
 
@@ -37,6 +36,7 @@ public class Tramo extends EntidadPersistente {
     @Column(name = "es_compartido")
     private Boolean compartido;
 
+    //TODO: revisar si se pone el OneToOne en el caso de que no se reutilizen los transportes
     @ManyToOne
     @JoinColumn(name = "trayecto_id", referencedColumnName = "id")
     private Trayecto trayecto;

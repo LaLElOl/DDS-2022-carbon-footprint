@@ -24,11 +24,11 @@ public class Trayecto extends EntidadPersistente {
     private Miembro miembro;
 
     //TODO: Revisar para poner one to one, si uso las ubicaciones despues
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "ubicacion_fin_id", referencedColumnName = "id")
     private Ubicacion fin;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "ubicacion_inicio_id", referencedColumnName = "id")
     private Ubicacion inicio;
 

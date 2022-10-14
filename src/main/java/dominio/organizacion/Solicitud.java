@@ -23,7 +23,9 @@ public class Solicitud extends EntidadPersistente {
     @JoinColumn(name = "solicitante_id", referencedColumnName = "id")
     private Miembro solicitante;
 
-    //TODO agregar sector como atributo
+    @ManyToOne
+    @JoinColumn(name = "sector_id", referencedColumnName = "id")
+    private Sector sector;
 
     public Miembro getSolicitante() {
         return solicitante;
