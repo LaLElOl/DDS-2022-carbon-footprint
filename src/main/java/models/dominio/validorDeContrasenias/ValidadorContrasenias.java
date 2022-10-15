@@ -1,6 +1,6 @@
 package models.dominio.validorDeContrasenias;
 
-import dominio.validorDeContrasenias.requisitos.*;
+import models.dominio.validorDeContrasenias.requisitos.*;
 import models.dominio.validorDeContrasenias.requisitos.*;
 
 import java.util.Arrays;

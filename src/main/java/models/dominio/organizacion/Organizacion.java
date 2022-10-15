@@ -2,7 +2,7 @@ package models.dominio.organizacion;
 
 import models.dominio.EntidadPersistente;
 import models.dominio.Usuario;
-import dominio.organizacion.datos.*;
+import models.dominio.organizacion.datos.*;
 import models.dominio.organizacion.datos.EPeriodicidad;
 import models.dominio.persona.Contacto;
 import models.dominio.transporte.Ubicacion;
@@ -50,6 +50,9 @@ public class Organizacion extends EntidadPersistente {
 
     @Column(name = "fechaUltimoCalculoHuella", columnDefinition = "DATE")
     private LocalDate fechaUltimoCalculoHuella;
+
+    @Column(name = "cuit")
+    private String cuit;
 
     @Transient
     private AdapterLectorExcel lectorExcel;

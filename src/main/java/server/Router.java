@@ -1,5 +1,6 @@
 package server;
 
+import controllers.OrganizacionesController;
 import middlewares.AuthMiddleware;
 
 import spark.utils.BooleanHelper;
@@ -25,7 +26,10 @@ public class Router {
     }
 
     private static void configure(){
+        OrganizacionesController organizacionesController = new OrganizacionesController();
 
-
+        //Organizaciones
+        Spark.get("/alta_organizacion", organizacionesController::crear, engine);
+        Spark.post("/alta_organizacion", organizacionesController::guardar);
     }
 }
