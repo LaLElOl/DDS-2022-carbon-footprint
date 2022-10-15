@@ -1,8 +1,9 @@
-import dominio.organizacion.*;
-import dominio.organizacion.datos.DatoConsumo;
-import dominio.persona.Miembro;
-import dominio.persona.Tramo;
-import dominio.persona.Trayecto;
+import models.dominio.organizacion.Organizacion;
+import models.dominio.organizacion.Sector;
+import models.dominio.organizacion.datos.DatoConsumo;
+import models.dominio.persona.Miembro;
+import models.dominio.persona.Tramo;
+import models.dominio.persona.Trayecto;
 import org.junit.*;
 
 import java.io.IOException;

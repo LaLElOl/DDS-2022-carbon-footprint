@@ -1,4 +1,4 @@
-import dominio.validorDeContrasenias.ValidadorContrasenias;
+import models.dominio.validorDeContrasenias.ValidadorContrasenias;
 import org.junit.Assert;
 import org.junit.Test;
 
