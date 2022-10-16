@@ -3,13 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre Pagina</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Tu Huella</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
 </head>
 <body>
     <header class="header">
         <div class="contenedor contenido-header">
-            <h1>Nombre Pagina</h1>
+            <h1 class="title is-1 mt-3">Tu Huella</h1>
             <nav class="navegacion-principal">
                 <a href="#">Link1</a>
                 <a href="#">Link2</a>
@@ -21,10 +22,21 @@
 
     <main>
         <section>
-            <h2 class="contacto">Alta de Organización</h2>
+            <h2 class="contacto title">Alta de Organización</h2>
     
             <form class = "formulario" method="post" href="/alta_organizacion">
                 <fieldset>
+
+                        <div class="campo">
+                            <label>Usuario</label>
+                            <input type="text" placeholder="Usuario">
+                        </div>
+                        
+                        <div class="campo">
+                            <label>Contraseña</label>
+                            <input type="text" placeholder="Contraseña">
+                        </div>
+
                         <div class = "campo">
                             <label>CUIT</label>
                             <input name="cuit" type="number" placeholder="CUIT">

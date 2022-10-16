@@ -2,6 +2,7 @@ html {
     font-size: 62.5%;
 }
 
+
 body {
     font-family: "Montserrat", sans-serif;
     font-size: 1.6rem;
@@ -86,7 +87,7 @@ a {
 }
 
 input {
-    width: 97%;
+    width: 100%;
     border: none;
     border-radius: 0.5rem;
     padding: 8px;
