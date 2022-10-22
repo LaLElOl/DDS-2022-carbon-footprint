@@ -4,6 +4,9 @@ import models.dominio.Usuario;
 import models.dominio.organizacion.Clasificacion;
 import models.dominio.organizacion.Organizacion;
 import models.dominio.organizacion.TipoOrganizacion;
+import models.dominio.persona.Contacto;
+import models.dominio.persona.Miembro;
+import models.dominio.persona.TipoDoc;
 import models.dominio.transporte.Ubicacion;
 import spark.ModelAndView;
 import spark.Request;
@@ -11,41 +14,44 @@ import spark.Response;
 
 import java.util.Locale;
 
-public class OrganizacionesController {
+public class MiembroController {
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_organizacion.html");
+        return new ModelAndView(null, "form_miembro.html");
     }
 
     public Response guardar(Request request,Response response) {
 
-
-        Organizacion org = new Organizacion();
-        Clasificacion clasif = new Clasificacion();
         Usuario usuario = new Usuario();
+        Miembro miembro = new Miembro();
         Ubicacion ubicacion = new Ubicacion();
+        Contacto contacto = new Contacto();
+
 
         usuario.setNickname(request.queryParams("usuario"));
         //usuario.setContrasenia(request.queryParams("contrasenia"));
-        org.setCuit(request.queryParams("cuit"));
-        org.setRazonSocial(request.queryParams("razon_social"));
-        TipoOrganizacion tipo = TipoOrganizacion.valueOf(request.queryParams("tipo_organizacion").toUpperCase(Locale.ROOT));
-        ubicacion.setLocalidad(Integer.valueOf(request.queryParams("codigo_postal")));
+        miembro.setNombre(request.queryParams("nombre"));
+        miembro.setApellido(request.queryParams("apellido"));
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
-        clasif.setClasificacion(request.queryParams("clasificacion"));
+        TipoDoc tipoDoc = TipoDoc.valueOf(request.queryParams("tipo_doc").toUpperCase(Locale.ROOT));
+        miembro.setNumDoc(Integer.valueOf(request.queryParams("numero_documento")));
+        contacto.setNumTelefono(request.queryParams("numero_telefono"));
+        contacto.setEmail(request.queryParams("email"));
+
 
         System.out.println(usuario.getNickname());
         //System.out.println(usuario.getContrasenia());
-        System.out.println(org.getCuit());
-        System.out.println(org.getRazonSocial());
-        System.out.println(tipo);
-        System.out.println(ubicacion.getLocalidad());
+        System.out.println(miembro.getNombre());
+        System.out.println(miembro.getApellido());
         System.out.println(ubicacion.getCalle());
         System.out.println(ubicacion.getAltura());
-        System.out.println(clasif.getClasificacion());
+        System.out.println(tipoDoc);
+        System.out.println(miembro.getNumDoc());
+        System.out.println(contacto.getNumTelefono());
+        System.out.println(contacto.getEmail());
 
-        response.redirect("/alta_organizacion");
+        response.redirect("/alta_miembro");
         return response;
     }
 }
