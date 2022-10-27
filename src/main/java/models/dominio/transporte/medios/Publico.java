@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -41,8 +42,7 @@ public class Publico extends Transporte {
         int indiceParadaInicial = obtenerIndiceParada(tramo.getInicioTramo());
         int indiceParadaFinal = obtenerIndiceParada(tramo.getFinTramo());
         int aux = indiceParadaInicial;
-        //TODO: Probar usando Iterator
-        while(aux < indiceParadaFinal){
+        while(aux < indiceParadaFinal && indiceParadaInicial != -1){
             distanciaRecorrida += this.paradas.get(aux).getDistanciaAlaSiguiente();
             aux++;
         }
@@ -52,24 +52,25 @@ public class Publico extends Transporte {
     private int obtenerIndiceParada(Ubicacion ubicacion){
         int i = 0;
         while(i < this.paradas.size()) {
-            if(this.paradas.get(i).getParadaActual().getUbicacion() == ubicacion) return i;
+            if(Objects.equals(this.paradas.get(i).getParadaActual().getUbicacion().getId(), ubicacion.getId())) return i;
             i++;
         }
         return -1;
     }
+
 ///Alternativa
-    public Integer calcularDistancia2(Tramo tramo, Miembro miembro){
-
-        int distanciaRecorrida = 0;
-        ParadasTransporte paradaPosicion = obtenerParada(tramo.getInicioTramo());
-        ParadasTransporte paradaFinal = obtenerParada(tramo.getFinTramo());
-
-        while(paradaPosicion != paradaFinal){
-            distanciaRecorrida += paradaPosicion.getDistanciaAlaSiguiente();
-            paradaPosicion = paradaPosicion.getParadaSiguiente();
-        }
-        return distanciaRecorrida;
-    }
+//    public Integer calcularDistancia2(Tramo tramo, Miembro miembro){
+//
+//        int distanciaRecorrida = 0;
+//        ParadasTransporte paradaPosicion = obtenerParada(tramo.getInicioTramo());
+//        ParadasTransporte paradaFinal = obtenerParada(tramo.getFinTramo());
+//
+//        while(paradaPosicion != paradaFinal){
+//            distanciaRecorrida += paradaPosicion.getDistanciaAlaSiguiente();
+//            paradaPosicion = paradaPosicion.getParadaSiguiente();
+//        }
+//        return distanciaRecorrida;
+//    }
 
     private ParadasTransporte obtenerParada(Ubicacion ubicacion){
 
