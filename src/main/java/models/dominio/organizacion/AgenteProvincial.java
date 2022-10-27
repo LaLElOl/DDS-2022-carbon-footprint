@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -34,6 +35,9 @@ public class AgenteProvincial extends EntidadPersistente {
         this.agentesMunicipales = new ArrayList<>();
     }
 
+    public void agregarAgentesMunicipales(AgenteMunicipal...agenteMunicipales){
+        Collections.addAll(this.agentesMunicipales,agenteMunicipales);
+    }
 
     public Double calcularHuella(int mes, int anio){
         return this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuella(mes,anio)).sum();

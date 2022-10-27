@@ -1,15 +1,13 @@
 import helpers.EntityManagerHelper;
 import models.dominio.Usuario;
-import models.dominio.organizacion.AgenteMunicipal;
-import models.dominio.organizacion.AgenteProvincial;
-import models.dominio.organizacion.Organizacion;
-import models.dominio.organizacion.Sector;
+import models.dominio.organizacion.*;
 import models.dominio.persona.Miembro;
 import models.dominio.persona.Tramo;
 import models.dominio.persona.Trayecto;
 import models.dominio.transporte.Ubicacion;
 import models.dominio.transporte.combustibles.*;
 import models.dominio.transporte.medios.*;
+import models.dominio.transporte.vehiculos.TipoVehiculo;
 import models.dominio.transporte.vehiculos.Vehiculo;
 import org.apache.poi.ss.formula.functions.T;
 import org.checkerframework.checker.units.qual.K;
@@ -30,6 +28,10 @@ public class ScriptDatosDB {
         Organizacion org1 = new Organizacion();
         Organizacion org2 = new Organizacion();
         Organizacion org3 = new Organizacion();
+
+        Clasificacion clasifOrg1 = new Clasificacion();
+        Clasificacion clasifOrg2 = new Clasificacion();
+        Clasificacion clasifOrg3 = new Clasificacion();
 
         Sector sec1 = new Sector();
         Sector sec2 = new Sector();
@@ -58,10 +60,10 @@ public class ScriptDatosDB {
         Trayecto tray4 = new Trayecto();
 
         Tramo tramo1 = new Tramo(miem1);
-        Tramo tramo2 = new Tramo(miem3);
+        Tramo tramo2 = new Tramo(miem1);//Copia del compartido
         Tramo tramo3 = new Tramo(miem3);
-        Tramo tramo4 = new Tramo(miem4);
-        Tramo tramo5 = new Tramo(miem1); //Copia del compartido
+        Tramo tramo4 = new Tramo(miem3);
+        Tramo tramo5 = new Tramo(miem4);
 
         Particular transPart = new Particular();
         Publico tren = new Publico();
@@ -98,6 +100,74 @@ public class ScriptDatosDB {
         Gasoil gasoil = new Gasoil();
 
         //HIDRATADO DE INSTANCIAS
+
+        //MIEMBRO 1-----------------------------------------------------
+
+        userMiem1.setNickname("Persona1");
+        userMiem1.setContrasenia("niniorata");
+        userMiem1.setEmail("asd@tumama1.com");
+
+        miem1.setNombre("Carla");
+        miem1.setApellido("Chumacera");
+        miem1.setUsuario(userMiem3);
+        miem1.setNumDoc(12312312);
+
+        vehiculo.setFactorVehiculo(1.5);
+        vehiculo.setTipoVehiculo(TipoVehiculo.AUTO);
+        //TODO: tengo que setear el generico que tenga el factor de emision cargado
+        vehiculo.setCombustible(nafta);
+
+        transPart.setVehiculo(vehiculo);
+
+        tramo1.setInicioTramo(ubParticular1);
+        tramo1.setFinTramo(ubParticular2);
+        tramo1.setCompartido(true);
+        tramo1.setTransporte(transPart);
+        tramo1.setTrayecto(tray1);
+
+        tray1.setInicio(ubParticular1);
+        tray1.setFin(ubParticular2);
+        tray1.agregarTramos(tramo1);
+        tray1.setMiembro(miem1);
+
+        miem1.agregarTrayectos(tray1);
+
+        //MIEMBRO 2-----------------------------------------------------
+
+        userMiem2.setNickname("Persona2");
+        userMiem2.setContrasenia("niniorata");
+        userMiem2.setEmail("asd@tumama2.com");
+
+        miem2.setNombre("Carmen");
+        miem2.setApellido("Sanchez");
+        miem2.setUsuario(userMiem3);
+        miem2.setNumDoc(12312313);
+
+        //Comparte tramo con el primer miembro pero se arma una instancia nueva con el dueño seteado en el miem1 y el comrpartido en false
+        tramo2.setInicioTramo(ubParticular1);
+        tramo2.setFinTramo(ubParticular2);
+        tramo2.setCompartido(false);
+        tramo2.setTransporte(transPart);
+        tramo2.setTrayecto(tray2);
+
+        tray2.setMiembro(miem2);
+        tray2.setInicio(ubParticular1);
+        tray2.setFin(ubParticular2);
+        tray2.agregarTramos(tramo2);
+
+        miem2.agregarTrayectos(tray2);
+
+        //MIEMBRO 3-----------------------------------------------------
+
+        userMiem3.setNickname("Persona3");
+        userMiem3.setContrasenia("niniorata");
+        userMiem3.setEmail("asd@tumama3.com");
+
+        miem3.setNombre("Carlos");
+        miem3.setApellido("Chumacero");
+        miem3.setUsuario(userMiem3);
+        miem3.setNumDoc(12312311);
+
         parada1.setNombre("Chilavert");
         parada1.setUbicacion(ubParada1);
         paradasTrans1.setParadaActual(parada1);
@@ -117,36 +187,159 @@ public class ScriptDatosDB {
         tren.setTipoTransporte(TipoTransporte.TREN);
         tren.setFactorEmision(2.0);
 
-        tramo2.setTransporte(tren);
-        tramo2.setCompartido(false);
-        tramo2.setInicioTramo(ubParada1);
-        tramo2.setFinTramo(ubParada2);
-        tramo2.setTrayecto(tray3);
-
-        tramo3.setInicioTramo(ubParada2);
-        tramo3.setFinTramo(ubEco1);
-        tramo3.setTransporte(transEco1);
+        tramo3.setTransporte(tren);
         tramo3.setCompartido(false);
+        tramo3.setInicioTramo(ubParada1);
+        tramo3.setFinTramo(ubParada2);
         tramo3.setTrayecto(tray3);
+
+        tramo4.setInicioTramo(ubParada2);
+        tramo4.setFinTramo(ubEco1);
+        tramo4.setTransporte(transEco1);
+        tramo4.setCompartido(false);
+        tramo4.setTrayecto(tray3);
 
         tray3.setMiembro(miem3);
         tray3.setInicio(ubParada1);
         tray3.setFin(ubEco1);
-        tray3.agregarTramos(tramo2,tramo3);
+        tray3.agregarTramos(tramo3,tramo4);
 
         miem3.agregarTrayectos(tray3);
 
+        //MIEMBRO 4-----------------------------------------------------
 
+        userMiem4.setNickname("Persona4");
+        userMiem4.setContrasenia("memetieron7");
+        userMiem4.setEmail("asd@tumama4.com");
 
+        miem2.setNombre("David");
+        miem2.setApellido("Luiz");
+        miem2.setUsuario(userMiem3);
+        miem2.setNumDoc(12312314);
 
-        transPart.setVehiculo(vehiculo);
+        tramo5.setInicioTramo(ubEco2);
+        tramo5.setFinTramo(ubEco3);
+        tramo5.setCompartido(false);
+        tramo5.setTransporte(transEco2);
+        tramo5.setTrayecto(tray4);
 
-        tramo1.setInicioTramo(ubParticular1);
-        tramo1.setFinTramo(ubParticular2);
-        tramo1.setCompartido(true);
-        tramo1.setTransporte(transPart);
+        tray4.setMiembro(miem4);
+        tray4.setInicio(ubEco2);
+        tray4.setFin(ubEco3);
+        tray4.agregarTramos(tramo5);
 
+        miem4.agregarTrayectos(tray4);
 
+        //ORG 1-----------------------------------------------------
+        clasifOrg1.setClasificacion("Clasif 1");
+        clasifOrg1.setTipoOrganizacion(TipoOrganizacion.ONG);
+
+        userOrg1.setNickname("Org1");
+        userOrg1.setContrasenia("skere");
+        userOrg1.setEmail("asd@tuorg1.com");
+
+        sec1.setNombre("Finanzas");
+        //TODO: Controlar este add, sino tengo que hacer la solicitud
+        sec1.getMiembros().add(miem1);
+        sec1.setOrganizacion(org1);
+        sec2.setNombre("Distribucion");
+        //TODO: Controlar este add, sino tengo que hacer la solicitud
+        sec2.getMiembros().add(miem2);
+        sec2.setOrganizacion(org1);
+
+        miem1.agregarSectores(sec1);
+        miem2.agregarSectores(sec1);
+
+        org1.setRazonSocial("Organizacion ONG");
+        org1.setCuit("33333333333");
+        org1.setUbicacion(null);
+        org1.setClasificacion(clasifOrg1);
+        org1.setContactosANotificar(null);
+        org1.setUsuario(userOrg1);
+        org1.agregarSectores(sec1,sec2);
+
+        //ORG 2-----------------------------------------------------
+
+        clasifOrg2.setClasificacion("Clasif 2");
+        clasifOrg2.setTipoOrganizacion(TipoOrganizacion.GUBERNAMENTAL);
+
+        userOrg2.setNickname("Org2");
+        userOrg2.setContrasenia("skere");
+        userOrg2.setEmail("asd@tuorg2.com");
+
+        sec3.setNombre("IT");
+        //TODO: Controlar este add, sino tengo que hacer la solicitud
+        sec3.getMiembros().add(miem3);
+        sec3.setOrganizacion(org2);
+
+        miem3.agregarSectores(sec3);
+
+        org2.setRazonSocial("Organizacion GUB");
+        org2.setCuit("33333333334");
+        org2.setUbicacion(null);
+        org2.setClasificacion(clasifOrg2);
+        org2.setContactosANotificar(null);
+        org2.setUsuario(userOrg2);
+        org2.agregarSectores(sec3);
+
+        //ORG 3-----------------------------------------------------
+
+        clasifOrg3.setClasificacion("Clasif 3");
+        clasifOrg3.setTipoOrganizacion(TipoOrganizacion.EMPRESA);
+
+        userOrg3.setNickname("Org3");
+        userOrg3.setContrasenia("skere");
+        userOrg3.setEmail("asd@tuorg2.com");
+
+        sec4.setNombre("IT");
+        //TODO: Controlar este add, sino tengo que hacer la solicitud
+        sec4.getMiembros().add(miem4);
+        sec4.setOrganizacion(org3);
+
+        miem4.agregarSectores(sec4);
+
+        org2.setRazonSocial("Organizacion EMP");
+        org2.setCuit("33333333334");
+        org2.setUbicacion(null);
+        org2.setClasificacion(clasifOrg3);
+        org2.setContactosANotificar(null);
+        org2.setUsuario(userOrg3);
+        org2.agregarSectores(sec4);
+
+        //AM 1-----------------------------------------------------
+
+        userAM1.setNickname("AM1");
+        userAM1.setContrasenia("skere");
+        userAM1.setEmail("asd@tuam1.com");
+
+        agMun1.setNombre("Ag. Mun1");
+        agMun1.setUsuario(userAM1);
+        agMun1.setMunicipio("Ituzaingo");
+        agMun1.agregarOrganizaciones(org1,org2);
+        agMun1.setAgenteProvincial(agProv);
+
+        //AM 2-----------------------------------------------------
+
+        userAM2.setNickname("AM2");
+        userAM2.setContrasenia("skere");
+        userAM2.setEmail("asd@tuam2.com");
+
+        agMun2.setNombre("Ag. Mun2");
+        agMun2.setUsuario(userAM2);
+        agMun2.setMunicipio("Vicente Lopez");
+        agMun2.agregarOrganizaciones(org3);
+        agMun2.setAgenteProvincial(agProv);
+
+        //AP 1-----------------------------------------------------
+
+        userAP.setNickname("AP");
+        userAP.setContrasenia("skere");
+        userAP.setEmail("asd@tuam1.com");
+
+        agProv.setNombre("Ag. Prov");
+        agProv.setUsuario(userAM1);
+        agProv.setProvincia("Buenos Aires");
+        agProv.agregarAgentesMunicipales(agMun1,agMun2);
 
         //GUARDADO DE DATOS EN BASE
         EntityManagerHelper.beginTransaction();
