@@ -2,17 +2,36 @@ package controllers;
 
 import models.dominio.Usuario;
 import models.dominio.organizacion.AgenteMunicipal;
-import models.dominio.organizacion.Clasificacion;
-import models.dominio.organizacion.Organizacion;
-import models.dominio.organizacion.TipoOrganizacion;
-import models.dominio.transporte.Ubicacion;
+import models.repositorios.RepositorioDeAgentesMunicipales;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.List;
 
 public class AgenteMunicipalController {
+
+    private RepositorioDeAgentesMunicipales repositorioAgenteMunicipal;
+
+    public AgenteMunicipalController(){repositorioAgenteMunicipal = new RepositorioDeAgentesMunicipales();}
+
+    public ModelAndView mostrarTodos(Request request, Response response) {
+        List<AgenteMunicipal> todosLosAgentesMunicipales = this.repositorioAgenteMunicipal.buscarTodos();
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("agente_municipal", todosLosAgentesMunicipales);
+        }}, "agentes_municipales.hbs");
+    }
+
+
+    public ModelAndView mostrar(Request request, Response response) {
+        String idBuscado = request.params("id");
+        AgenteMunicipal agenteMunicipalBuscado = this.repositorioAgenteMunicipal.buscar(new Integer(idBuscado));
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("agente_municipal", agenteMunicipalBuscado);
+        }}, "agente_municipal.hbs");//TODO
+    }
 
     public ModelAndView crear(Request request, Response response) {
         return new ModelAndView(null, "form_agente_municipal.html");
@@ -27,14 +46,34 @@ public class AgenteMunicipalController {
         usuario.setContrasenia(request.queryParams("contrasenia"));
         agenteMunicipal.setNombre(request.queryParams("nombre"));
         agenteMunicipal.setMunicipio(request.queryParams("municipio"));
+        agenteMunicipal.setUsuario(usuario);
 
-        System.out.println(usuario.getNickname());
-        System.out.println(usuario.getContrasenia());
-        System.out.println(agenteMunicipal.getNombre());
-        System.out.println(agenteMunicipal.getMunicipio());
-        //No printea nada :c
+        this.repositorioAgenteMunicipal.guardar(agenteMunicipal);
 
         response.redirect("/alta_agente_municipal");
+        return response;
+    }
+
+    public ModelAndView editar(Request request, Response response) {
+        String idBuscado = request.params("id");
+        AgenteMunicipal agenteMunicipalBuscado = this.repositorioAgenteMunicipal.buscar(new Integer(idBuscado));
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("agente_municipal", agenteMunicipalBuscado);
+        }}, "agente_municipal.hbs");//TODO
+    }
+
+
+    public Response modificar(Request request, Response response) {
+        String idBuscado = request.params("id");
+        AgenteMunicipal agenteMunicipalBuscado = this.repositorioAgenteMunicipal.buscar(new Integer(idBuscado));
+
+        agenteMunicipalBuscado.setNombre(request.queryParams("nombre"));
+        agenteMunicipalBuscado.setMunicipio(request.queryParams("municipio"));
+
+        this.repositorioAgenteMunicipal.guardar(agenteMunicipalBuscado);
+
+        response.redirect("/agentes_municipales");
         return response;
     }
 }
