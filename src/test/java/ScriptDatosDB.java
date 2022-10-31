@@ -13,6 +13,7 @@ import org.apache.poi.ss.formula.functions.T;
 import org.checkerframework.checker.units.qual.K;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class ScriptDatosDB {
 
@@ -298,13 +299,13 @@ public class ScriptDatosDB {
 
         miem4.agregarSectores(sec4);
 
-        org2.setRazonSocial("Organizacion EMP");
-        org2.setCuit("33333333334");
-        org2.setUbicacion(null);
-        org2.setClasificacion(clasifOrg3);
-        org2.setContactosANotificar(null);
-        org2.setUsuario(userOrg3);
-        org2.agregarSectores(sec4);
+        org3.setRazonSocial("Organizacion EMP");
+        org3.setCuit("33333333334");
+        org3.setUbicacion(null);
+        org3.setClasificacion(clasifOrg3);
+        org3.setContactosANotificar(null);
+        org3.setUsuario(userOrg3);
+        org3.agregarSectores(sec4);
 
         //AM 1-----------------------------------------------------
 
@@ -355,7 +356,79 @@ public class ScriptDatosDB {
         EntityManagerHelper.persist(electrico);
         EntityManagerHelper.persist(gasoil);
 
+        EntityManagerHelper.persist(ubParada1);
+        EntityManagerHelper.persist(ubParada2);
+        EntityManagerHelper.persist(ubParticular1);
+        EntityManagerHelper.persist(ubParticular2);
+        EntityManagerHelper.persist(ubEco1);
+        EntityManagerHelper.persist(ubEco2);
+        EntityManagerHelper.persist(ubEco3);
+
+        EntityManagerHelper.persist(userMiem1);
+        EntityManagerHelper.persist(userMiem2);
+        EntityManagerHelper.persist(userMiem3);
+        EntityManagerHelper.persist(userMiem4);
+        EntityManagerHelper.persist(userOrg1);
+        EntityManagerHelper.persist(userOrg2);
+        EntityManagerHelper.persist(userOrg3);
+        EntityManagerHelper.persist(userAM1);
+        EntityManagerHelper.persist(userAM2);
+        EntityManagerHelper.persist(userAP);
+
+        //MIEM 1
+        EntityManagerHelper.persist(vehiculo);
+        EntityManagerHelper.persist(transPart);
+        EntityManagerHelper.persist(tramo1);
+        EntityManagerHelper.persist(tray1);
+        EntityManagerHelper.persist(miem1);
+
+        //MIEM 2
+        EntityManagerHelper.persist(tramo2);
+        EntityManagerHelper.persist(tray2);
+        EntityManagerHelper.persist(miem2);
+
+        //MIEM 3
+        EntityManagerHelper.persist(parada1);
+        EntityManagerHelper.persist(paradasTrans1);
+        EntityManagerHelper.persist(parada2);
+        EntityManagerHelper.persist(paradasTrans2);
+        EntityManagerHelper.persist(tren);
+        EntityManagerHelper.persist(tramo3);
+        EntityManagerHelper.persist(transEco1);
+        EntityManagerHelper.persist(tramo4);
+        EntityManagerHelper.persist(tray3);
+        EntityManagerHelper.persist(miem3);
+
+        //MIEM 4
+        EntityManagerHelper.persist(transEco2);
+        EntityManagerHelper.persist(tramo5);
+        EntityManagerHelper.persist(tray4);
+        EntityManagerHelper.persist(miem4);
+
+        //ORG 1
+        EntityManagerHelper.persist(clasifOrg1);
+        EntityManagerHelper.persist(sec1);
+        EntityManagerHelper.persist(sec2);
+        EntityManagerHelper.persist(org1);
+
+        //ORG 2
+        EntityManagerHelper.persist(clasifOrg2);
+        EntityManagerHelper.persist(sec3);
+        EntityManagerHelper.persist(org2);
+
+        //ORG 3
+        EntityManagerHelper.persist(clasifOrg3);
+        EntityManagerHelper.persist(sec4);
+        EntityManagerHelper.persist(org3);
+
+        //AGENTES
+        EntityManagerHelper.persist(agMun1);
+        EntityManagerHelper.persist(agMun2);
+        EntityManagerHelper.persist(agProv);
+
         EntityManagerHelper.commit();
+
+        Assertions.assertNotNull(EntityManagerHelper.getEntityManager());
     }
 
 }

@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -31,6 +28,10 @@ public class Publico extends Transporte {
 
     @Column(name = "factor_emision")
     protected Double factorEmision;
+
+    public Publico(){
+        this.paradas = new ArrayList<>();
+    }
 
     public Double calcularConsumo() {
         return this.factorEmision;
