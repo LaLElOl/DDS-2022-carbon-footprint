@@ -34,7 +34,7 @@ public class AgenteMunicipalController {
     }
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_agente_municipal.html");
+        return new ModelAndView(null, "form_agente_municipal.hbs");
     }
 
     public Response guardar(Request request,Response response) {
@@ -50,7 +50,7 @@ public class AgenteMunicipalController {
 
         this.repositorioAgenteMunicipal.guardar(agenteMunicipal);
 
-        response.redirect("/alta_agente_municipal");
+        response.redirect("/index");
         return response;
     }
 
@@ -60,7 +60,7 @@ public class AgenteMunicipalController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("agente_municipal", agenteMunicipalBuscado);
-        }}, "agente_municipal.hbs");//TODO
+        }}, "form_agente_municipal.hbs");//TODO
     }
 
 
@@ -73,7 +73,7 @@ public class AgenteMunicipalController {
 
         this.repositorioAgenteMunicipal.guardar(agenteMunicipalBuscado);
 
-        response.redirect("/agentes_municipales");
+        response.redirect("/agente_municipal");
         return response;
     }
 }

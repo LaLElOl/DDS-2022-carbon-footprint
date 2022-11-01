@@ -34,13 +34,19 @@ public class Router {
         VehiculoParticularController vehiculoParticularController = new VehiculoParticularController();
         VehiculoPublicoController vehiculoPublicoController = new VehiculoPublicoController();
 
+        Spark.get("/index",(request,response)->"SOY EL INDEX");
+
         //Organizaciones
         Spark.get("/alta_organizacion", organizacionesController::crear, engine);
         Spark.post("/alta_organizacion", organizacionesController::guardar);
 
         //Agente Municipal
+        Spark.get("/agente_municipal",agenteMunicipalController::mostrarTodos, engine);
+        Spark.get("/agente_municipal/:id",agenteMunicipalController::mostrar, engine);
+        Spark.get("/agente_municipal/editar/:id",agenteMunicipalController::editar, engine);
         Spark.get("/alta_agente_municipal", agenteMunicipalController::crear, engine);
         Spark.post("/alta_agente_municipal", agenteMunicipalController::guardar);
+        Spark.post("/agente_municipal/editar/:id", agenteMunicipalController::modificar);
 
         //Agente Provincial
         Spark.get("/alta_agente_Provincial", agenteProvincialController::crear, engine);

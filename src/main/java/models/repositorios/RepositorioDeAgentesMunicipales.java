@@ -22,9 +22,10 @@ public class RepositorioDeAgentesMunicipales {
 
     public void guardar(AgenteMunicipal agenteMunicipal) {
         EntityManagerHelper.beginTransaction();
-        EntityManagerHelper
-                .getEntityManager()
-                .persist(agenteMunicipal);
+
+        EntityManagerHelper.persist(agenteMunicipal.getUsuario());
+        EntityManagerHelper.persist(agenteMunicipal);
+
         EntityManagerHelper.commit();
     }
 

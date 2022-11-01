@@ -60,6 +60,7 @@ public class OrganizacionesController {
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
         clasif.setClasificacion(request.queryParams("clasificacion"));
+        clasif.setTipoOrganizacion(tipo);
         org.setUsuario(usuario);
         org.setClasificacion(clasif);
         org.setUbicacion(ubicacion);
