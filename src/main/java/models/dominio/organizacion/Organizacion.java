@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -66,8 +67,13 @@ public class Organizacion extends EntidadPersistente {
     @JoinColumn(name = "agente_municipal_id", referencedColumnName = "id")
     private AgenteMunicipal agenteMunicipal;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "datos_consumo", referencedColumnName = "id")
+    private List<DatoConsumo> datosConsumo;
+
     public Organizacion(){
         this.sectores = new ArrayList<>();
+        this.datosConsumo = new ArrayList<>();
         this.contactosANotificar = new HashSet<>();
         this.lectorExcel = new ApachePOIExcel();
         this.huellaCarbonoActual = 0.0;
@@ -106,8 +112,9 @@ public class Organizacion extends EntidadPersistente {
         ){
             return this.huellaCarbonoActual;
         }
-
         //TODO: falta calcular la parte del excel y sumarla a "huella"
+
+
         double huella = 0.0;
         if(mes > 0 && mes <= 12){
             huella += obtenerHuellaMiembros();
@@ -125,18 +132,26 @@ public class Organizacion extends EntidadPersistente {
         return this.sectores.stream().mapToDouble(Sector::calcularHuella).sum();
     }
 
-    private List<DatoConsumo> obtenerConsumos(LocalDate fecha){
-        List<DatoConsumo> datos = new ArrayList<>();
-        //TODO: Obtener datos de la base de datos, filtrando por periodo (año) y organizacion
-        return datos;
+    private List<DatoConsumo> obtenerConsumos(EPeriodicidad periodicidad,LocalDate fecha){
+
+        switch(periodicidad){
+            case MENSUAL:
+                return this.datosConsumo.stream()
+                        .filter(dato -> dato.getEPeriodicidad() == periodicidad &&
+                                dato.getPeriodo().getYear() == fecha.getYear() &&
+                                dato.getPeriodo().getMonthValue() == fecha.getMonthValue())
+                        .collect(Collectors.toList());
+            case ANUAL:
+                return this.datosConsumo.stream()
+                        .filter(dato -> dato.getPeriodo().getYear() == fecha.getYear())
+                        .collect(Collectors.toList());
+            default:
+                return new ArrayList<>();
+        }
     }
 
     public double obtenerHuellaOrganizacion(EPeriodicidad periodicidad, LocalDate fecha) {
-        List<DatoConsumo> datos = obtenerConsumos(fecha);
-
-        return FactoryPeriodicidad.obtenerPeriodicidad(periodicidad).filtrarDatos(datos,fecha)
-                .stream()
-                .mapToDouble(DatoConsumo::calcularHuella)
-                .sum();
+        List<DatoConsumo> datos = obtenerConsumos(periodicidad,fecha);
+        return datos.stream().mapToDouble(DatoConsumo::calcularHuella).sum();
     }
 }
