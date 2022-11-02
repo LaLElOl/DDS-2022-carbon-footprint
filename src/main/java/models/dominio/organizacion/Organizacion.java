@@ -112,8 +112,6 @@ public class Organizacion extends EntidadPersistente {
         ){
             return this.huellaCarbonoActual;
         }
-        //TODO: falta calcular la parte del excel y sumarla a "huella"
-
 
         double huella = 0.0;
         if(mes > 0 && mes <= 12){

@@ -26,7 +26,7 @@
     <section>
         <h2 class="contacto title">{{organizacion.razonSocial}}</h2>
 
-        <form class="formulario" method="post">
+        <form class="formulario">
             <fieldset>
 
                 <div class="campo">
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="enviar">
-                    <button class="boton" type="submit">Editar</button>
+                    <button class="boton" type="button" onclick="window.location.href='/organizacion/editar/{{organizacion.id}}'">Editar</button>
                 </div>
             </fieldset>
         </form>

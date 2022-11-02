@@ -38,6 +38,12 @@ public class OrganizacionesController {
         String idBuscado = request.params("id");
         Organizacion organizacionBuscada = this.repositorioDeOrganizaciones.buscar(new Integer(idBuscado));
 
+        //TODO: ver porque la session es null
+/*
+        if(organizacionBuscada.getUsuario().getId() != request.session().attribute("id")){
+            response.redirect("/index");
+        }
+*/
         return new ModelAndView(new HashMap<String, Object>(){{
             put("organizacion", organizacionBuscada);
             //put("cant_tareas", servicioBuscado.cantTareas());

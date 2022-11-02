@@ -69,7 +69,7 @@ public class Router {
             Spark.get("",agenteMunicipalController::mostrarTodos, engine);
             Spark.get("/:id",agenteMunicipalController::mostrar, engine);
             Spark.get("/editar/:id",agenteMunicipalController::editar, engine);
-            Spark.post("/agente_municipal/editar/:id", agenteMunicipalController::modificar);
+            Spark.post("/editar/:id", agenteMunicipalController::modificar);
 
         });
 
@@ -83,6 +83,17 @@ public class Router {
         Spark.post("/alta_agente_Provincial", agenteProvincialController::guardar);
 
         //Miembro
+        Spark.path("/miembro", ()-> {
+
+            Spark.before("",AuthMiddleware::verificarSesion);
+            Spark.before("/*",AuthMiddleware::verificarSesion);
+
+            Spark.get("", miembroController::mostrarTodos, engine);
+            Spark.get("/:id", miembroController::mostrar, engine);
+            Spark.get("/editar/:id", miembroController::editar, engine);
+            Spark.post("/editar/:id", miembroController::modificar);
+        });
+
         Spark.get("/alta_miembro", miembroController::crear, engine);
         Spark.post("/alta_miembro", miembroController::guardar);
 

@@ -22,9 +22,12 @@ public class RepositorioDeMiembros {
 
     public void guardar(Miembro miembro) {
         EntityManagerHelper.beginTransaction();
-        EntityManagerHelper
-                .getEntityManager()
-                .persist(miembro);
+
+        EntityManagerHelper.persist(miembro.getUsuario());
+        EntityManagerHelper.persist(miembro.getContacto());
+        EntityManagerHelper.persist(miembro.getDomicilio());
+        EntityManagerHelper.persist(miembro);
+
         EntityManagerHelper.commit();
     }
 

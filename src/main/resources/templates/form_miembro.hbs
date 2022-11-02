@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta Miembro</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -24,43 +24,52 @@
 
     <main>
         <section>
+            {{#if miembro}}
+            <h2 class="contacto title">Editar Miembro</h2>
+            {{else}}
             <h2 class="contacto title">Alta de Miembro</h2>
-
-            <form class="formulario">
+            {{/if}}
+            <form class="formulario" method="post">
                 <fieldset>
                     <div class="campo">
                         <label>Usuario</label>
-                        <input type="text" placeholder="Usuario">
+                        <input name="usuario" type="text" placeholder="Usuario" value="{{miembro.usuario.nickname}}">
                     </div>
 
                     <div class="campo">
                         <label>Contraseña</label>
-                        <input type="text" placeholder="Contraseña">
+                        <input name="contrasenia" type="text" placeholder="Contraseña" value="{{miembro.usuario.contrasenia}}">
+                    </div>
+
+                    <div class="campo">
+                        <label>Email</label>
+                        <input name="email" type="email" placeholder="Email" value="{{miembro.usuario.email}}">
                     </div>
 
                     <div class="campo">
                         <label>Nombre</label>
-                        <input type="text" placeholder="Nombre">
+                        <input name="nombre" type="text" placeholder="Nombre" value="{{miembro.nombre}}">
                     </div>
 
                     <div class="campo">
                         <label>Apellido</label>
-                        <input type="text" placeholder="Apellido">
+                        <input name="apellido" type="text" placeholder="Apellido" value="{{miembro.apellido}}">
                     </div>
 
                     <div class="campo">
                         <label>Calle</label>
-                        <input type="text" placeholder="Calle">
+                        <input name="calle" type="text" placeholder="Calle" value="{{miembro.domicilio.calle}}">
                     </div>
 
                     <div class="campo">
                         <label>Altura</label>
-                        <input type="number" placeholder="Altura">
+                        <input name="altura" type="number" placeholder="Altura" value="{{miembro.domicilio.altura}}">
                     </div>
 
                     <div class="campo">
                         <label>Tipo de Documento</label>
-                        <select class="mr-6">
+                        <select name="tipo_doc" class="mr-6">
+                        {{!-- llevar tipoDoc a tabla aparte para poder listarlo desde db --}}
                             <option>DNI</option>
                             <option>LE</option>
                             <option>LC</option>
@@ -70,17 +79,12 @@
 
                     <div class="campo">
                         <label>Numero de Documento</label>
-                        <input type="text" placeholder="Numero de Documento">
+                        <input name="nro_doc" type="text" placeholder="Numero de Documento" value="{{miembro.numDoc}}">
                     </div>
 
                     <div class="campo">
                         <label>Teléfono</label>
-                        <input type="text" placeholder="Teléfono">
-                    </div>
-
-                    <div class="campo">
-                        <label>Email</label>
-                        <input type="email" placeholder="Email">
+                        <input name="telefono" type="text" placeholder="Teléfono" value="{{miembro.contacto.numTelefono}}">
                     </div>
 
                     <div class="enviar">
@@ -91,12 +95,6 @@
 
         </section>
     </main>
-
-
-    <footer class>
-        <p>Escribir algo copado aca</p>
-    </footer>
-
 </body>
 
 </html>

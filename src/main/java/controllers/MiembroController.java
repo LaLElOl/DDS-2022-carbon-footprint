@@ -41,7 +41,7 @@ public class MiembroController {
     }
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_miembro.html");
+        return new ModelAndView(null, "form_miembro.hbs");
     }
 
     public Response guardar(Request request,Response response) {
@@ -59,14 +59,16 @@ public class MiembroController {
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
         TipoDoc tipoDoc = TipoDoc.valueOf(request.queryParams("tipo_doc").toUpperCase(Locale.ROOT));
-        miembro.setNumDoc(Integer.valueOf(request.queryParams("numero_documento")));
-        contacto.setNumTelefono(request.queryParams("numero_telefono"));
+        miembro.setNumDoc(Integer.valueOf(request.queryParams("nro_doc")));
+        contacto.setNumTelefono(request.queryParams("telefono"));
         contacto.setEmail(request.queryParams("email"));
+        usuario.setEmail(request.queryParams("email"));
         miembro.setUsuario(usuario);
         miembro.setDomicilio(ubicacion);
         miembro.setContacto(contacto);
         miembro.setTipoDoc(tipoDoc);
 
+        this.repositorioDeMiembros.guardar(miembro);
 
         response.redirect("/alta_miembro");
         return response;
@@ -79,7 +81,7 @@ public class MiembroController {
         return new ModelAndView(new HashMap<String, Object>(){{
             put("miembro", miembroBuscado);
 
-        }}, "miembro.hbs");//TODO REVISAR
+        }}, "form_miembro.hbs");//TODO REVISAR
 
     }
 
@@ -95,7 +97,7 @@ public class MiembroController {
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
         TipoDoc tipoDoc = TipoDoc.valueOf(request.queryParams("tipo_doc").toUpperCase(Locale.ROOT));
-        miembroBuscado.setNumDoc(Integer.valueOf(request.queryParams("numero_documento")));
+        miembroBuscado.setNumDoc(Integer.valueOf(request.queryParams("nro_doc")));
         contacto.setNumTelefono(request.queryParams("numero_telefono"));
         contacto.setEmail(request.queryParams("email"));
         miembroBuscado.setDomicilio(ubicacion);
@@ -104,7 +106,7 @@ public class MiembroController {
 
         this.repositorioDeMiembros.guardar(miembroBuscado);
 
-        response.redirect("/miembros");
+        response.redirect("/index");
         return response;
     }
 }
