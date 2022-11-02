@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta Agente Provincial</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -24,28 +24,36 @@
 
     <main>
         <section>
-            <h2 class="contacto title">Alta de Agente Provincial</h2>
+            {{#if agenteProvincial}}
+            <h2 class="contacto title">
+            Editar Agente Provincial
+            </h2>
+            {{else}}
+            <h2 class="contacto title">
+            Alta de Agente Provincial
+            </h2>
+            {{/if}}
 
-            <form class="formulario">
+            <form class="formulario" method="post">
                 <fieldset>
                     <div class="campo">
                         <label>Usuario</label>
-                        <input type="text" placeholder="Usuario">
+                        <input name="usuario" type="text" placeholder="Usuario" value="{{agente_provincial.usuario.nickname}}">
                     </div>
 
                     <div class="campo">
                         <label>Contraseña</label>
-                        <input type="text" placeholder="Contraseña">
+                        <input name="contrasenia" type="text" placeholder="Contraseña" value="{{agente_provincial.usuario.contrasenia}}">
                     </div>
 
                     <div class="campo">
                         <label>Nombre</label>
-                        <input type="text" placeholder="Nombre">
+                        <input name="nombre" type="text" placeholder="Nombre" value="{{agente_provincial.nombre}}">
                     </div>
 
                     <div class="campo">
                         <label>Pronvincia</label>
-                        <input type="text" placeholder="Pronvincia">
+                        <input name="provincia" type="text" placeholder="Provincia" value="{{agente_provincial.provincia}}">
                     </div>
 
                     <div class="enviar">
@@ -53,15 +61,8 @@
                     </div>
                 </fieldset>
             </form>
-
         </section>
     </main>
-
-
-    <footer class>
-        <p>Escribir algo copado aca</p>
-    </footer>
-
 </body>
 
 </html>

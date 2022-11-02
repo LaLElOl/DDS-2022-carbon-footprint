@@ -73,14 +73,23 @@ public class Router {
 
         });
 
+
         Spark.get("/alta_agente_municipal", agenteMunicipalController::crear, engine);
         Spark.post("/alta_agente_municipal", agenteMunicipalController::guardar);
 
 
 
         //Agente Provincial
-        Spark.get("/alta_agente_Provincial", agenteProvincialController::crear, engine);
-        Spark.post("/alta_agente_Provincial", agenteProvincialController::guardar);
+
+        Spark.path("/agente_provincial", () -> {
+            Spark.get("",agenteProvincialController::mostrarTodos, engine);
+            Spark.get("/:id",agenteProvincialController::mostrar, engine);
+            Spark.get("/editar/:id",agenteProvincialController::editar, engine);
+            Spark.post("/agente_municipal/editar/:id", agenteProvincialController::modificar);
+
+        });
+        Spark.get("/alta_agente_provincial", agenteProvincialController::crear, engine);
+        Spark.post("/alta_agente_provincial", agenteProvincialController::guardar);
 
         //Miembro
         Spark.path("/miembro", ()-> {

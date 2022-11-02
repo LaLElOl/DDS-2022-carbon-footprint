@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agentes Provinciales</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -31,25 +31,15 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Provincia</th>
-                        <th>Cantidad de Agenetes Municipales</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each agente_provincial}}
                     <tr>
-                        <td>Nombre</td>
-                        <td>Provincia</td>
-                        <td>Cantidad de Agenetes Municipales</td>
+                        <td>{{nombre}}</td>
+                        <td>{{provincia}}</td>
                     </tr>
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Provincia</td>
-                        <td>Cantidad de Agenetes Municipales</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Provincia</td>
-                        <td>Cantidad de Agenetes Municipales</td>
-                    </tr>
+                    {{/each}}
                 </tbody>
             </table>
 
