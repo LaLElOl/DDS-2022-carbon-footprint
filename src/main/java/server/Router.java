@@ -33,16 +33,32 @@ public class Router {
         SectorController sectorController = new SectorController();
         VehiculoParticularController vehiculoParticularController = new VehiculoParticularController();
         VehiculoPublicoController vehiculoPublicoController = new VehiculoPublicoController();
+        LoginController loginController = new LoginController();
+
+        Spark.path("/login", () -> {
+            Spark.get("", loginController::pantallaDeLogin, engine);
+            Spark.post("", loginController::login);
+            Spark.post("/logout", loginController::logout);
+        });
+
 
         Spark.get("/index",(request,response)->"SOY EL INDEX");
 
         //Organizaciones
-        Spark.get("/organizacion",organizacionesController::mostrarTodos, engine);
-        Spark.get("/organizacion/:id",organizacionesController::mostrar, engine);
-        Spark.get("/organizacion/editar/:id",organizacionesController::editar, engine);
+        Spark.path("/organizacion", () -> {
+
+            Spark.before("",AuthMiddleware::verificarSesion);
+            Spark.before("/*",AuthMiddleware::verificarSesion);
+
+            Spark.get("",organizacionesController::mostrarTodos, engine);
+            Spark.get("/:id",organizacionesController::mostrar, engine);
+            Spark.get("/editar/:id",organizacionesController::editar, engine);
+            Spark.post("/editar/:id",organizacionesController::modificar);
+        });
+
         Spark.get("/alta_organizacion", organizacionesController::crear, engine);
         Spark.post("/alta_organizacion", organizacionesController::guardar);
-        Spark.post("/organizacion/editar/:id",organizacionesController::modificar);
+
 
         //Agente Municipal
         Spark.get("/agente_municipal",agenteMunicipalController::mostrarTodos, engine);

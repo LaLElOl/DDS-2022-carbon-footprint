@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -26,16 +26,16 @@
         <section>
             <h2 class="contacto title">Login</h2>
 
-            <form class="formulario">
+            <form class="formulario" method="post">
                 <fieldset>
                     <div class="campo">
-                        <label>Email</label>
-                        <input type="email" placeholder="Email">
+                        <label>Usuario</label>
+                        <input name="usuario" type="usuario" placeholder="Usuario">
                     </div>
 
                     <div class="campo">
                         <label>Contraseña</label>
-                        <input type="password" placeholder="Contraseña">
+                        <input name="contrasenia" type="password" placeholder="Contraseña">
                     </div>
 
                     <div class="enviar">

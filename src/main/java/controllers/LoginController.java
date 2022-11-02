@@ -9,15 +9,15 @@ import helpers.EntityManagerHelper;
 public class LoginController {
 
     public ModelAndView pantallaDeLogin(Request request, Response response) {
-        return new ModelAndView(null, "login.hbs");
+        return new ModelAndView(null, "login.html");
     }
 
     public Response login(Request request, Response response) {
         try {
             String query = "from "
                     + Usuario.class.getName()
-                    +" WHERE nombreDeUsuario='"
-                    + request.queryParams("nombre_de_usuario")
+                    +" WHERE nickname='"
+                    + request.queryParams("usuario")
                     +"' AND contrasenia='"
                     + request.queryParams("contrasenia")
                     +"'";
@@ -29,7 +29,7 @@ public class LoginController {
             if(usuario != null) {
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
-                response.redirect("/servicios");
+                response.redirect("/organizacion");//TODO redirijir a un perfil
             }
             else {
                 response.redirect("/login");
@@ -48,6 +48,6 @@ public class LoginController {
     }
 
     public ModelAndView prohibido(Request request, Response response) {
-        return new ModelAndView(null, "prohibido.hbs");
+        return new ModelAndView(null, "/index");//TODO prohibido
     }
 }
