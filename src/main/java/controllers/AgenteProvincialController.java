@@ -20,7 +20,7 @@ public class AgenteProvincialController {
         List<AgenteProvincial> todosLosAgentesProvinciales = this.repositorioAgenteProvincial.buscarTodos();
         return new ModelAndView(new HashMap<String, Object>(){{
             put("agente_provincial", todosLosAgentesProvinciales);
-        }}, "agentes_provincials.hbs");
+        }}, "agentes_provinciales.hbs");
     }
 
     public ModelAndView mostrar(Request request, Response response) {
@@ -33,7 +33,7 @@ public class AgenteProvincialController {
     }
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_agente_provincial.html");
+        return new ModelAndView(null, "form_agente_provincial.hbs");
     }
 
     public Response guardar(Request request,Response response) {
@@ -45,10 +45,11 @@ public class AgenteProvincialController {
         usuario.setContrasenia(request.queryParams("contrasenia"));
         agenteProvincial.setNombre(request.queryParams("nombre"));
         agenteProvincial.setProvincia(request.queryParams("provincia"));
+        agenteProvincial.setUsuario(usuario);
 
         this.repositorioAgenteProvincial.guardar(agenteProvincial);
 
-        response.redirect("/alta_agente_Provincial");
+        response.redirect("/index");
         return response;
     }
 
@@ -58,7 +59,7 @@ public class AgenteProvincialController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("agente_provincial", agenteProvincialBuscado);
-        }}, "agente_provincial.hbs");//TODO
+        }}, "form_agente_provincial.hbs");//TODO
     }
 
 
@@ -71,7 +72,7 @@ public class AgenteProvincialController {
 
         this.repositorioAgenteProvincial.guardar(agenteProvincialBuscado);
 
-        response.redirect("/agentes_provinciales");
+        response.redirect("/agente_provincial");
         return response;
     }
 }

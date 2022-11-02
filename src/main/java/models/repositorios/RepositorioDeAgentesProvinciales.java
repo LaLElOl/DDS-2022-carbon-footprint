@@ -22,9 +22,10 @@ public class RepositorioDeAgentesProvinciales {
 
     public void guardar(AgenteProvincial agenteProvincial) {
         EntityManagerHelper.beginTransaction();
-        EntityManagerHelper
-                .getEntityManager()
-                .persist(agenteProvincial);
+
+        EntityManagerHelper.persist(agenteProvincial.getUsuario());
+        EntityManagerHelper.persist(agenteProvincial);
+
         EntityManagerHelper.commit();
     }
 
