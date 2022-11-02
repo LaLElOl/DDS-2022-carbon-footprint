@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizaciones</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -32,36 +32,24 @@
                         <th>Nombre</th>
                         <th>Razón Social</th>
                         <th>Tipo Organización</th>
+                        <th>Clasificacion</th>
                         <th>Ubicacion</th>
                         <th>Huella de Carbono Actual</th>
-                        <th>Agente Municipal</th>
+                        <th>Ultima Fecha De Actualizacion De Huella</th>
                     </tr>
                 </thead>
                 <tbody>
+                {{#each organizacion}}
                     <tr>
-                        <td>Organización de Facu</td>
-                        <td>Una buen razon</td>
-                        <td>Tipo</td>
-                        <td>San Isidro</td>
-                        <td>10000</td>
-                        <td>Nico el Agente</td>
+                        <td>{{usuario.nickname}}</td>
+                        <td>{{razonSocial}}</td>
+                        <td>{{clasificacion.tipoOrganizacion}}</td>
+                        <td>{{clasificacion.tipoOrganizacion}}</td>
+                        <td>{{agenteMunicipal.municipio}}</td>
+                        <td>{{huellaCarbonoActual}}</td>
+                        <td>{{fechaUltimoCalculoHuella}}</td>
                     </tr>
-                    <tr>
-                        <td>Organización de Facu</td>
-                        <td>Una buen razon</td>
-                        <td>Tipo</td>
-                        <td>San Isidro</td>
-                        <td>10000</td>
-                        <td>Nico el Agente</td>
-                    </tr>
-                    <tr>
-                        <td>Organización de Facu</td>
-                        <td>Una buen razon</td>
-                        <td>Tipo</td>
-                        <td>San Isidro</td>
-                        <td>10000</td>
-                        <td>Nico el Agente</td>
-                    </tr>
+                {{/each}}
                 </tbody>
             </table>
 

@@ -23,9 +23,12 @@ public class RepositorioDeOrganizaciones {
 
     public void guardar(Organizacion organizacion) {
         EntityManagerHelper.beginTransaction();
-        EntityManagerHelper
-                .getEntityManager()
-                .persist(organizacion);
+
+        EntityManagerHelper.persist(organizacion.getUsuario());
+        EntityManagerHelper.persist(organizacion.getClasificacion());
+        EntityManagerHelper.persist(organizacion.getUbicacion());
+        EntityManagerHelper.persist(organizacion);
+
         EntityManagerHelper.commit();
     }
 

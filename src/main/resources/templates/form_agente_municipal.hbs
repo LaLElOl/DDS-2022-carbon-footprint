@@ -23,8 +23,15 @@
 
     <main>
         <section>
-            <h2 class="contacto title">Alta de Agente Municipal</h2>
-
+            {{#if agenteMunicipal}}
+            <h2 class="contacto title">
+            Editar Agente Municipal
+            </h2>
+            {{else}}
+            <h2 class="contacto title">
+            Alta de Agente Municipal
+            </h2>
+            {{/if}}
             <form class="formulario" method="post">
                 <fieldset>
                     <div class="campo">

@@ -37,8 +37,12 @@ public class Router {
         Spark.get("/index",(request,response)->"SOY EL INDEX");
 
         //Organizaciones
+        Spark.get("/organizacion",organizacionesController::mostrarTodos, engine);
+        Spark.get("/organizacion/:id",organizacionesController::mostrar, engine);
+        Spark.get("/organizacion/editar/:id",organizacionesController::editar, engine);
         Spark.get("/alta_organizacion", organizacionesController::crear, engine);
         Spark.post("/alta_organizacion", organizacionesController::guardar);
+        Spark.post("/organizacion/editar/:id",organizacionesController::modificar);
 
         //Agente Municipal
         Spark.get("/agente_municipal",agenteMunicipalController::mostrarTodos, engine);

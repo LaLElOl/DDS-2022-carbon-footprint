@@ -1,5 +1,6 @@
 package models.dominio.organizacion;
 
+import com.twilio.rest.api.v2010.account.incomingphonenumber.Local;
 import models.dominio.EntidadPersistente;
 import models.dominio.Usuario;
 import models.dominio.organizacion.datos.*;
@@ -69,6 +70,8 @@ public class Organizacion extends EntidadPersistente {
         this.sectores = new ArrayList<>();
         this.contactosANotificar = new HashSet<>();
         this.lectorExcel = new ApachePOIExcel();
+        this.huellaCarbonoActual = 0.0;
+        this.fechaUltimoCalculoHuella = LocalDate.now();
     }
 
     public void agregarSectores(Sector ... sectoresAAgregar){
