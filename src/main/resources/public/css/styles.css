@@ -86,7 +86,7 @@ a {
     border: none;
 }
 
-input {
+input:not(.checkbox) {
     width: 100%;
     border: none;
     border-radius: 0.5rem;
