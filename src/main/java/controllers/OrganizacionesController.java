@@ -71,6 +71,7 @@ public class OrganizacionesController {
         }
         usuario.setNickname(request.queryParams("usuario"));
         usuario.setContrasenia(request.queryParams("contrasenia"));
+        usuario.setEmail(request.queryParams("email"));
         org.setCuit(request.queryParams("cuit"));
         org.setRazonSocial(request.queryParams("razon_social"));
         TipoOrganizacion tipo = TipoOrganizacion.valueOf(request.queryParams("tipo_organizacion").toUpperCase(Locale.ROOT));
@@ -85,7 +86,7 @@ public class OrganizacionesController {
 
         this.repositorioDeOrganizaciones.guardar(org);
 
-        response.redirect("/alta_organizacion");
+        response.redirect("/home_organizacion");
         return response;
     }
 

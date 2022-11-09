@@ -41,6 +41,8 @@ public class Router {
             Spark.post("/logout", loginController::logout);
         });
 
+        Spark.get("/signup", loginController::signup,engine);
+
 
         Spark.get("/index",(request,response)->"SOY EL INDEX");
 

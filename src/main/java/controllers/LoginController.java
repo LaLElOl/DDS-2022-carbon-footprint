@@ -50,4 +50,8 @@ public class LoginController {
     public ModelAndView prohibido(Request request, Response response) {
         return new ModelAndView(null, "/index");//TODO prohibido
     }
+
+    public ModelAndView signup(Request request, Response response) {
+        return new ModelAndView(null, "/signup.html");
+    }
 }

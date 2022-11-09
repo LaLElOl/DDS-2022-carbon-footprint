@@ -50,7 +50,7 @@ public class AgenteMunicipalController {
 
         this.repositorioAgenteMunicipal.guardar(agenteMunicipal);
 
-        response.redirect("/index");
+        response.redirect("/home_agente");
         return response;
     }
 
