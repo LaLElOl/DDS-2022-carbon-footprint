@@ -1,5 +1,6 @@
 package controllers;
 
+import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
 import models.dominio.organizacion.AgenteMunicipal;
 import models.repositorios.RepositorioDeAgentesMunicipales;
@@ -44,9 +45,11 @@ public class AgenteMunicipalController {
 
         usuario.setNickname(request.queryParams("usuario"));
         usuario.setContrasenia(request.queryParams("contrasenia"));
+        usuario.setTipoUsuario(TipoUsuario.AGENTE_MUNICIPAL);
         agenteMunicipal.setNombre(request.queryParams("nombre"));
         agenteMunicipal.setMunicipio(request.queryParams("municipio"));
         agenteMunicipal.setUsuario(usuario);
+
 
         this.repositorioAgenteMunicipal.guardar(agenteMunicipal);
 

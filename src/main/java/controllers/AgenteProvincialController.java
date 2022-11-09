@@ -1,5 +1,6 @@
 package controllers;
 
+import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
 import models.dominio.organizacion.AgenteProvincial;
 import models.repositorios.RepositorioDeAgentesProvinciales;
@@ -43,6 +44,7 @@ public class AgenteProvincialController {
 
         usuario.setNickname(request.queryParams("usuario"));
         usuario.setContrasenia(request.queryParams("contrasenia"));
+        usuario.setTipoUsuario(TipoUsuario.AGENTE_PROVINCIAL);
         agenteProvincial.setNombre(request.queryParams("nombre"));
         agenteProvincial.setProvincia(request.queryParams("provincia"));
         agenteProvincial.setUsuario(usuario);

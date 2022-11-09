@@ -1,5 +1,6 @@
 package controllers;
 
+import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
 import models.dominio.organizacion.Clasificacion;
 import models.dominio.organizacion.Organizacion;
@@ -54,6 +55,7 @@ public class MiembroController {
 
         usuario.setNickname(request.queryParams("usuario"));
         usuario.setContrasenia(request.queryParams("contrasenia"));
+        usuario.setTipoUsuario(TipoUsuario.MIEMBRO);
         miembro.setNombre(request.queryParams("nombre"));
         miembro.setApellido(request.queryParams("apellido"));
         ubicacion.setCalle(request.queryParams("calle"));

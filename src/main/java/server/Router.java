@@ -34,6 +34,9 @@ public class Router {
         VehiculoParticularController vehiculoParticularController = new VehiculoParticularController();
         VehiculoPublicoController vehiculoPublicoController = new VehiculoPublicoController();
         LoginController loginController = new LoginController();
+        HomeController homeController = new HomeController();
+
+        Spark.get("/home", homeController::mostrarInicio,engine);
 
         Spark.path("/login", () -> {
             Spark.get("", loginController::pantallaDeLogin, engine);

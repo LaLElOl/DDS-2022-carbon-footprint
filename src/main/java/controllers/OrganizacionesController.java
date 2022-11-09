@@ -1,5 +1,6 @@
 package controllers;
 
+import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
 import models.dominio.organizacion.AgenteMunicipal;
 import models.dominio.organizacion.Clasificacion;
@@ -72,6 +73,7 @@ public class OrganizacionesController {
         usuario.setNickname(request.queryParams("usuario"));
         usuario.setContrasenia(request.queryParams("contrasenia"));
         usuario.setEmail(request.queryParams("email"));
+        usuario.setTipoUsuario(TipoUsuario.ORGANIZACION);
         org.setCuit(request.queryParams("cuit"));
         org.setRazonSocial(request.queryParams("razon_social"));
         TipoOrganizacion tipo = TipoOrganizacion.valueOf(request.queryParams("tipo_organizacion").toUpperCase(Locale.ROOT));
