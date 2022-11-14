@@ -19,7 +19,7 @@ public class SectorController {
     public ModelAndView mostrarTodos(Request request, Response response) {
         List<Sector> todosLosSectores = this.repositorioDeSectores.buscarTodos();
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("sectores", todosLosSectores);
+            put("sector", todosLosSectores);
         }}, "sectores.hbs");
     }
 

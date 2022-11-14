@@ -12,8 +12,9 @@ public class HomeController {
 
     public ModelAndView mostrarInicio(Request request, Response response) {
 
-        Integer id = new Integer(request.session().attribute("id"));
-        //TODO si id = null, mandarlo al login
+        //System.out.print((char[]) request.session().attribute("id"));
+        Integer id = Integer.parseInt(request.session().attribute("id"));
+
         Usuario usuario = this.repositorioDeUsuarios.buscar(id);
         String archivo = "login.html";
 

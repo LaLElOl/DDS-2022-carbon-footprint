@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sectores</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -30,34 +30,14 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Organización</th>
-                        <th>Cantidad de Miembros</th>
-                        <th>Cantidad de Solicitudes Activas</th>
-                        <th>Promedio Huella de Carbono</th>
                     </tr>
                 </thead>
                 <tbody>
+                {{#each sector}}
                     <tr>
-                        <td>Sector</td>
-                        <td>Pyme de Nico</td>
-                        <td>4</td>
-                        <td>90</td>
-                        <td>99999</td>
+                        <td>{{nombre}}</td>
                     </tr>
-                    <tr>
-                        <td>Sector</td>
-                        <td>Pyme de Nico</td>
-                        <td>4</td>
-                        <td>90</td>
-                        <td>99999</td>
-                    </tr>
-                    <tr>
-                        <td>Sector</td>
-                        <td>Pyme de Nico</td>
-                        <td>4</td>
-                        <td>90</td>
-                        <td>99999</td>
-                    </tr>
+                {{/each}}
                 </tbody>
             </table>
 

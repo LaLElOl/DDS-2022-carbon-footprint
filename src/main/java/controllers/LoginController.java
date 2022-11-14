@@ -28,8 +28,8 @@ public class LoginController {
 
             if(usuario != null) {
                 request.session(true);
-                request.session().attribute("id", usuario.getId());
-                response.redirect("/organizacion");//TODO redirigir a un perfil
+                request.session().attribute("id",Integer.toString(usuario.getId()));
+                response.redirect("/home");
             }
             else {
                 response.redirect("/login");
@@ -51,7 +51,8 @@ public class LoginController {
         return new ModelAndView(null, "/index");//TODO prohibido
     }
 
-    public ModelAndView signup(Request request, Response response) {
+    public ModelAndView signup(Request request, Response response)
+    {
         return new ModelAndView(null, "/signup.html");
     }
 }

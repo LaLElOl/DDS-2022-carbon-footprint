@@ -36,7 +36,13 @@ public class Router {
         LoginController loginController = new LoginController();
         HomeController homeController = new HomeController();
 
-        Spark.get("/home", homeController::mostrarInicio,engine);
+        Spark.path("/home", () -> {
+            Spark.before("",AuthMiddleware::verificarSesion);
+            Spark.before("/*",AuthMiddleware::verificarSesion);
+
+            Spark.get("", homeController::mostrarInicio,engine);
+        });
+
 
         Spark.path("/login", () -> {
             Spark.get("", loginController::pantallaDeLogin, engine);
@@ -55,10 +61,13 @@ public class Router {
             Spark.before("",AuthMiddleware::verificarSesion);
             Spark.before("/*",AuthMiddleware::verificarSesion);
 
+
             Spark.get("",organizacionesController::mostrarTodos, engine);
+            Spark.get("/excel",organizacionesController::excel,engine);
             Spark.get("/:id",organizacionesController::mostrar, engine);
             Spark.get("/editar/:id",organizacionesController::editar, engine);
             Spark.post("/editar/:id",organizacionesController::modificar);
+
         });
 
         Spark.get("/alta_organizacion", organizacionesController::crear, engine);
@@ -114,6 +123,8 @@ public class Router {
         //Sector
         Spark.get("/alta_sector", sectorController::crear, engine);
         Spark.post("/alta_sector", sectorController::guardar);
+        Spark.get("/sectores",sectorController::mostrarTodos, engine);
+        Spark.get("/sector/:id",sectorController::mostrar, engine);
 
         //Vehiculo particular
         Spark.get("/alta_vehiculo_particular", vehiculoParticularController::crear, engine);
@@ -122,5 +133,6 @@ public class Router {
         //Vehiculo publico
         Spark.get("/alta_vehiculo_publico", vehiculoPublicoController::crear, engine);
         Spark.post("/alta_vehiculo_publico", vehiculoPublicoController::guardar);
+
     }
 }

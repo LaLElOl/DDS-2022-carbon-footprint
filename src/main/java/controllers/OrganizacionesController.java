@@ -40,7 +40,6 @@ public class OrganizacionesController {
         Organizacion organizacionBuscada = this.repositorioDeOrganizaciones.buscar(new Integer(idBuscado));
 
         //TODO: ver porque la session es null
-
         if(organizacionBuscada.getUsuario().getId() != request.session().attribute("id")){
             response.redirect("/index");
         }
@@ -88,7 +87,7 @@ public class OrganizacionesController {
 
         this.repositorioDeOrganizaciones.guardar(org);
 
-        response.redirect("/home_organizacion");
+        response.redirect("/home");
         return response;
     }
 
@@ -133,6 +132,10 @@ public class OrganizacionesController {
 
         response.redirect("/organizacion/"+request.params("id"));
         return response;
+    }
+
+    public ModelAndView excel(Request request, Response response) {
+        return new ModelAndView(null, "cargar_excel.hbs");
     }
 
 }
