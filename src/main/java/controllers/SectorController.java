@@ -34,7 +34,7 @@ public class SectorController {
     }
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_sector.html");
+        return new ModelAndView(null, "form_sector.hbs");
     }
 
     public Response guardar(Request request,Response response) {
@@ -42,11 +42,11 @@ public class SectorController {
         Sector sector = new Sector();
 
         sector.setNombre(request.queryParams("nombre"));
-        //TODO sector.setOrganizacion();
+        //TODO sector.setOrganizacion(); ES NECESARIO??
 
         this.repositorioDeSectores.guardar(sector);
 
-        response.redirect("/alta_sector");
+        response.redirect("/home");
         return response;
     }
 

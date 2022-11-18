@@ -73,7 +73,7 @@ public class MiembroController {
 
         this.repositorioDeMiembros.guardar(miembro);
 
-        response.redirect("/home_miembro");
+        response.redirect("/home");
         return response;
     }
 

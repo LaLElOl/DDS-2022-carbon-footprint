@@ -51,7 +51,7 @@ public class AgenteProvincialController {
 
         this.repositorioAgenteProvincial.guardar(agenteProvincial);
 
-        response.redirect("/index");
+        response.redirect("/home");
         return response;
     }
 
