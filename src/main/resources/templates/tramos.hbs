@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tramos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -29,31 +29,25 @@
             <table class="table m-auto">
                 <thead>
                     <tr>
-                        <th>Inicio</th>
-                        <th>Fin</th>
+                        <th>Calle Inicio</th>
+                        <th>Altura Inicio</th>
+                        <th>Calle Fin</th>
+                        <th>Altura Fin</th>
                         <th>Transporte</th>
                         <th>Es Compartido</th>
                     </tr>
                 </thead>
                 <tbody>
+                {{#each tramo}}
                     <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
+                        <td>{{inicioTramo.calle}}</td>
+                        <td>{{inicioTramo.altura}}</td>
+                        <td>{{finTramo.calle}}</td>
+                        <td>{{finTramo.altura}}</td>
                         <td>Tren</td>
                         <td>Si</td>
                     </tr>
-                    <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
-                        <td>Tren</td>
-                        <td>Si</td>
-                    </tr>
-                    <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
-                        <td>Tren</td>
-                        <td>Si</td>
-                    </tr>
+                {{/each}}
                 </tbody>
             </table>
 
