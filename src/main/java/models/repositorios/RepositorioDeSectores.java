@@ -1,16 +1,17 @@
 package models.repositorios;
 
 import helpers.EntityManagerHelper;
+import models.dominio.organizacion.Organizacion;
 import models.dominio.organizacion.Sector;
 
 import java.util.List;
 
 public class RepositorioDeSectores {
 
-    public List buscarTodos() {
+    public List buscarTodos(Organizacion org) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Sector.class.getName())
+                .createQuery("from " + Sector.class.getName() + " where organizacion_id = " + org.getId() )
                 .getResultList();
     }
 

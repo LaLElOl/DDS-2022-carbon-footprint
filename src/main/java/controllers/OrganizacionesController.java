@@ -13,6 +13,8 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.awt.event.MouseListener;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -84,6 +86,8 @@ public class OrganizacionesController {
         org.setUsuario(usuario);
         org.setClasificacion(clasif);
         org.setUbicacion(ubicacion);
+        org.setFechaUltimoCalculoHuella(LocalDate.now());
+        org.setHuellaCarbonoActual(0.0);
 
         this.repositorioDeOrganizaciones.guardar(org);
 
@@ -138,4 +142,31 @@ public class OrganizacionesController {
         return new ModelAndView(null, "cargar_excel.hbs");
     }
 
+    public ModelAndView mostrarHuellaCarbono(Request request, Response response){
+
+        Integer id = request.session().attribute("id");
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("fecha",org.getFechaUltimoCalculoHuella());
+            put("valor",org.getHuellaCarbonoActual());
+        }}, "huella_carbono.hbs");
+    }
+
+    public Response calcularHuellaCarbonoMensual(Request request, Response response) {
+
+        int mes = new Integer(request.queryParams("id"));
+        if(mes != 0)
+            mes = LocalDate.now().getMonthValue();
+        Integer id = request.session().attribute("id");
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        int anio = LocalDate.now().getYear();
+        org.calcularHuella(mes,anio);
+
+        this.repositorioDeOrganizaciones.guardar(org);
+
+        response.redirect("/huella_carbono");
+        return response;
+    }
 }

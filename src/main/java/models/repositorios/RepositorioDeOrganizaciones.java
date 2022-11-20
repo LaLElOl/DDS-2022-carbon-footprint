@@ -1,6 +1,7 @@
 package models.repositorios;
 
 import helpers.EntityManagerHelper;
+import models.dominio.Usuario;
 import models.dominio.organizacion.Organizacion;
 
 import java.util.List;
@@ -32,5 +33,10 @@ public class RepositorioDeOrganizaciones {
         EntityManagerHelper.commit();
     }
 
-
+    public Organizacion buscarPorUsuario(Integer id) {
+        return (Organizacion) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Organizacion.class.getName() + " where" +  + id)
+                .getSingleResult();
+    }
 }

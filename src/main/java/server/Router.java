@@ -49,13 +49,11 @@ public class Router {
         Spark.path("/login", () -> {
             Spark.get("", loginController::pantallaDeLogin, engine);
             Spark.post("", loginController::login);
-            Spark.post("/logout", loginController::logout);
+            //Spark.post("/logout", loginController::logout);
         });
+        Spark.get("/logout", loginController::logout);
 
         Spark.get("/signup", loginController::signup,engine);
-
-
-        Spark.get("/index",(request,response)->"SOY EL INDEX");
 
         //Organizaciones
         Spark.path("/organizacion", () -> {
@@ -66,10 +64,18 @@ public class Router {
 
             Spark.get("",organizacionesController::mostrarTodos, engine);
             Spark.get("/excel",organizacionesController::excel,engine);
-            Spark.get("/:id",organizacionesController::mostrar, engine);
-            Spark.get("/editar/:id",organizacionesController::editar, engine);
-            Spark.post("/editar/:id",organizacionesController::modificar);
+            Spark.get("/alta_sector", sectorController::crear, engine);
+            Spark.get("/sectores",sectorController::mostrarTodos, engine);
+            Spark.get("/huella_carbono",organizacionesController::mostrarHuellaCarbono, engine);
 
+            Spark.get("/editar/:id",organizacionesController::editar, engine);
+            Spark.get("/sector/:id",sectorController::mostrar, engine);
+            Spark.get("/:id",organizacionesController::mostrar, engine);
+
+            Spark.post("/alta_sector", sectorController::guardar);
+            Spark.post("/huella_carbono_mensual",organizacionesController::calcularHuellaCarbonoMensual);
+            Spark.post("/huella_carbono_anual",organizacionesController::calcularHuellaCarbonoAnual);
+            Spark.post("/editar/:id",organizacionesController::modificar);
         });
 
         Spark.get("/alta_organizacion", organizacionesController::crear, engine);
@@ -122,11 +128,6 @@ public class Router {
         Spark.get("/alta_miembro", miembroController::crear, engine);
         Spark.post("/alta_miembro", miembroController::guardar);
 
-        //Sector
-        Spark.get("/alta_sector", sectorController::crear, engine);
-        Spark.post("/alta_sector", sectorController::guardar);
-        Spark.get("/sectores",sectorController::mostrarTodos, engine);
-        Spark.get("/sector/:id",sectorController::mostrar, engine);
 
         //Tramo
         Spark.get("/alta_trayecto", trayectoController::crear, engine);
