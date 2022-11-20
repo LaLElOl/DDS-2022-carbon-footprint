@@ -9,7 +9,7 @@ import helpers.EntityManagerHelper;
 public class LoginController {
 
     public ModelAndView pantallaDeLogin(Request request, Response response) {
-        return new ModelAndView(null, "login.html");
+        return new ModelAndView(null, "login.hbs");
     }
 
     public Response login(Request request, Response response) {
@@ -52,6 +52,6 @@ public class LoginController {
     }
 
     public ModelAndView signup(Request request, Response response) {
-        return new ModelAndView(null, "/signup.html");
+        return new ModelAndView(null, "/signup.hbs");
     }
 }

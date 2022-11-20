@@ -35,7 +35,7 @@ public class VehiculoParticularController {
     }
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_vehiculo_particular.html");
+        return new ModelAndView(null, "form_vehiculo_particular.hbs");
     }
 
     public Response guardar(Request request,Response response) {

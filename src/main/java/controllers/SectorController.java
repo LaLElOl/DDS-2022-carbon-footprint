@@ -34,7 +34,7 @@ public class SectorController {
     }
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_sector.html");
+        return new ModelAndView(null, "form_sector.hbs");
     }
 
     public Response guardar(Request request,Response response) {

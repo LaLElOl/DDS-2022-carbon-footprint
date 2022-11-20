@@ -13,7 +13,7 @@ import java.util.Locale;
 public class VehiculoPublicoController {
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_vehiculo_publico.html");
+        return new ModelAndView(null, "form_vehiculo_publico.hbs");
     }
 
     public Response guardar(Request request,Response response) {

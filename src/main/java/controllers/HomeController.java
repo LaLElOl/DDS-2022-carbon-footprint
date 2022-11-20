@@ -15,23 +15,23 @@ public class HomeController {
         Integer id = new Integer(request.session().attribute("id"));
         //TODO si id = null, mandarlo al login
         Usuario usuario = this.repositorioDeUsuarios.buscar(id);
-        String archivo = "login.html";
+        String archivo = "login.hbs";
 
         switch (usuario.getTipoUsuario()){
             case MIEMBRO:
-                archivo = "home_miembro.html";
+                archivo = "home_miembro.hbs";
                 break;
             case ORGANIZACION:
-                archivo = "home_organizacion.html";
+                archivo = "home_organizacion.hbs";
                 break;
             case AGENTE_MUNICIPAL:
-                archivo = "home_agente.html";
+                archivo = "home_agente.hbs";
                 break;
             case AGENTE_PROVINCIAL:
-                archivo = "home_agente.html";
+                archivo = "home_agente.hbs";
                 break;
             default:
-                //archivo = "home_miembro.html";
+                //archivo = "home_miembro.hbs";
                 break;
         }
 
