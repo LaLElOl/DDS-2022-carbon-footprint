@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trayectos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -29,40 +29,30 @@
             <table class="table m-auto">
                 <thead>
                     <tr>
-                        <th>Inicio</th>
-                        <th>Fin</th>
+                        <th>Calle Inicio</th>
+                        <th>Altura Inicio</th>
+                        <th>Calle Fin</th>
+                        <th>Altura Fin</th>
                         <th>Cant. Tramos</th>
                         <th>Agregar Tramo</th>
                         <th>Ver Tramos</th>
                     </tr>
                 </thead>
                 <tbody>
+                {{#each trayecto}}
                     <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
-                        <td>4</td>
+                        <td>{{inicio.calle}}</td>
+                        <td>{{inicio.altura}}</td>
+                        <td>{{fin.calle}}</td>
+                        <td>{{fin.altura}}</td>
+                        <td>4?</td>
+
+
                         <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='./form_tramo.html'">Agregar Tramo</button></td>
                         <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='./tramos.html'">Ver Tramos</button></td>
                     
                     </tr>
-                    <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
-                        <td>4</td>
-                        <td><button style="background-color: #77a785;" class="button is-primary"
-                                onclick="location.href='./form_tramo.html'">Agregar Tramo</button></td>
-                        <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='./tramos.html'">Ver
-                                tramos</button></td>
-                    </tr>
-                    <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
-                        <td>4</td>
-                        <td><button style="background-color: #77a785;" class="button is-primary"
-                                onclick="location.href='./form_tramo.html'">Agregar Tramo</button></td>
-                        <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='./tramos.html'">Ver
-                                tramos</button></td>
-                    </tr>
+                {{/each}}
                 </tbody>
             </table>
 

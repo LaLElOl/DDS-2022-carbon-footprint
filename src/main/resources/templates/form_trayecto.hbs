@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta Trayecto</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -26,26 +26,26 @@
         <section>
             <h2 class="contacto title">Alta de Trayecto</h2>
 
-            <form class="formulario">
+            <form class="formulario" method="post">
                 <fieldset>
                     <div class="campo">
                         <label>Calle de Inicio</label>
-                        <input type="text" placeholder="Calle de Inicio">
+                        <input name="calle_inicio" type="text" placeholder="Calle de Inicio" value="{{tramo.inicio.calle}}">
                     </div>
 
                     <div class="campo">
                         <label>Altura de Inicio</label>
-                        <input type="number" placeholder="Altura de Inicio">
+                        <input name="altura_inicio" type="number" placeholder="Altura de Inicio" value="{{tramo.inicio.altura}}">
                     </div>
 
                     <div class="campo">
                         <label>Calle de Fin</label>
-                        <input type="text" placeholder="Calle de Fin">
+                        <input name="calle_fin" type="text" placeholder="Calle de Fin" value="{{tramo.fin.calle}}">
                     </div>
 
                     <div class="campo">
                         <label>Altura de Fin</label>
-                        <input type="number" placeholder="Altura de Fin">
+                        <input name="altura_fin" type="number" placeholder="Altura de Fin" value="{{tramo.fin.altura}}">
                     </div>
                     
                     <div class="enviar">

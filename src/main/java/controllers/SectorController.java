@@ -42,7 +42,7 @@ public class SectorController {
         Sector sector = new Sector();
 
         sector.setNombre(request.queryParams("nombre"));
-        //TODO sector.setOrganizacion(); ES NECESARIO??
+        //TODO sector.setOrganizacion();
 
         this.repositorioDeSectores.guardar(sector);
 

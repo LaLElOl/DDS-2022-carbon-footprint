@@ -31,6 +31,7 @@ public class Router {
         AgenteProvincialController agenteProvincialController = new AgenteProvincialController();
         MiembroController miembroController = new MiembroController();
         SectorController sectorController = new SectorController();
+        TrayectoController trayectoController =new TrayectoController();
         VehiculoParticularController vehiculoParticularController = new VehiculoParticularController();
         VehiculoPublicoController vehiculoPublicoController = new VehiculoPublicoController();
         LoginController loginController = new LoginController();
@@ -125,6 +126,12 @@ public class Router {
         Spark.post("/alta_sector", sectorController::guardar);
         Spark.get("/sectores",sectorController::mostrarTodos, engine);
         Spark.get("/sector/:id",sectorController::mostrar, engine);
+
+        //Tramo
+        Spark.get("/alta_trayecto", trayectoController::crear, engine);
+        Spark.post("/alta_trayecto", trayectoController::guardar);
+        Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
+
 
         //Vehiculo particular
         Spark.get("/alta_vehiculo_particular", vehiculoParticularController::crear, engine);
