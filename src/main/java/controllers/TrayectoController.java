@@ -35,7 +35,7 @@ public class TrayectoController {
 
         this.repositorioDeTrayectos.guardar(trayecto);
 
-        response.redirect("/trayectos");
+        response.redirect("/miembro/alta_tramo");
         return response;
     }
 

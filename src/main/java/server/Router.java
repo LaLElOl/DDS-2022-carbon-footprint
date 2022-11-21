@@ -73,8 +73,7 @@ public class Router {
             Spark.get("/:id",organizacionesController::mostrar, engine);
 
             Spark.post("/alta_sector", sectorController::guardar);
-            Spark.post("/huella_carbono_mensual",organizacionesController::calcularHuellaCarbonoMensual);
-            Spark.post("/huella_carbono_anual",organizacionesController::calcularHuellaCarbonoAnual);
+            Spark.post("/huella_carbono_mensual",organizacionesController::calcularHuellaCarbono);
             Spark.post("/editar/:id",organizacionesController::modificar);
         });
 
@@ -120,24 +119,30 @@ public class Router {
             Spark.before("/*",AuthMiddleware::verificarSesion);
 
             Spark.get("", miembroController::mostrarTodos, engine);
-            Spark.get("/:id", miembroController::mostrar, engine);
+
+            Spark.get("/alta_trayecto", trayectoController::crear, engine);
+
+            Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
+            Spark.get("/alta_tramo", tramoController::crear, engine);
+
+            Spark.get("/tramos",tramoController::mostrarTodos, engine);
             Spark.get("/editar/:id", miembroController::editar, engine);
+            Spark.get("/:id", miembroController::mostrar, engine);
+            Spark.post("/alta_trayecto", trayectoController::guardar);
+            Spark.post("/alta_tramo", tramoController::guardar);
             Spark.post("/editar/:id", miembroController::modificar);
+
+
         });
 
         Spark.get("/alta_miembro", miembroController::crear, engine);
         Spark.post("/alta_miembro", miembroController::guardar);
 
 
-        //Tramo
-        Spark.get("/alta_trayecto", trayectoController::crear, engine);
-        Spark.post("/alta_trayecto", trayectoController::guardar);
-        Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
 
-        //Trayecto
-        Spark.get("/alta_tramo", tramoController::crear, engine);
-        Spark.post("/alta_tramo", tramoController::guardar);
-        Spark.get("/tramos",tramoController::mostrarTodos, engine);
+
+        //Tramo
+
 
         //Vehiculo particular
         Spark.get("/alta_vehiculo_particular", vehiculoParticularController::crear, engine);
