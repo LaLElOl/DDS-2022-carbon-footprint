@@ -38,7 +38,7 @@ public class TramoController {
 
         this.repositorioDeTramos.guardar(tramo);
 
-        response.redirect("/tramos");
+        response.redirect("/miembro/tramos");
         return response;
     }
 

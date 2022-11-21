@@ -153,7 +153,7 @@ public class OrganizacionesController {
         }}, "huella_carbono.hbs");
     }
 
-    public Response calcularHuellaCarbonoMensual(Request request, Response response) {
+    public Response calcularHuellaCarbono(Request request, Response response) {
 
         int mes = new Integer(request.queryParams("id"));
         if(mes != 0)
