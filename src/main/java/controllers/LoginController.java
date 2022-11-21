@@ -28,8 +28,8 @@ public class LoginController {
 
             if(usuario != null) {
                 request.session(true);
-                request.session().attribute("id", usuario.getId());
-                response.redirect("/organizacion");//TODO redirigir a un perfil
+                request.session().attribute("id",Integer.toString(usuario.getId()));
+                response.redirect("/home");
             }
             else {
                 response.redirect("/login");

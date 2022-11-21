@@ -53,7 +53,7 @@ public class AgenteMunicipalController {
 
         this.repositorioAgenteMunicipal.guardar(agenteMunicipal);
 
-        response.redirect("/home_agente");
+        response.redirect("/home");
         return response;
     }
 

@@ -13,14 +13,12 @@ import javax.persistence.*;
 
 public class Usuario extends EntidadPersistente{
 
-    @Id
     @Column(name = "email")
     private String email;
 
     @Column(name = "contrasenia")
     private String contrasenia;
 
-    @Id
     @Column(name = "nickname")
     private String nickname;
 

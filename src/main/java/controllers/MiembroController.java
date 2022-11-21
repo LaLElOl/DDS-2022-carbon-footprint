@@ -41,7 +41,8 @@ public class MiembroController {
         }}, "miembro.hbs"); // TODO REVISAR
     }
 
-    public ModelAndView crear(Request request, Response response) {
+    public ModelAndView crear(Request request, Response response)
+    {
         return new ModelAndView(null, "form_miembro.hbs");
     }
 
@@ -72,7 +73,7 @@ public class MiembroController {
 
         this.repositorioDeMiembros.guardar(miembro);
 
-        response.redirect("/home_miembro");
+        response.redirect("/home");
         return response;
     }
 

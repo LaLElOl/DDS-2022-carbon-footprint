@@ -1,25 +1,34 @@
 package controllers;
 
+import models.dominio.organizacion.Organizacion;
 import models.dominio.organizacion.Sector;
+import models.repositorios.RepositorioDeOrganizaciones;
 import models.repositorios.RepositorioDeSectores;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
 public class SectorController {
 
     private RepositorioDeSectores repositorioDeSectores;
+    private RepositorioDeOrganizaciones repositorioDeOrganizaciones;
 
-    public SectorController(){repositorioDeSectores = new RepositorioDeSectores();}
+    public SectorController(){
+        repositorioDeSectores = new RepositorioDeSectores();
+        repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+    }
 
 
     public ModelAndView mostrarTodos(Request request, Response response) {
-        List<Sector> todosLosSectores = this.repositorioDeSectores.buscarTodos();
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+        List<Sector> todosLosSectores = this.repositorioDeSectores.buscarTodos(org);
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("sectores", todosLosSectores);
+            put("sector", todosLosSectores);
         }}, "sectores.hbs");
     }
 
@@ -41,12 +50,18 @@ public class SectorController {
 
         Sector sector = new Sector();
 
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
         sector.setNombre(request.queryParams("nombre"));
-        //TODO sector.setOrganizacion();
+        sector.setOrganizacion(org);
+        sector.setFechaUltimoCalculoHuella(LocalDate.now());
+        sector.setHuellaCarbonoActual(0.0);
+        sector.setPromedioHCMiembro(0.0);
 
         this.repositorioDeSectores.guardar(sector);
 
-        response.redirect("/alta_sector");
+        response.redirect("/home");
         return response;
     }
 

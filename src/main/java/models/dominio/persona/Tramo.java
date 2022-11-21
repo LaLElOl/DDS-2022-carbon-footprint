@@ -1,5 +1,6 @@
 package models.dominio.persona;
 
+import lombok.NoArgsConstructor;
 import models.dominio.EntidadPersistente;
 import models.dominio.transporte.Ubicacion;
 import models.dominio.transporte.medios.Transporte;
@@ -13,6 +14,7 @@ import java.io.IOException;
 @Setter
 
 @Entity
+@NoArgsConstructor  //TODO: REVISAR CON EL JAVA SENIOR
 @Table(name = "tramo")
 public class Tramo extends EntidadPersistente {
 
@@ -40,6 +42,7 @@ public class Tramo extends EntidadPersistente {
     @ManyToOne
     @JoinColumn(name = "trayecto_id", referencedColumnName = "id")
     private Trayecto trayecto;
+
 
     public Tramo(Miembro m){
         this.duenioTramo = m;

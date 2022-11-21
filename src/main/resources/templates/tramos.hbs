@@ -7,31 +7,25 @@
             <table class="table m-auto">
                 <thead>
                     <tr>
-                        <th>Inicio</th>
-                        <th>Fin</th>
+                        <th>Calle Inicio</th>
+                        <th>Altura Inicio</th>
+                        <th>Calle Fin</th>
+                        <th>Altura Fin</th>
                         <th>Transporte</th>
                         <th>Es Compartido</th>
                     </tr>
                 </thead>
                 <tbody>
+                {{#each tramo}}
                     <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
+                        <td>{{inicioTramo.calle}}</td>
+                        <td>{{inicioTramo.altura}}</td>
+                        <td>{{finTramo.calle}}</td>
+                        <td>{{finTramo.altura}}</td>
                         <td>Tren</td>
                         <td>Si</td>
                     </tr>
-                    <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
-                        <td>Tren</td>
-                        <td>Si</td>
-                    </tr>
-                    <tr>
-                        <td>Calle y Altura</td>
-                        <td>Calle y Altura</td>
-                        <td>Tren</td>
-                        <td>Si</td>
-                    </tr>
+                {{/each}}
                 </tbody>
             </table>
 
