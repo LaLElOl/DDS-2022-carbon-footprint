@@ -168,4 +168,10 @@ public class Organizacion extends EntidadPersistente {
         List<DatoConsumo> datos = obtenerConsumos(periodicidad,fecha);
         return datos.stream().mapToDouble(DatoConsumo::calcularHuella).sum();
     }
+
+    public void agregarDatosConsumo(List<DatoConsumo> datosConsumo) {
+        datosConsumo.forEach(datoConsumo -> {
+            Collections.addAll(this.datosConsumo,datoConsumo);
+        });
+    }
 }

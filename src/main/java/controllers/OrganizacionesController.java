@@ -6,14 +6,16 @@ import models.dominio.organizacion.AgenteMunicipal;
 import models.dominio.organizacion.Clasificacion;
 import models.dominio.organizacion.Organizacion;
 import models.dominio.organizacion.TipoOrganizacion;
+import models.dominio.organizacion.datos.DatoConsumo;
 import models.dominio.transporte.Ubicacion;
 import models.repositorios.RepositorioDeAgentesMunicipales;
 import models.repositorios.RepositorioDeOrganizaciones;
+import models.services.lectorExcel.ApachePOIExcel;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -24,10 +26,12 @@ public class OrganizacionesController {
 
     private RepositorioDeOrganizaciones repositorioDeOrganizaciones;
     private RepositorioDeAgentesMunicipales repositorioDeAgentesMunicipales;
+    private ApachePOIExcel apachePoi;
 
     public OrganizacionesController(){
         repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
         repositorioDeAgentesMunicipales = new RepositorioDeAgentesMunicipales();
+        apachePoi = new ApachePOIExcel();
     }
 
     public ModelAndView mostrarTodos(Request request, Response response) {
@@ -138,6 +142,18 @@ public class OrganizacionesController {
 
     public ModelAndView excel(Request request, Response response) {
         return new ModelAndView(null, "cargar_excel.hbs");
+    }
+
+    public Response guardarConsumo(Request request, Response response) throws IOException {
+        String path = request.queryParams("excel");
+        Integer id = request.session().attribute("id");
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+        List<DatoConsumo> datosConsumo = this.apachePoi.leerExcel(path,org);
+        List<DatoConsumo> datosConsumoAnteriores = org.getDatosConsumo();
+
+        this.repositorioDeOrganizaciones.guardar(org);
+        response.redirect("/home");
+        return response;
     }
 
     public ModelAndView mostrarHuellaCarbono(Request request, Response response){

@@ -74,6 +74,7 @@ public class Router {
 
             Spark.post("/alta_sector", sectorController::guardar);
             Spark.post("/huella_carbono",organizacionesController::calcularHuellaCarbono);
+            Spark.post("/excel", organizacionesController::guardarConsumo);
             Spark.post("/editar/:id",organizacionesController::modificar);
         });
 
