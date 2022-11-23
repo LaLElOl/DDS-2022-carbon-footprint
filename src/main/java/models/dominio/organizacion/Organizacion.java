@@ -47,11 +47,17 @@ public class Organizacion extends EntidadPersistente {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
-    @Column(name = "huellaCarbonoActual")
-    private Double huellaCarbonoActual;
+    @Column(name = "huellaCarbonoMensual")
+    private Double huellaCarbonoActualMensual;
 
-    @Column(name = "fechaUltimoCalculoHuella", columnDefinition = "DATE")
-    private LocalDate fechaUltimoCalculoHuella;
+    @Column(name = "fechaUltimoCalculoHuellaMensual", columnDefinition = "DATE")
+    private LocalDate fechaUltimoCalculoHuellaMensual;
+
+    @Column(name = "huellaCarbonoAnual")
+    private Double huellaCarbonoActualAnual;
+
+    @Column(name = "fechaUltimoCalculoHuellaAnual", columnDefinition = "DATE")
+    private LocalDate fechaUltimoCalculoHuellaAnual;
 
     @Column(name = "cuit")
     private String cuit;
@@ -76,8 +82,10 @@ public class Organizacion extends EntidadPersistente {
         this.datosConsumo = new ArrayList<>();
         this.contactosANotificar = new HashSet<>();
         this.lectorExcel = new ApachePOIExcel();
-        this.huellaCarbonoActual = 0.0;
-        this.fechaUltimoCalculoHuella = LocalDate.now();
+        this.huellaCarbonoActualMensual = 0.0;
+        this.fechaUltimoCalculoHuellaMensual = LocalDate.now();
+        this.huellaCarbonoActualAnual = 0.0;
+        this.fechaUltimoCalculoHuellaAnual = LocalDate.now();
     }
 
     public void agregarSectores(Sector ... sectoresAAgregar){
@@ -106,23 +114,31 @@ public class Organizacion extends EntidadPersistente {
 
     public Double calcularHuella(int mes, int anio){
 
-        if(
-                LocalDate.now().minus(2,ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuella) &&
-                        this.fechaUltimoCalculoHuella != null
-        ){
-            return this.huellaCarbonoActual;
-        }
-
         double huella = 0.0;
         if(mes > 0 && mes <= 12){
+            if(
+                    LocalDate.now().minus(30,ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuellaMensual) &&
+                            this.fechaUltimoCalculoHuellaMensual != null
+            ){
+                return this.huellaCarbonoActualMensual;
+            }
+
             huella += obtenerHuellaMiembros();
             huella += obtenerHuellaOrganizacion(EPeriodicidad.MENSUAL, LocalDate.of(anio,mes,1));
+            this.fechaUltimoCalculoHuellaMensual = LocalDate.now();
+            this.huellaCarbonoActualMensual = huella;
         }else{
+            if(
+                    LocalDate.now().minus(30,ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuellaAnual) &&
+                            this.fechaUltimoCalculoHuellaAnual != null
+            ){
+                return this.huellaCarbonoActualAnual;
+            }
             huella += obtenerHuellaMiembros() * 12;
             huella += obtenerHuellaOrganizacion(EPeriodicidad.ANUAL,LocalDate.of(anio,1,1));
+            this.fechaUltimoCalculoHuellaAnual = LocalDate.now();
+            this.huellaCarbonoActualAnual = huella;
         }
-        this.fechaUltimoCalculoHuella = LocalDate.now();
-        this.huellaCarbonoActual = huella;
         return huella;
     }
 

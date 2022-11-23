@@ -86,8 +86,6 @@ public class OrganizacionesController {
         org.setUsuario(usuario);
         org.setClasificacion(clasif);
         org.setUbicacion(ubicacion);
-        org.setFechaUltimoCalculoHuella(LocalDate.now());
-        org.setHuellaCarbonoActual(0.0);
 
         this.repositorioDeOrganizaciones.guardar(org);
 
@@ -144,21 +142,23 @@ public class OrganizacionesController {
 
     public ModelAndView mostrarHuellaCarbono(Request request, Response response){
 
-        Integer id = request.session().attribute("id");
+        Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("fecha",org.getFechaUltimoCalculoHuella());
-            put("valor",org.getHuellaCarbonoActual());
+            put("fechaMensual",org.getFechaUltimoCalculoHuellaMensual());
+            put("valorMensual",org.getHuellaCarbonoActualMensual());
+            put("fechaAnual",org.getFechaUltimoCalculoHuellaAnual());
+            put("valorAnual",org.getHuellaCarbonoActualAnual());
         }}, "huella_carbono.hbs");
     }
 
     public Response calcularHuellaCarbono(Request request, Response response) {
 
-        int mes = new Integer(request.queryParams("id"));
+        int mes = new Integer(request.queryParams("mes"));
         if(mes != 0)
             mes = LocalDate.now().getMonthValue();
-        Integer id = request.session().attribute("id");
+        Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
 
         int anio = LocalDate.now().getYear();
@@ -166,7 +166,7 @@ public class OrganizacionesController {
 
         this.repositorioDeOrganizaciones.guardar(org);
 
-        response.redirect("/huella_carbono");
+        response.redirect("/organizacion/huella_carbono");
         return response;
     }
 }

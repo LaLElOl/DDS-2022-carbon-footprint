@@ -73,7 +73,7 @@ public class Router {
             Spark.get("/:id",organizacionesController::mostrar, engine);
 
             Spark.post("/alta_sector", sectorController::guardar);
-            Spark.post("/huella_carbono_mensual",organizacionesController::calcularHuellaCarbono);
+            Spark.post("/huella_carbono",organizacionesController::calcularHuellaCarbono);
             Spark.post("/editar/:id",organizacionesController::modificar);
         });
 
