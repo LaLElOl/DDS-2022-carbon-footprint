@@ -11,16 +11,23 @@ import models.dominio.transporte.Ubicacion;
 import models.repositorios.RepositorioDeAgentesMunicipales;
 import models.repositorios.RepositorioDeOrganizaciones;
 import models.services.lectorExcel.ApachePOIExcel;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 public class OrganizacionesController {
 
@@ -144,12 +151,27 @@ public class OrganizacionesController {
         return new ModelAndView(null, "cargar_excel.hbs");
     }
 
-    public Response guardarConsumo(Request request, Response response) throws IOException {
+    public Response guardarConsumo(Request request, Response response) throws IOException, ServletException {
         String path = request.queryParams("excel");
-        Integer id = request.session().attribute("id");
+        Integer id = new Integer(request.session().attribute("id"));
+
+        /*try {
+            FileItemFactory file = new DiskFileItemFactory();
+            ServletFileUpload fileUpload = new ServletFileUpload(file);
+            List items = fileUpload.parseRequest((HttpServletRequest) request);
+            for (int i = 0; i < items.size(); i++) {
+                FileItem fileItem = (FileItem) items.get(i);
+                if (!fileItem.isFormField()) {
+                    File f = new File("./Data" + fileItem.getName());
+                    fileItem.write(f);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
         List<DatoConsumo> datosConsumo = this.apachePoi.leerExcel(path,org);
-        List<DatoConsumo> datosConsumoAnteriores = org.getDatosConsumo();
+        org.agregarDatosConsumo(datosConsumo);
 
         this.repositorioDeOrganizaciones.guardar(org);
         response.redirect("/home");
