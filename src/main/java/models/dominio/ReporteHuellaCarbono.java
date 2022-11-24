@@ -30,4 +30,11 @@ public class ReporteHuellaCarbono extends EntidadPersistente{
 
     @Column(name = "valorHuella")
     private Double valorHuella;
+
+    public ReporteHuellaCarbono(Organizacion org, LocalDate periodo, EPeriodicidad periodicidad, Double huella){
+        this.organizacion = org;
+        this.ePeriodicidad = periodicidad;
+        this.fechaPeriodo = periodo;
+        this.valorHuella = huella;
+    }
 }

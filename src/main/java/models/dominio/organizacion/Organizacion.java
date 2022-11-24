@@ -2,6 +2,7 @@ package models.dominio.organizacion;
 
 import com.twilio.rest.api.v2010.account.incomingphonenumber.Local;
 import models.dominio.EntidadPersistente;
+import models.dominio.ReporteHuellaCarbono;
 import models.dominio.Usuario;
 import models.dominio.organizacion.datos.*;
 import models.dominio.organizacion.datos.EPeriodicidad;
@@ -173,5 +174,13 @@ public class Organizacion extends EntidadPersistente {
         datosConsumo.forEach(datoConsumo -> {
             Collections.addAll(this.datosConsumo,datoConsumo);
         });
+    }
+
+    public ReporteHuellaCarbono generarReporte(LocalDate fecha, EPeriodicidad periodicidad) {
+        if (periodicidad == EPeriodicidad.ANUAL){
+            return new ReporteHuellaCarbono(this,fecha,periodicidad,this.huellaCarbonoActualAnual);
+        }else{
+            return new ReporteHuellaCarbono(this,fecha,periodicidad,this.huellaCarbonoActualMensual);
+        }
     }
 }

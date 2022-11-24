@@ -91,15 +91,34 @@ public class ScriptDatosDB {
         //TODO: Setear factores de emision de cada uno
 
         GasNatural gasNatural = new GasNatural();
+        gasNatural.setFactorEmision(56.10);
+
         FuelOil fuelOil = new FuelOil();
+        fuelOil.setFactorEmision(77.4);
+
         Carbon carbon = new Carbon();
+        carbon.setFactorEmision(94.6);
+
         Lenia lenia = new Lenia();
+        lenia.setFactorEmision(112.0);
+
         Kerosene kerosene = new Kerosene();
+        kerosene.setFactorEmision(71.5);
+
         CarbonLenia carbonLenia = new CarbonLenia();
+        carbonLenia.setFactorEmision(97.5);
+
         GNC gnc = new GNC();
+        gnc.setFactorEmision(74.1);
+
         Nafta nafta = new Nafta();
+        nafta.setFactorEmision(69.3);
+
         Electrico electrico = new Electrico();
+        electrico.setFactorEmision(0.0);
+
         Gasoil gasoil = new Gasoil();
+        gasoil.setFactorEmision(74.1);
 
         //HIDRATADO DE INSTANCIAS
 
@@ -108,6 +127,7 @@ public class ScriptDatosDB {
         userMiem1.setNickname("Persona1");
         userMiem1.setContrasenia("niniorata");
         userMiem1.setEmail("asd@tumama1.com");
+        userMiem1.setTipoUsuario(TipoUsuario.MIEMBRO);
 
         miem1.setNombre("Carla");
         miem1.setApellido("Chumacera");
@@ -139,6 +159,7 @@ public class ScriptDatosDB {
         userMiem2.setNickname("Persona2");
         userMiem2.setContrasenia("niniorata");
         userMiem2.setEmail("asd@tumama2.com");
+        userMiem2.setTipoUsuario(TipoUsuario.MIEMBRO);
 
         miem2.setNombre("Carmen");
         miem2.setApellido("Sanchez");
@@ -164,6 +185,7 @@ public class ScriptDatosDB {
         userMiem3.setNickname("Persona3");
         userMiem3.setContrasenia("niniorata");
         userMiem3.setEmail("asd@tumama3.com");
+        userMiem3.setTipoUsuario(TipoUsuario.MIEMBRO);
 
         miem3.setNombre("Carlos");
         miem3.setApellido("Chumacero");
@@ -213,6 +235,7 @@ public class ScriptDatosDB {
         userMiem4.setNickname("Persona4");
         userMiem4.setContrasenia("memetieron7");
         userMiem4.setEmail("asd@tumama4.com");
+        userMiem4.setTipoUsuario(TipoUsuario.MIEMBRO);
 
         miem2.setNombre("David");
         miem2.setApellido("Luiz");
@@ -269,6 +292,7 @@ public class ScriptDatosDB {
         userOrg2.setNickname("Org2");
         userOrg2.setContrasenia("skere");
         userOrg2.setEmail("asd@tuorg2.com");
+        userOrg2.setTipoUsuario(TipoUsuario.ORGANIZACION);
 
         sec3.setNombre("IT");
         //TODO: Controlar este add, sino tengo que hacer la solicitud
@@ -293,6 +317,7 @@ public class ScriptDatosDB {
         userOrg3.setNickname("Org3");
         userOrg3.setContrasenia("skere");
         userOrg3.setEmail("asd@tuorg2.com");
+        userOrg3.setTipoUsuario(TipoUsuario.ORGANIZACION);
 
         sec4.setNombre("IT");
         //TODO: Controlar este add, sino tengo que hacer la solicitud
@@ -314,6 +339,7 @@ public class ScriptDatosDB {
         userAM1.setNickname("AM1");
         userAM1.setContrasenia("skere");
         userAM1.setEmail("asd@tuam1.com");
+        userAM1.setTipoUsuario(TipoUsuario.AGENTE_MUNICIPAL);
 
         agMun1.setNombre("Ag. Mun1");
         agMun1.setUsuario(userAM1);
@@ -326,6 +352,7 @@ public class ScriptDatosDB {
         userAM2.setNickname("AM2");
         userAM2.setContrasenia("skere");
         userAM2.setEmail("asd@tuam2.com");
+        userAM2.setTipoUsuario(TipoUsuario.AGENTE_MUNICIPAL);
 
         agMun2.setNombre("Ag. Mun2");
         agMun2.setUsuario(userAM2);
@@ -338,6 +365,7 @@ public class ScriptDatosDB {
         userAP.setNickname("AP");
         userAP.setContrasenia("skere");
         userAP.setEmail("asd@tuam1.com");
+        userAP.setTipoUsuario(TipoUsuario.AGENTE_PROVINCIAL);
 
         agProv.setNombre("Ag. Prov");
         agProv.setUsuario(userAM1);

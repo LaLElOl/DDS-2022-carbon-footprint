@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue("electrico")
 public class Electrico extends Combustible {
 
+    public Electrico(){
+        setNombre("electrico");
+    }
+
     public Double obtenerGramos(Double kwh){
         //TODO: INCHEQUEABLE
         return kwh*122;

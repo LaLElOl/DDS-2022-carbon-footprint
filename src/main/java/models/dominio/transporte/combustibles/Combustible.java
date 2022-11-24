@@ -14,6 +14,9 @@ import javax.persistence.*;
 @Table(name = "combustible")
 public abstract class Combustible extends EntidadPersistente {
 
+    @Column(name = "nombre")
+    private String nombre;
+
     @Column(name = "factor_emision")
     private Double factorEmision;
 

@@ -4,6 +4,7 @@ import models.dominio.organizacion.Organizacion;
 import models.dominio.organizacion.datos.DatoConsumo;
 import models.dominio.organizacion.datos.EPeriodicidad;
 import models.dominio.transporte.combustibles.*;
+import models.repositorios.RepositorioDeCombustibles;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,6 +20,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class ApachePOIExcel implements AdapterLectorExcel {
+
+    private RepositorioDeCombustibles repositorioDeCombustibles;
+
+    public ApachePOIExcel(){
+        this.repositorioDeCombustibles = new RepositorioDeCombustibles();
+    }
 
     public List<DatoConsumo> leerExcel(String pathArchivo, Organizacion organizacion) throws IOException {
 
@@ -88,30 +95,40 @@ public class ApachePOIExcel implements AdapterLectorExcel {
     private Combustible obtenerCombustible(Cell cell) {
         //TODO: Necesitamos alternativa a un switch para hacer esto
         //TODO: Tiene que recuperar la instancia unica de cada combustible desde la DB
+        String tipoCombustible = "";
         switch(cell.getRichStringCellValue().toString().toLowerCase(Locale.ROOT)){
             case "gas natural":
-                return new GasNatural();
+                tipoCombustible = "gas_natural";
+                break;
             case "fuel oil":
-                return new FuelOil();
+                tipoCombustible = "fuel_oil";
+                break;
             case "carbon":
-                return new Carbon();
+                tipoCombustible = "carbon";
+                break;
             case "leña":
-                return new Lenia();
+                tipoCombustible = "lenia";
+                break;
             case "kerosene":
-                return new Kerosene();
+                tipoCombustible = "kerosene";
+                break;
             case "carbon de leña":
-                return new CarbonLenia();
+                tipoCombustible = "carbon_lenia";
+                break;
             case "gnc":
-                return new GNC();
+                tipoCombustible = "gnc";
+                break;
             case "nafta":
-                return new Nafta();
+                tipoCombustible = "nafta";
+                break;
             case "electricidad":
-                return new Electrico();
+                tipoCombustible = "electrico";
+                break;
             case "gasoil":
-                return new Gasoil();
-            default:
-                return null;
+                tipoCombustible = "gasoil";
+                break;
         }
+        return this.repositorioDeCombustibles.buscar(tipoCombustible);
     }
 
     private String obtenerActividad(Cell cell) {

@@ -1,5 +1,6 @@
 package controllers;
 
+import models.dominio.ReporteHuellaCarbono;
 import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
 import models.dominio.organizacion.AgenteMunicipal;
@@ -7,10 +8,12 @@ import models.dominio.organizacion.Clasificacion;
 import models.dominio.organizacion.Organizacion;
 import models.dominio.organizacion.TipoOrganizacion;
 import models.dominio.organizacion.datos.DatoConsumo;
+import models.dominio.organizacion.datos.EPeriodicidad;
 import models.dominio.transporte.Ubicacion;
 import models.repositorios.RepositorioDeAgentesMunicipales;
 import models.repositorios.RepositorioDeDatosConsumo;
 import models.repositorios.RepositorioDeOrganizaciones;
+import models.repositorios.RepositorioDeReportes;
 import models.services.lectorExcel.ApachePOIExcel;
 import spark.ModelAndView;
 import spark.Request;
@@ -34,11 +37,13 @@ public class OrganizacionesController {
     private RepositorioDeAgentesMunicipales repositorioDeAgentesMunicipales;
     private ApachePOIExcel apachePoi;
     private RepositorioDeDatosConsumo repositorioDeDatosConsumo;
+    private RepositorioDeReportes repositorioDeReportes;
 
     public OrganizacionesController(){
         repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
         repositorioDeAgentesMunicipales = new RepositorioDeAgentesMunicipales();
         repositorioDeDatosConsumo = new RepositorioDeDatosConsumo();
+        repositorioDeReportes = new RepositorioDeReportes();
         apachePoi = new ApachePOIExcel();
     }
 
@@ -196,13 +201,21 @@ public class OrganizacionesController {
     public Response calcularHuellaCarbono(Request request, Response response) {
 
         int mes = new Integer(request.queryParams("mes"));
-        if(mes != 0)
-            mes = LocalDate.now().getMonthValue();
+        EPeriodicidad periodicidad = EPeriodicidad.ANUAL;
+        LocalDate fecha = LocalDate.now();
+        if(mes != 0) {
+            mes = fecha.getMonthValue();
+            periodicidad = EPeriodicidad.MENSUAL;
+        }
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
 
-        int anio = LocalDate.now().getYear();
+        int anio = fecha.getYear();
         org.calcularHuella(mes,anio);
+
+        ReporteHuellaCarbono reporte = org.generarReporte(fecha,periodicidad);
+
+        this.repositorioDeReportes.guardar(reporte);
 
         this.repositorioDeOrganizaciones.guardar(org);
 

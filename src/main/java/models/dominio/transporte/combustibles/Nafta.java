@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue("nafta")
 public class Nafta extends Combustible {
 
+    public Nafta(){
+        setNombre("nafta");
+    }
+
     public Double obtenerGramos(Double litros){
         return litros*850;
     }
