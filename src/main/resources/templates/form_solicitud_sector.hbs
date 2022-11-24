@@ -8,17 +8,17 @@
         <form class="formulario" method="post">
             <fieldset>
                 <div class="campo">
-                    <label>Seleccione una Organizacion</label>
-                    <select class="input-select" name="organizacion_id">
+                    <label>Seleccione un Sector</label>
+                    <select class="input-select" name="sector_id">
                             <option>Seleccionar</option>
-                        {{#each organizaciones}}
-                            <option value="{{id}}">{{razonSocial}}</option>
+                        {{#each sectores}}
+                            <option value="{{id}}">{{nombre}}</option>
                         {{/each}}
                     </select>
                 </div>
 
                 <div class="enviar">
-                    <button class="boton" type="submit">Siguiente</button>
+                    <button class="boton" type="submit">Enviar</button>
                 </div>
             </fieldset>
         </form>

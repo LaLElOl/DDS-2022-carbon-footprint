@@ -116,12 +116,13 @@ public class Router {
         //Miembro
         Spark.path("/miembro", ()-> {
 
-            //Spark.before("",AuthMiddleware::verificarSesion);
-           // Spark.before("/*",AuthMiddleware::verificarSesion);
+            Spark.before("",AuthMiddleware::verificarSesion);
+            Spark.before("/*",AuthMiddleware::verificarSesion);
 
             Spark.get("", miembroController::mostrarTodos, engine);
 
             Spark.get("/unirse_org", miembroController::unirseAOrg, engine);
+            Spark.get("/unirse_sector/:id", miembroController::mostrarSectoresOrganizacion, engine);
             Spark.get("/alta_trayecto", trayectoController::crear, engine);
 
             Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
@@ -132,7 +133,8 @@ public class Router {
             Spark.get("/:id", miembroController::mostrar, engine);
             Spark.post("/alta_trayecto", trayectoController::guardar);
             Spark.post("/alta_tramo", tramoController::guardar);
-            Spark.post("/unirse_org", miembroController::generarSolicitud);
+            Spark.post("/unirse_org", miembroController::recibirOrganizacion);
+            Spark.post("/unirse_sector/:id", miembroController::generarSolicitud);
             Spark.post("/editar/:id", miembroController::modificar);
         });
 

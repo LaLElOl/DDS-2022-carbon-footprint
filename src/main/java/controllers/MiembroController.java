@@ -125,10 +125,8 @@ public class MiembroController {
 
     public ModelAndView unirseAOrg(Request request, Response response) {
         List<Organizacion> organizaciones = this.repositorioDeOrganizaciones.buscarTodos();
-        List<Sector> sectores = this.repositorioDeSectores.todos();//TODO Falta filtrar los sectores
         return new ModelAndView(new HashMap<String,Object>(){{
             put("organizaciones",organizaciones);
-            put("sectores",sectores);
         }}, "form_solicitud_org.hbs");
     }
 
@@ -151,4 +149,19 @@ public class MiembroController {
         return response;
     }
 
+    public Response recibirOrganizacion(Request request, Response response) {
+        String organizacion_id = request.queryParams("organizacion_id");
+
+        response.redirect("/miembro/unirse_sector/" + organizacion_id);
+        return response;
+    }
+
+    public ModelAndView mostrarSectoresOrganizacion(Request request, Response response) {
+        List<Sector> sectores = this.repositorioDeSectores.buscarTodos(request.params("id"));
+
+        return new ModelAndView(new HashMap<String,Object>(){{
+            put("sectores",sectores);
+        }}, "form_solicitud_sector.hbs");
+
+    }
 }

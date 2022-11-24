@@ -26,7 +26,7 @@ public class SectorController {
     public ModelAndView mostrarTodos(Request request, Response response) {
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
-        List<Sector> todosLosSectores = this.repositorioDeSectores.buscarTodos(org);
+        List<Sector> todosLosSectores = this.repositorioDeSectores.buscarTodos(org.getId().toString());
         return new ModelAndView(new HashMap<String, Object>(){{
             put("sector", todosLosSectores);
         }}, "sectores.hbs");

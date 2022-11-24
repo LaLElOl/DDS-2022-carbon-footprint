@@ -8,10 +8,10 @@ import java.util.List;
 
 public class RepositorioDeSectores {
 
-    public List buscarTodos(Organizacion org) {
+    public List buscarTodos(String org_id) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Sector.class.getName() + " where organizacion_id = " + org.getId() )
+                .createQuery("from " + Sector.class.getName() + " where organizacion_id = " + org_id )
                 .getResultList();
     }
 
