@@ -1,0 +1,45 @@
+{{#partial "contenido" }}
+<body>
+
+<main>
+    <section>
+        <h2 class="contacto title">Solicitud</h2>
+
+        <form class="formulario" method="post">
+            <fieldset>
+                <div class="campo">
+                    <label>Seleccione una Organizacion</label>
+                    <select class="input-select" name="organizacion_id">
+                            <option>Seleccionar</option>
+                        {{#each organizaciones}}
+                            <option value="{{id}}">{{razonSocial}}</option>
+                        {{/each}}
+                    </select>
+
+                    <label>Seleccione un Sector</label>
+                    <select class="input-select" name="sector_id">
+                            <option>Seleccionar</option>
+                        {{#each sectores}}
+                            <option value="{{id}}">{{nombre}}</option>
+                        {{/each}}
+                    </select>
+
+                </div>
+
+                <div class="enviar">
+                    <button class="boton" type="submit">Siguiente</button>
+                </div>
+            </fieldset>
+        </form>
+
+    </section>
+</main>
+
+
+<footer class>
+    <p>Escribir algo copado aca</p>
+</footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

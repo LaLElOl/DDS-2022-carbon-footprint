@@ -1,6 +1,7 @@
 package models.repositorios;
 
 import helpers.EntityManagerHelper;
+import models.dominio.organizacion.Organizacion;
 import models.dominio.persona.Miembro;
 
 import java.util.List;
@@ -29,6 +30,13 @@ public class RepositorioDeMiembros {
         EntityManagerHelper.persist(miembro);
 
         EntityManagerHelper.commit();
+    }
+
+    public Miembro buscarPorUsuario(Integer id) {
+        return (Miembro) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Miembro.class.getName() + " where usuario_id =" + id)
+                .getSingleResult();
     }
 
 }

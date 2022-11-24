@@ -1,7 +1,6 @@
 package models.repositorios;
 
 import helpers.EntityManagerHelper;
-import models.dominio.Usuario;
 import models.dominio.organizacion.Organizacion;
 
 import java.util.List;

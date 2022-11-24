@@ -2,18 +2,20 @@ package controllers;
 
 import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
-import models.dominio.organizacion.Clasificacion;
-import models.dominio.organizacion.Organizacion;
-import models.dominio.organizacion.TipoOrganizacion;
+import models.dominio.organizacion.*;
 import models.dominio.persona.Contacto;
 import models.dominio.persona.Miembro;
 import models.dominio.persona.TipoDoc;
 import models.dominio.transporte.Ubicacion;
 import models.repositorios.RepositorioDeMiembros;
+import models.repositorios.RepositorioDeOrganizaciones;
+import models.repositorios.RepositorioDeSectores;
+import models.repositorios.RepositorioDeSolicitudes;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -21,8 +23,16 @@ import java.util.Locale;
 public class MiembroController {
 
     private RepositorioDeMiembros repositorioDeMiembros;
+    private RepositorioDeOrganizaciones repositorioDeOrganizaciones;
+    private RepositorioDeSectores repositorioDeSectores;
+    private RepositorioDeSolicitudes repositorioDeSolicitudes;
 
-    public MiembroController(){repositorioDeMiembros = new RepositorioDeMiembros();}
+    public MiembroController(){
+        repositorioDeMiembros = new RepositorioDeMiembros();
+        repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+        repositorioDeSectores = new RepositorioDeSectores();
+        repositorioDeSolicitudes = new RepositorioDeSolicitudes();
+    }
 
     public ModelAndView mostrarTodos(Request request, Response response) {
         List<Miembro> todosLosMiembros = this.repositorioDeMiembros.buscarTodos();
@@ -112,4 +122,33 @@ public class MiembroController {
         response.redirect("/index");
         return response;
     }
+
+    public ModelAndView unirseAOrg(Request request, Response response) {
+        List<Organizacion> organizaciones = this.repositorioDeOrganizaciones.buscarTodos();
+        List<Sector> sectores = this.repositorioDeSectores.todos();//TODO Falta filtrar los sectores
+        return new ModelAndView(new HashMap<String,Object>(){{
+            put("organizaciones",organizaciones);
+            put("sectores",sectores);
+        }}, "form_solicitud_org.hbs");
+    }
+
+
+    public Response generarSolicitud(Request request, Response response){
+        Sector sector =this.repositorioDeSectores.buscar(new Integer(request.queryParams("sector_id")));
+        Integer id = new Integer(request.session().attribute("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id);
+        Solicitud solicitud = new Solicitud();
+
+        solicitud.setSolicitante(miembro);
+        solicitud.setSector(sector);
+        sector.agregarMiembroSolicitante(solicitud);
+        solicitud.setFecha(LocalDate.now());
+
+        this.repositorioDeSolicitudes.guardar(solicitud);
+        this.repositorioDeSectores.guardar(sector);
+        response.redirect("/home");
+
+        return response;
+    }
+
 }

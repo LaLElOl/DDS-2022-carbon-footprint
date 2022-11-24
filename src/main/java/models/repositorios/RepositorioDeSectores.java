@@ -15,6 +15,13 @@ public class RepositorioDeSectores {
                 .getResultList();
     }
 
+    public List todos(){
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Sector.class.getName())
+                .getResultList();
+    }
+
     public Sector buscar(Integer id) {
         return EntityManagerHelper
                 .getEntityManager()
