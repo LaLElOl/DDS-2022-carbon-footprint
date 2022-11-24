@@ -3,6 +3,7 @@ package models.dominio;
 import models.dominio.organizacion.Organizacion;
 import lombok.Getter;
 import lombok.Setter;
+import models.dominio.organizacion.datos.EPeriodicidad;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -22,6 +23,10 @@ public class ReporteHuellaCarbono extends EntidadPersistente{
 
     @Column(name = "fechaPeriodo", columnDefinition = "DATE")
     private LocalDate fechaPeriodo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "periodicidad")
+    private EPeriodicidad ePeriodicidad;
 
     @Column(name = "valorHuella")
     private Double valorHuella;

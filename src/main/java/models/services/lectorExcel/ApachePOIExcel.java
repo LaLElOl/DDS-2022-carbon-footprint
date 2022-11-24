@@ -5,10 +5,13 @@ import models.dominio.organizacion.datos.DatoConsumo;
 import models.dominio.organizacion.datos.EPeriodicidad;
 import models.dominio.transporte.combustibles.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,11 +21,12 @@ import java.util.Locale;
 public class ApachePOIExcel implements AdapterLectorExcel {
 
     public List<DatoConsumo> leerExcel(String pathArchivo, Organizacion organizacion) throws IOException {
-        FileInputStream file = new FileInputStream(pathArchivo);
-        Workbook workbook = new XSSFWorkbook(file);
-        List<DatoConsumo> data = new ArrayList<>();
 
-        Sheet hoja = workbook.getSheetAt(0);
+        FileInputStream file = new FileInputStream(pathArchivo);
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        XSSFSheet hoja = workbook.getSheetAt(0);
+
+        List<DatoConsumo> data = new ArrayList<>();
 
         //Empezamos por la fila nro 3 porque las primeras dos son titulos nomas
         for(int j=2 ; j < hoja.getLastRowNum() + 1; j++){

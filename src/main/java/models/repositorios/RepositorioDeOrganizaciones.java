@@ -36,7 +36,7 @@ public class RepositorioDeOrganizaciones {
     public Organizacion buscarPorUsuario(Integer id) {
         return (Organizacion) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Organizacion.class.getName() + " where" +  + id)
+                .createQuery("from " + Organizacion.class.getName() + " where usuario_id =" + id)
                 .getSingleResult();
     }
 }

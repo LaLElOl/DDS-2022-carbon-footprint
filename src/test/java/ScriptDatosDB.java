@@ -1,4 +1,5 @@
 import helpers.EntityManagerHelper;
+import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
 import models.dominio.organizacion.*;
 import models.dominio.persona.Miembro;
@@ -238,6 +239,7 @@ public class ScriptDatosDB {
         userOrg1.setNickname("Org1");
         userOrg1.setContrasenia("skere");
         userOrg1.setEmail("asd@tuorg1.com");
+        userOrg1.setTipoUsuario(TipoUsuario.ORGANIZACION);
 
         sec1.setNombre("Finanzas");
         //TODO: Controlar este add, sino tengo que hacer la solicitud
