@@ -10,9 +10,9 @@ public class RepositorioDeDatosConsumo {
 
         public void guardar(DatoConsumo datoConsumo) {
             EntityManagerHelper.beginTransaction();
-
-            EntityManagerHelper.persist(datoConsumo);
-
+            EntityManagerHelper
+                    .getEntityManager()
+                    .persist(datoConsumo);
             EntityManagerHelper.commit();
         }
 

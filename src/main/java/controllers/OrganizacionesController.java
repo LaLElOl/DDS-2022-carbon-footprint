@@ -173,9 +173,9 @@ public class OrganizacionesController {
         }
 
         List<DatoConsumo> datosConsumo = this.apachePoi.leerExcel("upload/" + tempFile.getFileName().toString(),org);
-        org.agregarDatosConsumo(datosConsumo);
 
-        org.getDatosConsumo().forEach(dato -> this.repositorioDeDatosConsumo.guardar(dato));
+        datosConsumo.forEach(dato -> this.repositorioDeDatosConsumo.guardar(dato));
+        org.agregarDatosConsumo(datosConsumo);
 
         this.repositorioDeOrganizaciones.guardar(org);
 

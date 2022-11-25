@@ -96,39 +96,50 @@ public class ApachePOIExcel implements AdapterLectorExcel {
         //TODO: Necesitamos alternativa a un switch para hacer esto
         //TODO: Tiene que recuperar la instancia unica de cada combustible desde la DB
         String tipoCombustible = "";
+        Integer id = new Integer(0) ;
         switch(cell.getRichStringCellValue().toString().toLowerCase(Locale.ROOT)){
             case "gas natural":
                 tipoCombustible = "gas_natural";
+                id = 1;
                 break;
             case "fuel oil":
                 tipoCombustible = "fuel_oil";
+                id = 2;
                 break;
             case "carbon":
                 tipoCombustible = "carbon";
+                id = 3;
                 break;
             case "leña":
                 tipoCombustible = "lenia";
+                id = 4;
                 break;
             case "kerosene":
                 tipoCombustible = "kerosene";
+                id = 5;
                 break;
             case "carbon de leña":
                 tipoCombustible = "carbon_lenia";
+                id = 6;
                 break;
             case "gnc":
                 tipoCombustible = "gnc";
+                id = 7;
                 break;
             case "nafta":
                 tipoCombustible = "nafta";
+                id = 8;
                 break;
             case "electricidad":
                 tipoCombustible = "electrico";
+                id = 9;
                 break;
             case "gasoil":
                 tipoCombustible = "gasoil";
+                id = 10;
                 break;
         }
-        return this.repositorioDeCombustibles.buscar(tipoCombustible);
+        return this.repositorioDeCombustibles.buscar(id);
     }
 
     private String obtenerActividad(Cell cell) {

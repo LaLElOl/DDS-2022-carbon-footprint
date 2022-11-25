@@ -16,10 +16,10 @@ public class RepositorioDeCombustibles {
                 .getResultList();
     }
 
-    public Combustible buscar(String nombre) {
+    public Combustible buscar(Integer id) {
         return (Combustible) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Combustible.class.getName() + " where nombre =" + nombre)
+                .createQuery("from " + Combustible.class.getName() + " where id =" + id)
                 .getSingleResult();
     }
 
