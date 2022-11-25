@@ -33,10 +33,10 @@ public class Router {
         SectorController sectorController = new SectorController();
         TrayectoController trayectoController =new TrayectoController();
         TramoController tramoController = new TramoController();
-        VehiculoParticularController vehiculoParticularController = new VehiculoParticularController();
-        VehiculoPublicoController vehiculoPublicoController = new VehiculoPublicoController();
+        TransporteController vehiculoParticularController = new TransporteController();
         LoginController loginController = new LoginController();
         HomeController homeController = new HomeController();
+
 
         Spark.path("/home", () -> {
             Spark.before("",AuthMiddleware::verificarSesion);
@@ -127,9 +127,10 @@ public class Router {
 
             Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
             Spark.get("/alta_tramo", tramoController::crear, engine);
-
             Spark.get("/tramos",tramoController::mostrarTodos, engine);
             Spark.get("/editar/:id", miembroController::editar, engine);
+            Spark.get("/tipo_transporte",miembroController::tipoTransporte,engine);
+
             Spark.get("/:id", miembroController::mostrar, engine);
             Spark.post("/alta_trayecto", trayectoController::guardar);
             Spark.post("/alta_tramo", tramoController::guardar);
@@ -151,9 +152,6 @@ public class Router {
         Spark.get("/alta_vehiculo_particular", vehiculoParticularController::crear, engine);
         Spark.post("/alta_vehiculo_particular", vehiculoParticularController::guardar);
 
-        //Vehiculo publico
-        Spark.get("/alta_vehiculo_publico", vehiculoPublicoController::crear, engine);
-        Spark.post("/alta_vehiculo_publico", vehiculoPublicoController::guardar);
 
     }
 }

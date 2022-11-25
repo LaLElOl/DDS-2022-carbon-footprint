@@ -27,12 +27,9 @@ public class TramoController {
         Tramo tramo = new Tramo(miembro);
         Ubicacion ubicacionInicio = new Ubicacion();
         Ubicacion ubicacionFin = new Ubicacion();
-        //TODO SETEAR COMPARTIDO Y TRANSPORTE
 
-        ubicacionInicio.setCalle(request.queryParams("calle_inicio"));
-        ubicacionInicio.setAltura(Integer.valueOf(request.queryParams("altura_inicio")));
-        ubicacionFin.setCalle(request.queryParams("calle_fin"));
-        ubicacionFin.setAltura(Integer.valueOf(request.queryParams("altura_fin")));
+        tramo.setCompartido(Boolean.FALSE);
+        guardarUbicaciones(request,response,ubicacionInicio,ubicacionFin);
         tramo.setInicioTramo(ubicacionInicio);
         tramo.setFinTramo(ubicacionFin);
 
@@ -40,6 +37,15 @@ public class TramoController {
 
         response.redirect("/miembro/tramos");
         return response;
+    }
+
+    public void guardarUbicaciones(Request request,Response response,Ubicacion ubicacionInicio,Ubicacion ubicacionFin){
+
+        ubicacionInicio.setCalle(request.queryParams("calle_inicio"));
+        ubicacionInicio.setAltura(Integer.valueOf(request.queryParams("altura_inicio")));
+        ubicacionFin.setCalle(request.queryParams("calle_fin"));
+        ubicacionFin.setAltura(Integer.valueOf(request.queryParams("altura_fin")));
+
     }
 
     public ModelAndView mostrarTodos(Request request, Response response) {

@@ -1,30 +1,30 @@
 package models.repositorios;
 
 import helpers.EntityManagerHelper;
-import models.dominio.transporte.vehiculos.Vehiculo;
+import models.dominio.transporte.medios.Transporte;
 
 import java.util.List;
 
-public class RepositorioDeVehiculos {
+public class RepositorioDeTransportes {
 
     public List buscarTodos() {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Vehiculo.class.getName())
+                .createQuery("from " + Transporte.class.getName())
                 .getResultList();
     }
 
-    public Vehiculo buscar(Integer id) {
+    public Transporte buscar(Integer id) {
         return EntityManagerHelper
                 .getEntityManager()
-                .find(Vehiculo.class, id);
+                .find(Transporte.class, id);
     }
 
-    public void guardar(Vehiculo vehiculo) {
+    public void guardar(Transporte transporte) {
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper
                 .getEntityManager()
-                .persist(vehiculo);
+                .persist(transporte);
         EntityManagerHelper.commit();
     }
 

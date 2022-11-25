@@ -164,4 +164,8 @@ public class MiembroController {
         }}, "form_solicitud_sector.hbs");
 
     }
+
+    public ModelAndView tipoTransporte(Request request, Response response) {
+        return new ModelAndView(null, "tipo_transporte.hbs");
+    }
 }
