@@ -7,6 +7,7 @@
             <table class="table m-auto">
                 <thead>
                     <tr>
+                        <th>Nombre</th>
                         <th>Calle Inicio</th>
                         <th>Altura Inicio</th>
                         <th>Calle Fin</th>
@@ -19,6 +20,7 @@
                 <tbody>
                 {{#each trayecto}}
                     <tr>
+                        <td>{{nombre}}</td>
                         <td>{{inicio.calle}}</td>
                         <td>{{inicio.altura}}</td>
                         <td>{{fin.calle}}</td>

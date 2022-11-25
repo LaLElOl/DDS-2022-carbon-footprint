@@ -9,11 +9,10 @@
 
                     <div class="campo">
                         <label>Seleccionar Trayecto</label>
-                            <select>
-                                <option>Trayecto 1</option>
-                                <option>Trayecto 2</option>
-                                <option>Trayecto 3</option>
-                                <option>Trayecto 4</option>
+                            <select name="trayecto">
+                            {{#each trayecto}}
+                                <option value="{{id}}">{{nombre}}</option>
+                            {{/each}}
                             </select>
                     </div>
 
@@ -28,8 +27,18 @@
                     </div>
 
                     <div class="campo">
+                        <label>Localidad de Inicio</label>
+                        <input name="localidad_inicio" type="text" placeholder="Localidad de Inicio" value="{{tramo.inicio.municipio}}">
+                    </div>
+
+                    <div class="campo">
+                        <label>Provincia de Inicio</label>
+                        <input name="provincia_inicio" type="text" placeholder="Provincia de Inicio" value="{{tramo.inicio.provincia}}">
+                    </div>
+
+                    <div class="campo">
                         <label>Seleccionar Transporte</label>
-                            <select>
+                            <select name="transporte">
                                 <option>Transporte 1</option>
                                 <option>Transporte 2</option>
                                 <option>Transporte 3</option>
@@ -52,8 +61,18 @@
                         <input name="altura_fin" type="number" placeholder="Altura de Fin" value="{{tramo.finTramo.altura}}">
                     </div>
 
+                    <div class="campo">
+                        <label>Localidad de Fin</label>
+                        <input name="localidad_fin" type="text" placeholder="Localidad de Fin" value="{{tramo.finTramo.municipio}}">
+                    </div>
+
+                    <div class="campo">
+                        <label>Provincia de Fin</label>
+                        <input name="provincia_fin" type="text" placeholder="Provincia de Fin" value="{{tramo.finTramo.provincia}}">
+                    </div>
+
                     <div class="enviar">
-                        <button class="boton" type="submit">Enviar</button>
+                        <button class="boton" type="submit">Generar Tramo</button>
                     </div>
 
 

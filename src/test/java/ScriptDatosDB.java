@@ -131,7 +131,7 @@ public class ScriptDatosDB {
 
         miem1.setNombre("Carla");
         miem1.setApellido("Chumacera");
-        miem1.setUsuario(userMiem3);
+        miem1.setUsuario(userMiem1);
         miem1.setNumDoc(12312312);
 
         vehiculo.setFactorVehiculo(1.5);
@@ -163,7 +163,7 @@ public class ScriptDatosDB {
 
         miem2.setNombre("Carmen");
         miem2.setApellido("Sanchez");
-        miem2.setUsuario(userMiem3);
+        miem2.setUsuario(userMiem2);
         miem2.setNumDoc(12312313);
 
         //Comparte tramo con el primer miembro pero se arma una instancia nueva con el dueño seteado en el miem1 y el comrpartido en false
@@ -239,7 +239,7 @@ public class ScriptDatosDB {
 
         miem2.setNombre("David");
         miem2.setApellido("Luiz");
-        miem2.setUsuario(userMiem3);
+        miem2.setUsuario(userMiem4);
         miem2.setNumDoc(12312314);
 
         tramo5.setInicioTramo(ubEco2);

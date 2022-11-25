@@ -2,8 +2,12 @@ package controllers;
 
 import models.dominio.persona.Miembro;
 import models.dominio.persona.Tramo;
+import models.dominio.persona.Trayecto;
 import models.dominio.transporte.Ubicacion;
+import models.repositorios.RepositorioDeDatosConsumo;
+import models.repositorios.RepositorioDeMiembros;
 import models.repositorios.RepositorioDeTramos;
+import models.repositorios.RepositorioDeTrayectos;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -14,16 +18,29 @@ import java.util.List;
 public class TramoController {
 
     private RepositorioDeTramos repositorioDeTramos;
+    private RepositorioDeMiembros repositorioDeMiembros;
+    private RepositorioDeTrayectos repositorioDeTrayectos;
 
-    public TramoController(){repositorioDeTramos = new RepositorioDeTramos();}
+    public TramoController(){
+        repositorioDeTramos = new RepositorioDeTramos();
+        repositorioDeMiembros = new RepositorioDeMiembros();
+        repositorioDeTrayectos = new RepositorioDeTrayectos();
+    }
 
     public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_tramo.hbs");
+
+        Integer id = new Integer(request.session().attribute("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id);
+        List<Trayecto> trayectos = this.repositorioDeTrayectos.buscarTrayectosDeMiembro(miembro.getId());
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("trayecto", trayectos);
+        }}, "form_tramo.hbs");
     }
 
     public Response guardar(Request request,Response response) {
 
-        Miembro miembro = new Miembro();// TODO: Setear verdadero duenio
+        Integer id = new Integer(request.session().attribute("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id);
         Tramo tramo = new Tramo(miembro);
         Ubicacion ubicacionInicio = new Ubicacion();
         Ubicacion ubicacionFin = new Ubicacion();

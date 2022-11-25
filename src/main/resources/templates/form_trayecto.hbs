@@ -7,29 +7,53 @@
             <form class="formulario" method="post">
                 <fieldset>
                     <div class="campo">
+                        <label>Nombre de Trayecto</label>
+                        <input name="nombre" type="text" placeholder="Nombre">
+                    </div>
+
+                    <div class="campo">
                         <label>Calle de Inicio</label>
-                        <input name="calle_inicio" type="text" placeholder="Calle de Inicio" value="{{tramo.inicio.calle}}">
+                        <input name="calle_inicio" type="text" placeholder="Calle de Inicio">
                     </div>
 
                     <div class="campo">
                         <label>Altura de Inicio</label>
-                        <input name="altura_inicio" type="number" placeholder="Altura de Inicio" value="{{tramo.inicio.altura}}">
+                        <input name="altura_inicio" type="number" placeholder="Altura de Inicio">
+                    </div>
+
+                    <div class="campo">
+                        <label>Localidad de Inicio</label>
+                        <input name="localidad_inicio" type="text" placeholder="Localidad de Inicio">
+                    </div>
+
+                    <div class="campo">
+                        <label>Provincia de Inicio</label>
+                        <input name="provincia_inicio" type="text" placeholder="Provincia de Inicio">
                     </div>
 
                     <div class="campo">
                         <label>Calle de Fin</label>
-                        <input name="calle_fin" type="text" placeholder="Calle de Fin" value="{{tramo.fin.calle}}">
+                        <input name="calle_fin" type="text" placeholder="Calle de Fin">
                     </div>
 
                     <div class="campo">
                         <label>Altura de Fin</label>
-                        <input name="altura_fin" type="number" placeholder="Altura de Fin" value="{{tramo.fin.altura}}">
+                        <input name="altura_fin" type="number" placeholder="Altura de Fin">
+                    </div>
+
+                    <div class="campo">
+                        <label>Localidad de Fin</label>
+                        <input name="localidad_fin" type="text" placeholder="Localidad de Fin">
+                    </div>
+
+                    <div class="campo">
+                        <label>Provincia de Fin</label>
+                        <input name="provincia_fin" type="text" placeholder="Provincia de Fin">
                     </div>
                     
                     <div class="enviar">
-                        <button class="boton" type="submit">Enviar</button>
+                        <button class="boton" type="submit">Guardar y Generar Tramo</button>
                     </div>
-
                     
                 </fieldset>
             </form>
