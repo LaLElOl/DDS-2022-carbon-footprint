@@ -62,6 +62,7 @@ public class TrayectoController {
         List<Trayecto> todosLosTrayectos = this.repositorioDeTrayectos.buscarTrayectosDeMiembro(miembro.getId());
         return new ModelAndView(new HashMap<String, Object>(){{
             put("trayecto", todosLosTrayectos);
+            put("miembro_id",miembro.getId());
         }}, "trayectos.hbs");
     }
 

@@ -23,7 +23,6 @@ public class RepositorioDeTramos {
     public void guardar(Tramo tramo) {
         EntityManagerHelper.beginTransaction();
 
-        EntityManagerHelper.persist(tramo.getDuenioTramo());
         EntityManagerHelper.persist(tramo.getInicioTramo());
         EntityManagerHelper.persist(tramo.getFinTramo());
         EntityManagerHelper.persist(tramo);
