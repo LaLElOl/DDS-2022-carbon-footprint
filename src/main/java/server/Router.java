@@ -33,7 +33,7 @@ public class Router {
         SectorController sectorController = new SectorController();
         TrayectoController trayectoController =new TrayectoController();
         TramoController tramoController = new TramoController();
-        TransporteController vehiculoParticularController = new TransporteController();
+        TransporteController transporteController = new TransporteController();
         LoginController loginController = new LoginController();
         HomeController homeController = new HomeController();
 
@@ -54,6 +54,10 @@ public class Router {
         Spark.get("/logout", loginController::logout);
 
         Spark.get("/signup", loginController::signup,engine);
+
+        //Altas de administrador
+        Spark.get("/alta_contratado", transporteController::crearServicioContratado,engine);
+        Spark.post("/alta_contratado", transporteController::guardarServicioContratado);
 
         //Organizaciones
         Spark.path("/organizacion", () -> {
@@ -129,8 +133,10 @@ public class Router {
             Spark.get("/tramos",tramoController::mostrarTodos, engine);
             Spark.get("/editar/:id", miembroController::editar, engine);
 
+            Spark.get("/:id/sectores", miembroController::mostrarSectores, engine);
             Spark.get("/:id/trayecto/:id_trayecto/tipo_transporte",miembroController::tipoTransporte,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::tramoEcologico,engine);
+            Spark.get("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::tramoContratado,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramos", tramoController::mostrarTodos, engine);
             Spark.get("/:id", miembroController::mostrar, engine);
 
@@ -140,6 +146,7 @@ public class Router {
             Spark.post("/unirse_sector/:id", miembroController::generarSolicitud);
             Spark.post("/editar/:id", miembroController::modificar);
             Spark.post("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);
+            Spark.post("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::guardarTramoContratado);
         });
 
         Spark.get("/alta_miembro", miembroController::crear, engine);
@@ -148,8 +155,8 @@ public class Router {
 
 
         //Vehiculo particular
-        Spark.get("/alta_vehiculo_particular", vehiculoParticularController::crear, engine);
-        Spark.post("/alta_vehiculo_particular", vehiculoParticularController::guardar);
+        Spark.get("/alta_vehiculo_particular", transporteController::crear, engine);
+        Spark.post("/alta_vehiculo_particular", transporteController::guardar);
 
 
     }

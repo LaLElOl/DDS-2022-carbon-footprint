@@ -6,6 +6,7 @@ import models.dominio.persona.Tramo;
 import models.dominio.persona.Trayecto;
 import models.dominio.transporte.Ubicacion;
 import models.dominio.transporte.medios.Ecologico;
+import models.dominio.transporte.medios.ServicioContratado;
 import models.repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
@@ -100,7 +101,39 @@ public class TramoController {
         this.repositorioDeTransportes.guardar(ecologico);
         this.repositorioDeTramos.guardar(tramo);
 
-        response.redirect("/miembro/trayectos"); //TODO: Luego cambiar a vista de tramos.
+        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
+
+        return response;
+    }
+
+    public ModelAndView tramoContratado(Request request, Response response) {
+        List<ServicioContratado> serviciosContratados = this.repositorioDeTransportes.buscarServiciosContratados();
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("servicio_contratado", serviciosContratados);
+        }}, "tramo_contratado.hbs");
+    }
+
+    public Response guardarTramoContratado(Request request, Response response) {
+        Integer servicio_contratado_id = new Integer(request.queryParams("servicio_contratado_id"));
+        ServicioContratado servicioContratado = this.repositorioDeTransportes.buscarServicioContratado(servicio_contratado_id);
+        Integer id = new Integer(request.params("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscar(id);
+        Integer id_trayecto = new Integer(request.params("id_trayecto"));
+        Trayecto trayecto = this.repositorioDeTrayectos.buscar(id_trayecto);
+        Tramo tramo = new Tramo(miembro);
+        Ubicacion ubicacionInicio = new Ubicacion();
+        Ubicacion ubicacionFin = new Ubicacion();
+
+        guardarUbicaciones(request,response,ubicacionInicio,ubicacionFin);
+        tramo.setInicioTramo(ubicacionInicio);
+        tramo.setFinTramo(ubicacionFin);
+        tramo.setTrayecto(trayecto);
+        tramo.setTransporte(servicioContratado);
+
+        this.repositorioDeTramos.guardar(tramo);
+
+        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
 
         return response;
     }

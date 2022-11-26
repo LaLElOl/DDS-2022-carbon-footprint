@@ -36,5 +36,12 @@ public class RepositorioDeSectores {
         EntityManagerHelper.commit();
     }
 
+    public List buscarTodosSegunMiembro(String miembro_id) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Sector.class.getName() + " where organizacion_id = " + miembro_id )
+                .getResultList();
+    }
+
 
 }

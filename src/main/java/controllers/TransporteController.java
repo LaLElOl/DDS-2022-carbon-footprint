@@ -1,5 +1,6 @@
 package controllers;
 
+import models.dominio.transporte.medios.ServicioContratado;
 import models.dominio.transporte.vehiculos.TipoVehiculo;
 import models.dominio.transporte.vehiculos.Vehiculo;
 import models.repositorios.RepositorioDeTransportes;
@@ -17,6 +18,17 @@ public class TransporteController {
 
     public TransporteController(){repositorioDeTransportes = new RepositorioDeTransportes();}
 
+    public ModelAndView crear(Request request, Response response) {
+        return new ModelAndView(null, "form_vehiculo_particular.hbs");
+    }
+
+
+    public ModelAndView crearServicioContratado(Request request, Response response) {
+        return new ModelAndView(null, "form_servicio_contratado.hbs");
+    }
+
+
+
     public ModelAndView mostrarTodos(Request request, Response response) {
         List<Vehiculo> todosLosVehiculosParticulares = this.repositorioDeTransportes.buscarTodos();
         return new ModelAndView(new HashMap<String, Object>(){{
@@ -25,9 +37,6 @@ public class TransporteController {
     }
 
 
-    public ModelAndView crear(Request request, Response response) {
-        return new ModelAndView(null, "form_vehiculo_particular.hbs");
-    }
 
     public Response guardar(Request request,Response response) {
 
@@ -43,4 +52,15 @@ public class TransporteController {
         return response;
     }
 
+
+    public Response guardarServicioContratado(Request request, Response response) {
+        ServicioContratado servicioContratado = new ServicioContratado();
+
+        servicioContratado.setFactorEmision(Double.valueOf(request.queryParams("factor_emision")));
+
+        this.repositorioDeTransportes.guardar(servicioContratado);
+
+        response.redirect("/home");
+        return response;
+    }
 }

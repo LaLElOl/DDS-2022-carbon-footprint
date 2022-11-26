@@ -1,6 +1,7 @@
 package models.repositorios;
 
 import helpers.EntityManagerHelper;
+import models.dominio.transporte.medios.ServicioContratado;
 import models.dominio.transporte.medios.Transporte;
 
 import java.util.List;
@@ -28,5 +29,17 @@ public class RepositorioDeTransportes {
         EntityManagerHelper.commit();
     }
 
+    public List buscarServiciosContratados() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Transporte.class.getName() + " where tipo_transporte ='servicio_contratado'")
+                .getResultList();
+    }
+
+    public ServicioContratado buscarServicioContratado(Integer id) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .find(ServicioContratado.class, id);
+    }
 
 }

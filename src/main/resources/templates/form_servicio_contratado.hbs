@@ -1,0 +1,42 @@
+{{#partial "contenido" }}
+<body>
+    <main>
+        <section>
+            <h2 class="contacto title">Alta de Servicio Contratado</h2>
+
+            <form class="formulario"  method="post">
+                <fieldset>
+
+                    <div class="campo">
+                        <label>Nombre</label>
+                        <input name = "nombre" type="text" placeholder="Nombre">
+                    </div>
+
+
+                    <div class="campo">
+                        <label>Factor de Emisión</label>
+                        <input name = "factor_emision" type="number" placeholder="Factor de Emisión">
+                    </div>
+
+                    <div class="campo">
+                        <label>Factor de Vehículo</label>
+                        <input name = "factor_vehiculo" type="number" placeholder="Factor de Vehiculo">
+                    </div>
+
+                    <div class="enviar">
+                        <button class="boton" type="submit">Enviar</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </section>
+    </main>
+
+
+    <footer class>
+        <p>Escribir algo copado aca</p>
+    </footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

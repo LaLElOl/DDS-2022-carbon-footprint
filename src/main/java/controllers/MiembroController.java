@@ -123,6 +123,15 @@ public class MiembroController {
         return response;
     }
 
+    public ModelAndView mostrarSectores(Request request, Response response) {
+        String id_miembro = request.params("id");
+        //List<Sector> sectores = this.repositorioDeSectores TODO Mostrar las organizaciones y el sector
+        return new ModelAndView(null, "sectores.hbs");
+    }
+
+
+
+
     public ModelAndView unirseAOrg(Request request, Response response) {
         List<Organizacion> organizaciones = this.repositorioDeOrganizaciones.buscarTodos();
         return new ModelAndView(new HashMap<String,Object>(){{
@@ -173,6 +182,7 @@ public class MiembroController {
             put("id_trayecto",id_trayecto);
         }}, "tipo_transporte.hbs");
     }
+
 
 
 }
