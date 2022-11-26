@@ -27,6 +27,9 @@ public class Solicitud extends EntidadPersistente {
     @JoinColumn(name = "sector_id", referencedColumnName = "id")
     private Sector sector;
 
+    @Column(name = "estado")
+    private String estado;
+
     public Miembro getSolicitante() {
         return solicitante;
     }

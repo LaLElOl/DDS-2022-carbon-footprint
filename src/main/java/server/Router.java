@@ -38,6 +38,7 @@ public class Router {
         LoginController loginController = new LoginController();
         HomeController homeController = new HomeController();
         VehiculoController vehiculoController = new VehiculoController();
+        SolicitudController solicitudController = new SolicitudController();
 
 
         Spark.path("/home", () -> {
@@ -78,6 +79,8 @@ public class Router {
             Spark.get("/sector/:id",sectorController::mostrar, engine);
             Spark.get("/:id",organizacionesController::mostrar, engine);
 
+            Spark.get("/:id/sectores/:id_sector/miembros",miembroController::mostrarSegunSector,engine);
+            Spark.get("/:id/sectores/:id_sector/solicitudes",solicitudController::mostrarSegunSector,engine);
             Spark.post("/alta_sector", sectorController::guardar);
             Spark.post("/huella_carbono",organizacionesController::calcularHuellaCarbono);
             Spark.post("/excel", organizacionesController::guardarConsumo);

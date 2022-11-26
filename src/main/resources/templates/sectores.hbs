@@ -14,6 +14,9 @@
                 {{#each sector}}
                     <tr>
                         <td>{{nombre}}</td>
+
+                        <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='/organizacion/{{organizacion_id}}/sectores/{{id}}/miembros'">Ver Miembros</button></td>
+                        <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='/organizacion/{{organizacion_id}}/sectores/{{id}}/solicitudes'">Ver Solicitudes</button></td>
                     </tr>
                 {{/each}}
                 </tbody>

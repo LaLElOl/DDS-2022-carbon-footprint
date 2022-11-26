@@ -52,6 +52,16 @@ public class MiembroController {
         }}, "miembro.hbs"); // TODO REVISAR
     }
 
+    public ModelAndView mostrarSegunSector(Request request, Response response) {
+        String sector_id = request.params("id_sector");
+        Sector sector = this.repositorioDeSectores.buscar(Integer.valueOf(sector_id));
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("miembro", sector.getMiembros());
+        }}, "miembros.hbs");
+
+    }
+
     public ModelAndView crear(Request request, Response response)
     {
         return new ModelAndView(null, "form_miembro.hbs");
@@ -151,6 +161,7 @@ public class MiembroController {
         solicitud.setSector(sector);
         sector.agregarMiembroSolicitante(solicitud);
         solicitud.setFecha(LocalDate.now());
+        solicitud.setEstado("Pendiente");
 
         this.repositorioDeSolicitudes.guardar(solicitud);
         this.repositorioDeSectores.guardar(sector);
@@ -183,9 +194,6 @@ public class MiembroController {
             put("id_trayecto",id_trayecto);
         }}, "tipo_transporte.hbs");
     }
-
-
-
 
 
 

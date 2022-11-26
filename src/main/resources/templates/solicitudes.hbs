@@ -3,18 +3,22 @@
     <main>
         <section>
 
-            <h2 class="title">Miembros</h2>
+            <h2 class="title">Solicitudes</h2>
             <table class="table m-auto">
                 <thead>
                     <tr>
                         <th>Nombre de Miembro</th>
+                        <th>Estado</th>
                     </tr>
+
                 </thead>
                 <tbody>
-                {{#each miembro}}
+                {{#each solicitud}}
                     <tr>
-                        <td>{{nombre}}</td>
-                        <td><button style="background-color: #77a785;" class="button is-primary">Funar</button></td>
+                        <td>{{solicitante.nombre}}</td>
+                        <td>{{estado}}</td>
+                        <td><button style="background-color: #77a785;" class="button is-primary">Aceptar</button></td>
+                        <td><button style="background-color: #77a785;" class="button is-primary">Rechazar</button></td>
                     </tr>
                 {{/each}}
                 </tbody>

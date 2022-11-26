@@ -39,4 +39,11 @@ public class RepositorioDeMiembros {
                 .getSingleResult();
     }
 
+    public List buscarPorSector(String sector_id) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Miembro.class.getName() + " where id =(Select miembro_id from empleados_sector where sector_id =" + sector_id + ")")
+                .getResultList();
+    }
+
 }

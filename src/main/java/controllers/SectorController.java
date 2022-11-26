@@ -29,6 +29,7 @@ public class SectorController {
         List<Sector> todosLosSectores = this.repositorioDeSectores.buscarTodos(org.getId().toString());
         return new ModelAndView(new HashMap<String, Object>(){{
             put("sector", todosLosSectores);
+            put("organizacion_id",org.getId());
         }}, "sectores.hbs");
     }
 
