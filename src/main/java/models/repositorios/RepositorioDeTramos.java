@@ -7,10 +7,10 @@ import java.util.List;
 
 public class RepositorioDeTramos {
 
-    public List buscarTodos() {
+    public List buscarTodos(Integer trayecto_id) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Tramo.class.getName())
+                .createQuery("from " + Tramo.class.getName() + " where trayecto_id =" + trayecto_id)
                 .getResultList();
     }
 

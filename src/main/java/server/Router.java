@@ -131,7 +131,7 @@ public class Router {
 
             Spark.get("/:id/trayecto/:id_trayecto/tipo_transporte",miembroController::tipoTransporte,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::tramoEcologico,engine);
-            Spark.get("/:id/trayecto/id_trayecto/alta_tramo", tramoController::crear, engine);
+            Spark.get("/:id/trayecto/:id_trayecto/tramos", tramoController::mostrarTodos, engine);
             Spark.get("/:id", miembroController::mostrar, engine);
 
             Spark.post("/alta_trayecto", trayectoController::guardar);

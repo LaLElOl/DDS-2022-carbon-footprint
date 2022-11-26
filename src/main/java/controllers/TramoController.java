@@ -67,7 +67,9 @@ public class TramoController {
     }
 
     public ModelAndView mostrarTodos(Request request, Response response) {
-        List<Tramo> todosLosTramos = this.repositorioDeTramos.buscarTodos();
+        Integer id_trayecto = new Integer(request.params("id_trayecto"));
+
+        List<Tramo> todosLosTramos = this.repositorioDeTramos.buscarTodos(id_trayecto);
         return new ModelAndView(new HashMap<String, Object>(){{
             put("tramo", todosLosTramos);
         }}, "tramos.hbs");
