@@ -8,11 +8,11 @@
             <fieldset>
 
                 <div class="campo">
-                    <label>Seleccione el servicio contratado</label>
-                    <select class="input-select" name="servicio_contratado_id">
+                    <label>Seleccione su Vehiculo</label>
+                    <select class="input-select" name="vehiculo_id">
                          <option>Seleccionar</option>
-                            {{#each servicio_contratado}}
-                         <option value="{{id}}">{{id}}</option>
+                            {{#each vehiculo}}
+                         <option value="{{id}}">{{nombre}}</option>
                             {{/each}}
                     </select>
                 </div>

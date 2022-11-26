@@ -3,6 +3,7 @@ package server;
 import controllers.*;
 import middlewares.AuthMiddleware;
 
+import models.repositorios.RepositorioDeVehiculos;
 import spark.utils.BooleanHelper;
 import spark.utils.HandlebarsTemplateEngineBuilder;
 import spark.Spark;
@@ -36,6 +37,7 @@ public class Router {
         TransporteController transporteController = new TransporteController();
         LoginController loginController = new LoginController();
         HomeController homeController = new HomeController();
+        VehiculoController vehiculoController = new VehiculoController();
 
 
         Spark.path("/home", () -> {
@@ -133,10 +135,13 @@ public class Router {
             Spark.get("/tramos",tramoController::mostrarTodos, engine);
             Spark.get("/editar/:id", miembroController::editar, engine);
 
+
+            Spark.get("/alta_vehiculo", vehiculoController::altaVehiculo, engine);
             Spark.get("/:id/sectores", miembroController::mostrarSectores, engine);
             Spark.get("/:id/trayecto/:id_trayecto/tipo_transporte",miembroController::tipoTransporte,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::tramoEcologico,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::tramoContratado,engine);
+            Spark.get("/:id/trayecto/:id_trayecto/tramo_particular",tramoController::tramosParticular,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramos", tramoController::mostrarTodos, engine);
             Spark.get("/:id", miembroController::mostrar, engine);
 
@@ -145,8 +150,10 @@ public class Router {
             Spark.post("/unirse_org", miembroController::recibirOrganizacion);
             Spark.post("/unirse_sector/:id", miembroController::generarSolicitud);
             Spark.post("/editar/:id", miembroController::modificar);
+            Spark.post("/alta_vehiculo", vehiculoController::guardarVehiculo);
             Spark.post("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);
             Spark.post("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::guardarTramoContratado);
+            Spark.post("/:id/trayecto/:id_trayecto/tramo_particular",tramoController::guardarTramoParticular);
         });
 
         Spark.get("/alta_miembro", miembroController::crear, engine);

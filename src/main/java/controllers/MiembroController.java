@@ -7,10 +7,10 @@ import models.dominio.persona.Contacto;
 import models.dominio.persona.Miembro;
 import models.dominio.persona.TipoDoc;
 import models.dominio.transporte.Ubicacion;
-import models.repositorios.RepositorioDeMiembros;
-import models.repositorios.RepositorioDeOrganizaciones;
-import models.repositorios.RepositorioDeSectores;
-import models.repositorios.RepositorioDeSolicitudes;
+import models.dominio.transporte.combustibles.Combustible;
+import models.dominio.transporte.vehiculos.TipoVehiculo;
+import models.dominio.transporte.vehiculos.Vehiculo;
+import models.repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -26,6 +26,7 @@ public class MiembroController {
     private RepositorioDeOrganizaciones repositorioDeOrganizaciones;
     private RepositorioDeSectores repositorioDeSectores;
     private RepositorioDeSolicitudes repositorioDeSolicitudes;
+
 
     public MiembroController(){
         repositorioDeMiembros = new RepositorioDeMiembros();
@@ -182,6 +183,9 @@ public class MiembroController {
             put("id_trayecto",id_trayecto);
         }}, "tipo_transporte.hbs");
     }
+
+
+
 
 
 

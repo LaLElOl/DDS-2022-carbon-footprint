@@ -6,7 +6,9 @@ import models.dominio.persona.Tramo;
 import models.dominio.persona.Trayecto;
 import models.dominio.transporte.Ubicacion;
 import models.dominio.transporte.medios.Ecologico;
+import models.dominio.transporte.medios.Particular;
 import models.dominio.transporte.medios.ServicioContratado;
+import models.dominio.transporte.vehiculos.Vehiculo;
 import models.repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
@@ -21,12 +23,14 @@ public class TramoController {
     private RepositorioDeMiembros repositorioDeMiembros;
     private RepositorioDeTrayectos repositorioDeTrayectos;
     private RepositorioDeTransportes repositorioDeTransportes;
+    private RepositorioDeVehiculos repositorioDeVehiculos;
 
     public TramoController(){
         repositorioDeTramos = new RepositorioDeTramos();
         repositorioDeMiembros = new RepositorioDeMiembros();
         repositorioDeTrayectos = new RepositorioDeTrayectos();
         repositorioDeTransportes = new RepositorioDeTransportes();
+        repositorioDeVehiculos = new RepositorioDeVehiculos();
     }
 
     public ModelAndView crear(Request request, Response response) {
@@ -136,5 +140,44 @@ public class TramoController {
         response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
 
         return response;
+    }
+
+    public ModelAndView tramosParticular(Request request, Response response) {
+        String miembro_id = request.params("id");
+        List<Vehiculo> vehiculos = this.repositorioDeVehiculos.buscarTodosSegunMiembro(miembro_id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("vehiculo", vehiculos);
+        }}, "tramo_particular.hbs");
+    }
+
+
+    public Response guardarTramoParticular(Request request, Response response) {
+        Integer vehiculo_id = new Integer(request.queryParams("vehiculo_id"));
+        Vehiculo vehiculo = this.repositorioDeVehiculos.buscar(vehiculo_id);
+        Particular particular = new Particular();
+        particular.setVehiculo(vehiculo);
+        Integer id = new Integer(request.params("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscar(id);
+        Integer id_trayecto = new Integer(request.params("id_trayecto"));
+        Trayecto trayecto = this.repositorioDeTrayectos.buscar(id_trayecto);
+        Tramo tramo = new Tramo(miembro);
+        Ubicacion ubicacionInicio = new Ubicacion();
+        Ubicacion ubicacionFin = new Ubicacion();
+
+        tramo.setTransporte(particular);
+        tramo.setTrayecto(trayecto);
+        guardarUbicaciones(request,response,ubicacionInicio,ubicacionFin);
+        tramo.setInicioTramo(ubicacionInicio);
+        tramo.setFinTramo(ubicacionFin);
+
+        this.repositorioDeTransportes.guardar(particular);
+        this.repositorioDeTramos.guardar(tramo);
+
+        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
+
+        return response;
+
+
     }
 }
