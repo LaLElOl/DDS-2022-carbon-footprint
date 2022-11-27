@@ -4,10 +4,11 @@
         <section>
 
             <h2 class="title">Solicitudes</h2>
-            <table class="table m-auto">
+            <table class="table m-auto" method="post">
                 <thead>
                     <tr>
                         <th>Nombre de Miembro</th>
+                        <th>Fecha</th>
                         <th>Estado</th>
                     </tr>
 
@@ -16,9 +17,10 @@
                 {{#each solicitud}}
                     <tr>
                         <td>{{solicitante.nombre}}</td>
+                        <td>{{fecha_creacion}}</td>
                         <td>{{estado}}</td>
-                        <td><button style="background-color: #77a785;" class="button is-primary">Aceptar</button></td>
-                        <td><button style="background-color: #77a785;" class="button is-primary">Rechazar</button></td>
+                        <td><button style="background-color: #77a785;" class="button is-primary" >Aceptar</button></td>
+                        <td><button style="background-color: #77a785;" class="button is-primary" >Rechazar</button></td>
                     </tr>
                 {{/each}}
                 </tbody>

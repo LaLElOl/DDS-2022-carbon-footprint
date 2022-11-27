@@ -56,8 +56,16 @@ public class Sector extends EntidadPersistente {
 
     public void darDeAltaAMiembro(Solicitud solicitud) {
         if(this.solicitudes.remove(solicitud)){
+            solicitud.setFecha_respuesta(LocalDate.now());
+            solicitud.setEstado(EstadoSolicitud.ACEPTADA);
             this.miembros.add(solicitud.getSolicitante());
         }
+    }
+
+    public void rechazarSolicitud(Solicitud solicitud){
+        solicitud.setFecha_respuesta(LocalDate.now());
+        solicitud.setEstado(EstadoSolicitud.RECHAZADA);
+        this.solicitudes.remove(solicitud);
     }
 
     public Set<Miembro> getMiembros() {

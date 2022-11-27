@@ -16,8 +16,8 @@ import java.time.LocalDate;
 
 public class Solicitud extends EntidadPersistente {
 
-    @Column(name = "fecha", columnDefinition = "DATE")
-    private LocalDate fecha;
+    @Column(name = "fecha_creacion", columnDefinition = "DATE")
+    private LocalDate fecha_creacion;
 
     @ManyToOne
     @JoinColumn(name = "solicitante_id", referencedColumnName = "id")
@@ -27,8 +27,14 @@ public class Solicitud extends EntidadPersistente {
     @JoinColumn(name = "sector_id", referencedColumnName = "id")
     private Sector sector;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private String estado;
+    private EstadoSolicitud estado;
+
+    @Column(name = "fecha_respuesta", columnDefinition = "DATE")
+    private LocalDate fecha_respuesta;
+
+
 
     public Miembro getSolicitante() {
         return solicitante;

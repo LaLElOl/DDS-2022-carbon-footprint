@@ -151,24 +151,7 @@ public class MiembroController {
     }
 
 
-    public Response generarSolicitud(Request request, Response response){
-        Sector sector =this.repositorioDeSectores.buscar(new Integer(request.queryParams("sector_id")));
-        Integer id = new Integer(request.session().attribute("id"));
-        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id);
-        Solicitud solicitud = new Solicitud();
 
-        solicitud.setSolicitante(miembro);
-        solicitud.setSector(sector);
-        sector.agregarMiembroSolicitante(solicitud);
-        solicitud.setFecha(LocalDate.now());
-        solicitud.setEstado("Pendiente");
-
-        this.repositorioDeSolicitudes.guardar(solicitud);
-        this.repositorioDeSectores.guardar(sector);
-        response.redirect("/home");
-
-        return response;
-    }
 
     public Response recibirOrganizacion(Request request, Response response) {
         String organizacion_id = request.queryParams("organizacion_id");
