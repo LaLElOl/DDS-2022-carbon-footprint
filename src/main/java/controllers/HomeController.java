@@ -31,6 +31,9 @@ public class HomeController {
             case AGENTE_PROVINCIAL:
                 archivo = "home_agente.hbs";
                 break;
+            case ADMINISTRADOR:
+                archivo = "home_administrador.hbs";
+                break;
             default:
                 //archivo = "home_miembro.hbs";
                 break;

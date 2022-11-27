@@ -1,0 +1,33 @@
+{{#partial "contenido" }}
+<body>
+    <main>
+        <section>
+
+            <h2 class="title">Miembros</h2>
+            <table class="table m-auto">
+                <thead>
+                    <tr>
+                        <th>Nombre de Servicio Contratado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each contratado}}
+                    <tr>
+                        <td>{{nombre}}</td>
+                        <td><button style="background-color: #77a785;" class="button is-primary">Eliminar</button></td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+
+        </section>
+    </main>
+
+
+    <footer class>
+        <p>Escribir algo copado aca</p>
+    </footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

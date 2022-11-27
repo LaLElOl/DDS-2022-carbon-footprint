@@ -39,6 +39,7 @@ public class Router {
         HomeController homeController = new HomeController();
         VehiculoController vehiculoController = new VehiculoController();
         SolicitudController solicitudController = new SolicitudController();
+        ParadaController paradaController = new ParadaController();
 
 
         Spark.path("/home", () -> {
@@ -58,9 +59,17 @@ public class Router {
 
         Spark.get("/signup", loginController::signup,engine);
 
-        //Altas de administrador
-        Spark.get("/alta_contratado", transporteController::crearServicioContratado,engine);
-        Spark.post("/alta_contratado", transporteController::guardarServicioContratado);
+
+        Spark.path("/administrador", () -> {
+
+            Spark.get("/alta_contratado", transporteController::crearServicioContratado,engine);
+            Spark.get("/servicios_contratados", transporteController::mostrarServiciosContratados,engine);
+            Spark.get("/alta_parada", paradaController::crearParada,engine);
+
+
+            Spark.post("/alta_contratado", transporteController::guardarServicioContratado);
+           //Spark.post("/alta_parada", paradaController::guardarParada);
+        });
 
         //Organizaciones
         Spark.path("/organizacion", () -> {

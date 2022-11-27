@@ -15,10 +15,7 @@ import java.util.*;
 @Entity
 @DiscriminatorValue("publico")
 public class Publico extends Transporte {
-
-    @Column(name = "nombre")
-    private String nombre;
-
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "medio_transporte")
     protected TipoTransporte tipoTransporte;

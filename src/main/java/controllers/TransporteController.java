@@ -1,6 +1,7 @@
 package controllers;
 
 import models.dominio.transporte.medios.ServicioContratado;
+import models.dominio.transporte.medios.Transporte;
 import models.dominio.transporte.vehiculos.TipoVehiculo;
 import models.dominio.transporte.vehiculos.Vehiculo;
 import models.repositorios.RepositorioDeTransportes;
@@ -25,6 +26,13 @@ public class TransporteController {
 
     public ModelAndView crearServicioContratado(Request request, Response response) {
         return new ModelAndView(null, "form_servicio_contratado.hbs");
+    }
+
+    public ModelAndView mostrarServiciosContratados(Request request, Response response) {
+        List<ServicioContratado> serviciosContratados = this.repositorioDeTransportes.buscarServiciosContratados();
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("contratado", serviciosContratados);
+        }}, "servicios_contratados.hbs");
     }
 
 
@@ -57,6 +65,7 @@ public class TransporteController {
         ServicioContratado servicioContratado = new ServicioContratado();
 
         servicioContratado.setFactorEmision(Double.valueOf(request.queryParams("factor_emision")));
+        servicioContratado.setNombre(request.queryParams("nombre"));
 
         this.repositorioDeTransportes.guardar(servicioContratado);
 
