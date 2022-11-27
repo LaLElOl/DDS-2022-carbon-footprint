@@ -7,31 +7,23 @@
             <table class="table m-auto">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Nombre de Parada</th>
+                        <th>Provincia</th>
+                        <th>Municipio</th>
                         <th>Calle</th>
                         <th>Altura</th>
-                        <th>Distancia a la Siguiente</th>
                     </tr>
                 </thead>
                 <tbody>
+                {{#each parada}}
                     <tr>
-                        <td>Nombre</td>
-                        <td>Calle</td>
-                        <td>Altura</td>
-                        <td>Distancia a la Siguiente</td>
+                        <td>{{nombre}}</td>
+                        <td>{{ubicacion.provincia}}</td>
+                        <td>{{ubicacion.municipio}}</td>
+                        <td>{{ubicacion.calle}}</td>
+                        <td>{{ubicacion.altura}}</td>
                     </tr>
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Calle</td>
-                        <td>Altura</td>
-                        <td>Distancia a la Siguiente</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Calle</td>
-                        <td>Altura</td>
-                        <td>Distancia a la Siguiente</td>
-                    </tr>
+                {{/each}}
                 </tbody>
             </table>
 

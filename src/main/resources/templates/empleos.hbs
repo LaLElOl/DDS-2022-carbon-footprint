@@ -2,19 +2,21 @@
 <body>
     <main>
         <section>
-            <h2 class="title">Servicios Contratados</h2>
+
+            <h2 class="title">Empleo</h2>
             <table class="table m-auto">
                 <thead>
                     <tr>
-                        <th>Nombre de Servicio Contratado</th>
+                        <th>Organizacion</th>
+                        <th>Sector</th>
                     </tr>
                 </thead>
                 <tbody>
-                {{#each contratado}}
+                {{#each sector}}
                     <tr>
+                        <td>{{organizacion.razonSocial}}</td>
                         <td>{{nombre}}</td>
-                        <td>{{factorEmision}}</td>
-                        <td><button style="background-color: #77a785;" class="button is-primary">Eliminar</button></td>
+
                     </tr>
                 {{/each}}
                 </tbody>
@@ -25,7 +27,6 @@
 
 
     <footer class>
-        <p>Escribir algo copado aca</p>
     </footer>
 
 </body>

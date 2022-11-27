@@ -2,6 +2,8 @@ package controllers;
 
 import models.dominio.organizacion.Organizacion;
 import models.dominio.organizacion.Sector;
+import models.dominio.persona.Miembro;
+import models.repositorios.RepositorioDeMiembros;
 import models.repositorios.RepositorioDeOrganizaciones;
 import models.repositorios.RepositorioDeSectores;
 import spark.ModelAndView;
@@ -16,10 +18,12 @@ public class SectorController {
 
     private RepositorioDeSectores repositorioDeSectores;
     private RepositorioDeOrganizaciones repositorioDeOrganizaciones;
+    private RepositorioDeMiembros repositorioDeMiembros;
 
     public SectorController(){
         repositorioDeSectores = new RepositorioDeSectores();
         repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+        repositorioDeMiembros =  new RepositorioDeMiembros();
     }
 
 
@@ -89,4 +93,15 @@ public class SectorController {
         response.redirect("/sectores");
         return response;
     }
+
+    public ModelAndView mostrarSegunMiembro(Request request, Response response) {
+        Integer id_miembro = new Integer(request.session().attribute("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(Integer.valueOf(id_miembro));
+        List<Sector> sectores = miembro.getSectores();
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("sector", sectores);
+        }}, "empleos.hbs");
+    }
+
 }
