@@ -66,8 +66,10 @@ public class TramoController {
 
         ubicacionInicio.setCalle(request.queryParams("calle_inicio"));
         ubicacionInicio.setAltura(Integer.valueOf(request.queryParams("altura_inicio")));
+        ubicacionInicio.setLocalidad(Integer.valueOf(request.queryParams("localidad_inicio")));
         ubicacionFin.setCalle(request.queryParams("calle_fin"));
         ubicacionFin.setAltura(Integer.valueOf(request.queryParams("altura_fin")));
+        ubicacionFin.setLocalidad(Integer.valueOf(request.queryParams("localidad_fin")));
 
     }
 

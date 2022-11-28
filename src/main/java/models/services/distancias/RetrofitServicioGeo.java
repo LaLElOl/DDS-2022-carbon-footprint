@@ -8,13 +8,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class RetrofitServicioGeo {
+public class RetrofitServicioGeo implements AdapterGeoService {
     private static RetrofitServicioGeo instancia = null;
     private static final String urlAPI = "https://ddstpa.com.ar/api/";
     private final Retrofit retrofit;
 
 
-    private RetrofitServicioGeo() {
+    public RetrofitServicioGeo() {
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(urlAPI)
                 .addConverterFactory(GsonConverterFactory.create())

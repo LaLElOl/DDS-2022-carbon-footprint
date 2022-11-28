@@ -3,7 +3,6 @@
 <main>
     <section>
         <h2 class="contacto title">Alta de Tramo</h2>
-
         <form class="formulario" method="post">
             <fieldset>
 
@@ -19,29 +18,36 @@
 
                 <div class="campo">
                     <label>Calle de Inicio</label>
-                    <input name="calle_inicio" type="text" placeholder="Calle de Inicio" value="{{tramo.inicioTramo.calle}}">
+                    <input name="calle_inicio" type="text" placeholder="Calle de Inicio" >
                 </div>
 
                 <div class="campo">
                     <label>Altura de Inicio</label>
-                    <input name="altura_inicio" type="number" placeholder="Altura de Inicio" value="{{tramo.inicioTramo.altura}}">
+                    <input name="altura_inicio" type="number" placeholder="Altura de Inicio" >
                 </div>
 
+                <div class="campo">
+                    <label>Localida Origen ID </label>
+                    <input name="localidad_inicio" type="number" placeholder="Localida Origen ID" >
+                </div>
 
                 <div class="campo">
                     <label>Calle de Fin</label>
-                    <input name="calle_fin" type="text" placeholder="Calle de Fin" value="{{tramo.finTramo.calle}}">
+                    <input name="calle_fin" type="text" placeholder="Calle de Fin" >
                 </div>
 
                 <div class="campo">
                     <label>Altura de Fin</label>
-                    <input name="altura_fin" type="number" placeholder="Altura de Fin" value="{{tramo.finTramo.altura}}">
+                    <input name="altura_fin" type="number" placeholder="Altura de Fin">
                 </div>
 
+                <div class="campo">
+                    <label>Localida Destino ID </label>
+                    <input name="localidad_fin" type="number" placeholder="Localida Fin ID" >
+                </div>
                 <div class="enviar">
                     <button class="boton" type="submit">Enviar</button>
                 </div>
-
 
             </fieldset>
         </form>
@@ -51,7 +57,6 @@
 
 
 <footer class>
-    <p>Escribir algo copado aca</p>
 </footer>
 
 </body>

@@ -15,6 +15,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -171,5 +172,17 @@ public class MiembroController {
     }
 
 
+    public ModelAndView huellaCarbono(Request request, Response response) {
+        Integer id_miembro = new Integer(request.session().attribute("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id_miembro);
 
+        Double huella = miembro.calcularHuella();
+        LocalDate fecha = LocalDate.now();
+
+
+        return new ModelAndView(new HashMap<String,Object>(){{
+            put("huella",huella);
+            put("fecha",fecha);
+        }}, "huella_carbono_miembro.hbs");
+    }
 }

@@ -19,8 +19,18 @@
                         <td>{{solicitante.nombre}}</td>
                         <td>{{fecha_creacion}}</td>
                         <td>{{estado}}</td>
-                        <td><button style="background-color: #77a785;" class="button is-primary" >Aceptar</button></td>
-                        <td><button style="background-color: #77a785;" class="button is-primary" >Rechazar</button></td>
+                        <form method="post">
+                         <input style="display:none;" name="respuesta" value= "1">
+                          <input style="display:none;" name="id_solicitud" value= {{id}}>
+                        <td><button style="background-color: #77a785;" type="submit"
+                         class="button is-primary" >Aceptar</button></td>
+                         </form>
+                         <form method="post">
+                         <input style="display:none;" name="respuesta" value= "0">
+                         <input style="display:none;" name="id_solicitud" value= {{id}}>
+                        <td><button style="background-color: #77a785;" type="submit"
+                         class="button is-primary" >Rechazar</button></td>
+                         </form>
                     </tr>
                 {{/each}}
                 </tbody>

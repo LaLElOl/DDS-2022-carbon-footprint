@@ -73,6 +73,7 @@ public class Miembro extends EntidadPersistente {
     }
 
     public Double calcularHuella() {
+
         double huella = 0.0;
         huella = this.trayectos.stream().mapToDouble(trayecto -> trayecto.calcularHuella(this)).sum();
         return huella;
@@ -83,8 +84,11 @@ public class Miembro extends EntidadPersistente {
         boolean trabajoAca = this.sectores.contains(sector);
         if(trabajoAca){
             double huellaOrganizacion = sector.getOrganizacion().calcularHuella(mes,anio);
-            porcentajeImpacto = (this.calcularHuella() / huellaOrganizacion)*100;
+            if(huellaOrganizacion != 0) {
+                porcentajeImpacto = (this.calcularHuella() / huellaOrganizacion) * 100;
+            }
         }
         return porcentajeImpacto;
     }
+
 }

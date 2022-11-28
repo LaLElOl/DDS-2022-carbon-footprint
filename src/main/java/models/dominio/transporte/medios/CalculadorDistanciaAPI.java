@@ -4,6 +4,7 @@ import models.dominio.persona.Miembro;
 import models.dominio.persona.Tramo;
 import models.services.distancias.AdapterGeoService;
 import models.services.distancias.Distancia;
+import models.services.distancias.RetrofitServicioGeo;
 
 import java.io.IOException;
 
@@ -12,6 +13,11 @@ import java.io.IOException;
 public class CalculadorDistanciaAPI {
 
     private AdapterGeoService servicioDistancia;
+
+
+    public CalculadorDistanciaAPI(){
+        servicioDistancia = new RetrofitServicioGeo();
+    }
 
 
     public Double calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {

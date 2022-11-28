@@ -65,39 +65,31 @@ public class SolicitudController {
 
     }
 
-    public Response aceptarSolicitud(Request request, Response response){
-        Integer id_solicitud = Integer.valueOf(request.params("id_solicitud"));
+
+    public Response responderSolicitud(Request request, Response response){
+        Integer id_solicitud = Integer.valueOf(request.queryParams("id_solicitud"));
         Solicitud solicitud = this.repositorioDeSolicitudes.buscar(id_solicitud);
         Integer id_sector = Integer.valueOf(request.params("id_sector"));
         Sector sector = this.repositorioDeSectores.buscar(id_sector);
+        Integer respuesta = new Integer(request.queryParams("respuesta"));
+        Miembro miembro = solicitud.getSolicitante();
 
-        sector.darDeAltaAMiembro(solicitud);
+        if(respuesta == 0){
+            sector.rechazarSolicitud(solicitud);
+        }
+        else{
+            sector.darDeAltaAMiembro(solicitud);
+            miembro.agregarSectores(sector);
+        }
 
         this.repositorioDeSolicitudes.guardar(solicitud);
         this.repositorioDeSectores.guardar(sector);
+        this.repositorioDeMiembros.guardar(miembro);
 
         response.redirect("/home");
 
         return response;
     }
-
-    public Response rechazarSolicitud(Request request, Response response){
-        Integer id_solicitud = Integer.valueOf(request.params("id_solicitud"));
-        Solicitud solicitud = this.repositorioDeSolicitudes.buscar(id_solicitud);
-        Integer id_sector = Integer.valueOf(request.params("id_sector"));
-        Sector sector = this.repositorioDeSectores.buscar(id_sector);
-
-        sector.rechazarSolicitud(solicitud);
-
-        this.repositorioDeSolicitudes.guardar(solicitud);
-        this.repositorioDeSectores.guardar(sector);
-
-        response.redirect("/home");
-
-        return response;
-    }
-
-
 
 
 }
