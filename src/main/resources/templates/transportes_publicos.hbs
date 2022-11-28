@@ -1,0 +1,38 @@
+{{#partial "contenido" }}
+<body>
+    <main>
+        <section>
+
+            <h2 class="title">Transportes Publicos</h2>
+            <table class="table m-auto">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Factor Emision</th>
+                        <th>Tipo Vehiculo</th>
+                        <th>Agregar Parada</th>
+                        <th>Ver Paradas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each publico}}
+                    <tr>
+                        <td>{{nombre}}</td>
+                        <td>{{factorEmision}}</td>
+                        <td>{{tipoTransporte}}</td>
+
+
+                        <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='/administrador/publico/{{id}}/agregar_parada'">Agregar Parada</button></td>
+                        <td><button style="background-color: #77a785;" class="button is-primary" onclick="location.href='/administrador/publico/{{id}}/paradas'">Ver Paradas</button></td>
+
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+
+        </section>
+    </main>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

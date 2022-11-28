@@ -36,6 +36,13 @@ public class RepositorioDeTransportes {
                 .getResultList();
     }
 
+    public List buscarPublicos() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Transporte.class.getName() + " where tipo_transporte ='publico'")
+                .getResultList();
+    }
+
     public ServicioContratado buscarServicioContratado(Integer id) {
         return EntityManagerHelper
                 .getEntityManager()

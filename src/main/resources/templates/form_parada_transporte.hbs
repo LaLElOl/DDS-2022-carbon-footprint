@@ -1,0 +1,36 @@
+{{#partial "contenido" }}
+<body>
+    <main>
+        <section>
+            <h2 class="contacto title">Agregar Parada a Transporte Publico</h2>
+
+            <form class="formulario" method="post">
+                <fieldset>
+
+                    <div class="campo">
+                        <label>Seleccione la Parada</label>
+                        <select class="input-select" name="parada_id">
+                             <option>Seleccionar</option>
+                                {{#each parada}}
+                             <option value="{{id}}">{{nombre}}</option>
+                                {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label>Distancia a la Parada Siguiente</label>
+                        <input name="distancia" type="number" placeholder="Distancia">
+                    </div>
+
+                    <div class="enviar">
+                        <button class="boton" type="submit">Enviar</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </section>
+    </main>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

@@ -86,4 +86,24 @@ public class Publico extends Transporte {
     public void quitarParada(ParadasTransporte parada){
         this.paradas.remove(parada);
     }
+
+    public ParadasTransporte agregarParada(ParadasTransporte paradaTransporte) {
+        ParadasTransporte ultimaParada = new ParadasTransporte();
+        ultimaParada.setParadaActual(null);
+        ultimaParada.setParadaSiguiente(null);
+        if(!this.paradas.isEmpty()) {
+            ultimaParada = this.getUltimaParada();
+            ultimaParada.setParadaSiguiente(paradaTransporte);
+        }
+        this.paradas.add(paradaTransporte);
+        return ultimaParada;
+    }
+
+    public ParadasTransporte getUltimaParada() {
+        return this.paradas.get(this.paradas.size() -1 );
+    }
+
+    public Integer getCantidadParadas(){
+        return this.paradas.size();
+    }
 }

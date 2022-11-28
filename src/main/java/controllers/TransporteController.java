@@ -1,6 +1,9 @@
 package controllers;
 
+import models.dominio.organizacion.TipoOrganizacion;
+import models.dominio.transporte.medios.Publico;
 import models.dominio.transporte.medios.ServicioContratado;
+import models.dominio.transporte.medios.TipoTransporte;
 import models.dominio.transporte.medios.Transporte;
 import models.dominio.transporte.vehiculos.TipoVehiculo;
 import models.dominio.transporte.vehiculos.Vehiculo;
@@ -71,5 +74,27 @@ public class TransporteController {
 
         response.redirect("/home");
         return response;
+    }
+
+    public ModelAndView crearTransportePublico(Request request, Response response) {
+        return new ModelAndView(null, "form_vehiculo_publico.hbs");
+    }
+
+    public Response guardarTransportePublico(Request request, Response response) {
+        Publico publico = new Publico();
+        TipoTransporte tipo = TipoTransporte.valueOf(request.queryParams("tipo").toUpperCase(Locale.ROOT));
+        publico.setTipoTransporte(tipo);
+        publico.setNombre(request.queryParams("nombre"));
+        publico.setFactorEmision(Double.valueOf(request.queryParams("factor")));
+        this.repositorioDeTransportes.guardar(publico);
+        response.redirect("/home");
+        return response;
+    }
+
+    public ModelAndView mostrarPublicos(Request request, Response response) {
+        List<Publico> todosLosVehiculosPublicos = this.repositorioDeTransportes.buscarPublicos();
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("publico", todosLosVehiculosPublicos);
+        }}, "transportes_publicos.hbs");
     }
 }

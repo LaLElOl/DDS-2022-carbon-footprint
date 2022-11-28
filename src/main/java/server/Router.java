@@ -63,13 +63,19 @@ public class Router {
         Spark.path("/administrador", () -> {
 
             Spark.get("/alta_contratado", transporteController::crearServicioContratado,engine);
+            Spark.get("/alta_publico", transporteController::crearTransportePublico,engine);
+            Spark.get("/publicos", transporteController::mostrarPublicos,engine);
             Spark.get("/servicios_contratados", transporteController::mostrarServiciosContratados,engine);
             Spark.get("/alta_parada", paradaController::crearParada,engine);
             Spark.get("/paradas", paradaController::mostrarParadas,engine);
+            Spark.get("/publico/:id/agregar_parada", paradaController::agregarParada,engine);
+            Spark.get("/publico/:id/paradas", paradaController::mostrarParadasTransporte,engine);
 
 
             Spark.post("/alta_contratado", transporteController::guardarServicioContratado);
             Spark.post("/alta_parada", paradaController::guardarParada);
+            Spark.post("/alta_publico", transporteController::guardarTransportePublico);
+            Spark.post("/publico/:id/agregar_parada", paradaController::guardarParadaTransporte);
         });
 
         //Organizaciones

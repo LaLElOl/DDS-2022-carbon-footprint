@@ -1,0 +1,37 @@
+{{#partial "contenido" }}
+<body>
+    <main>
+        <section>
+
+            <h2 class="title">Paradas</h2>
+            <table class="table m-auto">
+                <thead>
+                    <tr>
+                        <th>Nombre de Parada</th>
+                        <th>Calle</th>
+                        <th>Altura</th>
+                        <th>Distancia a Siguiente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each parada}}
+                    <tr>
+                        <td>{{paradaActual.nombre}}</td>
+                        <td>{{paradaActual.ubicacion.calle}}</td>
+                        <td>{{paradaActual.ubicacion.altura}}</td>
+                        <td>{{distanciaAlaSiguiente}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+
+        </section>
+    </main>
+
+
+    <footer class>
+    </footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

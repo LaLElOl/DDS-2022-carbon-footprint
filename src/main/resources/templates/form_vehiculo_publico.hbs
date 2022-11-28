@@ -4,21 +4,21 @@
         <section>
             <h2 class="contacto title">Alta de Vehículo Público</h2>
 
-            <form class="formulario">
+            <form class="formulario" method="post">
                 <fieldset>
                     <div class="campo">
                         <label>Nombre</label>
-                        <input type="text" placeholder="Nombre">
+                        <input name="nombre" type="text" placeholder="Nombre">
                     </div>
 
                     <div class="campo">
                         <label>Factor de Emisión</label>
-                        <input type="number" placeholder="Factor de Emisión">
+                        <input name="factor" type="number" placeholder="Factor de Emisión">
                     </div>
 
                     <div class="campo">
                         <label>Tipo de Vehículo</label>
-                        <select class="mr-6">
+                        <select name="tipo" class="mr-6">
                             <option>Colectivo</option>
                             <option>Subte</option>
                             <option>Tren</option>
@@ -36,7 +36,6 @@
 
 
     <footer class>
-        <p>Escribir algo copado aca</p>
     </footer>
 
 </body>
