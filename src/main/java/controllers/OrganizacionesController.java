@@ -29,6 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class OrganizacionesController {
@@ -84,10 +85,6 @@ public class OrganizacionesController {
         Ubicacion ubicacion = new Ubicacion();
         AgenteMunicipal agMun;
 
-        if(!Objects.equals(request.queryParams("agente_municipal"), "null")){
-            agMun = this.repositorioDeAgentesMunicipales.buscar(new Integer(request.queryParams("agente_municipal")));
-            org.setAgenteMunicipal(agMun);
-        }
         usuario.setNickname(request.queryParams("usuario"));
         usuario.setContrasenia(request.queryParams("contrasenia"));
         usuario.setEmail(request.queryParams("email"));
@@ -104,7 +101,16 @@ public class OrganizacionesController {
         org.setClasificacion(clasif);
         org.setUbicacion(ubicacion);
 
-        this.repositorioDeOrganizaciones.guardar(org);
+        if(!Objects.equals(request.queryParams("agente_municipal"), "null")){
+            agMun = this.repositorioDeAgentesMunicipales.buscar(new Integer(request.queryParams("agente_municipal")));
+            org.setAgenteMunicipal(agMun);
+            agMun.agregarOrganizaciones(org);
+            this.repositorioDeOrganizaciones.guardar(org);
+            this.repositorioDeAgentesMunicipales.guardar(agMun);
+        }
+        else{
+            this.repositorioDeOrganizaciones.guardar(org);
+        }
 
         response.redirect("/home");
         return response;
@@ -213,11 +219,14 @@ public class OrganizacionesController {
         int anio = fecha.getYear();
         org.calcularHuella(mes,anio);
 
-        ReporteHuellaCarbono reporte = org.generarReporte(fecha,periodicidad);
-
-        this.repositorioDeReportes.guardar(reporte);
-
         this.repositorioDeOrganizaciones.guardar(org);
+
+        if(
+                LocalDate.now().minus(30, ChronoUnit.DAYS).isBefore(org.getFechaUltimoCalculoHuellaMensual())
+        ) {
+            ReporteHuellaCarbono reporte = org.generarReporte(fecha, periodicidad);
+            this.repositorioDeReportes.guardar(reporte);
+        }
 
         response.redirect("/organizacion/huella_carbono");
         return response;

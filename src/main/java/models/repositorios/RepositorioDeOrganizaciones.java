@@ -38,4 +38,13 @@ public class RepositorioDeOrganizaciones {
                 .createQuery("from " + Organizacion.class.getName() + " where usuario_id =" + id)
                 .getSingleResult();
     }
+
+    public List buscarPorAgenteMunicipal(Integer id) {
+        return  EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Organizacion.class.getName() + " where agente_municipal_id =" + id)
+                .getResultList();
+    }
+
+
 }

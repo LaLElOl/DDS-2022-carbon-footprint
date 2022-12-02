@@ -26,10 +26,10 @@ public class HomeController {
                 archivo = "home_organizacion.hbs";
                 break;
             case AGENTE_MUNICIPAL:
-                archivo = "home_agente.hbs";
+                archivo = "home_agente_municipal.hbs";
                 break;
             case AGENTE_PROVINCIAL:
-                archivo = "home_agente.hbs";
+                archivo = "home_agente_provincial.hbs";
                 break;
             case ADMINISTRADOR:
                 archivo = "home_administrador.hbs";

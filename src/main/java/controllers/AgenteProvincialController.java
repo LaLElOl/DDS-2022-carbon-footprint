@@ -45,6 +45,7 @@ public class AgenteProvincialController {
         usuario.setNickname(request.queryParams("usuario"));
         usuario.setContrasenia(request.queryParams("contrasenia"));
         usuario.setTipoUsuario(TipoUsuario.AGENTE_PROVINCIAL);
+        usuario.setEmail(request.queryParams("email"));
         agenteProvincial.setNombre(request.queryParams("nombre"));
         agenteProvincial.setProvincia(request.queryParams("provincia"));
         agenteProvincial.setUsuario(usuario);

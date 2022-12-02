@@ -117,12 +117,12 @@ public class Organizacion extends EntidadPersistente {
 
         double huella = 0.0;
         if(mes > 0 && mes <= 12){
-            if(
+           /* if(
                     LocalDate.now().minus(30,ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuellaMensual) &&
                             this.fechaUltimoCalculoHuellaMensual != null
             ){
                 return this.huellaCarbonoActualMensual;
-            }
+            }*/
 
             huella += obtenerHuellaMiembros();
             huella += obtenerHuellaOrganizacion(EPeriodicidad.MENSUAL, LocalDate.of(anio,mes,1));

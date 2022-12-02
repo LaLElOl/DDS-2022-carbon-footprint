@@ -2,6 +2,7 @@ package models.repositorios;
 
 import helpers.EntityManagerHelper;
 import models.dominio.organizacion.AgenteMunicipal;
+import models.dominio.organizacion.Organizacion;
 
 import java.util.List;
 
@@ -27,6 +28,13 @@ public class RepositorioDeAgentesMunicipales {
         EntityManagerHelper.persist(agenteMunicipal);
 
         EntityManagerHelper.commit();
+    }
+
+    public AgenteMunicipal buscarPorUsuario(Integer id) {
+        return (AgenteMunicipal) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + AgenteMunicipal.class.getName() + " where usuario_id =" + id)
+                .getSingleResult();
     }
 
 

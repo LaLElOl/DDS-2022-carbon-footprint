@@ -185,4 +185,6 @@ public class MiembroController {
             put("fecha",fecha);
         }}, "huella_carbono_miembro.hbs");
     }
+
+
 }

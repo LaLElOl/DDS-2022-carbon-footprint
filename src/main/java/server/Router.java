@@ -117,8 +117,14 @@ public class Router {
             Spark.before("/*",AuthMiddleware::verificarSesion);
 
             Spark.get("",agenteMunicipalController::mostrarTodos, engine);
+            Spark.get("/reportes",agenteMunicipalController::mostrarTodos, engine);
+            Spark.get("/organizaciones",agenteMunicipalController::mostrarOrganizaciones, engine);
+            Spark.get("/huella_carbono",agenteMunicipalController::mostrarHuellaCarbono, engine);
+
             Spark.get("/:id",agenteMunicipalController::mostrar, engine);
             Spark.get("/editar/:id",agenteMunicipalController::editar, engine);
+
+            Spark.post("/huella_carbono",agenteMunicipalController::calcularHuellaCarbono);
             Spark.post("/editar/:id", agenteMunicipalController::modificar);
 
         });
@@ -157,6 +163,7 @@ public class Router {
             Spark.get("/empleos", sectorController::mostrarSegunMiembro, engine);
             Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
             Spark.get("/tramos",tramoController::mostrarTodos, engine);
+            Spark.get("/tramo_publico",tramoController::mostrarTodos, engine);
             Spark.get("/editar/:id", miembroController::editar, engine);
 
 

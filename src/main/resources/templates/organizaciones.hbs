@@ -9,11 +9,10 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Razón Social</th>
-                        <th>Tipo Organización</th>
                         <th>Clasificacion</th>
-                        <th>Ubicacion</th>
-                        <th>Huella de Carbono Actual</th>
-                        <th>Ultima Fecha De Actualizacion De Huella</th>
+                        <th>Tipo Organización</th>
+                        <th>Huella de Carbono Mensual</th>
+                        <th>Huella de Carbono Anual</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,11 +21,10 @@
 
                         <td>{{usuario.nickname}}</td>
                         <td>{{razonSocial}}</td>
+                        <td>{{clasificacion.clasificacion}}</td>
                         <td>{{clasificacion.tipoOrganizacion}}</td>
-                        <td>{{clasificacion.tipoOrganizacion}}</td>
-                        <td>{{agenteMunicipal.municipio}}</td>
-                        <td>{{huellaCarbonoActual}}</td>
-                        <td>{{fechaUltimoCalculoHuella}}</td>
+                        <td>{{huellaCarbonoActualMensual}}</td>
+                        <td>{{huellaCarbonoActualAnual}}</td>
                     </tr>
                 {{/each}}
                 </tbody>

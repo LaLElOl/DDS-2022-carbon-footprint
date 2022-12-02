@@ -7,6 +7,7 @@ import models.dominio.persona.Trayecto;
 import models.dominio.transporte.Ubicacion;
 import models.dominio.transporte.medios.Ecologico;
 import models.dominio.transporte.medios.Particular;
+import models.dominio.transporte.medios.Publico;
 import models.dominio.transporte.medios.ServicioContratado;
 import models.dominio.transporte.vehiculos.Vehiculo;
 import models.repositorios.*;
@@ -178,7 +179,13 @@ public class TramoController {
         response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
 
         return response;
+    }
 
+    public ModelAndView tramoPublico(Request request, Response response) {
+        List<Publico> serviciosContratados = this.repositorioDeTransportes.buscarServiciosContratados();
 
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("servicio_contratado", serviciosContratados);
+        }}, "tramo_contratado.hbs"); //TODO
     }
 }
