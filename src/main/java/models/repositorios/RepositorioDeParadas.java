@@ -44,4 +44,10 @@ public class RepositorioDeParadas {
                 .createQuery("from " + ParadasTransporte.class.getName() + " where transporte_id=" + id)
                 .getResultList();
     }
+
+    public ParadasTransporte buscarParadaTransporte(Integer id) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .find(ParadasTransporte.class, id);
+    }
 }

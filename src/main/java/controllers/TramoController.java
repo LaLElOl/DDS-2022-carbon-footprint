@@ -1,14 +1,12 @@
 package controllers;
 
 import helpers.EntityManagerHelper;
+import models.dominio.organizacion.Sector;
 import models.dominio.persona.Miembro;
 import models.dominio.persona.Tramo;
 import models.dominio.persona.Trayecto;
 import models.dominio.transporte.Ubicacion;
-import models.dominio.transporte.medios.Ecologico;
-import models.dominio.transporte.medios.Particular;
-import models.dominio.transporte.medios.Publico;
-import models.dominio.transporte.medios.ServicioContratado;
+import models.dominio.transporte.medios.*;
 import models.dominio.transporte.vehiculos.Vehiculo;
 import models.repositorios.*;
 import spark.ModelAndView;
@@ -25,6 +23,7 @@ public class TramoController {
     private RepositorioDeTrayectos repositorioDeTrayectos;
     private RepositorioDeTransportes repositorioDeTransportes;
     private RepositorioDeVehiculos repositorioDeVehiculos;
+    private RepositorioDeParadas repositorioDeParadas;
 
     public TramoController(){
         repositorioDeTramos = new RepositorioDeTramos();
@@ -32,6 +31,7 @@ public class TramoController {
         repositorioDeTrayectos = new RepositorioDeTrayectos();
         repositorioDeTransportes = new RepositorioDeTransportes();
         repositorioDeVehiculos = new RepositorioDeVehiculos();
+        repositorioDeParadas = new RepositorioDeParadas();
     }
 
     public ModelAndView crear(Request request, Response response) {
@@ -182,10 +182,55 @@ public class TramoController {
     }
 
     public ModelAndView tramoPublico(Request request, Response response) {
-        List<Publico> serviciosContratados = this.repositorioDeTransportes.buscarServiciosContratados();
+        List<Publico> Transportes_Publicos = this.repositorioDeTransportes.buscarPublicos();
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("servicio_contratado", serviciosContratados);
-        }}, "tramo_contratado.hbs"); //TODO
+            put("publico", Transportes_Publicos);
+        }}, "tramo_publico.hbs");
+    }
+
+    public Response recibirTransportePublico(Request request, Response response) {
+        String publico_id = request.queryParams("publico_id");
+        String trayecto_id = request.params("id_trayecto");
+
+        response.redirect("/miembro/trayecto/" + trayecto_id + "/tramo_publico/" + publico_id);
+        return response;
+    }
+
+    public ModelAndView mostrarParadasPublico(Request request, Response response) {
+        List<Parada> paradas = this.repositorioDeParadas.buscarParadasTransporte(request.params("id_publico"));
+
+        return new ModelAndView(new HashMap<String,Object>(){{
+            put("parada",paradas);
+        }}, "paradas_publico.hbs");
+
+    }
+
+    public Response guardarTramoPublico(Request request, Response response) {
+        Integer id = new Integer(request.session().attribute("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id);
+        Tramo tramo = new Tramo(miembro);
+        Integer id_trayecto = new Integer(request.params("id_trayecto"));
+        Trayecto trayecto = this.repositorioDeTrayectos.buscar(id_trayecto);
+        Integer id_publico = new Integer(request.params("id_publico"));
+        Publico publico = (Publico) this.repositorioDeTransportes.buscar(id_publico);
+        Integer paradaT_inicio_id = new Integer(request.queryParams("parada_inicio_id"));
+        Integer paradaT_destino_id = new Integer(request.queryParams("parada_destino_id"));
+        ParadasTransporte parada_inicio = this.repositorioDeParadas.buscarParadaTransporte(paradaT_inicio_id);
+        ParadasTransporte parada_destino = this.repositorioDeParadas.buscarParadaTransporte(paradaT_destino_id);
+
+        Ubicacion ubicacion_inicio = parada_inicio.getParadaActual().getUbicacion();
+        Ubicacion ubicacion_destino = parada_destino.getParadaActual().getUbicacion();
+
+        tramo.setInicioTramo(ubicacion_inicio);
+        tramo.setFinTramo(ubicacion_destino);
+        tramo.setTrayecto(trayecto);
+        tramo.setTransporte(publico);
+
+        this.repositorioDeTramos.guardar(tramo);
+
+        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
+
+        return response;
     }
 }

@@ -1,0 +1,35 @@
+{{#partial "contenido" }}
+<body>
+<main>
+    <section>
+        <h2 class="contacto title">Alta de Tramo</h2>
+        <form class="formulario" method="post">
+            <fieldset>
+
+                <div class="campo">
+                    <label>Seleccione el Transporte Publico</label>
+                    <select class="input-select" name="publico_id">
+                         <option>Seleccionar</option>
+                            {{#each publico}}
+                         <option value="{{id}}">{{nombre}}</option>
+                            {{/each}}
+                    </select>
+                </div>
+
+                <div class="enviar">
+                    <button class="boton" type="submit">Siguiente</button>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </section>
+</main>
+
+
+<footer class>
+</footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

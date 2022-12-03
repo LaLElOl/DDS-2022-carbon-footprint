@@ -162,12 +162,15 @@ public class Router {
 
             Spark.get("/empleos", sectorController::mostrarSegunMiembro, engine);
             Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
-            Spark.get("/tramos",tramoController::mostrarTodos, engine);
-            Spark.get("/tramo_publico",tramoController::mostrarTodos, engine);
+            Spark.get("/tramos",tramoController::tramoPublico, engine);
+
             Spark.get("/editar/:id", miembroController::editar, engine);
 
 
             Spark.get("/alta_vehiculo", vehiculoController::altaVehiculo, engine);
+
+            Spark.get("/trayecto/:id_trayecto/tramo_publico",tramoController::tramoPublico, engine);
+            Spark.get("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::mostrarParadasPublico, engine);
             Spark.get("/:id/trayecto/:id_trayecto/tipo_transporte",miembroController::tipoTransporte,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::tramoEcologico,engine);
             Spark.get("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::tramoContratado,engine);
@@ -181,6 +184,8 @@ public class Router {
             Spark.post("/unirse_sector/:id", solicitudController::generarSolicitud);
             Spark.post("/editar/:id", miembroController::modificar);
             Spark.post("/alta_vehiculo", vehiculoController::guardarVehiculo);
+            Spark.post("/trayecto/:id_trayecto/tramo_publico",tramoController::recibirTransportePublico);
+            Spark.post("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::guardarTramoPublico);
             Spark.post("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);
             Spark.post("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::guardarTramoContratado);
             Spark.post("/:id/trayecto/:id_trayecto/tramo_particular",tramoController::guardarTramoParticular);

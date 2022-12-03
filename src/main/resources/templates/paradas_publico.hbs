@@ -1,0 +1,45 @@
+{{#partial "contenido" }}
+<body>
+<main>
+    <section>
+        <h2 class="contacto title">Alta de Tramo</h2>
+        <form class="formulario" method="post">
+            <fieldset>
+
+                <div class="campo">
+                    <label>Seleccione la Parada Inicio</label>
+                    <select class="input-select" name="parada_inicio_id">
+                         <option>Seleccionar</option>
+                            {{#each parada}}
+                         <option value="{{id}}">{{paradaActual.nombre}}</option>
+                            {{/each}}
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label>Seleccione la Parada Destino</label>
+                    <select class="input-select" name="parada_destino_id">
+                         <option>Seleccionar</option>
+                            {{#each parada}}
+                         <option value="{{id}}">{{paradaActual.nombre}}</option>
+                            {{/each}}
+                    </select>
+                </div>
+
+                <div class="enviar">
+                    <button class="boton" type="submit">Siguiente</button>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </section>
+</main>
+
+
+<footer class>
+</footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}
