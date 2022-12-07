@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,8 +39,12 @@ public class Trayecto extends EntidadPersistente {
     @OneToMany(mappedBy = "trayecto")
     private final List<Tramo> tramos;
 
+    @Column(name = "fecha_alta_tramo", columnDefinition = "DATE")
+    private LocalDate fechaAltaTramo;
+
     public Trayecto(){
         this.tramos = new ArrayList<>();
+        this.fechaAltaTramo = LocalDate.now();
     }
 
     public Double distanciaTotal(Miembro miembro){
