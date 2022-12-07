@@ -136,6 +136,7 @@ public class TramoController {
         tramo.setFinTramo(ubicacionFin);
         tramo.setTrayecto(trayecto);
         tramo.setTransporte(servicioContratado);
+        tramo.setCompartido(Boolean.FALSE);
 
         this.repositorioDeTramos.guardar(tramo);
 
@@ -172,6 +173,7 @@ public class TramoController {
         guardarUbicaciones(request,response,ubicacionInicio,ubicacionFin);
         tramo.setInicioTramo(ubicacionInicio);
         tramo.setFinTramo(ubicacionFin);
+        tramo.setCompartido(Boolean.FALSE);
 
         this.repositorioDeTransportes.guardar(particular);
         this.repositorioDeTramos.guardar(tramo);
@@ -226,6 +228,7 @@ public class TramoController {
         tramo.setFinTramo(ubicacion_destino);
         tramo.setTrayecto(trayecto);
         tramo.setTransporte(publico);
+        tramo.setCompartido(Boolean.FALSE);
 
         this.repositorioDeTramos.guardar(tramo);
 
