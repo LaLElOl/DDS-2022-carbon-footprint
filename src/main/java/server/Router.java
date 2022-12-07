@@ -40,11 +40,11 @@ public class Router {
         VehiculoController vehiculoController = new VehiculoController();
         SolicitudController solicitudController = new SolicitudController();
         ParadaController paradaController = new ParadaController();
-
+        AuthMiddleware authMiddleware = new AuthMiddleware();
 
         Spark.path("/home", () -> {
-            Spark.before("",AuthMiddleware::verificarSesion);
-            Spark.before("/*",AuthMiddleware::verificarSesion);
+            Spark.before("",authMiddleware::verificarSesion);
+            Spark.before("/*",authMiddleware::verificarSesion);
 
             Spark.get("", homeController::mostrarInicio,engine);
         });
@@ -61,6 +61,12 @@ public class Router {
 
 
         Spark.path("/administrador", () -> {
+
+            Spark.before("",authMiddleware::verificarSesion);
+            Spark.before("/*",authMiddleware::verificarSesion);
+
+            Spark.before("",authMiddleware::verificarAdministrador);
+            Spark.before("/*",authMiddleware::verificarAdministrador);
 
             Spark.get("/alta_contratado", transporteController::crearServicioContratado,engine);
             Spark.get("/alta_publico", transporteController::crearTransportePublico,engine);
@@ -81,9 +87,11 @@ public class Router {
         //Organizaciones
         Spark.path("/organizacion", () -> {
 
-            Spark.before("",AuthMiddleware::verificarSesion);
-            Spark.before("/*",AuthMiddleware::verificarSesion);
+            Spark.before("",authMiddleware::verificarSesion);
+            Spark.before("/*",authMiddleware::verificarSesion);
 
+            Spark.before("",authMiddleware::verificarOrganizacion);
+            Spark.before("/*",authMiddleware::verificarOrganizacion);
 
             Spark.get("",organizacionesController::mostrarTodos, engine);
             Spark.get("/excel",organizacionesController::excel,engine);
@@ -113,8 +121,11 @@ public class Router {
         //Agente Municipal
         Spark.path("/agente_municipal", () -> {
 
-            Spark.before("",AuthMiddleware::verificarSesion);
-            Spark.before("/*",AuthMiddleware::verificarSesion);
+            Spark.before("",authMiddleware::verificarSesion);
+            Spark.before("/*",authMiddleware::verificarSesion);
+
+            Spark.before("",authMiddleware::verificarAgenteMunicipal);
+            Spark.before("/*",authMiddleware::verificarAgenteMunicipal);
 
             Spark.get("",agenteMunicipalController::mostrarTodos, engine);
             Spark.get("/reportes",agenteMunicipalController::mostrarTodos, engine);
@@ -138,6 +149,13 @@ public class Router {
         //Agente Provincial
 
         Spark.path("/agente_provincial", () -> {
+
+            Spark.before("",authMiddleware::verificarSesion);
+            Spark.before("/*",authMiddleware::verificarSesion);
+
+            Spark.before("",authMiddleware::verificarAgenteProvincial);
+            Spark.before("/*",authMiddleware::verificarAgenteProvincial);
+
             Spark.get("",agenteProvincialController::mostrarTodos, engine);
             Spark.get("/:id",agenteProvincialController::mostrar, engine);
             Spark.get("/editar/:id",agenteProvincialController::editar, engine);
@@ -150,8 +168,11 @@ public class Router {
         //Miembro
         Spark.path("/miembro", ()-> {
 
-            Spark.before("",AuthMiddleware::verificarSesion);
-            Spark.before("/*",AuthMiddleware::verificarSesion);
+            Spark.before("",authMiddleware::verificarSesion);
+            Spark.before("/*",authMiddleware::verificarSesion);
+
+            Spark.before("",authMiddleware::verificarMiembro);
+            Spark.before("/*",authMiddleware::verificarMiembro);
 
             Spark.get("", miembroController::mostrarTodos, engine);
 
