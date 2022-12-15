@@ -1,0 +1,51 @@
+{{#partial "contenido" }}
+
+<body>
+    <main>
+        <section>
+
+            <h2 class="title">Huella de Carbono Mensual</h2>
+                <table class="table m-auto">
+                    <thead>
+                        <tr>
+                            <th>Huella</th>
+                            <th>Fecha de Calculo</th>
+                            <th>Año</th>
+                            <th>Mes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form method="post">
+                        <tr>
+                            <td >{{valorMensual}}</td>
+                            <td>{{fechaMensual}}</td>
+                            <td> <input name="anio" type="number"></td>
+                            <td>
+                                <select name="mes">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                              </td>
+                                <td><button style="background-color: #77a785;" class="button is-primary"
+                                    type="submit">Calcular</button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+        </section>
+    </main>
+
+
+</body>
+{{/partial}}
+{{> base.hbs }}

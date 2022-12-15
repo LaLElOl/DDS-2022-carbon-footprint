@@ -231,4 +231,80 @@ public class OrganizacionesController {
         response.redirect("/organizacion/huella_carbono");
         return response;
     }
+
+    public ModelAndView mostrarHuellaDeCarbono(Request request, Response response) {
+        return new ModelAndView(null, "/huella_de_carbono.hbs");
+    }
+
+    public ModelAndView mostrarHuellaDeCarbonoMensual(Request request, Response response) {
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("fechaMensual",org.getFechaUltimoCalculoHuellaMensual());
+            put("valorMensual",org.getHuellaCarbonoActualMensual());
+        }}, "/huella_mensual.hbs");
+    }
+
+    public ModelAndView mostrarHuellaDeCarbonoAnual(Request request, Response response) {
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("fechaAnual",org.getFechaUltimoCalculoHuellaAnual());
+            put("valorAnual",org.getHuellaCarbonoActualAnual());
+        }}, "/huella_anual.hbs");
+    }
+
+
+    public Response calcularHuellaCarbonoMensual(Request request, Response response) {
+
+        int mes = new Integer(request.queryParams("mes"));
+        EPeriodicidad periodicidad = EPeriodicidad.MENSUAL;
+        LocalDate fecha = LocalDate.now();
+
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        int anio = new Integer(request.queryParams("anio"));
+        org.calcularHuella(mes,anio);
+
+        this.repositorioDeOrganizaciones.guardar(org);
+
+        /*if(
+                LocalDate.now().minus(30, ChronoUnit.DAYS).isBefore(org.getFechaUltimoCalculoHuellaMensual())
+        ) {*/
+            ReporteHuellaCarbono reporte = org.generarReporte(fecha, periodicidad);
+            this.repositorioDeReportes.guardar(reporte);
+       // }
+
+        response.redirect("/organizacion/huella_mensual");
+        return response;
+    }
+
+
+    public Response calcularHuellaCarbonoAnual(Request request, Response response) {
+
+
+        EPeriodicidad periodicidad = EPeriodicidad.ANUAL;
+        LocalDate fecha = LocalDate.now();
+
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        int anio = new Integer(request.queryParams("anio"));
+        org.calcularHuella(0,anio);
+
+        this.repositorioDeOrganizaciones.guardar(org);
+
+        /*if(
+                LocalDate.now().minus(30, ChronoUnit.DAYS).isBefore(org.getFechaUltimoCalculoHuellaMensual())
+        ) {*/
+        ReporteHuellaCarbono reporte = org.generarReporte(fecha, periodicidad);
+        this.repositorioDeReportes.guardar(reporte);
+        // }
+
+        response.redirect("/organizacion/huella_anual");
+        return response;
+    }
+
 }
