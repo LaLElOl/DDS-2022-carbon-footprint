@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.*;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
@@ -8,7 +8,7 @@ public class ContextTest extends AbstractPersistenceTest implements WithGlobalEn
 
     @Test
     public void contextUp() {
-        Assertions.assertNotNull(entityManager());
+        Assert.assertNotNull(entityManager());
     }
     @Test
     public void contextUpWithTransaction() throws Exception {

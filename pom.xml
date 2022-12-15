@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+<!--        <maven.compiler.source>8</maven.compiler.source>-->
+<!--        <maven.compiler.target>8</maven.compiler.target>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -57,14 +57,14 @@
 <!--                    <processTypes>-->
 <!--                        &lt;!&ndash; Tell Heroku how to launch your application &ndash;&gt;-->
 <!--                        &lt;!&ndash; You might have to remove the ./ in front   &ndash;&gt;-->
-<!--                        <web>java -jar target/grupo-07-1.0-SNAPSHOT-jar-with-dependencies.jar</web>-->
+<!--                        <web>java -jar target/grupo-12-1.0-SNAPSHOT-jar-with-dependencies.jar</web>-->
 <!--                    </processTypes>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>2.4.4</version>
                 <configuration>
                     <projectId>keen-inscriber-371700</projectId>
                     <version>GCLOUD_CONFIG</version>
@@ -227,18 +227,6 @@
             <version>20.0</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>5.2.0</version>
@@ -255,22 +243,6 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-
-
-
     </dependencies>
 
 </project>
