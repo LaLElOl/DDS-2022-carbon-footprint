@@ -68,6 +68,7 @@
                 <configuration>
                     <projectId>keen-inscriber-371700</projectId>
                     <version>GCLOUD_CONFIG</version>
+                    <artifact>target/grupo-12-1.0-SNAPSHOT-jar-with-dependencies.jar</artifact>
                 </configuration>
             </plugin>
             <plugin>
