@@ -21,7 +21,6 @@ import spark.Response;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

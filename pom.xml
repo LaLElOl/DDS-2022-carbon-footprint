@@ -7,44 +7,61 @@
     <groupId>ar.edu.utn.frba.dds</groupId>
     <artifactId>grupo-12</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
 <!--        <maven.compiler.source>8</maven.compiler.source>-->
 <!--        <maven.compiler.target>8</maven.compiler.target>-->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <build>
         <plugins>
+<!--            <plugin>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.1</version>-->
+<!--                <configuration>-->
+<!--                    <source>1.8</source>-->
+<!--                    <target>1.8</target>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <artifactId>maven-assembly-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>single</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <descriptorRefs>-->
+<!--                        &lt;!&ndash; This tells Maven to include all dependencies &ndash;&gt;-->
+<!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
+<!--                    </descriptorRefs>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <mainClass>server.Server</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <descriptorRefs>
-                        <!-- This tells Maven to include all dependencies -->
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>server.Server</mainClass>
-                        </manifest>
-                    </archive>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 <!--            <plugin>-->
@@ -68,24 +85,19 @@
                 <configuration>
                     <projectId>keen-inscriber-371700</projectId>
                     <version>GCLOUD_CONFIG</version>
-                    <artifact>target/grupo-12-1.0-SNAPSHOT-jar-with-dependencies.jar</artifact>
+<!--                    <artifact>target/grupo-12-1.0-SNAPSHOT-jar-with-dependencies.jar</artifact>-->
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.2.v20170220</version>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.3.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.postgresql</groupId>-->
+<!--            <artifactId>postgresql</artifactId>-->
+<!--            <version>42.3.1</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
@@ -215,17 +227,65 @@
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
-            <version>2.7.2</version>
+            <version>2.9.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-http</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-io</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-security</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-server</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-webapp</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.eclipse.jetty.websocket</groupId>
+                    <artifactId>websocket-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.websocket</groupId>
+                    <artifactId>websocket-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.websocket</groupId>
+                    <artifactId>websocket-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.websocket</groupId>
+                    <artifactId>websocket-server</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.websocket</groupId>
+                    <artifactId>websocket-servlet</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.sparkjava</groupId>-->
+<!--            <artifactId>spark-debug-tools</artifactId>-->
+<!--            <version>0.5</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>com.sparkjava</groupId>
-            <artifactId>spark-debug-tools</artifactId>
-            <version>0.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sparkjava</groupId>
-            <artifactId>spark-template-velocity</artifactId>
-            <version>2.7.1</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -248,6 +308,12 @@
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>2.0.10</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 

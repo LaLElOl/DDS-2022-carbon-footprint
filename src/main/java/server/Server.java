@@ -1,13 +1,18 @@
 package server;
 
-import spark.Spark;
-import spark.debug.DebugScreen;
+import spark.servlet.SparkApplication;
 
-public class Server {
+public class Server implements SparkApplication {
 
 	public static void main(String[] args) {
-		Spark.port(8081);
-		Router.init();
+		//Spark.port(8081);
+		new Server().init();
 		//DebugScreen.enableDebugScreen();
 	}
+
+	@Override
+	public void init() {
+		Router.init();
+	}
 }
+
