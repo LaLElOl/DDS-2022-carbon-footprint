@@ -1,27 +1,15 @@
 package server;
 
-import spark.servlet.SparkApplication;
+import spark.Spark;
+import spark.debug.DebugScreen;
 
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
-
-public class Server implements SparkApplication {
+public class Server{
 
 	public static void main(String[] args) {
-		//Spark.port(8081);
-		new Server().init();
-		//DebugScreen.enableDebugScreen();
-	}
-
-	@Override
-	public void init() {
+		Spark.port(9000);
 		Router.init();
+		DebugScreen.enableDebugScreen();
 	}
 
-	@WebFilter(
-			filterName = "SparkInitFilter",
-			urlPatterns = {"/*"},
-			initParams = {@WebInitParam(name = "applicationClass", value = "Server")})
-	public static class SparkInitFilter extends spark.servlet.SparkFilter {}
 }
 
