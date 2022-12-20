@@ -2,6 +2,9 @@ package server;
 
 import spark.servlet.SparkApplication;
 
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
+
 public class Server implements SparkApplication {
 
 	public static void main(String[] args) {
@@ -14,5 +17,11 @@ public class Server implements SparkApplication {
 	public void init() {
 		Router.init();
 	}
+
+	@WebFilter(
+			filterName = "SparkInitFilter",
+			urlPatterns = {"/*"},
+			initParams = {@WebInitParam(name = "applicationClass", value = "Server")})
+	public static class SparkInitFilter extends spark.servlet.SparkFilter {}
 }
 
