@@ -41,6 +41,9 @@ public class Router {
         SolicitudController solicitudController = new SolicitudController();
         ParadaController paradaController = new ParadaController();
         AuthMiddleware authMiddleware = new AuthMiddleware();
+        ServiceGeoController serviceGeoController = new ServiceGeoController();
+
+        Spark.get("/provincias",serviceGeoController::obtenerProvincias);
 
         Spark.path("/home", () -> {
             Spark.before("",authMiddleware::verificarSesion);

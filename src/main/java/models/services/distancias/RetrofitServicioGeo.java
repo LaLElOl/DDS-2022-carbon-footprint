@@ -28,10 +28,15 @@ public class RetrofitServicioGeo implements AdapterGeoService {
         return instancia;
     }
 
-    public List<Provincia> provincias() throws IOException {
+    public List<Provincia> provincias() {
         GeoService geoService = this.retrofit.create(GeoService.class);
         Call<List<Provincia>> requestProvinciasArg = geoService.provincias(1,"Bearer Yi/6XlA+LZc7PKtkXwWFa8dSWE9zT7dEEj3aHrmztYw=");
-        Response<List<Provincia>> responseProvinciasArg = requestProvinciasArg.execute();
+        Response<List<Provincia>> responseProvinciasArg = null;
+        try {
+            responseProvinciasArg = requestProvinciasArg.execute();
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo generar la solicitud de provincias",e);
+        }
         return responseProvinciasArg.body();
     }
 

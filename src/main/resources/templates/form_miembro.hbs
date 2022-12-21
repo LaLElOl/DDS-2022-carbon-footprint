@@ -35,6 +35,16 @@
                     </div>
 
                     <div class="campo">
+                        <label>Provincia</label>
+                        <select id="provincias" name="provincia" type="text" placeholder="Provincia" value="{{miembro.domicilio.provincia}}"></select>
+                    </div>
+
+                    <div class="campo">
+                        <label>Municipio</label>
+                        <select id="municipios" name="municipio" type="text" placeholder="Municipio" value="{{miembro.domicilio.Municipio}}">
+                    </div>
+
+                    <div class="campo">
                         <label>Calle</label>
                         <input name="calle" type="text" placeholder="Calle" value="{{miembro.domicilio.calle}}">
                     </div>
@@ -72,6 +82,7 @@
             </form>
 
         </section>
+        <script src="/js/main.js"></script>
     </main>
 </body>
 {{/partial}}
