@@ -183,4 +183,14 @@ public class Organizacion extends EntidadPersistente {
             return new ReporteHuellaCarbono(this,fecha,periodicidad,this.huellaCarbonoActualMensual);
         }
     }
+
+    public Double huellaTotal(){
+        double huella = 0.0;
+
+        huella += obtenerHuellaMiembros();
+        huella += this.datosConsumo.stream().mapToDouble(DatoConsumo::calcularHuella).sum();
+
+        return huella;
+
+    }
 }

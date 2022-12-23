@@ -85,4 +85,12 @@ public class AgenteMunicipal extends EntidadPersistente {
         }
         return huella;
     }
+
+    public Double huellaTotal(){
+        double huella = 0.0;
+
+        huella += this.organizaciones.stream().mapToDouble( o -> o.huellaTotal()).sum();
+
+        return huella;
+    }
 }

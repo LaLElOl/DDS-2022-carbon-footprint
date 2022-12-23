@@ -156,10 +156,11 @@ public class AgenteMunicipalController {
 
         Integer id = new Integer(request.session().attribute("id"));
         AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+        Double huellaTotal = agenteMunicipal.huellaTotal();
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("municipio",agenteMunicipal.getMunicipio());
-            put("huella",1);
+            put("huella",huellaTotal);
         }}, "total_huella_municipio.hbs");
     }
 
