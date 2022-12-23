@@ -29,4 +29,5 @@ public interface GeoService {
     Call<List<Localidad>> localidad(@Query("offset")Integer numero,
                                     @Query("municipioId") Integer munId,
                                     @Header("Authorization")String token);
+
 }
