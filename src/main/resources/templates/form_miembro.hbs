@@ -37,11 +37,19 @@
                     <div class="campo">
                         <label>Provincia</label>
                         <select id="provincias" name="provincia" type="text" placeholder="Provincia" value="{{miembro.domicilio.provincia}}"></select>
+                        <button id="prov_generador" type="button" onclick="obtenerProvincias()">Cargar Provincias</button>
                     </div>
 
                     <div class="campo">
                         <label>Municipio</label>
-                        <select id="municipios" name="municipio" type="text" placeholder="Municipio" value="{{miembro.domicilio.Municipio}}">
+                        <select id="municipios" name="municipio" type="text" placeholder="Municipio" value="{{miembro.domicilio.municipio}}"></select>
+                        <button id="mun_generador" type="button" onclick="obtenerMunicipios()">Cargar Municipios</button>
+                    </div>
+
+                    <div class="campo">
+                        <label>Localidad</label>
+                        <select id="localidades" name="localidad" type="text" placeholder="Localidad" value="{{miembro.domicilio.localidad}}"></select>
+                        <button id="loc_generador" type="button" onclick="obtenerLocalidades()">Cargar Localidades</button>
                     </div>
 
                     <div class="campo">

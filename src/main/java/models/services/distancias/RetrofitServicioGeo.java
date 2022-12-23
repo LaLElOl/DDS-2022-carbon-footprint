@@ -55,4 +55,34 @@ public class RetrofitServicioGeo implements AdapterGeoService {
         Response<Distancia> responseDistancia = requestDistancia.execute();
         return responseDistancia.body();
     }
+
+    public List<Municipio> municipios(Integer provId) {
+        GeoService geoService = this.retrofit.create(GeoService.class);
+        Call<List<Municipio>> requestMunicipioArg = geoService.municipios(
+                1,
+                provId,
+                "Bearer Yi/6XlA+LZc7PKtkXwWFa8dSWE9zT7dEEj3aHrmztYw=");
+        Response<List<Municipio>> responseMunicipioArg = null;
+        try {
+            responseMunicipioArg = requestMunicipioArg.execute();
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo generar la solicitud de Municipios",e);
+        }
+        return responseMunicipioArg.body();
+    }
+
+    public List<Localidad> localidades(Integer munId) {
+        GeoService geoService = this.retrofit.create(GeoService.class);
+        Call<List<Localidad>> requestLocalidadArg = geoService.localidad(
+                1,
+                munId,
+                "Bearer Yi/6XlA+LZc7PKtkXwWFa8dSWE9zT7dEEj3aHrmztYw=");
+        Response<List<Localidad>> responseLocalidadArg = null;
+        try {
+            responseLocalidadArg = requestLocalidadArg.execute();
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo generar la solicitud de Municipios",e);
+        }
+        return responseLocalidadArg.body();
+    }
 }

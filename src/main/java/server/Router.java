@@ -44,6 +44,8 @@ public class Router {
         ServiceGeoController serviceGeoController = new ServiceGeoController();
 
         Spark.get("/provincias",serviceGeoController::obtenerProvincias);
+        Spark.get("/municipios/:id",serviceGeoController::obtenerMunicipios);
+        Spark.get("/localidades/:id",serviceGeoController::obtenerLocalidades);
 
         Spark.path("/home", () -> {
             Spark.before("",authMiddleware::verificarSesion);

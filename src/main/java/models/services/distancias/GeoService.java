@@ -19,4 +19,14 @@ public interface GeoService {
                               @Query("calleDestino")String calleDestino,
                               @Query("alturaDestino")Integer alturaDestino,
                               @Header("Authorization")String token);
+
+    @GET("municipios")
+    Call<List<Municipio>> municipios(@Query("offset")Integer numero,
+                                     @Query("provinciaId") Integer provId,
+                                     @Header("Authorization")String token);
+
+    @GET("localidades")
+    Call<List<Localidad>> localidad(@Query("offset")Integer numero,
+                                    @Query("municipioId") Integer munId,
+                                    @Header("Authorization")String token);
 }
