@@ -144,6 +144,10 @@ public class Router {
             Spark.get("/reportes",agenteMunicipalController::mostrarTodos, engine);
             Spark.get("/organizaciones",agenteMunicipalController::mostrarOrganizaciones, engine);
             Spark.get("/huella_carbono",agenteMunicipalController::mostrarHuellaCarbono, engine);
+            Spark.get("/total_huella",agenteMunicipalController::mostrarTotalHuella, engine);
+            Spark.get("/composicion_huella",agenteMunicipalController::mostrarComposicionHuella, engine);
+            Spark.get("/evolucion_huella",agenteMunicipalController::mostrarEvolucionHuella, engine);
+
 
             Spark.get("/:id",agenteMunicipalController::mostrar, engine);
             Spark.get("/editar/:id",agenteMunicipalController::editar, engine);

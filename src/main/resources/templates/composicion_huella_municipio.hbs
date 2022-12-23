@@ -1,0 +1,37 @@
+{{#partial "contenido" }}
+<body>
+    <main>
+        <section>
+
+            <h2 class="title">Composición Huella</h2>
+            <table class="table m-auto">
+                <thead>
+                    <tr>
+                        <th>Municipio</th>
+                        <th>Combustión fija</th>
+                        <th>Combustión móvil</th>
+                        <th>Electricidad</th>
+                        <th>Logística</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{municipio}}</td>
+                        <td>{{fija}}</td>
+                        <td>{{movil}}</td>
+                        <td>{{electricidad}}</td>
+                        <td>{{logistica}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+    </main>
+
+
+    <footer class>
+    </footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}

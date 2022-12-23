@@ -151,4 +151,51 @@ public class AgenteMunicipalController {
             put("valorAnual",agenteMunicipal.getHuellaCarbonoActualAnual());
         }}, "huella_carbono.hbs");
     }
+
+    public ModelAndView mostrarTotalHuella(Request request, Response response){
+
+        Integer id = new Integer(request.session().attribute("id"));
+        AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("municipio",agenteMunicipal.getMunicipio());
+            put("huella",1);
+        }}, "total_huella_municipio.hbs");
+    }
+
+    public ModelAndView mostrarComposicionHuella(Request request, Response response){
+
+        Integer id = new Integer(request.session().attribute("id"));
+        AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("municipio",agenteMunicipal.getMunicipio());
+            put("fija",1);
+            put("movil",1);
+            put("electricidad",1);
+            put("logistica",1);
+        }}, "composicion_huella_municipio.hbs");
+    }
+
+    public ModelAndView mostrarEvolucionHuella(Request request, Response response){
+
+        Integer id = new Integer(request.session().attribute("id"));
+        AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("municipio",agenteMunicipal.getMunicipio());
+            put("enero",1);
+            put("febrero",1);
+            put("marzo",1);
+            put("abril",1);
+            put("mayo",1);
+            put("junio",1);
+            put("julio",1);
+            put("agosto",1);
+            put("septiembre",1);
+            put("octubre",1);
+            put("noviembre",1);
+            put("diciembre",1);
+        }}, "evolucion_huella_municipio.hbs");
+    }
 }
