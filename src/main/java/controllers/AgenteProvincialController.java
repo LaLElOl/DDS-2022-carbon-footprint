@@ -78,4 +78,11 @@ public class AgenteProvincialController {
         response.redirect("/agente_provincial");
         return response;
     }
+
+    public ModelAndView verReporteProvincias(Request request, Response response) {
+        List<AgenteProvincial> todosLosAgentesProvinciales = this.repositorioAgenteProvincial.buscarTodos();
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("agente_provincial", todosLosAgentesProvinciales);
+        }}, "huella_provincias.hbs");
+    }
 }

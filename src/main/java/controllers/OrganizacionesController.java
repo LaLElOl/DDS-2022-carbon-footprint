@@ -306,4 +306,48 @@ public class OrganizacionesController {
         return response;
     }
 
+    public ModelAndView verReporteOrganizaciones(Request request, Response response) {
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("gubernamental",1);
+            put("ong",1);
+            put("empresa",1);
+            put("institucion",1);
+        }}, "/huella_tipo_org.hbs");
+    }
+
+    public ModelAndView mostrarComposicionHuella(Request request, Response response){
+
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("organizacion",org.getRazonSocial());
+            put("fija",1);
+            put("movil",1);
+            put("electricidad",1);
+            put("logistica",1);
+        }}, "composicion_huella_org.hbs");
+    }
+
+    public ModelAndView mostrarEvolucionHuella(Request request, Response response){
+
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("organizacion",org.getRazonSocial());
+            put("enero",1);
+            put("febrero",1);
+            put("marzo",1);
+            put("abril",1);
+            put("mayo",1);
+            put("junio",1);
+            put("julio",1);
+            put("agosto",1);
+            put("septiembre",1);
+            put("octubre",1);
+            put("noviembre",1);
+            put("diciembre",1);
+        }}, "evolucion_huella_org.hbs");
+    }
 }

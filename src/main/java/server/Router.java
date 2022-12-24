@@ -78,6 +78,8 @@ public class Router {
 
             Spark.get("/alta_contratado", transporteController::crearServicioContratado,engine);
             Spark.get("/alta_publico", transporteController::crearTransportePublico,engine);
+            Spark.get("/reporte_organizaciones", organizacionesController::verReporteOrganizaciones,engine);
+            Spark.get("/reporte_provincias", agenteProvincialController::verReporteProvincias,engine);
             Spark.get("/publicos", transporteController::mostrarPublicos,engine);
             Spark.get("/servicios_contratados", transporteController::mostrarServiciosContratados,engine);
             Spark.get("/alta_parada", paradaController::crearParada,engine);
@@ -109,6 +111,8 @@ public class Router {
             Spark.get("/huella_carbono",organizacionesController::mostrarHuellaDeCarbono, engine);
             Spark.get("/huella_mensual",organizacionesController::mostrarHuellaDeCarbonoMensual, engine);
             Spark.get("/huella_anual",organizacionesController::mostrarHuellaDeCarbonoAnual, engine);
+            Spark.get("/composicion_huella",organizacionesController::mostrarComposicionHuella, engine);
+            Spark.get("/evolucion_huella",organizacionesController::mostrarEvolucionHuella, engine);
 
             Spark.get("/editar/:id",organizacionesController::editar, engine);
             Spark.get("/sector/:id",sectorController::mostrar, engine);

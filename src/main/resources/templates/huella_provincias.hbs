@@ -1,0 +1,34 @@
+{{#partial "contenido" }}
+<body>
+    <main>
+        <section>
+
+            <h2 class="title">Huella Total de Provincias</h2>
+            <table class="table m-auto">
+                <thead>
+                    <tr>
+                        <th>Provicia</th>
+                        <th>Huella Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each agente_provincial}}
+                        <tr>
+
+                            <td>{{agente_provincial.provincia}}</td>
+                            <td>{{agente_provincial.huellaTotal}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+        </section>
+    </main>
+
+
+    <footer class>
+    </footer>
+
+</body>
+{{/partial}}
+{{> base.hbs }}
