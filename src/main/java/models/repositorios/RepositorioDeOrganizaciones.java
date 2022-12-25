@@ -1,7 +1,9 @@
 package models.repositorios;
 
 import helpers.EntityManagerHelper;
+import models.dominio.organizacion.Clasificacion;
 import models.dominio.organizacion.Organizacion;
+import models.dominio.organizacion.TipoOrganizacion;
 
 import java.util.List;
 
@@ -45,6 +47,14 @@ public class RepositorioDeOrganizaciones {
                 .createQuery("from " + Organizacion.class.getName() + " where agente_municipal_id =" + id)
                 .getResultList();
     }
+
+    /*public List buscarPorTipo(TipoOrganizacion tipoOrganizacion) {
+        return  EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Organizacion.class.getName() + "," + Clasificacion.class.getName() +
+                         " tipo_organizacion =" + tipoOrganizacion)
+                .getResultList();
+    }*/
 
 
 }

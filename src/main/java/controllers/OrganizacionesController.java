@@ -30,6 +30,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class OrganizacionesController {
 
@@ -306,26 +307,21 @@ public class OrganizacionesController {
         return response;
     }
 
-    public ModelAndView verReporteOrganizaciones(Request request, Response response) {
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("gubernamental",1);
-            put("ong",1);
-            put("empresa",1);
-            put("institucion",1);
-        }}, "/huella_tipo_org.hbs");
-    }
 
     public ModelAndView mostrarComposicionHuella(Request request, Response response){
 
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
-
+        double huellaFija = org.huellaSegunActividad("Combustion fija");
+        double huellaMovil = org.huellaSegunActividad("Combustion movil");
+        double huellaElecticidad = org.huellaSegunActividad("Electricidad adquirida y consumida");
+        double huellaLogistica = org.huellaSegunActividad("Logística de productos y residuos");
         return new ModelAndView(new HashMap<String, Object>(){{
             put("organizacion",org.getRazonSocial());
-            put("fija",1);
-            put("movil",1);
-            put("electricidad",1);
-            put("logistica",1);
+            put("fija",huellaFija);
+            put("movil",huellaMovil);
+            put("electricidad",huellaElecticidad);
+            put("logistica",huellaLogistica);
         }}, "composicion_huella_org.hbs");
     }
 
@@ -334,20 +330,59 @@ public class OrganizacionesController {
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
 
+        Double huellaEnero = org.calcularHuella(1,2022);
+        Double huellaFebrero = org.calcularHuella(2,2022);
+        Double huellaMarzo = org.calcularHuella(3,2022);
+        Double huellaAbril = org.calcularHuella(4,2022);
+        Double huellaMayo = org.calcularHuella(5,2022);
+        Double huellaJunio = org.calcularHuella(6,2022);
+        Double huellaJulio = org.calcularHuella(7,2022);
+        Double huellaAgosto = org.calcularHuella(8,2022);
+        Double huellaSeptiembre = org.calcularHuella(9,2022);
+        Double huellaOctubre = org.calcularHuella(10,2022);
+        Double huellaNoviembre = org.calcularHuella(11,2022);
+        Double huellaDiciembre = org.calcularHuella(12,2022);
+
         return new ModelAndView(new HashMap<String, Object>(){{
             put("organizacion",org.getRazonSocial());
-            put("enero",1);
-            put("febrero",1);
-            put("marzo",1);
-            put("abril",1);
-            put("mayo",1);
-            put("junio",1);
-            put("julio",1);
-            put("agosto",1);
-            put("septiembre",1);
-            put("octubre",1);
-            put("noviembre",1);
-            put("diciembre",1);
+            put("enero",huellaEnero);
+            put("febrero",huellaFebrero);
+            put("marzo",huellaMarzo);
+            put("abril",huellaAbril);
+            put("mayo",huellaMayo);
+            put("junio",huellaJunio);
+            put("julio",huellaJulio);
+            put("agosto",huellaAgosto);
+            put("septiembre",huellaSeptiembre);
+            put("octubre",huellaOctubre);
+            put("noviembre",huellaNoviembre);
+            put("diciembre",huellaDiciembre);
         }}, "evolucion_huella_org.hbs");
+    }
+
+    public ModelAndView verReporteOrganizaciones(Request request, Response response) {
+        double huellaGubernamental = huellaPorTipoOrg(TipoOrganizacion.GUBERNAMENTAL);
+        double huellaONG = huellaPorTipoOrg(TipoOrganizacion.ONG);
+        double huellaEmpresa = huellaPorTipoOrg(TipoOrganizacion.EMPRESA);
+        double huellaInstitucion = huellaPorTipoOrg(TipoOrganizacion.INSTITUCION);
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("gubernamental", huellaGubernamental);
+            put("ong",huellaONG);
+            put("empresa",huellaEmpresa);
+            put("institucion",huellaInstitucion);
+        }}, "/huella_tipo_org.hbs");
+    }
+
+    public Double huellaPorTipoOrg(TipoOrganizacion tipoOrganizacion){
+        double huellaGubernamental = 0.0;
+        List<Organizacion> gubernamentales = this.repositorioDeOrganizaciones.buscarTodos();
+        gubernamentales = gubernamentales.stream().filter(o->o.esTipoOrganizacion(tipoOrganizacion)).
+                collect(Collectors.toList());
+
+        huellaGubernamental += gubernamentales.stream().mapToDouble(o -> o.huellaTotal()).sum();
+        double finalHuellaGubernamental = huellaGubernamental;
+
+        return finalHuellaGubernamental;
     }
 }

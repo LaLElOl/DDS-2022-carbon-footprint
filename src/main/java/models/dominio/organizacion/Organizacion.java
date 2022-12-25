@@ -191,6 +191,21 @@ public class Organizacion extends EntidadPersistente {
         huella += this.datosConsumo.stream().mapToDouble(DatoConsumo::calcularHuella).sum();
 
         return huella;
+    }
 
+    public Double huellaSegunActividad(String actividad){
+        double huella = 0.0;
+        huella += this.datosConsumo.stream().
+                filter(d -> d.esActividad(actividad)).
+                mapToDouble(DatoConsumo ::calcularHuella).sum();
+
+        return huella;
+    }
+
+    public Boolean esTipoOrganizacion( TipoOrganizacion tipoOrganizacion){
+        if(this.clasificacion.getTipoOrganizacion().equals(tipoOrganizacion)){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 }

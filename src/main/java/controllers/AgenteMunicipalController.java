@@ -168,13 +168,17 @@ public class AgenteMunicipalController {
 
         Integer id = new Integer(request.session().attribute("id"));
         AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+        double huellaFija = agenteMunicipal.huellaSegunActividad("Combustion fija");
+        double huellaMovil = agenteMunicipal.huellaSegunActividad("Combustion movil");
+        double huellaElecticidad = agenteMunicipal.huellaSegunActividad("Electricidad adquirida y consumida");
+        double huellaLogistica = agenteMunicipal.huellaSegunActividad("Logística de productos y residuos");
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("municipio",agenteMunicipal.getMunicipio());
-            put("fija",1);
-            put("movil",1);
-            put("electricidad",1);
-            put("logistica",1);
+            put("fija",huellaFija);
+            put("movil",huellaMovil);
+            put("electricidad",huellaElecticidad);
+            put("logistica",huellaLogistica);
         }}, "composicion_huella_municipio.hbs");
     }
 
@@ -182,21 +186,35 @@ public class AgenteMunicipalController {
 
         Integer id = new Integer(request.session().attribute("id"));
         AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+        Double huellaEnero = agenteMunicipal.calcularHuella(1,2022);
+        Double huellaFebrero = agenteMunicipal.calcularHuella(2,2022);
+        Double huellaMarzo = agenteMunicipal.calcularHuella(3,2022);
+        Double huellaAbril = agenteMunicipal.calcularHuella(4,2022);
+        Double huellaMayo = agenteMunicipal.calcularHuella(5,2022);
+        Double huellaJunio = agenteMunicipal.calcularHuella(6,2022);
+        Double huellaJulio = agenteMunicipal.calcularHuella(7,2022);
+        Double huellaAgosto = agenteMunicipal.calcularHuella(8,2022);
+        Double huellaSeptiembre = agenteMunicipal.calcularHuella(9,2022);
+        Double huellaOctubre = agenteMunicipal.calcularHuella(10,2022);
+        Double huellaNoviembre = agenteMunicipal.calcularHuella(11,2022);
+        Double huellaDiciembre = agenteMunicipal.calcularHuella(12,2022);
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("municipio",agenteMunicipal.getMunicipio());
-            put("enero",1);
-            put("febrero",1);
-            put("marzo",1);
-            put("abril",1);
-            put("mayo",1);
-            put("junio",1);
-            put("julio",1);
-            put("agosto",1);
-            put("septiembre",1);
-            put("octubre",1);
-            put("noviembre",1);
-            put("diciembre",1);
+            put("enero",huellaEnero);
+            put("febrero",huellaFebrero);
+            put("marzo",huellaMarzo);
+            put("abril",huellaAbril);
+            put("mayo",huellaMayo);
+            put("junio",huellaJunio);
+            put("julio",huellaJulio);
+            put("agosto",huellaAgosto);
+            put("septiembre",huellaSeptiembre);
+            put("octubre",huellaOctubre);
+            put("noviembre",huellaNoviembre);
+            put("diciembre",huellaDiciembre);
         }}, "evolucion_huella_municipio.hbs");
     }
+
+
 }

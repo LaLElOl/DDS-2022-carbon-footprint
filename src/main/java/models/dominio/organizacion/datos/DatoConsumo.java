@@ -41,4 +41,11 @@ public class DatoConsumo extends EntidadPersistente {
     public double calcularHuella(){
         return this.valor * this.tipoConsumo.getFactorEmision();
     }
+
+    public boolean esActividad( String actividad){
+        if(this.actividad.equals(actividad)){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 }

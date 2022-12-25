@@ -80,7 +80,10 @@ public class Sector extends EntidadPersistente {
 
     public Double calcularHuella() {
 
-        if(
+        if (this.fechaUltimoCalculoHuella == null) {
+        }
+
+        else if (
                 LocalDate.now().minus(2, ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuella) &&
                         this.fechaUltimoCalculoHuella != null
         ){
