@@ -92,7 +92,7 @@ public class OrganizacionesController {
         org.setCuit(request.queryParams("cuit"));
         org.setRazonSocial(request.queryParams("razon_social"));
         TipoOrganizacion tipo = TipoOrganizacion.valueOf(request.queryParams("tipo_organizacion").toUpperCase(Locale.ROOT));
-        ubicacion.setLocalidad(Integer.valueOf(request.queryParams("codigo_postal")));
+        ubicacion.setLocalidadId(Integer.valueOf(request.queryParams("codigo_postal")));
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
         clasif.setClasificacion(request.queryParams("clasificacion"));
@@ -146,7 +146,7 @@ public class OrganizacionesController {
         organizacionBuscada.setRazonSocial(request.queryParams("razon_social"));
         TipoOrganizacion tipo = TipoOrganizacion.valueOf(request.queryParams("tipo_organizacion").toUpperCase(Locale.ROOT));
         clasif.setTipoOrganizacion(tipo);
-        ubicacion.setLocalidad(Integer.valueOf(request.queryParams("codigo_postal")));
+        ubicacion.setLocalidadId(Integer.valueOf(request.queryParams("codigo_postal")));
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
         clasif.setClasificacion(request.queryParams("clasificacion"));

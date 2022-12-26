@@ -22,10 +22,10 @@ public class CalculadorDistanciaAPI {
 
     public Double calcularDistancia(Tramo tramo, Miembro miembro) throws IOException {
         Distancia d = servicioDistancia.distancia(
-                tramo.getInicioTramo().getLocalidad(),
+                tramo.getInicioTramo().getLocalidadId(),
                 tramo.getInicioTramo().getCalle(),
                 String.valueOf(tramo.getInicioTramo().getAltura()),
-                tramo.getFinTramo().getLocalidad(),
+                tramo.getFinTramo().getLocalidadId(),
                 tramo.getFinTramo().getCalle(),
                 tramo.getFinTramo().getAltura());
         return new Double(d.getValor());

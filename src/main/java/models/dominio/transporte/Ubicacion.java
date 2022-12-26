@@ -25,14 +25,22 @@ public class Ubicacion extends EntidadPersistente {
     @Column(name = "latitud")
     private Double latitud;
 
+    @Column(name = "localidad_id")
+    private Integer localidadId;
     @Column(name = "localidad")
-    private Integer localidad;
+    private String localidad;
 
     @Column(name = "longitud")
     private Double longitud;
 
+    @Column(name = "provincia_id")
+    private String provinciaId;
+
     @Column(name = "provincia")
     private String provincia;
+
+    @Column(name = "municipio_id")
+    private String municipioId;
 
     @Column(name = "municipio")
     private String municipio;
