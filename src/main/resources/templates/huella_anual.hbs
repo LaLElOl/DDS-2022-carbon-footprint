@@ -18,7 +18,14 @@
                         <tr>
                             <td >{{valorAnual}}</td>
                             <td>{{fechaAnual}}</td>
-                            <td> <input required="required" name="anio" type="number"></td>
+                            <td>
+                                <select required="required" class="input-select" name="anio">
+                                    <option>Año</option>
+                                    {{#each anio}}
+                                        <option value="{{this}}">{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </td>
 
                                 <td><button style="background-color: #77a785;" class="button is-primary"
                                     type="submit">Calcular</button></td>
