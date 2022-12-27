@@ -173,10 +173,8 @@ public class MiembroController {
     }
 
     public ModelAndView tipoTransporte(Request request, Response response) {
-        Integer id_miembro = new Integer(request.params("id"));
         Integer id_trayecto = new Integer(request.params("id_trayecto"));
         return new ModelAndView(new HashMap<String,Object>(){{
-            put("id_miembro",id_miembro);
             put("id_trayecto",id_trayecto);
         }}, "tipo_transporte.hbs");
     }

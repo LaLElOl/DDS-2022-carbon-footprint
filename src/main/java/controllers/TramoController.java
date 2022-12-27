@@ -146,8 +146,9 @@ public class TramoController {
     }
 
     public ModelAndView tramosParticular(Request request, Response response) {
-        String miembro_id = request.params("id");
-        List<Vehiculo> vehiculos = this.repositorioDeVehiculos.buscarTodosSegunMiembro(miembro_id);
+        String usuario_id = request.session().attribute("id");
+        int miembro_id = this.repositorioDeMiembros.buscarPorUsuario(new Integer(usuario_id)).getId();
+        List<Vehiculo> vehiculos = this.repositorioDeVehiculos.buscarTodosSegunMiembro(String.valueOf(miembro_id));
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("vehiculo", vehiculos);
@@ -160,8 +161,7 @@ public class TramoController {
         Vehiculo vehiculo = this.repositorioDeVehiculos.buscar(vehiculo_id);
         Particular particular = new Particular();
         particular.setVehiculo(vehiculo);
-        Integer id = new Integer(request.params("id"));
-        Miembro miembro = this.repositorioDeMiembros.buscar(id);
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(request.session().attribute("id"));
         Integer id_trayecto = new Integer(request.params("id_trayecto"));
         Trayecto trayecto = this.repositorioDeTrayectos.buscar(id_trayecto);
         Tramo tramo = new Tramo(miembro);
