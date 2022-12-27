@@ -5,19 +5,23 @@
 
             <h2 class="title">Evolución Huella</h2>
             <table class="table m-auto">
-                <form method = "post">
-                    <div class="campo">
-                        <label>Seleccione un Anio</label>
-                        <select class="input-select" name="anio">
-                            <option>Seleccionar</option>
-                            {{#each anio}}
-                                <option value="{{anio}}"></option>
-                            {{/each}}
-                        </select>
-                    </div>
-                </form>
+
 
                 <thead>
+                <form method = "post">
+                    <tr>
+                        <td>
+                            <select class="input-select" name="anio">
+                                <option>Seleccionar</option>
+                                {{#each anio}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                        <td><button style="background-color: #77a785;" class="button is-primary"
+                                    type="submit">Filtrar</button></td>
+                    </tr>
+                </form>
                 <tr>
                     <th>Mes</th>
                     <th>Huella</th>

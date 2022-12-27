@@ -71,6 +71,10 @@ public class Trayecto extends EntidadPersistente {
     }
 
     public Double calcularHuella(Miembro miembro) {
+        if(this.inicio.algunNull()|| this.fin.algunNull()){
+            return 0.0;
+        }
+
         return this.tramos.stream().mapToDouble(t -> t.calcularHuella(miembro)).sum();
     }
 }

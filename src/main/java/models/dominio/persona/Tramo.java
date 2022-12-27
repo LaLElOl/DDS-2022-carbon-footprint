@@ -58,6 +58,9 @@ public class Tramo extends EntidadPersistente {
 
     public Double calcularHuella(Miembro miembro){
         double huella = 0.0;
+        if(this.inicioTramo.algunNull() || this.finTramo.algunNull()){
+            return 0.0;
+        }
         try{
             huella = this.calcularConsumo() * this.calcularDistancia(miembro);
         }catch(IOException e){
