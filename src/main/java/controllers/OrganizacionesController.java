@@ -331,7 +331,6 @@ public class OrganizacionesController {
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
         List<DatoConsumo> datos = this.repositorioDeDatosConsumo.buscarTodos(org.getId().toString());
-        //List<Integer> anios = (List<Integer>) datos.stream().mapToInt(DatoConsumo::anio).distinct().collect(Collectors.toList());
         List<Integer> anios = datos.stream().map(DatoConsumo::anio).distinct().collect(Collectors.toList());
 
         String anio = request.params("anio");
@@ -341,23 +340,23 @@ public class OrganizacionesController {
             int year = new Integer(anio);
 
             String huellaEnero = new DecimalFormat("#.##").format(org.calcularHuella(1,year));
-            Double huellaFebrero = org.calcularHuella(2,year);
-            Double huellaMarzo = org.calcularHuella(3,year);
-            Double huellaAbril = org.calcularHuella(4,year);
-            Double huellaMayo = org.calcularHuella(5,year);
-            Double huellaJunio = org.calcularHuella(6,year);
-            Double huellaJulio = org.calcularHuella(7,year);
+            String huellaFebrero = new DecimalFormat("#.##").format(org.calcularHuella(2,year));
+            String huellaMarzo = new DecimalFormat("#.##").format(org.calcularHuella(3,year));
+            String huellaAbril = new DecimalFormat("#.##").format(org.calcularHuella(4,year));
+            String huellaMayo = new DecimalFormat("#.##").format(org.calcularHuella(5,year));
+            String huellaJunio = new DecimalFormat("#.##").format(org.calcularHuella(6,year));
+            String huellaJulio = new DecimalFormat("#.##").format(org.calcularHuella(7,year));
             String huellaAgosto = new DecimalFormat("#.##").format(org.calcularHuella(8,year));
-            Double huellaSeptiembre = org.calcularHuella(9,year);
-            Double huellaOctubre = org.calcularHuella(10,year);
-            Double huellaNoviembre = org.calcularHuella(11,year);
-            Double huellaDiciembre = org.calcularHuella(12,year);
+            String huellaSeptiembre = new DecimalFormat("#.##").format(org.calcularHuella(9,year));
+            String huellaOctubre = new DecimalFormat("#.##").format(org.calcularHuella(10,year));
+            String huellaNoviembre = new DecimalFormat("#.##").format(org.calcularHuella(11,year));
+            String huellaDiciembre = new DecimalFormat("#.##").format(org.calcularHuella(12,year));
 
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("anio",anios);
                 put("organizacion",org.getRazonSocial());
                 put("enero",huellaEnero);
-                put("febrero",huellaFebrero.shortValue());
+                put("febrero",huellaFebrero);
                 put("marzo",huellaMarzo);
                 put("abril",huellaAbril);
                 put("mayo",huellaMayo);
@@ -406,4 +405,8 @@ public class OrganizacionesController {
     }
 
 
+    public Response enviarAnio(Request request, Response response) {
+        response.redirect("/organizacion/evolucion_huella/" + request.queryParams("anio"));
+        return response;
+    }
 }

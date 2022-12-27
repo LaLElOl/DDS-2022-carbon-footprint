@@ -16,27 +16,27 @@
                 <fieldset>
                     <div class="campo">
                         <label>Usuario</label>
-                        <input required="required" name="usuario" type="text" placeholder="Usuario" value="{{agente_provincial.usuario.nickname}}">
+                        <input required="required" required="required" name="usuario" type="text" placeholder="Usuario" value="{{agente_provincial.usuario.nickname}}">
                     </div>
 
                     <div class="campo">
                         <label>Email</label>
-                        <input required="required" name="email" type="email" placeholder="Email" value="{{agente_provincial.usuario.email}}">
+                        <input required="required" required="required" name="email" type="email" placeholder="Email" value="{{agente_provincial.usuario.email}}">
                     </div>
 
                     <div class="campo">
                         <label>Contraseña</label>
-                        <input required="required" name="contrasenia" type="password" placeholder="Contraseña" value="{{agente_provincial.usuario.contrasenia}}">
+                        <input required="required" required="required" name="contrasenia" type="password" placeholder="Contraseña" value="{{agente_provincial.usuario.contrasenia}}">
                     </div>
 
                     <div class="campo">
                         <label>Nombre</label>
-                        <input required="required" name="nombre" type="text" placeholder="Nombre" value="{{agente_provincial.nombre}}">
+                        <input required="required" required="required" name="nombre" type="text" placeholder="Nombre" value="{{agente_provincial.nombre}}">
                     </div>
 
                     <div class="campo">
                         <label>Provincia</label>
-                        <select required="required" id="provincias" name="provincia" type="text" placeholder="Provincia" value="{{agente_provincial.provincia}}">{{agente_provincial.provincia}}</select>
+                        <select required="required" required="required" id="provincias" name="provincia" type="text" placeholder="Provincia" value="{{agente_provincial.provincia}}">{{agente_provincial.provincia}}</select>
                         <button id="prov_generador" type="button" onclick="obtenerProvincias()">Cargar Provincias</button>
                     </div>
 

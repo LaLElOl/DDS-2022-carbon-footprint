@@ -9,7 +9,7 @@
             <fieldset>
                 <div class="campo">
                     <label>Seleccione una Organizacion</label>
-                    <select class="input-select" name="organizacion_id">
+                    <select required="required" class="input-select" name="organizacion_id">
                             <option>Seleccionar</option>
                         {{#each organizaciones}}
                             <option value="{{id}}">{{razonSocial}}</option>

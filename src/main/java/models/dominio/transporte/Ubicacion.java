@@ -44,4 +44,20 @@ public class Ubicacion extends EntidadPersistente {
 
     @Column(name = "municipio")
     private String municipio;
+
+    public Boolean algunNull(){
+        if(this.altura.equals(null) ||
+        this.calle.equals(null) ||
+        this.latitud == null ||
+        this.localidadId == null ||
+        this.localidad.equals(null) ||
+        this.provinciaId.equals(null) ||
+        this.provincia.equals(null) ||
+        this.municipioId.equals(null) ||
+        this.municipio.equals(null)){
+            return Boolean.TRUE;
+        }
+
+        return Boolean.FALSE;
+    }
 }

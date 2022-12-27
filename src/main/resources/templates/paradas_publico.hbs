@@ -8,7 +8,7 @@
 
                 <div class="campo">
                     <label>Seleccione la Parada Inicio</label>
-                    <select class="input-select" name="parada_inicio_id">
+                    <select required="required" class="input-select" name="parada_inicio_id">
                          <option>Seleccionar</option>
                             {{#each parada}}
                          <option value="{{id}}">{{paradaActual.nombre}}</option>
@@ -18,7 +18,7 @@
 
                 <div class="campo">
                     <label>Seleccione la Parada Destino</label>
-                    <select class="input-select" name="parada_destino_id">
+                    <select required="required" class="input-select" name="parada_destino_id">
                          <option>Seleccionar</option>
                             {{#each parada}}
                          <option value="{{id}}">{{paradaActual.nombre}}</option>

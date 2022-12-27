@@ -9,12 +9,12 @@
 
                     <div class="campo">
                         <label>Nombre de Vehiculo</label>
-                        <input name="nombre" type="text" placeholder="nombre">
+                        <input required="required" name="nombre" type="text" placeholder="nombre">
                     </div>
 
                     <div class="campo">
                         <label>Tipo de Vehículo</label>
-                        <select class="mr-6" name="tipo_vehiculo">
+                        <select required="required" class="mr-6" name="tipo_vehiculo">
                             <option>Auto</option>
                             <option>Moto</option>
                             <option>Camioneta</option>
@@ -23,12 +23,12 @@
 
                     <div class="campo">
                         <label>Factor de Vehículo</label>
-                        <input name="factor_vehiculo" type="number" placeholder="Factor de Vehiculo">
+                        <input required="required" name="factor_vehiculo" type="number" placeholder="Factor de Vehiculo">
                     </div>
 
                     <div class="campo">
                         <label>Seleccione el Combustible</label>
-                        <select class="input-select" name="combustible_id">
+                        <select required="required" class="input-select" name="combustible_id">
                              <option>Seleccionar</option>
                                 {{#each combustible}}
                              <option value="{{id}}">{{nombre}}</option>

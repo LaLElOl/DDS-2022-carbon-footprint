@@ -9,7 +9,7 @@
 
                     <div class="campo">
                         <label>Seleccione la Parada</label>
-                        <select class="input-select" name="parada_id">
+                        <select required="required" class="input-select" name="parada_id">
                              <option>Seleccionar</option>
                                 {{#each parada}}
                              <option value="{{id}}">{{nombre}}</option>
@@ -19,7 +19,7 @@
 
                     <div class="campo">
                         <label>Distancia a la Parada Siguiente</label>
-                        <input name="distancia" type="number" placeholder="Distancia">
+                        <input required="required" name="distancia" type="number" placeholder="Distancia">
                     </div>
 
                     <div class="enviar">

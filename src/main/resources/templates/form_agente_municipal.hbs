@@ -16,31 +16,31 @@
                 <fieldset>
                     <div class="campo">
                         <label>Usuario</label>
-                        <input name="usuario" type="text" placeholder="Usuario" >
+                        <input required="required" name="usuario" type="text" placeholder="Usuario" >
                     </div>
 
                     <div class="campo">
                         <label>Email</label>
-                        <input name="email" type="email" placeholder="Email">
+                        <input required="required" name="email" type="email" placeholder="Email">
                     </div>
 
                     <div class="campo">
                         <label>Contraseña</label>
-                        <input name="contrasenia" type="password" placeholder="Contraseña" >
+                        <input required="required" name="contrasenia" type="password" placeholder="Contraseña" >
                     </div>
 
                     <div class="campo">
                         <label>Nombre</label>
-                        <input name="nombre" type="text" placeholder="Nombre" value="{{agente_municipal.nombre}}">
+                        <input required="required" name="nombre" type="text" placeholder="Nombre" value="{{agente_municipal.nombre}}">
                     </div>
 
                     <div class="campo">
                         <label>Municipio</label>
-                        <input name="municipio" type="text" placeholder="Municipio" value="{{agente_municipal.municipio}}">
+                        <input required="required" name="municipio" type="text" placeholder="Municipio" value="{{agente_municipal.municipio}}">
                     </div>
                     <div class="campo">
                         <label>Provincia</label>
-                        <select class="input-select" name="id_provincial">
+                        <select required="required" class="input-select" name="id_provincial">
                              <option>Seleccionar</option>
                                 {{#each agente_provincial}}
                              <option value="{{id}}">{{provincia}}</option>

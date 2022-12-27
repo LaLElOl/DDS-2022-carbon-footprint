@@ -19,9 +19,9 @@
                         <tr>
                             <td >{{valorMensual}}</td>
                             <td>{{fechaMensual}}</td>
-                            <td> <input name="anio" type="number"></td>
+                            <td> <input required="required" name="anio" type="number"></td>
                             <td>
-                                <select name="mes">
+                                <select required="required" name="mes">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -39,7 +39,7 @@
                                 <td><button style="background-color: #77a785;" class="button is-primary"
                                     type="submit">Calcular</button></td>
                         </tr>
-
+                        </form>
                     </tbody>
                 </table>
         </section>

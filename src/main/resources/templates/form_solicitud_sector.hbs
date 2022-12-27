@@ -9,7 +9,7 @@
             <fieldset>
                 <div class="campo">
                     <label>Seleccione un Sector</label>
-                    <select class="input-select" name="sector_id">
+                    <select required="required" class="input-select" name="sector_id">
                             <option>Seleccionar</option>
                         {{#each sectores}}
                             <option value="{{id}}">{{nombre}}</option>

@@ -113,6 +113,7 @@ public class Router {
             Spark.get("/huella_anual",organizacionesController::mostrarHuellaDeCarbonoAnual, engine);
             Spark.get("/composicion_huella",organizacionesController::mostrarComposicionHuella, engine);
             Spark.get("/evolucion_huella",organizacionesController::mostrarEvolucionHuella, engine);
+            Spark.get("/evolucion_huella/:anio",organizacionesController::mostrarEvolucionHuella, engine);
 
             Spark.get("/editar/:id",organizacionesController::editar, engine);
             Spark.get("/sector/:id",sectorController::mostrar, engine);
@@ -127,6 +128,8 @@ public class Router {
             Spark.post("/huella_anual",organizacionesController::calcularHuellaCarbonoAnual);
             Spark.post("/excel", organizacionesController::guardarConsumo);
             Spark.post("/editar/:id",organizacionesController::modificar);
+            Spark.post("/evolucion_huella",organizacionesController::enviarAnio);
+            Spark.post("/evolucion_huella/:anio",organizacionesController::enviarAnio);
             Spark.post("/:id/sectores/:id_sector/solicitudes",solicitudController::responderSolicitud);
 
         });
