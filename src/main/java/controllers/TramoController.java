@@ -15,6 +15,7 @@ import spark.Response;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class TramoController {
 
@@ -123,7 +124,7 @@ public class TramoController {
     public Response guardarTramoContratado(Request request, Response response) {
         Integer servicio_contratado_id = new Integer(request.queryParams("servicio_contratado_id"));
         ServicioContratado servicioContratado = this.repositorioDeTransportes.buscarServicioContratado(servicio_contratado_id);
-        Integer id = new Integer(request.params("id"));
+        Integer id = new Integer(request.session().attribute("id"));
         Miembro miembro = this.repositorioDeMiembros.buscar(id);
         Integer id_trayecto = new Integer(request.params("id_trayecto"));
         Trayecto trayecto = this.repositorioDeTrayectos.buscar(id_trayecto);
@@ -200,12 +201,13 @@ public class TramoController {
     }
 
     public ModelAndView mostrarParadasPublico(Request request, Response response) {
-        List<Parada> paradas = this.repositorioDeParadas.buscarParadasTransporte(request.params("id_publico"));
+
+        String id_parada = request.params("id_publico");
+        List<Parada> paradas = this.repositorioDeParadas.buscarParadasTransporte(id_parada);
 
         return new ModelAndView(new HashMap<String,Object>(){{
             put("parada",paradas);
         }}, "paradas_publico.hbs");
-
     }
 
     public Response guardarTramoPublico(Request request, Response response) {

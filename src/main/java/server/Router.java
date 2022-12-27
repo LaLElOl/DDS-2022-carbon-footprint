@@ -50,6 +50,9 @@ public class Router {
         Spark.get("/municipio/:provid/:id",serviceGeoController::obtenerMunicipio);
         Spark.get("/localidad/:munid/:id",serviceGeoController::obtenerLocalidad);
 
+
+        Spark.get("/", loginController::mandarALogin);
+
         Spark.path("/home", () -> {
             Spark.before("",authMiddleware::verificarSesion);
             Spark.before("/*",authMiddleware::verificarSesion);
@@ -217,8 +220,8 @@ public class Router {
             Spark.get("/trayecto/:id_trayecto/tramo_publico",tramoController::tramoPublico, engine);
             Spark.get("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::mostrarParadasPublico, engine);
             Spark.get("/trayecto/:id_trayecto/tipo_transporte",miembroController::tipoTransporte,engine);
-            Spark.get("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::tramoEcologico,engine);
-            Spark.get("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::tramoContratado,engine);
+            Spark.get("/trayecto/:id_trayecto/tramo_ecologico",tramoController::tramoEcologico,engine);
+            Spark.get("/trayecto/:id_trayecto/tramo_contratado",tramoController::tramoContratado,engine);
             Spark.get("/trayecto/:id_trayecto/tramo_particular",tramoController::tramosParticular,engine);
             Spark.get("/trayecto/:id_trayecto/tramos", tramoController::mostrarTodos, engine);
             Spark.get("/:id", miembroController::mostrar, engine);
@@ -231,8 +234,8 @@ public class Router {
             Spark.post("/alta_vehiculo", vehiculoController::guardarVehiculo);
             Spark.post("/trayecto/:id_trayecto/tramo_publico",tramoController::recibirTransportePublico);
             Spark.post("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::guardarTramoPublico);
-            Spark.post("/:id/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);
-            Spark.post("/:id/trayecto/:id_trayecto/tramo_contratado",tramoController::guardarTramoContratado);
+            Spark.post("/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);
+            Spark.post("/trayecto/:id_trayecto/tramo_contratado",tramoController::guardarTramoContratado);
             Spark.post("/trayecto/:id_trayecto/tramo_particular",tramoController::guardarTramoParticular);
         });
 

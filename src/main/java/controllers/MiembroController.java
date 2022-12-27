@@ -119,8 +119,8 @@ public class MiembroController {
     public Response modificar(Request request, Response response) {
         String idBuscado = request.session().attribute("id");
         Miembro miembroBuscado = this.repositorioDeMiembros.buscarPorUsuario(new Integer(idBuscado));
-        Ubicacion ubicacion = new Ubicacion();
-        Contacto contacto = new Contacto();
+        Ubicacion ubicacion = miembroBuscado.getDomicilio();
+        Contacto contacto = miembroBuscado.getContacto();
 
         miembroBuscado.setNombre(request.queryParams("nombre"));
         miembroBuscado.setApellido(request.queryParams("apellido"));
@@ -133,7 +133,7 @@ public class MiembroController {
         ubicacion.setLocalidadId(Integer.valueOf(request.queryParams("localidad").split("-")[0]));
         ubicacion.setLocalidad(request.queryParams("localidad").split("-")[1]);TipoDoc tipoDoc = TipoDoc.valueOf(request.queryParams("tipo_doc").toUpperCase(Locale.ROOT));
         miembroBuscado.setNumDoc(Integer.valueOf(request.queryParams("nro_doc")));
-        contacto.setNumTelefono(request.queryParams("numero_telefono"));
+        contacto.setNumTelefono(request.queryParams("telefono"));
         contacto.setEmail(request.queryParams("email"));
         miembroBuscado.setDomicilio(ubicacion);
         miembroBuscado.setContacto(contacto);

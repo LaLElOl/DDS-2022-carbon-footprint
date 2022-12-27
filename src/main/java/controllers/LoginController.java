@@ -54,4 +54,9 @@ public class LoginController {
     public ModelAndView signup(Request request, Response response) {
         return new ModelAndView(null, "/signup.hbs");
     }
+
+    public Response mandarALogin(Request request, Response response) {
+        response.redirect("/login");
+        return response;
+    }
 }
