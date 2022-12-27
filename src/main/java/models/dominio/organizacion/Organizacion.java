@@ -208,4 +208,8 @@ public class Organizacion extends EntidadPersistente {
         }
         return Boolean.FALSE;
     }
+
+    public List<Integer> aniosDatosConsumos(){
+        return this.datosConsumo.stream().map(DatoConsumo::anio).distinct().collect(Collectors.toList());
+    }
 }

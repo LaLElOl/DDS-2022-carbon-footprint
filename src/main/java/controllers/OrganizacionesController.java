@@ -330,8 +330,7 @@ public class OrganizacionesController {
 
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
-        List<DatoConsumo> datos = this.repositorioDeDatosConsumo.buscarTodos(org.getId().toString());
-        List<Integer> anios = datos.stream().map(DatoConsumo::anio).distinct().collect(Collectors.toList());
+        List<Integer> anios = org.aniosDatosConsumos();
 
         String anio = request.params("anio");
 

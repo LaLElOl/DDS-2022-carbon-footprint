@@ -5,6 +5,7 @@ import models.dominio.EntidadPersistente;
 import models.dominio.Usuario;
 import lombok.Getter;
 import lombok.Setter;
+import models.dominio.organizacion.datos.DatoConsumo;
 import models.dominio.organizacion.datos.EPeriodicidad;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -100,5 +102,13 @@ public class AgenteMunicipal extends EntidadPersistente {
         huella += this.organizaciones.stream().mapToDouble(o -> o.huellaSegunActividad(actividad)).sum();
 
         return huella;
+    }
+
+    public List<Integer> aniosDatosConsumos(){
+        List<Integer> lista = new ArrayList<>();
+
+        this.organizaciones.stream().forEach(o -> lista.addAll(o.aniosDatosConsumos()));
+
+        return lista;
     }
 }
