@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -329,35 +330,53 @@ public class OrganizacionesController {
 
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+        List<DatoConsumo> datos = this.repositorioDeDatosConsumo.buscarTodos(org.getId().toString());
+        List<String> anios = datos.stream().map(DatoConsumo::anio).distinct().collect(Collectors.toList());
 
-        Double huellaEnero = org.calcularHuella(1,2022);
-        Double huellaFebrero = org.calcularHuella(2,2022);
-        Double huellaMarzo = org.calcularHuella(3,2022);
-        Double huellaAbril = org.calcularHuella(4,2022);
-        Double huellaMayo = org.calcularHuella(5,2022);
-        Double huellaJunio = org.calcularHuella(6,2022);
-        Double huellaJulio = org.calcularHuella(7,2022);
-        Double huellaAgosto = org.calcularHuella(8,2022);
-        Double huellaSeptiembre = org.calcularHuella(9,2022);
-        Double huellaOctubre = org.calcularHuella(10,2022);
-        Double huellaNoviembre = org.calcularHuella(11,2022);
-        Double huellaDiciembre = org.calcularHuella(12,2022);
+        String anio = request.params("anio");
 
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("organizacion",org.getRazonSocial());
-            put("enero",huellaEnero);
-            put("febrero",huellaFebrero);
-            put("marzo",huellaMarzo);
-            put("abril",huellaAbril);
-            put("mayo",huellaMayo);
-            put("junio",huellaJunio);
-            put("julio",huellaJulio);
-            put("agosto",huellaAgosto);
-            put("septiembre",huellaSeptiembre);
-            put("octubre",huellaOctubre);
-            put("noviembre",huellaNoviembre);
-            put("diciembre",huellaDiciembre);
-        }}, "evolucion_huella_org.hbs");
+        if(anio != null){
+
+            int year = new Integer(anio);
+
+            String huellaEnero = new DecimalFormat("#.##").format(org.calcularHuella(1,year));
+            Double huellaFebrero = org.calcularHuella(2,year);
+            Double huellaMarzo = org.calcularHuella(3,year);
+            Double huellaAbril = org.calcularHuella(4,year);
+            Double huellaMayo = org.calcularHuella(5,year);
+            Double huellaJunio = org.calcularHuella(6,year);
+            Double huellaJulio = org.calcularHuella(7,year);
+            String huellaAgosto = new DecimalFormat("#.##").format(org.calcularHuella(8,year));
+            Double huellaSeptiembre = org.calcularHuella(9,year);
+            Double huellaOctubre = org.calcularHuella(10,year);
+            Double huellaNoviembre = org.calcularHuella(11,year);
+            Double huellaDiciembre = org.calcularHuella(12,year);
+
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("anio",anios);
+                put("organizacion",org.getRazonSocial());
+                put("enero",huellaEnero);
+                put("febrero",huellaFebrero.shortValue());
+                put("marzo",huellaMarzo);
+                put("abril",huellaAbril);
+                put("mayo",huellaMayo);
+                put("junio",huellaJunio);
+                put("julio",huellaJulio);
+                put("agosto",huellaAgosto);
+                put("septiembre",huellaSeptiembre);
+                put("octubre",huellaOctubre);
+                put("noviembre",huellaNoviembre);
+                put("diciembre",huellaDiciembre);
+            }}, "evolucion_huella_org.hbs");
+
+        }
+        else{
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("anio",anios);
+            }}, "evolucion_huella_org.hbs");
+        }
+
+
     }
 
     public ModelAndView verReporteOrganizaciones(Request request, Response response) {
@@ -380,9 +399,10 @@ public class OrganizacionesController {
         gubernamentales = gubernamentales.stream().filter(o->o.esTipoOrganizacion(tipoOrganizacion)).
                 collect(Collectors.toList());
 
-        huellaGubernamental += gubernamentales.stream().mapToDouble(o -> o.huellaTotal()).sum();
-        double finalHuellaGubernamental = huellaGubernamental;
+        huellaGubernamental += gubernamentales.stream().mapToDouble(Organizacion::huellaTotal).sum();
 
-        return finalHuellaGubernamental;
+        return huellaGubernamental;
     }
+
+
 }

@@ -2,7 +2,10 @@ package models.repositorios;
 
 import helpers.EntityManagerHelper;
 import models.dominio.organizacion.Organizacion;
+import models.dominio.organizacion.Sector;
 import models.dominio.organizacion.datos.DatoConsumo;
+
+import java.util.List;
 
 
 public class RepositorioDeDatosConsumo {
@@ -16,10 +19,10 @@ public class RepositorioDeDatosConsumo {
             EntityManagerHelper.commit();
         }
 
-        public Organizacion buscarPorUsuario(Integer id) {
-            return (Organizacion) EntityManagerHelper
-                    .getEntityManager()
-                    .createQuery("from " + Organizacion.class.getName() + " where" +  + id)
-                    .getSingleResult();
-        }
+    public List buscarTodos(String org_id) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + DatoConsumo.class.getName() + " where organizacion_id = " + org_id )
+                .getResultList();
+    }
 }

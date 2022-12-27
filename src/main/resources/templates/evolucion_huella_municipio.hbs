@@ -5,39 +5,73 @@
 
             <h2 class="title">Evolución Huella</h2>
             <table class="table m-auto">
+                <form method = "post">
+                    <div class="campo">
+                        <label>Seleccione un Anio</label>
+                        <select class="input-select" name="anio">
+                            <option>Seleccionar</option>
+                            {{#each anio}}
+                                <option value="{{anio}}"></option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </form>
+
                 <thead>
-                    <tr>
-                        <th>Municipio</th>
-                        <th>Enero</th>
-                        <th>Febrero</th>
-                        <th>Marzo</th>
-                        <th>Abril</th>
-                        <th>Mayo</th>
-                        <th>Junio</th>
-                        <th>Julio</th>
-                        <th>Agosto</th>
-                        <th>Septiembre</th>
-                        <th>Octubre</th>
-                        <th>Noviembre</th>
-                        <th>Diciembre</th>
-                    </tr>
+                <tr>
+                    <th>Mes</th>
+                    <th>Huella</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{{municipio}}</td>
-                        <td>{{enero}}</td>
-                        <td>{{febrero}}</td>
-                        <td>{{marzo}}</td>
-                        <td>{{abril}}</td>
-                        <td>{{mayo}}</td>
-                        <td>{{junio}}</td>
-                        <td>{{julio}}</td>
-                        <td>{{agosto}}</td>
-                        <td>{{septiembre}}</td>
-                        <td>{{octubre}}</td>
-                        <td>{{noviembre}}</td>
-                        <td>{{diciembre}}</td>
-                    </tr>
+                <tr>
+                    <td>Enero</td>
+                    <td>{{enero}}</td>
+                </tr>
+                <tr>
+                    <td>Febrero</td>
+                    <td>{{febrero}}</td>
+                </tr>
+                <tr>
+                    <td>Marzo</td>
+                    <td>{{marzo}}</td>
+                </tr>
+                <tr>
+                    <td>Abril</td>
+                    <td>{{abril}}</td>
+                </tr>
+                <tr>
+                    <td>Mayo</td>
+                    <td>{{mayo}}</td>
+                </tr>
+                <tr>
+                    <td>Junio</td>
+                    <td>{{junio}}</td>
+                </tr>
+                <tr>
+                    <td>Julio</td>
+                    <td>{{julio}}</td>
+                </tr>
+                <tr>
+                    <td>Agosto</td>
+                    <td>{{agosto}}</td>
+                </tr>
+                <tr>
+                    <td>Septiembre</td>
+                    <td>{{septiembre}}</td>
+                </tr>
+                <tr>
+                    <td>Octubre</td>
+                    <td>{{octubre}}</td>
+                </tr>
+                <tr>
+                    <td>Noviembre</td>
+                    <td>{{noviembre}}</td>
+                </tr>
+                <tr>
+                    <td>Diciembre</td>
+                    <td>{{diciembre}}</td>
+                </tr>
                 </tbody>
             </table>
 
