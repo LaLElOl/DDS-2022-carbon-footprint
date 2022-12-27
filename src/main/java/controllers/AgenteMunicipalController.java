@@ -15,6 +15,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -186,35 +187,58 @@ public class AgenteMunicipalController {
 
         Integer id = new Integer(request.session().attribute("id"));
         AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
-        Double huellaEnero = agenteMunicipal.calcularHuella(1,2022);
-        Double huellaFebrero = agenteMunicipal.calcularHuella(2,2022);
-        Double huellaMarzo = agenteMunicipal.calcularHuella(3,2022);
-        Double huellaAbril = agenteMunicipal.calcularHuella(4,2022);
-        Double huellaMayo = agenteMunicipal.calcularHuella(5,2022);
-        Double huellaJunio = agenteMunicipal.calcularHuella(6,2022);
-        Double huellaJulio = agenteMunicipal.calcularHuella(7,2022);
-        Double huellaAgosto = agenteMunicipal.calcularHuella(8,2022);
-        Double huellaSeptiembre = agenteMunicipal.calcularHuella(9,2022);
-        Double huellaOctubre = agenteMunicipal.calcularHuella(10,2022);
-        Double huellaNoviembre = agenteMunicipal.calcularHuella(11,2022);
-        Double huellaDiciembre = agenteMunicipal.calcularHuella(12,2022);
+        List<Integer> anios = agenteMunicipal.aniosDatosConsumos();
 
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("municipio",agenteMunicipal.getMunicipio());
-            put("enero",huellaEnero);
-            put("febrero",huellaFebrero);
-            put("marzo",huellaMarzo);
-            put("abril",huellaAbril);
-            put("mayo",huellaMayo);
-            put("junio",huellaJunio);
-            put("julio",huellaJulio);
-            put("agosto",huellaAgosto);
-            put("septiembre",huellaSeptiembre);
-            put("octubre",huellaOctubre);
-            put("noviembre",huellaNoviembre);
-            put("diciembre",huellaDiciembre);
-        }}, "evolucion_huella_municipio.hbs");
+
+        String anio = request.params("anio");
+
+        if(anio != null){
+
+            int year = new Integer(anio);
+
+            String huellaEnero = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(1,year));
+            String huellaFebrero = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(2,year));
+            String huellaMarzo = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(3,year));
+            String huellaAbril = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(4,year));
+            String huellaMayo = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(5,year));
+            String huellaJunio = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(6,year));
+            String huellaJulio = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(7,year));
+            String huellaAgosto = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(8,year));
+            String huellaSeptiembre = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(9,year));
+            String huellaOctubre = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(10,year));
+            String huellaNoviembre = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(11,year));
+            String huellaDiciembre = new DecimalFormat("#.##").format(agenteMunicipal.calcularHuella(12,year));
+
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("anio",anios);
+                put("municipio",agenteMunicipal.getMunicipio());
+                put("enero",huellaEnero);
+                put("febrero",huellaFebrero);
+                put("marzo",huellaMarzo);
+                put("abril",huellaAbril);
+                put("mayo",huellaMayo);
+                put("junio",huellaJunio);
+                put("julio",huellaJulio);
+                put("agosto",huellaAgosto);
+                put("septiembre",huellaSeptiembre);
+                put("octubre",huellaOctubre);
+                put("noviembre",huellaNoviembre);
+                put("diciembre",huellaDiciembre);
+            }}, "evolucion_huella_municipio.hbs");
+
+        }
+        else{
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("anio",anios);
+            }}, "evolucion_huella_municipio.hbs");
+        }
+
+
     }
 
 
+    public Response enviarAnio(Request request, Response response) {
+        response.redirect("/agente_municipal/evolucion_huella/" + request.queryParams("anio"));
+        return response;
+    }
 }

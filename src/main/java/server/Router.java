@@ -157,12 +157,15 @@ public class Router {
             Spark.get("/total_huella",agenteMunicipalController::mostrarTotalHuella, engine);
             Spark.get("/composicion_huella",agenteMunicipalController::mostrarComposicionHuella, engine);
             Spark.get("/evolucion_huella",agenteMunicipalController::mostrarEvolucionHuella, engine);
+            Spark.get("/evolucion_huella/:anio",agenteMunicipalController::mostrarEvolucionHuella, engine);
 
 
             Spark.get("/:id",agenteMunicipalController::mostrar, engine);
             Spark.get("/editar/:id",agenteMunicipalController::editar, engine);
 
             Spark.post("/huella_carbono",agenteMunicipalController::calcularHuellaCarbono);
+            Spark.post("/evolucion_huella",agenteMunicipalController::enviarAnio);
+            Spark.post("/evolucion_huella/:anio",agenteMunicipalController::enviarAnio);
             Spark.post("/editar/:id", agenteMunicipalController::modificar);
 
         });
