@@ -49,7 +49,7 @@ public class DatoConsumo extends EntidadPersistente {
         return Boolean.FALSE;
     }
 
-    public String anio(){
-        return String.valueOf(this.periodo.getYear());
+    public Integer anio(){
+        return this.periodo.getYear();
     }
 }
