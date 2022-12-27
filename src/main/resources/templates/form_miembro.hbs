@@ -11,60 +11,60 @@
                 <fieldset>
                     <div class="campo">
                         <label>Usuario</label>
-                        <input name="usuario" type="text" placeholder="Usuario" value="{{miembro.usuario.nickname}}">
+                        <input name="usuario" type="text" placeholder="Usuario" required="required" value="{{miembro.usuario.nickname}}">
                     </div>
 
                     <div class="campo">
                         <label>Email</label>
-                        <input name="email" type="email" placeholder="Email" value="{{miembro.usuario.email}}">
+                        <input name="email" type="email" placeholder="Email" required="required" value="{{miembro.usuario.email}}">
                     </div>
 
                     <div class="campo">
                         <label>Contraseña</label>
-                        <input name="contrasenia" type="password" placeholder="Contraseña" value="{{miembro.usuario.contrasenia}}">
+                        <input name="contrasenia" type="password" placeholder="Contraseña" required="required" value="{{miembro.usuario.contrasenia}}">
                     </div>
 
                     <div class="campo">
                         <label>Nombre</label>
-                        <input name="nombre" type="text" placeholder="Nombre" value="{{miembro.nombre}}">
+                        <input name="nombre" type="text" placeholder="Nombre" required="required" value="{{miembro.nombre}}">
                     </div>
 
                     <div class="campo">
                         <label>Apellido</label>
-                        <input name="apellido" type="text" placeholder="Apellido" value="{{miembro.apellido}}">
+                        <input name="apellido" type="text" placeholder="Apellido" required="required" value="{{miembro.apellido}}">
                     </div>
 
                     <div class="campo">
                         <label>Provincia</label>
-                        <select id="provincias" name="provincia" type="text" placeholder="Provincia" value="{{miembro.domicilio.provincia}}"></select>
+                        <select required="required" id="provincias" name="provincia" type="text" placeholder="Provincia" value="{{miembro.domicilio.provinciaId}}-{{miembro.domicilio.provincia}}">{{miembro.domicilio.provincia}}</select>
                         <button id="prov_generador" type="button" onclick="obtenerProvincias()">Cargar Provincias</button>
                     </div>
 
                     <div class="campo">
                         <label>Municipio</label>
-                        <select id="municipios" name="municipio" type="text" placeholder="Municipio" value="{{miembro.domicilio.municipio}}"></select>
+                        <select required="required" id="municipios" name="municipio" type="text" placeholder="Municipio" value="{{miembro.domicilio.municipio}}"></select>
                         <button id="mun_generador" type="button" onclick="obtenerMunicipios()">Cargar Municipios</button>
                     </div>
 
                     <div class="campo">
                         <label>Localidad</label>
-                        <select id="localidades" name="localidad" type="text" placeholder="Localidad" value="{{miembro.domicilio.localidad}}"></select>
+                        <select required="required" id="localidades" name="localidad" type="text" placeholder="Localidad" value="{{miembro.domicilio.localidad}}"></select>
                         <button id="loc_generador" type="button" onclick="obtenerLocalidades()">Cargar Localidades</button>
                     </div>
 
                     <div class="campo">
                         <label>Calle</label>
-                        <input name="calle" type="text" placeholder="Calle" value="{{miembro.domicilio.calle}}">
+                        <input required="required" name="calle" type="text" placeholder="Calle" value="{{miembro.domicilio.calle}}">
                     </div>
 
                     <div class="campo">
                         <label>Altura</label>
-                        <input name="altura" type="number" placeholder="Altura" value="{{miembro.domicilio.altura}}">
+                        <input required="required" name="altura" type="number" placeholder="Altura" value="{{miembro.domicilio.altura}}">
                     </div>
 
                     <div class="campo">
                         <label>Tipo de Documento</label>
-                        <select name="tipo_doc" class="mr-6">
+                        <select required="required" name="tipo_doc" class="mr-6">
                         {{!-- llevar tipoDoc a tabla aparte para poder listarlo desde db --}}
                             <option>DNI</option>
                             <option>LE</option>
@@ -75,12 +75,12 @@
 
                     <div class="campo">
                         <label>Numero de Documento</label>
-                        <input name="nro_doc" type="text" placeholder="Numero de Documento" value="{{miembro.numDoc}}">
+                        <input required="required" name="nro_doc" type="text" placeholder="Numero de Documento" value="{{miembro.numDoc}}">
                     </div>
 
                     <div class="campo">
                         <label>Teléfono</label>
-                        <input name="telefono" type="text" placeholder="Teléfono" value="{{miembro.contacto.numTelefono}}">
+                        <input required="required" name="telefono" type="text" placeholder="Teléfono" value="{{miembro.contacto.numTelefono}}">
                     </div>
 
                     <div class="enviar">

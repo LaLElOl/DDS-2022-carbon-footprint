@@ -36,7 +36,7 @@ public class ParadaController {
         parada.setNombre(request.queryParams("nombre"));
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
-        ubicacion.setLocalidad(Integer.valueOf(request.queryParams("localidad")));
+        ubicacion.setLocalidadId(Integer.valueOf(request.queryParams("localidad")));
         ubicacion.setProvincia(request.queryParams("provincia"));
         ubicacion.setMunicipio(request.queryParams("municipio"));
 

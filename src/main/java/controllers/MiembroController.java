@@ -83,10 +83,12 @@ public class MiembroController {
         miembro.setApellido(request.queryParams("apellido"));
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
-        ubicacion.setProvincia(request.queryParams("provincia"));
-        ubicacion.setMunicipio(request.queryParams("municipio"));
-        //TODO hay que ver porque la api recibe un Integer, no un String. Para los otros valores anteriores tambien me devuelve el id
-        ubicacion.setLocalidad(Integer.valueOf(request.queryParams("localidad")));
+        ubicacion.setProvinciaId(request.queryParams("provincia").split("-")[0]);
+        ubicacion.setProvincia(request.queryParams("provincia").split("-")[1]);
+        ubicacion.setMunicipioId(request.queryParams("municipio").split("-")[0]);
+        ubicacion.setMunicipio(request.queryParams("municipio").split("-")[1]);
+        ubicacion.setLocalidadId(Integer.valueOf(request.queryParams("localidad").split("-")[0]));
+        ubicacion.setLocalidad(request.queryParams("localidad").split("-")[1]);
         TipoDoc tipoDoc = TipoDoc.valueOf(request.queryParams("tipo_doc").toUpperCase(Locale.ROOT));
         miembro.setNumDoc(Integer.valueOf(request.queryParams("nro_doc")));
         contacto.setNumTelefono(request.queryParams("telefono"));
