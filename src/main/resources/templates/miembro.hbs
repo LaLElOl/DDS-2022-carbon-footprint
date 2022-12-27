@@ -1,0 +1,81 @@
+{{#partial "contenido" }}
+    <body>
+    <main>
+        <section>
+            {{#if miembro}}
+                <h2 class="contacto title">Editar Miembro</h2>
+            {{else}}
+                <h2 class="contacto title">Alta de Miembro</h2>
+            {{/if}}
+            <fieldset>
+                <div class="campo">
+                    <label>Usuario</label>
+                    <small>{{miembro.usuario.nickname}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Email</label>
+                    <small>{{miembro.usuario.email}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Nombre</label>
+                    <small>{{miembro.nombre}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Apellido</label>
+                    <small>{{miembro.apellido}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Provincia</label>
+                    <small>{{miembro.domicilio.provincia}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Municipio</label>
+                    <small>{{miembro.domicilio.municipio}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Localidad</label>
+                    <small>{{miembro.domicilio.localidad}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Calle</label>
+                    <small>{{miembro.domicilio.calle}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Altura</label>
+                    <small>{{miembro.domicilio.altura}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Tipo de Documento</label>
+                    <small>{{miembro.tipoDoc}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Numero de Documento</label>
+                    <small>{{miembro.numDoc}}</small>
+                </div>
+
+                <div class="campo">
+                    <label>Teléfono</label>
+                    <small>{{miembro.contacto.numTelefono}}</small>
+                </div>
+
+                <div class="enviar">
+                    <button style="margin-left: 218px;background-color: #77a785;" class="boton" onclick="location.href='miembro/editar'">Editar</button>
+                </div>
+
+            </fieldset>
+
+        </section>
+    </main>
+    </body>
+{{/partial}}
+{{> base.hbs }}

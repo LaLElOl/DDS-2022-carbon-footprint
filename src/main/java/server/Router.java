@@ -178,8 +178,8 @@ public class Router {
             Spark.before("/*",authMiddleware::verificarAgenteProvincial);
 
             Spark.get("",agenteProvincialController::mostrarTodos, engine);
-            Spark.get("/:id",agenteProvincialController::mostrar, engine);
             Spark.get("/editar/:id",agenteProvincialController::editar, engine);
+            Spark.get("/:id",agenteProvincialController::mostrar, engine);
             Spark.post("/agente_municipal/editar/:id", agenteProvincialController::modificar);
 
         });
@@ -195,7 +195,7 @@ public class Router {
             Spark.before("",authMiddleware::verificarMiembro);
             Spark.before("/*",authMiddleware::verificarMiembro);
 
-            Spark.get("", miembroController::mostrarTodos, engine);
+            Spark.get("", miembroController::mostrar, engine);
 
             Spark.get("/unirse_org", miembroController::unirseAOrg, engine);
             Spark.get("/unirse_sector/:id", miembroController::mostrarSectoresOrganizacion, engine);
@@ -206,7 +206,7 @@ public class Router {
             Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
             Spark.get("/tramos",tramoController::tramoPublico, engine);
 
-            Spark.get("/editar/:id", miembroController::editar, engine);
+            Spark.get("/editar", miembroController::editar, engine);
 
 
             Spark.get("/alta_vehiculo", vehiculoController::altaVehiculo, engine);
@@ -224,7 +224,7 @@ public class Router {
             Spark.post("/alta_tramo", tramoController::guardar);
             Spark.post("/unirse_org", miembroController::recibirOrganizacion);
             Spark.post("/unirse_sector/:id", solicitudController::generarSolicitud);
-            Spark.post("/editar/:id", miembroController::modificar);
+            Spark.post("/editar", miembroController::modificar);
             Spark.post("/alta_vehiculo", vehiculoController::guardarVehiculo);
             Spark.post("/trayecto/:id_trayecto/tramo_publico",tramoController::recibirTransportePublico);
             Spark.post("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::guardarTramoPublico);

@@ -44,13 +44,12 @@ public class MiembroController {
     }
 
     public ModelAndView mostrar(Request request, Response response) {
-        String idBuscado = request.params("id");
-        Miembro miembroBuscado = this.repositorioDeMiembros.buscar(new Integer(idBuscado));
+        String idBuscado = request.session().attribute("id");
+        Miembro miembroBuscado = this.repositorioDeMiembros.buscarPorUsuario(new Integer(idBuscado));
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("miembro", miembroBuscado);
-            //put("cant_tareas", servicioBuscado.cantTareas());//TRAMOS,TRAYECTOS?
-        }}, "miembro.hbs"); // TODO REVISAR
+        }}, "miembro.hbs");
     }
 
     public ModelAndView mostrarSegunSector(Request request, Response response) {
@@ -106,20 +105,20 @@ public class MiembroController {
     }
 
     public ModelAndView editar(Request request, Response response) {
-        String idBuscado = request.params("id");
+        String idBuscado = request.session().attribute("id");
         Miembro miembroBuscado = this.repositorioDeMiembros.buscar(new Integer(idBuscado));
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("miembro", miembroBuscado);
 
-        }}, "form_miembro.hbs");//TODO REVISAR
+        }}, "form_miembro.hbs");
 
     }
 
 
     public Response modificar(Request request, Response response) {
-        String idBuscado = request.params("id");
-        Miembro miembroBuscado = this.repositorioDeMiembros.buscar(new Integer(idBuscado));
+        String idBuscado = request.session().attribute("id");
+        Miembro miembroBuscado = this.repositorioDeMiembros.buscarPorUsuario(new Integer(idBuscado));
         Ubicacion ubicacion = new Ubicacion();
         Contacto contacto = new Contacto();
 
@@ -127,7 +126,12 @@ public class MiembroController {
         miembroBuscado.setApellido(request.queryParams("apellido"));
         ubicacion.setCalle(request.queryParams("calle"));
         ubicacion.setAltura(Integer.valueOf(request.queryParams("altura")));
-        TipoDoc tipoDoc = TipoDoc.valueOf(request.queryParams("tipo_doc").toUpperCase(Locale.ROOT));
+        ubicacion.setProvinciaId(request.queryParams("provincia").split("-")[0]);
+        ubicacion.setProvincia(request.queryParams("provincia").split("-")[1]);
+        ubicacion.setMunicipioId(request.queryParams("municipio").split("-")[0]);
+        ubicacion.setMunicipio(request.queryParams("municipio").split("-")[1]);
+        ubicacion.setLocalidadId(Integer.valueOf(request.queryParams("localidad").split("-")[0]));
+        ubicacion.setLocalidad(request.queryParams("localidad").split("-")[1]);TipoDoc tipoDoc = TipoDoc.valueOf(request.queryParams("tipo_doc").toUpperCase(Locale.ROOT));
         miembroBuscado.setNumDoc(Integer.valueOf(request.queryParams("nro_doc")));
         contacto.setNumTelefono(request.queryParams("numero_telefono"));
         contacto.setEmail(request.queryParams("email"));
@@ -137,7 +141,7 @@ public class MiembroController {
 
         this.repositorioDeMiembros.guardar(miembroBuscado);
 
-        response.redirect("/index");
+        response.redirect("/home");
         return response;
     }
 
