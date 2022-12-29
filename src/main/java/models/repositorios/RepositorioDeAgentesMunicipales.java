@@ -37,5 +37,12 @@ public class RepositorioDeAgentesMunicipales {
                 .getSingleResult();
     }
 
+    public List buscarPorAgenteProvincial(Integer id) {
+        return  EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + AgenteMunicipal.class.getName() + " where agente_provincial_id =" + id)
+                .getResultList();
+    }
+
 
 }

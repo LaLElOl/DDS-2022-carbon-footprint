@@ -109,6 +109,6 @@ public class AgenteMunicipal extends EntidadPersistente {
 
         this.organizaciones.stream().forEach(o -> lista.addAll(o.aniosDatosConsumos()));
 
-        return lista;
+        return lista.stream().distinct().collect(Collectors.toList());
     }
 }

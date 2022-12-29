@@ -153,6 +153,75 @@ public class AgenteMunicipalController {
         }}, "huella_carbono.hbs");
     }
 
+    public ModelAndView mostrarHuellaDeCarbono(Request request, Response response) {
+        return new ModelAndView(null, "/huella_municipal.hbs");
+    }
+
+    public ModelAndView mostrarHuellaDeCarbonoMensual(Request request, Response response) {
+        Integer id = new Integer(request.session().attribute("id"));
+        AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+        List<Integer> anios = agenteMunicipal.aniosDatosConsumos();
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("fechaMensual",agenteMunicipal.getFechaUltimoCalculoHuellaMensual());
+            put("valorMensual",agenteMunicipal.getHuellaCarbonoActualMensual());
+            put("anio",anios);
+        }}, "/huella_mensual.hbs");
+    }
+
+    public ModelAndView mostrarHuellaDeCarbonoAnual(Request request, Response response) {
+        Integer id = new Integer(request.session().attribute("id"));
+        AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+        List<Integer> anios = agenteMunicipal.aniosDatosConsumos();
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("fechaAnual",agenteMunicipal.getFechaUltimoCalculoHuellaAnual());
+            put("valorAnual",agenteMunicipal.getHuellaCarbonoActualAnual());
+            put("anio",anios);
+        }}, "/huella_anual.hbs");
+    }
+
+
+    public Response calcularHuellaCarbonoMensual(Request request, Response response) {
+
+        int mes = new Integer(request.queryParams("mes"));
+        EPeriodicidad periodicidad = EPeriodicidad.MENSUAL;
+        LocalDate fecha = LocalDate.now();
+
+        Integer id = new Integer(request.session().attribute("id"));
+        AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+
+        int anio = new Integer(request.queryParams("anio"));
+        agenteMunicipal.calcularHuella(mes,anio);
+
+        this.repositorioAgenteMunicipal.guardar(agenteMunicipal);
+
+        response.redirect("/agente_municipal/huella_mensual");
+        return response;
+    }
+
+
+    public Response calcularHuellaCarbonoAnual(Request request, Response response) {
+
+
+        EPeriodicidad periodicidad = EPeriodicidad.ANUAL;
+        LocalDate fecha = LocalDate.now();
+
+        Integer id = new Integer(request.session().attribute("id"));
+        AgenteMunicipal agenteMunicipal = this.repositorioAgenteMunicipal.buscarPorUsuario(id);
+
+        int anio = new Integer(request.queryParams("anio"));
+        agenteMunicipal.calcularHuella(0,anio);
+
+        this.repositorioAgenteMunicipal.guardar(agenteMunicipal);
+
+        response.redirect("/agente_municipal/huella_anual");
+        return response;
+    }
+
+
+
+
     public ModelAndView mostrarTotalHuella(Request request, Response response){
 
         Integer id = new Integer(request.session().attribute("id"));
