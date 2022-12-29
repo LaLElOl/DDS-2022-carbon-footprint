@@ -75,6 +75,7 @@ public class Organizacion extends EntidadPersistente {
     private AgenteMunicipal agenteMunicipal;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     private List<DatoConsumo> datosConsumo;
 
     public Organizacion(){

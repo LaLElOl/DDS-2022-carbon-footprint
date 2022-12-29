@@ -243,8 +243,8 @@ public class OrganizacionesController {
         List<Integer> anios = org.aniosDatosConsumos();
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("fechaMensual",org.getFechaUltimoCalculoHuellaMensual());
             put("valorMensual",org.getHuellaCarbonoActualMensual());
+            put("fechaMensual",org.getFechaUltimoCalculoHuellaMensual());
             put("anio",anios);
         }}, "/huella_mensual.hbs");
     }

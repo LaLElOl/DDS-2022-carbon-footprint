@@ -45,6 +45,18 @@ public class Ubicacion extends EntidadPersistente {
     @Column(name = "municipio")
     private String municipio;
 
+    public Ubicacion(){
+        altura = 0;
+        calle = "";
+        latitud = 0.0;
+        longitud = 0.0;
+        municipio = "";
+        municipioId = "";
+        localidad = "";
+        localidadId = 0;
+        provincia = "";
+        provinciaId = "";
+    }
     public Boolean algunNull(){
         if(this.altura.equals(null) ||
         this.calle.equals(null) ||

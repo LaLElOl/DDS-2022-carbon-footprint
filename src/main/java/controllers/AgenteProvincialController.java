@@ -118,7 +118,7 @@ public class AgenteProvincialController {
             put("fechaMensual",agenteProvincial.getFechaUltimoCalculoHuellaMensual());
             put("valorMensual",agenteProvincial.getHuellaCarbonoActualMensual());
             put("anio",anios);
-        }}, "/huella_mensual.hbs");
+        }}, "huella_mensual.hbs");
     }
 
     public ModelAndView mostrarHuellaDeCarbonoAnual(Request request, Response response) {
@@ -130,7 +130,7 @@ public class AgenteProvincialController {
             put("fechaAnual",agenteProvincial.getFechaUltimoCalculoHuellaAnual());
             put("valorAnual",agenteProvincial.getHuellaCarbonoActualAnual());
             put("anio",anios);
-        }}, "/huella_anual.hbs");
+        }}, "huella_anual.hbs");
     }
 
 
