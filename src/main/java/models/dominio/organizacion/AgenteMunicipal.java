@@ -55,6 +55,8 @@ public class AgenteMunicipal extends EntidadPersistente {
 
     public AgenteMunicipal() {
         this.organizaciones = new ArrayList<>();
+        this.setHuellaCarbonoActualAnual(0.0);
+        this.setHuellaCarbonoActualMensual(0.0);
     }
 
     public void agregarOrganizaciones(Organizacion... organizaciones) {

@@ -136,18 +136,18 @@ public class AgenteProvincialController {
 
     public Response calcularHuellaCarbonoMensual(Request request, Response response) {
 
-        int mes = new Integer(request.queryParams("mes"));
+        Integer mes = new Integer(request.queryParams("mes"));
 
         Integer id = new Integer(request.session().attribute("id"));
         AgenteProvincial agenteProvincial = this.repositorioAgenteProvincial.buscarPorUsuario(id);
 
-        int anio = new Integer(request.queryParams("anio"));
+        Integer anio = new Integer(request.queryParams("anio"));
         agenteProvincial.calcularHuella(mes,anio);
 
         this.repositorioAgenteProvincial.guardar(agenteProvincial);
 
 
-        response.redirect("/agenteProvincial/huella_mensual");
+        response.redirect("/agente_provincial/huella_mensual");
         return response;
     }
 
@@ -163,7 +163,7 @@ public class AgenteProvincialController {
 
         this.repositorioAgenteProvincial.guardar(agenteProvincial);
 
-        response.redirect("/agenteProvincial/huella_anual");
+        response.redirect("/agente_provincial/huella_anual");
         return response;
     }
 

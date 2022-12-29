@@ -50,6 +50,9 @@ public class AgenteProvincial extends EntidadPersistente {
 
     public AgenteProvincial() {
         this.agentesMunicipales = new ArrayList<>();
+        this.setHuellaTotal(0.0);
+        this.setHuellaCarbonoActualAnual(0.0);
+        this.setHuellaCarbonoActualMensual(0.0);
     }
 
     public void agregarAgentesMunicipales(AgenteMunicipal...agenteMunicipales){
