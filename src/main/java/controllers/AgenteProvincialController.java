@@ -173,9 +173,9 @@ public class AgenteProvincialController {
         Integer id = new Integer(request.session().attribute("id"));
         AgenteProvincial agenteProvincial = this.repositorioAgenteProvincial.buscarPorUsuario(id);
 
-        //Double huellaTotal = agenteProvincial.huellaTotal();
-        //agenteProvincial.setHuellaTotal(huellaTotal);
-        //this.repositorioAgenteProvincial.guardar(agenteProvincial);
+        Double huellaTotal = agenteProvincial.huellaTotal();
+        agenteProvincial.setHuellaTotal(huellaTotal);
+        this.repositorioAgenteProvincial.guardar(agenteProvincial);
 
 
         return new ModelAndView(new HashMap<String, Object>(){{

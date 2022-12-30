@@ -90,6 +90,7 @@ public class TramoController {
 
     public Response guardarTramoEcologico(Request request, Response response) {
         Ecologico ecologico = new Ecologico();
+        ecologico.setTipo("Ecologico");
         Integer id = new Integer(request.session().attribute("id"));
         Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id);
         Integer id_trayecto = new Integer(request.params("id_trayecto"));
@@ -108,7 +109,7 @@ public class TramoController {
         this.repositorioDeTransportes.guardar(ecologico);
         this.repositorioDeTramos.guardar(tramo);
 
-        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
+        response.redirect("/miembro/"+"/trayecto/"+id_trayecto+"/tramos");
 
         return response;
     }
@@ -141,7 +142,7 @@ public class TramoController {
 
         this.repositorioDeTramos.guardar(tramo);
 
-        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
+        response.redirect("/miembro/"+"/trayecto/"+id_trayecto+"/tramos");
 
         return response;
     }
@@ -162,7 +163,8 @@ public class TramoController {
         Vehiculo vehiculo = this.repositorioDeVehiculos.buscar(vehiculo_id);
         Particular particular = new Particular();
         particular.setVehiculo(vehiculo);
-        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(request.session().attribute("id"));
+        particular.setTipo("Particular");
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(new Integer(request.session().attribute("id")));
         Integer id_trayecto = new Integer(request.params("id_trayecto"));
         Trayecto trayecto = this.repositorioDeTrayectos.buscar(id_trayecto);
         Tramo tramo = new Tramo(miembro);
@@ -179,7 +181,7 @@ public class TramoController {
         this.repositorioDeTransportes.guardar(particular);
         this.repositorioDeTramos.guardar(tramo);
 
-        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
+        response.redirect("/miembro/"+"/trayecto/"+id_trayecto+"/tramos");
 
         return response;
     }
@@ -234,7 +236,7 @@ public class TramoController {
 
         this.repositorioDeTramos.guardar(tramo);
 
-        response.redirect("/miembro/"+ miembro.getId()+"/trayecto/"+id_trayecto+"/tramos");
+        response.redirect("/miembro/"+"/trayecto/"+id_trayecto+"/tramos");
 
         return response;
     }

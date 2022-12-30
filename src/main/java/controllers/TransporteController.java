@@ -66,7 +66,7 @@ public class TransporteController {
 
     public Response guardarServicioContratado(Request request, Response response) {
         ServicioContratado servicioContratado = new ServicioContratado();
-
+        servicioContratado.setTipo("Servicio Contratado");
         servicioContratado.setFactorEmision(Double.valueOf(request.queryParams("factor_emision")));
         servicioContratado.setNombre(request.queryParams("nombre"));
 
@@ -82,6 +82,7 @@ public class TransporteController {
 
     public Response guardarTransportePublico(Request request, Response response) {
         Publico publico = new Publico();
+        publico.setTipo("Publico");
         TipoTransporte tipo = TipoTransporte.valueOf(request.queryParams("tipo").toUpperCase(Locale.ROOT));
         publico.setTipoTransporte(tipo);
         publico.setNombre(request.queryParams("nombre"));

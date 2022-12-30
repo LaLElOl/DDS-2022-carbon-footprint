@@ -20,6 +20,9 @@ public abstract class Transporte extends EntidadPersistente {
     @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "tipo")
+    private String tipo;
+
     public abstract Double calcularConsumo();
     public abstract Double calcularDistancia(Tramo tramo, Miembro miembro) throws IOException;
 }

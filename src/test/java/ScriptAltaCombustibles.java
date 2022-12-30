@@ -1,4 +1,4 @@
-import helpers.EntityManagerHelper;
+/*import helpers.EntityManagerHelper;
 import models.dominio.transporte.combustibles.*;
 import org.junit.Test;
 
@@ -53,3 +53,4 @@ public class ScriptAltaCombustibles {
 
     }
 }
+*/

@@ -187,7 +187,7 @@ public class Organizacion extends EntidadPersistente {
     public Double huellaTotal(){
         double huella = 0.0;
 
-        huella += obtenerHuellaMiembros();
+        huella += obtenerHuellaMiembros()*12;
         huella += this.datosConsumo.stream().mapToDouble(DatoConsumo::calcularHuella).sum();
 
         return huella;

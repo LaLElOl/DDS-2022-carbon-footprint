@@ -80,15 +80,6 @@ public class Sector extends EntidadPersistente {
 
     public Double calcularHuella() {
 
-        if (this.fechaUltimoCalculoHuella == null) {
-        }
-
-        else if (
-                LocalDate.now().minus(2, ChronoUnit.DAYS).isBefore(this.fechaUltimoCalculoHuella) &&
-                        this.fechaUltimoCalculoHuella != null
-        ){
-            return this.huellaCarbonoActual;
-        }
 
         double huella =  this.getMiembros().stream().mapToDouble(Miembro::calcularHuella).sum();
         this.promedioHCMiembro = huella / getMiembros().size();
