@@ -6,9 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -31,8 +33,26 @@ public class AgenteProvincial extends EntidadPersistente {
     @OneToMany(mappedBy = "agenteProvincial",fetch = FetchType.LAZY)
     private List<AgenteMunicipal> agentesMunicipales;
 
+    @Column(name = "huellaCarbonoMensual")
+    private Double huellaCarbonoActualMensual;
+
+    @Column(name = "fechaUltimoCalculoHuellaMensual", columnDefinition = "DATE")
+    private LocalDate fechaUltimoCalculoHuellaMensual;
+
+    @Column(name = "huellaCarbonoAnual")
+    private Double huellaCarbonoActualAnual;
+
+    @Column(name = "huellaTotal")
+    private Double huellaTotal;
+
+    @Column(name = "fechaUltimoCalculoHuellaAnual", columnDefinition = "DATE")
+    private LocalDate fechaUltimoCalculoHuellaAnual;
+
     public AgenteProvincial() {
         this.agentesMunicipales = new ArrayList<>();
+        this.setHuellaTotal(0.0);
+        this.setHuellaCarbonoActualAnual(0.0);
+        this.setHuellaCarbonoActualMensual(0.0);
     }
 
     public void agregarAgentesMunicipales(AgenteMunicipal...agenteMunicipales){
@@ -40,6 +60,33 @@ public class AgenteProvincial extends EntidadPersistente {
     }
 
     public Double calcularHuella(int mes, int anio){
-        return this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuella(mes,anio)).sum();
+        Double huella = 0.0;
+
+        if(mes == 0){
+            this.fechaUltimoCalculoHuellaAnual = LocalDate.now();
+            this.huellaCarbonoActualAnual = this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuella(mes,anio)).sum();
+            huella = this.huellaCarbonoActualAnual;
+        }
+        else{
+            this.fechaUltimoCalculoHuellaMensual = LocalDate.now();
+            this.huellaCarbonoActualMensual = this.agentesMunicipales.stream().mapToDouble(a -> a.calcularHuella(mes,anio)).sum();
+            huella = this.huellaCarbonoActualMensual;
+        }
+        return huella;
     }
+
+    public List<Integer> aniosDatosConsumos() {
+        List<Integer> lista = new ArrayList<>();
+
+        this.agentesMunicipales.stream().forEach(o -> lista.addAll(o.aniosDatosConsumos()));
+
+        return lista.stream().distinct().collect(Collectors.toList());
+    }
+
+    public Double huellaTotal(){
+        double huella = 0.0;
+        huella = this.agentesMunicipales.stream().mapToDouble( o -> o.huellaTotal()).sum();
+        return huella;
+    }
+
 }

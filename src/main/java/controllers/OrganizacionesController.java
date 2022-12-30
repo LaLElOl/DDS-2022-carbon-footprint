@@ -234,25 +234,30 @@ public class OrganizacionesController {
     }
 
     public ModelAndView mostrarHuellaDeCarbono(Request request, Response response) {
-        return new ModelAndView(null, "/huella_de_carbono.hbs");
+        return new ModelAndView(null, "/huella_org.hbs");
     }
 
     public ModelAndView mostrarHuellaDeCarbonoMensual(Request request, Response response) {
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+        List<Integer> anios = org.aniosDatosConsumos();
+
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("fechaMensual",org.getFechaUltimoCalculoHuellaMensual());
             put("valorMensual",org.getHuellaCarbonoActualMensual());
+            put("fechaMensual",org.getFechaUltimoCalculoHuellaMensual());
+            put("anio",anios);
         }}, "/huella_mensual.hbs");
     }
 
     public ModelAndView mostrarHuellaDeCarbonoAnual(Request request, Response response) {
         Integer id = new Integer(request.session().attribute("id"));
         Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+        List<Integer> anios = org.aniosDatosConsumos();
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("fechaAnual",org.getFechaUltimoCalculoHuellaAnual());
             put("valorAnual",org.getHuellaCarbonoActualAnual());
+            put("anio",anios);
         }}, "/huella_anual.hbs");
     }
 

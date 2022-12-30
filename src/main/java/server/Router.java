@@ -151,9 +151,11 @@ public class Router {
             Spark.before("/*",authMiddleware::verificarAgenteMunicipal);
 
             Spark.get("",agenteMunicipalController::mostrarTodos, engine);
-            Spark.get("/reportes",agenteMunicipalController::mostrarTodos, engine);
+            //Spark.get("/reportes",agenteMunicipalController::mostrarTodos, engine);
             Spark.get("/organizaciones",agenteMunicipalController::mostrarOrganizaciones, engine);
-            Spark.get("/huella_carbono",agenteMunicipalController::mostrarHuellaCarbono, engine);
+            Spark.get("/huella_carbono",agenteMunicipalController::mostrarHuellaDeCarbono, engine);
+            Spark.get("/huella_mensual",agenteMunicipalController::mostrarHuellaDeCarbonoMensual, engine);
+            Spark.get("/huella_anual",agenteMunicipalController::mostrarHuellaDeCarbonoAnual, engine);
             Spark.get("/total_huella",agenteMunicipalController::mostrarTotalHuella, engine);
             Spark.get("/composicion_huella",agenteMunicipalController::mostrarComposicionHuella, engine);
             Spark.get("/evolucion_huella",agenteMunicipalController::mostrarEvolucionHuella, engine);
@@ -164,6 +166,8 @@ public class Router {
             Spark.get("/editar/:id",agenteMunicipalController::editar, engine);
 
             Spark.post("/huella_carbono",agenteMunicipalController::calcularHuellaCarbono);
+            Spark.post("/huella_mensual",agenteMunicipalController::calcularHuellaCarbonoMensual);
+            Spark.post("/huella_anual",agenteMunicipalController::calcularHuellaCarbonoAnual);
             Spark.post("/evolucion_huella",agenteMunicipalController::enviarAnio);
             Spark.post("/evolucion_huella/:anio",agenteMunicipalController::enviarAnio);
             Spark.post("/editar/:id", agenteMunicipalController::modificar);
@@ -187,8 +191,17 @@ public class Router {
             Spark.before("/*",authMiddleware::verificarAgenteProvincial);
 
             Spark.get("",agenteProvincialController::mostrarTodos, engine);
+            Spark.get("/agentes_municipales",agenteProvincialController::mostrarAgMunicipales, engine);
+            Spark.get("/huella_carbono",agenteProvincialController::mostrarHuellaDeCarbono, engine);
+            Spark.get("/huella_mensual",agenteProvincialController::mostrarHuellaDeCarbonoMensual, engine);
+            Spark.get("/huella_anual",agenteProvincialController::mostrarHuellaDeCarbonoAnual, engine);
+            Spark.get("/total_huella",agenteProvincialController::mostrarTotalHuella, engine);
             Spark.get("/editar/:id",agenteProvincialController::editar, engine);
             Spark.get("/:id",agenteProvincialController::mostrar, engine);
+
+
+            Spark.post("/huella_mensual",agenteProvincialController::calcularHuellaCarbonoMensual);
+            Spark.post("/huella_anual",agenteProvincialController::calcularHuellaCarbonoAnual);
             Spark.post("/agente_municipal/editar/:id", agenteProvincialController::modificar);
 
         });
