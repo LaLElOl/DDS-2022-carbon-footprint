@@ -90,4 +90,15 @@ public class Miembro extends EntidadPersistente {
         return porcentajeImpacto;
     }
 
+    public double calcularImpacto(Double huellaMiembro,Double huellaOrg){
+
+        double porcentajeImpacto = 0.0;
+        if(huellaOrg != 0) {
+            porcentajeImpacto = (huellaMiembro / huellaOrg)*100;
+        }
+        return porcentajeImpacto;
+
+
+    }
 }
+

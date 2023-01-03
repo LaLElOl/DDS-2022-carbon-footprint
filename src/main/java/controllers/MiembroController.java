@@ -228,16 +228,20 @@ public class MiembroController {
     public ModelAndView mostrarImpactoMensual(Request request, Response response) {
         Integer id_miembro = new Integer(request.session().attribute("id"));
         Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id_miembro);
-        //int mes = new Integer(request.queryParams("mes"));
-        //int anio = new Integer(request.queryParams("anio"));
+        int mes = new Integer(request.queryParams("mes"));
+        int anio = new Integer(request.queryParams("anio"));
 
         String organizacion_id = request.session().attribute("org_id");
         Organizacion org = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(organizacion_id));
 
+        Double huella_miembro = miembro.calcularHuella();
+        Double huella_org = org.calcularHuella(mes,anio);
+        Double impacto = miembro.calcularImpacto(huella_miembro,huella_org);
+
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("huella_miembro",miembro.calcularHuella());
-            put("huella_org",org.getHuellaCarbonoActualMensual());
-            put("impacto",miembro.calcularImpactoEnOrganizacion(org));
+            put("huella_miembro",huella_miembro);
+            put("huella_org",huella_org);
+            put("impacto",impacto);
         }}, "/impacto_mensual.hbs");
 
     }

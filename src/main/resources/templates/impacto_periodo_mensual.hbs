@@ -5,48 +5,35 @@
         <section>
 
             <h2 class="title">Huella de Carbono Mensual</h2>
-            <table class="table m-auto">
-                <thead>
-                <tr>
-                    <th>Año</th>
-                    <th>Mes</th>
-                </tr>
-                </thead>
-                <tbody>
                 <form method="post">
-                    <tr>
-                        <td>
-                            <select required="required" class="input-select" name="anio">
-                                {{#each anio}}
-                                    <option value="{{this}}">{{this}}</option>
-                                {{/each}}
-                            </select>
-                        </td>
-                        <td>
-                            <select required="required" name="mes" >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select>
-                        </td>
-                        <td><button style="background-color: #77a785;" class="button is-primary"
-                                    type="submit">Calcular</button></td>
-                    </tr>
+                    <div>
+                        <select name="anio" required="required" class="input-select" >
+                            {{#each anio}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
 
-                    <input required="required" style="display:none;" name="organizacion_id" value= {{organizacion_id}}>
+                    <div>
+                        <select name="mes" required="required">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+
+                    <button style="background-color: #77a785;" class="button is-primary" type="submit">Calcular</button>
+
                 </form>
-
-                </tbody>
-            </table>
         </section>
     </main>
 
