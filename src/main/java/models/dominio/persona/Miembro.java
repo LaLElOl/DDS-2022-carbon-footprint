@@ -2,6 +2,7 @@ package models.dominio.persona;
 
 import models.dominio.EntidadPersistente;
 import models.dominio.Usuario;
+import models.dominio.organizacion.Organizacion;
 import models.dominio.transporte.Ubicacion;
 import models.dominio.organizacion.Sector;
 import lombok.Getter;
@@ -79,15 +80,13 @@ public class Miembro extends EntidadPersistente {
         return huella;
     }
 
-    public double calcularImpactoEnOrganizacion(Sector sector,int mes, int anio){
+    public double calcularImpactoEnOrganizacion(Organizacion organizacion, int mes, int anio){
+
         double porcentajeImpacto = 0.0;
-        boolean trabajoAca = this.sectores.contains(sector);
-        if(trabajoAca){
-            double huellaOrganizacion = sector.getOrganizacion().calcularHuella(mes,anio);
+            double huellaOrganizacion = organizacion.calcularHuella(mes,anio);
             if(huellaOrganizacion != 0) {
                 porcentajeImpacto = (this.calcularHuella() / huellaOrganizacion) * 100;
             }
-        }
         return porcentajeImpacto;
     }
 

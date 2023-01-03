@@ -1,0 +1,36 @@
+{{#partial "contenido" }}
+    <body>
+    <main>
+        <section>
+
+            <h2 class="title">Huella de Carbono</h2>
+            <form method="post">
+
+            <div class="campo">
+                <label>Seleccione una Organizacion</label>
+                <select required="required" class="input-select" name="organizacion_id">
+                    {{#each sector}}
+                        <option value="{{organizacion.id}}">{{organizacion.razonSocial}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="campo">
+                <label>Seleccione tipo de huella</label>
+            </div>
+            <div class="campo">
+                <select required="required" class="input-select" name="periodo">
+                    <option value="MENSUAL">MENSUAL</option>
+                    <option value="ANUAL">ANUAL</option>
+                </select>
+            </div>
+
+                <button style="background-color: #77a785;" class="button is-primary" type="submit">Siguiente</button>
+            </form>
+
+        </section>
+    </main>
+
+
+    </body>
+{{/partial}}
+{{> base.hbs }}

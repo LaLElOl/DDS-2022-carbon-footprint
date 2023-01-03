@@ -1,0 +1,33 @@
+{{#partial "contenido" }}
+
+    <body>
+    <main>
+        <section>
+
+            <h2 class="title">Impacto Huella de Carbono Mensual</h2>
+            <table class="table m-auto">
+                <thead>
+                <tr>
+                    <th>Huella Miembro</th>
+                    <th>Huella Organizacion</th>
+                    <th>Impacto</th>
+                </tr>
+                </thead>
+                <tbody>
+                <form method="post">
+                    <tr>
+                        <td >{{huella_miembro}}</td>
+                        <td>{{huella_org}}</td>
+                        <td>{{impacto}} "%"</td>
+
+                    </tr>
+                </form>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+
+    </body>
+{{/partial}}
+{{> base.hbs }}

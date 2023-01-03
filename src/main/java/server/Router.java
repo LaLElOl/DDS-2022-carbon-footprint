@@ -110,7 +110,6 @@ public class Router {
             Spark.get("/excel",organizacionesController::excel,engine);
             Spark.get("/alta_sector", sectorController::crear, engine);
             Spark.get("/sectores",sectorController::mostrarTodos, engine);
-            //Spark.get("/huella_carbono",organizacionesController::mostrarHuellaCarbono, engine);
             Spark.get("/huella_carbono",organizacionesController::mostrarHuellaDeCarbono, engine);
             Spark.get("/huella_mensual",organizacionesController::mostrarHuellaDeCarbonoMensual, engine);
             Spark.get("/huella_anual",organizacionesController::mostrarHuellaDeCarbonoAnual, engine);
@@ -126,7 +125,6 @@ public class Router {
             Spark.get("/:id/sectores/:id_sector/solicitudes",solicitudController::mostrarSegunSector,engine);
 
             Spark.post("/alta_sector", sectorController::guardar);
-            //Spark.post("/huella_carbono",organizacionesController::calcularHuellaCarbono);
             Spark.post("/huella_mensual",organizacionesController::calcularHuellaCarbonoMensual);
             Spark.post("/huella_anual",organizacionesController::calcularHuellaCarbonoAnual);
             Spark.post("/excel", organizacionesController::guardarConsumo);
@@ -151,7 +149,6 @@ public class Router {
             Spark.before("/*",authMiddleware::verificarAgenteMunicipal);
 
             Spark.get("",agenteMunicipalController::mostrarTodos, engine);
-            //Spark.get("/reportes",agenteMunicipalController::mostrarTodos, engine);
             Spark.get("/organizaciones",agenteMunicipalController::mostrarOrganizaciones, engine);
             Spark.get("/huella_carbono",agenteMunicipalController::mostrarHuellaDeCarbono, engine);
             Spark.get("/huella_mensual",agenteMunicipalController::mostrarHuellaDeCarbonoMensual, engine);
@@ -223,6 +220,9 @@ public class Router {
             Spark.get("/unirse_sector/:id", miembroController::mostrarSectoresOrganizacion, engine);
             Spark.get("/alta_trayecto", trayectoController::crear, engine);
             Spark.get("/huella_carbono", miembroController::huellaCarbono, engine);
+            Spark.get("/org_impacto", miembroController::elegirOrgImpacto, engine);
+            Spark.get("/impacto_periodo_mensual", miembroController::elegirPeriodo, engine);
+            Spark.get("/impacto_mensual", miembroController::mostrarImpactoMensual, engine);
 
             Spark.get("/empleos", sectorController::mostrarSegunMiembro, engine);
             Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
@@ -248,6 +248,9 @@ public class Router {
             Spark.post("/unirse_sector/:id", solicitudController::generarSolicitud);
             Spark.post("/editar", miembroController::modificar);
             Spark.post("/alta_vehiculo", vehiculoController::guardarVehiculo);
+            Spark.post("/org_impacto", miembroController::enviarTipoImpacto);
+            Spark.post("/impacto_periodo_mensual", miembroController::enviarPeriodoImpactoMensual);
+            Spark.post("/impacto_mensual", miembroController::mostrarImpactoMensualCalculado);
             Spark.post("/trayecto/:id_trayecto/tramo_publico",tramoController::recibirTransportePublico);
             Spark.post("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::guardarTramoPublico);
             Spark.post("/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);
