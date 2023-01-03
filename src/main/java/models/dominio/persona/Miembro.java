@@ -80,10 +80,10 @@ public class Miembro extends EntidadPersistente {
         return huella;
     }
 
-    public double calcularImpactoEnOrganizacion(Organizacion organizacion, int mes, int anio){
+    public double calcularImpactoEnOrganizacion(Organizacion organizacion){
 
         double porcentajeImpacto = 0.0;
-            double huellaOrganizacion = organizacion.calcularHuella(mes,anio);
+            double huellaOrganizacion = organizacion.getHuellaCarbonoActualMensual();
             if(huellaOrganizacion != 0) {
                 porcentajeImpacto = (this.calcularHuella() / huellaOrganizacion) * 100;
             }

@@ -3,6 +3,7 @@ package controllers;
 import models.dominio.TipoUsuario;
 import models.dominio.Usuario;
 import models.dominio.organizacion.*;
+import models.dominio.organizacion.datos.EPeriodicidad;
 import models.dominio.persona.Contacto;
 import models.dominio.persona.Miembro;
 import models.dominio.persona.TipoDoc;
@@ -227,16 +228,16 @@ public class MiembroController {
     public ModelAndView mostrarImpactoMensual(Request request, Response response) {
         Integer id_miembro = new Integer(request.session().attribute("id"));
         Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id_miembro);
-        int mes = new Integer(request.queryParams("mes"));
-        int anio = new Integer(request.queryParams("anio"));
+        //int mes = new Integer(request.queryParams("mes"));
+        //int anio = new Integer(request.queryParams("anio"));
 
-        String organizacion_id = request.queryParams("organizacion_id");
+        String organizacion_id = request.session().attribute("org_id");
         Organizacion org = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(organizacion_id));
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("huella_miembro",miembro.calcularHuella());
-            put("huella_org",org.calcularHuella(mes,anio));
-            put("impacto",miembro.calcularImpactoEnOrganizacion(org,mes,anio));
+            put("huella_org",org.getHuellaCarbonoActualMensual());
+            put("impacto",miembro.calcularImpactoEnOrganizacion(org));
         }}, "/impacto_mensual.hbs");
 
     }
@@ -264,6 +265,15 @@ public class MiembroController {
 
 
     public Response mostrarImpactoMensualCalculado(Request request, Response response) {
+
+        int mes = new Integer(request.queryParams("mes"));
+        Integer id = new Integer(request.session().attribute("id"));
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
+
+        int anio = new Integer(request.queryParams("anio"));
+        org.calcularHuella(mes,anio);
+
+        this.repositorioDeOrganizaciones.guardar(org);
         response.redirect("/miembro/impacto_mensual");
         return response;
     }
