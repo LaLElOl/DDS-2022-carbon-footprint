@@ -215,11 +215,13 @@ public class MiembroController {
         return new ModelAndView(new HashMap<String, Object>(){{
             put("organizacion_id",organizacion_id);
             put("anio",anios);
-        }}, "/impacto_periodo_mensual.hbs");
+        }}, "impacto_periodo_mensual.hbs");
     }
 
 
     public Response enviarPeriodoImpactoMensual(Request request, Response response) {
+        request.session().attribute("mes_impacto",request.queryParams("mes"));
+        request.session().attribute("anio_impacto",request.queryParams("anio"));
         response.redirect("/miembro/impacto_mensual");
         return response;
     }
@@ -228,8 +230,8 @@ public class MiembroController {
     public ModelAndView mostrarImpactoMensual(Request request, Response response) {
         Integer id_miembro = new Integer(request.session().attribute("id"));
         Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id_miembro);
-        int mes = new Integer(request.queryParams("mes"));
-        int anio = new Integer(request.queryParams("anio"));
+        int mes = new Integer(request.session().attribute("mes_impacto"));
+        int anio = new Integer(request.session().attribute("anio_impacto"));
 
         String organizacion_id = request.session().attribute("org_id");
         Organizacion org = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(organizacion_id));
@@ -237,7 +239,6 @@ public class MiembroController {
         Double huella_miembro = miembro.calcularHuella();
         Double huella_org = org.calcularHuella(mes,anio);
         Double impacto = miembro.calcularImpacto(huella_miembro,huella_org);
-
         return new ModelAndView(new HashMap<String, Object>(){{
             put("huella_miembro",huella_miembro);
             put("huella_org",huella_org);
@@ -264,21 +265,6 @@ public class MiembroController {
                 response.redirect("/home");
                 break;
         }
-        return response;
-    }
-
-
-    public Response mostrarImpactoMensualCalculado(Request request, Response response) {
-
-        int mes = new Integer(request.queryParams("mes"));
-        Integer id = new Integer(request.session().attribute("id"));
-        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
-
-        int anio = new Integer(request.queryParams("anio"));
-        org.calcularHuella(mes,anio);
-
-        this.repositorioDeOrganizaciones.guardar(org);
-        response.redirect("/miembro/impacto_mensual");
         return response;
     }
 }

@@ -250,7 +250,6 @@ public class Router {
             Spark.post("/alta_vehiculo", vehiculoController::guardarVehiculo);
             Spark.post("/org_impacto", miembroController::enviarTipoImpacto);
             Spark.post("/impacto_periodo_mensual", miembroController::enviarPeriodoImpactoMensual);
-            Spark.post("/impacto_mensual", miembroController::mostrarImpactoMensualCalculado);
             Spark.post("/trayecto/:id_trayecto/tramo_publico",tramoController::recibirTransportePublico);
             Spark.post("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::guardarTramoPublico);
             Spark.post("/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);
