@@ -56,7 +56,7 @@ public class AgenteMunicipalController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("agente_municipal", agenteMunicipalBuscado);
-        }}, "agente_municipal.hbs");//TODO
+        }}, "agente_municipal.hbs");
     }
 
     public ModelAndView crear(Request request, Response response) {
@@ -102,7 +102,7 @@ public class AgenteMunicipalController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("agente_municipal", agenteMunicipalBuscado);
-        }}, "form_agente_municipal.hbs");//TODO
+        }}, "form_agente_municipal.hbs");
     }
 
 

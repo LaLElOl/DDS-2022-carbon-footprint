@@ -60,7 +60,6 @@ public class OrganizacionesController {
         String idBuscado = request.params("id");
         Organizacion organizacionBuscada = this.repositorioDeOrganizaciones.buscar(new Integer(idBuscado));
 
-        //TODO: ver porque la session es null
         if(organizacionBuscada.getUsuario().getId() != request.session().attribute("id")){
             response.redirect("/index");
         }
@@ -333,9 +332,10 @@ public class OrganizacionesController {
 
     public ModelAndView mostrarEvolucionHuella(Request request, Response response){
 
-        Integer id = new Integer(request.session().attribute("id"));
-        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(id);
-        List<Integer> anios = org.aniosDatosConsumos();
+        String id = request.session().attribute("id");
+        Organizacion org = this.repositorioDeOrganizaciones.buscarPorUsuario(new Integer(id));
+        List<DatoConsumo> datos = repositorioDeDatosConsumo.buscarTodos(String.valueOf(org.getId()));
+        List<Integer> anios = datos.stream().map(DatoConsumo::anio).distinct().collect(Collectors.toList());
 
         String anio = request.params("anio");
 

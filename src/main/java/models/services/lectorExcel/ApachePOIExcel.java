@@ -93,8 +93,6 @@ public class ApachePOIExcel implements AdapterLectorExcel {
     }
 
     private Combustible obtenerCombustible(Cell cell) {
-        //TODO: Necesitamos alternativa a un switch para hacer esto
-        //TODO: Tiene que recuperar la instancia unica de cada combustible desde la DB
         String tipoCombustible = "";
         Integer id = new Integer(0) ;
         switch(cell.getRichStringCellValue().toString().toLowerCase(Locale.ROOT)){

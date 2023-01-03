@@ -14,7 +14,7 @@ import java.io.IOException;
 @Setter
 
 @Entity
-@NoArgsConstructor  //TODO: REVISAR CON EL JAVA SENIOR
+@NoArgsConstructor
 @Table(name = "tramo")
 public class Tramo extends EntidadPersistente {
 
@@ -30,7 +30,6 @@ public class Tramo extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_inicio_id", referencedColumnName = "id")
     private Ubicacion inicioTramo;
 
-    //TODO: controlar manytoone
     @ManyToOne
     @JoinColumn(name = "transporte_id", referencedColumnName = "id")
     private Transporte transporte;
@@ -38,7 +37,6 @@ public class Tramo extends EntidadPersistente {
     @Column(name = "es_compartido")
     private Boolean compartido;
 
-    //TODO: revisar si se pone el OneToOne en el caso de que no se reutilizen los transportes
     @ManyToOne
     @JoinColumn(name = "trayecto_id", referencedColumnName = "id")
     private Trayecto trayecto;

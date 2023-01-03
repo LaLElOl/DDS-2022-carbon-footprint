@@ -17,6 +17,7 @@ import spark.Request;
 import spark.Response;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -244,7 +245,6 @@ public class MiembroController {
             put("huella_org",huella_org);
             put("impacto",impacto);
         }}, "/impacto_mensual.hbs");
-
     }
 
     public Response enviarTipoImpacto(Request request, Response response) {
@@ -266,5 +266,41 @@ public class MiembroController {
                 break;
         }
         return response;
+    }
+
+    public ModelAndView elegirAnio(Request request, Response response) {
+        String organizacion_id = request.session().attribute("org_id");
+        Organizacion org = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(organizacion_id));
+        List<Integer> anios = org.aniosDatosConsumos();
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("organizacion_id",organizacion_id);
+            put("anio",anios);
+        }}, "impacto_periodo_anual.hbs");
+    }
+
+    public Response enviarPeriodoAnual(Request request, Response response) {
+        request.session().attribute("anio_impacto",request.queryParams("anio"));
+        response.redirect("/miembro/impacto_anual");
+        return response;
+    }
+
+    public ModelAndView mostrarImpactoAnual(Request request, Response response) {
+        Integer id_miembro = new Integer(request.session().attribute("id"));
+        Miembro miembro = this.repositorioDeMiembros.buscarPorUsuario(id_miembro);
+        int mes = 0;
+        int anio = new Integer(request.session().attribute("anio_impacto"));
+
+        String organizacion_id = request.session().attribute("org_id");
+        Organizacion org = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(organizacion_id));
+
+        Double huella_miembro = miembro.calcularHuella() * 12;
+        Double huella_org = org.calcularHuella(mes,anio);
+        Double impacto = miembro.calcularImpacto(huella_miembro,huella_org);
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("huella_miembro",huella_miembro);
+            put("huella_org",huella_org);
+            put("impacto",impacto);
+        }}, "impacto_mensual.hbs");
     }
 }

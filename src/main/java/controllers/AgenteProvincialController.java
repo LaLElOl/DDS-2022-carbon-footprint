@@ -72,7 +72,7 @@ public class AgenteProvincialController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("agente_provincial", agenteProvincialBuscado);
-        }}, "form_agente_provincial.hbs");//TODO
+        }}, "form_agente_provincial.hbs");
     }
 
 

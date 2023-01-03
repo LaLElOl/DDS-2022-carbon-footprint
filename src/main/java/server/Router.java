@@ -223,6 +223,8 @@ public class Router {
             Spark.get("/org_impacto", miembroController::elegirOrgImpacto, engine);
             Spark.get("/impacto_periodo_mensual", miembroController::elegirPeriodo, engine);
             Spark.get("/impacto_mensual", miembroController::mostrarImpactoMensual, engine);
+            Spark.get("/impacto_periodo_anual",miembroController::elegirAnio, engine);
+            Spark.get("/impacto_anual",miembroController::mostrarImpactoAnual, engine);
 
             Spark.get("/empleos", sectorController::mostrarSegunMiembro, engine);
             Spark.get("/trayectos",trayectoController::mostrarTodos, engine);
@@ -250,6 +252,7 @@ public class Router {
             Spark.post("/alta_vehiculo", vehiculoController::guardarVehiculo);
             Spark.post("/org_impacto", miembroController::enviarTipoImpacto);
             Spark.post("/impacto_periodo_mensual", miembroController::enviarPeriodoImpactoMensual);
+            Spark.post("/impacto_periodo_anual",miembroController::enviarPeriodoAnual);
             Spark.post("/trayecto/:id_trayecto/tramo_publico",tramoController::recibirTransportePublico);
             Spark.post("/trayecto/:id_trayecto/tramo_publico/:id_publico",tramoController::guardarTramoPublico);
             Spark.post("/trayecto/:id_trayecto/tramo_ecologico",tramoController::guardarTramoEcologico);

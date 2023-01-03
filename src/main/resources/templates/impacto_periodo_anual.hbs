@@ -1,0 +1,25 @@
+{{#partial "contenido" }}
+
+    <body>
+    <main>
+        <section>
+
+            <h2 class="title">Huella de Carbono Anual</h2>
+            <form method="post">
+                <div>
+                    <select name="anio" required="required" class="input-select" >
+                        {{#each anio}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <button style="background-color: #77a785;" class="button is-primary" type="submit">Calcular</button>
+
+            </form>
+        </section>
+    </main>
+
+    </body>
+{{/partial}}
+{{> base.hbs }}
